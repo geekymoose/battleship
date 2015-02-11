@@ -44,7 +44,7 @@ public abstract class FleetGridModel {
     protected int                   gridHeight;    
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
-    protected ArrayList<Boat>      listBoats;
+    protected ArrayList<Boat>       listBoats;
     protected int                   nbAliveBoats;
     
     
