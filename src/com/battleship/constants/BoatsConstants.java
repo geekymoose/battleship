@@ -18,5 +18,6 @@ package com.battleship.constants;
  * @author  Anthony CHAFFOT
  */
 public interface BoatsConstants {
-    
+    public static int WAS_HIT=1;
+    public static int NOT_HIT=-1;
 }
