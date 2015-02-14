@@ -2,7 +2,7 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
+package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.constants.FleetGridConstants;
@@ -48,6 +48,9 @@ public class Player implements FleetGridConstants{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
+    /**
+     * Create a new player
+     */
     private Player() {
         this.name           = "";
         this.score          = 0;

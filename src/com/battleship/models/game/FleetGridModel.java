@@ -2,8 +2,9 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
+package com.battleship.models.game;
 
+import com.battleship.models.sprites.Boat;
 import java.util.ArrayList;
 
 
@@ -16,19 +17,19 @@ import java.util.ArrayList;
  * 
  * <p>
  * Grid for a fleet. Each player has got a fleet placed on a gridFleetModel. 
- * FleetGridModel is bound with one player.
- * <p>
+ * FleetGridModel is bound with one player (Its owner).
+ * </p>
+ * 
  * <h2>Grid Type</h2>
- * </p>
- * There are different kind of FleetGrid
- * <ul>
- * <li>FleetGridSquare</li>
- * <li>FleetGridHexagon</li>
- * </ul>
- * <br/>
- * FleetGridSquare use square coordinates like commons array displaying.<br/>
- * FleetGridHexagon use hexagon grid.
- * </p>
+ * <p> There are different kind of FleetGrid<p>
+ *  <ul>
+ *      <li>FleetGridSquare</li>
+ *      <li>FleetGridHexagon</li>
+ *  </ul>
+ * <h3>FleetGridSquare</h3>
+ * <p>Use square coordinates like commons array displaying.</p>
+ * <h3>FleetGridHexagon</h3>
+ * <p>Hexagon grid</p>
  *
  * 
  * @date    Feb 9, 2015
@@ -85,7 +86,15 @@ public abstract class FleetGridModel {
     public BoxMap getBoxMapAt(int pX, int pY){
         return this.tabBoxMap[pY][pX];
     }
-    public  abstract BoxMap         getNextBoxMap(int pX, int pY);
+    
+    /**
+     * Return the next box map according to the direction given.
+     * @param pX
+     * @param pY
+     * @param pDirection
+     * @return 
+     */
+    public  abstract BoxMap getNextBoxMap(int pX, int pY, int pDirection);
     
     
     
