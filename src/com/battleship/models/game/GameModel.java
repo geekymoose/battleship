@@ -2,7 +2,7 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
+package com.battleship.models.game;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.constants.Msg;

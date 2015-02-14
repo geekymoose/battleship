@@ -2,27 +2,17 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
-
-import com.battleship.behaviors.Target;
+package com.battleship.models.game;
 
 
 
 
 
 /**
- * <h1>BoxMap</h1>
+ * <h1>FleetGridHexagon</h1>
  * <p>
- * public class BoxMap<br/>
- * implements Target
- * </p>
- * 
- * <p>
- * This class represents a square on GridFleetModel. 
- * No matter the kind of grid (ex: square
- * or hexagon), BoxMap is only one compartment in this grid. (Grid itself know box position,
- * therefore BoxMap do not need to know its x:y position)<br/>
- * BoxMap can be targeted by a shoot, that is why it implements.
+ * public class FleetGridHexagon<br/>
+ * extends FleetGridModel
  * </p>
  * 
  *
@@ -30,43 +20,41 @@ import com.battleship.behaviors.Target;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see GridFleetModel
  */
-public class BoxMap implements Target{
+public class FleetGridHexagon extends FleetGridModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     Object      content;
     
     
     
     
     
+
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new BoxMap
+     * Create a new FleetGrid with hexagon coordinates
+     * @param pWidth    Grid width
+     * @param pHeight   Grid Height
+     * @param pOwner    FleetGrid owner
      */
-    public BoxMap(){
-    
+    public FleetGridHexagon(int pWidth, int pHeight, Player pOwner){
+        super(pWidth, pHeight, pOwner);
     }
     
     
     
     
     
+
     //**************************************************************************
     // Functions
     //**************************************************************************
     @Override
-    public void hit(){
-    
-    }
-
-    @Override
-    public boolean isValideTarget(){
-        return false;
+    public BoxMap getNextBoxMap(int pX, int pY){
+        return null; //To Do
     }
     
     
@@ -76,11 +64,4 @@ public class BoxMap implements Target{
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
-    /**
-     * Return the content in this BoxMap
-     * @return the content in this BoxMap
-     */
-    public Object getContent(){
-        return this.content;
-    }
 }

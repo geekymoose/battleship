@@ -2,16 +2,16 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
+package com.battleship.models.game;
 
 
 
 
 
 /**
- * <h1>FleetGridHexagon</h1>
+ * <h1>FleetGridSquare</h1>
  * <p>
- * public class FleetGridHexagon<br/>
+ * public class FleetGridSquare<br/>
  * extends FleetGridModel
  * </p>
  * 
@@ -21,7 +21,7 @@ package com.battleship.models;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class FleetGridHexagon extends FleetGridModel{
+public class FleetGridSquare extends FleetGridModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -30,17 +30,16 @@ public class FleetGridHexagon extends FleetGridModel{
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new FleetGrid with hexagon coordinates
+     * Create a new FleetGrid with square coordinates
      * @param pWidth    Grid width
      * @param pHeight   Grid Height
      * @param pOwner    FleetGrid owner
      */
-    public FleetGridHexagon(int pWidth, int pHeight, Player pOwner){
+    public FleetGridSquare(int pWidth, int pHeight, Player pOwner){
         super(pWidth, pHeight, pOwner);
     }
     
@@ -48,7 +47,6 @@ public class FleetGridHexagon extends FleetGridModel{
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
