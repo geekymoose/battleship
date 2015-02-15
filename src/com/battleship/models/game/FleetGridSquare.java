@@ -23,14 +23,6 @@ package com.battleship.models.game;
  */
 public class FleetGridSquare extends FleetGridModel{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
@@ -41,6 +33,7 @@ public class FleetGridSquare extends FleetGridModel{
      */
     public FleetGridSquare(int pWidth, int pHeight, Player pOwner){
         super(pWidth, pHeight, pOwner);
+        this.tabBoxMap      = new BoxMapSquare[pHeight][pWidth];
     }
     
     
@@ -51,15 +44,10 @@ public class FleetGridSquare extends FleetGridModel{
     // Functions
     //**************************************************************************
     @Override
-    public BoxMap getNextBoxMap(int pX, int pY){
-        return null; //To Do
+    public BoxMap getNextBoxMap(BoxMap pPos, int pDirection){
+        if(pPos==null){
+            return null; 
+        }
+        return null;
     }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
 }
