@@ -13,7 +13,9 @@ import java.util.ArrayList;
 
 /**
  * <h1>FleetGridModel</h1>
- * <p>public abstract class FleetGridModel</p>
+ * <p>
+ * public abstract class FleetGridModel
+ * </p>
  * 
  * <p>
  * Grid for a fleet. Each player has got a fleet placed on a gridFleetModel. 
@@ -37,7 +39,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class FleetGridModel {
+public abstract class FleetGridModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -66,7 +68,6 @@ public abstract class FleetGridModel {
         this.gridHeight     = pHeight;
         this.owner          = pOwner;
         this.listBoats      = new ArrayList();
-        this.tabBoxMap      = new BoxMap[pHeight][pWidth];
         this.nbAliveBoats   = 0;
     }
     
@@ -78,23 +79,30 @@ public abstract class FleetGridModel {
     // Functions
     //**************************************************************************
     /**
-     * Return the BoxMap at position pX:pY
-     * @param pX
-     * @param pY
-     * @return BoxMap
+     * Return the BoxMap at position x:y 
+     * If this position is not in the grid, return null
+     * @param pX x coordinate
+     * @param pY y coordinate
+     * @return BoxMap at x:y if exists, otherwise, return null
      */
     public BoxMap getBoxMapAt(int pX, int pY){
+        /*
+         * Check if coordinates are on the grid, otherwise, return null
+         */
+        if (pX<0 || pX>=this.gridWidth || pY<0 || pY>=this.gridHeight){
+            return null;
+        }
         return this.tabBoxMap[pY][pX];
     }
     
     /**
+     * @deprecated Not sure we going to use it
      * Return the next box map according to the direction given.
-     * @param pX
-     * @param pY
-     * @param pDirection
-     * @return 
+     * @param pCurrentBoxMap    Current position (Position is a BoxMap)
+     * @param pDirection        Direction
+     * @return next BoxMap, null if there is no next BoxMap (Border reached)
      */
-    public  abstract BoxMap getNextBoxMap(int pX, int pY, int pDirection);
+    public abstract BoxMap getNextBoxMap(BoxMap pCurrentBoxMap, int pDirection);
     
     
     

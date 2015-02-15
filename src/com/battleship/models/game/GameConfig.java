@@ -13,8 +13,7 @@ import com.battleship.constants.GameConstants;
 /**
  * <h1>GameConfig</h1>
  * <p>
- * public class GameConfig<br/>
- * implements GameConstants
+ * public class GameConfig
  * </p>
  * 
  * <p>

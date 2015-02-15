@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
+import com.battleship.constants.BoatsConstants;
 import com.battleship.models.sprites.Sprite;
 
 
@@ -19,10 +20,9 @@ import com.battleship.models.sprites.Sprite;
  * </p>
  * 
  * <p>
- * This class represents a square on GridFleetModel. No matter the kind of grid 
- * (ex: square or hexagon), BoxMap is only one compartment in this grid. 
- * (Grid itself know box position, therefore BoxMap do not need to 
- * know its x:y position)<br/>
+ * This class represents a square on GridFleetModel. There are some different kind 
+ * of BoxMap, depending to the grid type 
+ * (ex: square or hexagon), BoxMap is only one compartment in this grid.<br/>
  * BoxMap contains a Sprite which is an item as a Boat or water. <br/>
  * BoxMap can be targeted by a shoot, that is why it implements Target.
  * </p>
@@ -31,13 +31,16 @@ import com.battleship.models.sprites.Sprite;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see GridFleetModel
+ * @see     GridFleetModel
  */
-public class BoxMap implements Target{
+public abstract class BoxMap implements Target, BoatsConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     Sprite      content;
+    protected   Sprite                  content;
+    protected   final int               posX;
+    protected   final int               posY;
+    protected   final FleetGridModel    grid;
     
     
     
@@ -48,10 +51,16 @@ public class BoxMap implements Target{
     //**************************************************************************
     /**
      * Create a new BoxMap with a Sprite inside
-     * @param pSprite sprite to add inside this BoxMap
+     * @param pX        x coordinate
+     * @param pY        y coordinate
+     * @param pSprite   sprite to add inside this BoxMap
+     * @param pGrid     grid where the BoxMap is (This grid contains the new BoxMap)
      */
-    public BoxMap(Sprite pSprite){
-        this.content = pSprite;
+    protected BoxMap(int pX, int pY, Sprite pSprite, FleetGridModel pGrid){
+        this.content    = pSprite;
+        this.posX       = pX;
+        this.posY       = pY;
+        this.grid       = pGrid;
     }
     
     
@@ -60,6 +69,22 @@ public class BoxMap implements Target{
     
     //**************************************************************************
     // Functions
+    //**************************************************************************
+    /**
+     * Return the next box map according to the direction given. 
+     * In function of grid, some direction are forgiven. If one is used, 
+     * null will be returned. (Note it should not append)
+     * @param pDirection direction
+     * @return next BoxMap, null if there is no next BoxMap (Border reached)
+     */
+    public abstract BoxMap getNextBoxMap(int pDirection);
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions from Target implements
     //**************************************************************************
     @Override
     public void hit(){
@@ -84,5 +109,21 @@ public class BoxMap implements Target{
      */
     public Sprite getContent(){
         return this.content;
+    }
+    
+    /**
+     * return x coordinate
+     * @return x coordinate
+     */
+    public int getPosX(){
+        return this.posX;
+    }
+    
+    /**
+     * Return y coordinate
+     * @return y coordinate
+     */
+    public int getPosY(){
+        return this.posY;
     }
 }

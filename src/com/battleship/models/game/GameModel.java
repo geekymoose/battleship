@@ -15,8 +15,7 @@ import com.battleship.exceptions.ForbiddenAction;
 /**
  * <h1>GameModel</h1>
  * <p>
- * public class GameModel<br/>
- * implements GameConstants
+ * public class GameModel
  * </p>
  * 
  * <p>
