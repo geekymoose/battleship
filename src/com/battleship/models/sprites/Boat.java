@@ -13,7 +13,8 @@ import com.battleship.models.game.FleetGridModel;
 /**
  * <h1>Boat</h1>
  * <p>
- * public abstract class Boat
+ * public abstract class Boat<br/>
+ * implements Sprite
  * </p>
  *
  * <p>
@@ -32,7 +33,7 @@ import com.battleship.models.game.FleetGridModel;
  * @author Jessica FAVIN
  * @author Contsantin MASSON
  */
-public abstract class Boat {
+public abstract class Boat implements Sprite{
     protected String            kindOfBoat;
     protected int               nbLives;
     protected int               orientation;
