@@ -45,10 +45,10 @@ public abstract class FleetGridModel{
     //**************************************************************************
     protected int                   gridWidth;             
     protected int                   gridHeight;    
+    protected int                   nbAliveBoats;
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
     protected ArrayList<Boat>       listBoats;
-    protected int                   nbAliveBoats;
     
     
     
@@ -66,9 +66,10 @@ public abstract class FleetGridModel{
     protected FleetGridModel(int pWidth, int pHeight, Player pOwner){
         this.gridWidth      = pWidth;
         this.gridHeight     = pHeight;
+        this.nbAliveBoats   = 0;
         this.owner          = pOwner;
         this.listBoats      = new ArrayList();
-        this.nbAliveBoats   = 0;
+        //BoxMap is created in specific Grid (As FleetGridHexagon or FleetGridSquare)
     }
     
     
