@@ -15,6 +15,6 @@ package com.battleship.behaviors;
  * @author Constantin MASSON
  */
 public interface Target {
-    public void hit();
-    public boolean isValideTarget();
+    public void     hit();
+    public boolean  isValideTarget();
 }

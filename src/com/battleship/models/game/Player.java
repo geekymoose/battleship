@@ -2,10 +2,11 @@
  * Creation : Feb 9, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.models;
+package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.constants.FleetGridConstants;
+import com.battleship.models.weapons.Weapon;
 import java.util.ArrayList;
 
 
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 /**
  * <h1>Player</h1>
  * <p>
- * public class Player<br/>
- * implements FleetGridConstants
+ * public class Player
  * </p>
  * 
  * <p>
@@ -48,6 +48,9 @@ public class Player implements FleetGridConstants{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
+    /**
+     * Create a new player
+     */
     private Player() {
         this.name           = "";
         this.score          = 0;
@@ -97,7 +100,8 @@ public class Player implements FleetGridConstants{
      * @return true if is able to shoot, otherwise, return false
      */
     public boolean shootAt(int pX, int pY, Target[] pWhere) {
-        return this.currentWeapon.fire();
+        //return this.currentWeapon.fire();
+        return false; //To Di
     }
     
     
