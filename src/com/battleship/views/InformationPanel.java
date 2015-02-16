@@ -4,7 +4,10 @@
  */
 package com.battleship.views;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 
@@ -15,11 +18,19 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ScorePanel extends JPanel{
+public class InformationPanel extends JPanel{
+    private JTextArea ta_info;
+    private JScrollPane sp_scroll;
+    
+    private JLabel l_title;
+    private JLabel l_scoreTitle;
+    private JLabel l_score;
+    
+    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public ScorePanel(){
+    public InformationPanel(){
 
     }
 
