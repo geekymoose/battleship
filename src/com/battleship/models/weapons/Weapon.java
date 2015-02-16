@@ -1,27 +1,28 @@
-/* 
- * Creation : Feb 9, 2015
- * Project Computer Science L2 Semester 4 - BattleShip
+/*
+ * Class :      Weapon
+ * Creation:    Feb 15, 2015
+ * Author :     Constantin MASSON
+ * 
  */
-package com.battleship.models;
+
+package com.battleship.models.weapons;
 
 
 
 
 
 /**
- * <h1>FleetGridHexagon</h1>
- * <p>
- * public class FleetGridHexagon<br/>
- * extends FleetGridModel
- * </p>
- * 
+ * <h1>Weapon</h1>
+ * <p>public abstract class Weapon</p>
  *
- * @date    Feb 9, 2015
+ *
+ * 
+ * @date Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class FleetGridHexagon extends FleetGridModel{
+public abstract class Weapon {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -34,14 +35,8 @@ public class FleetGridHexagon extends FleetGridModel{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    /**
-     * Create a new FleetGrid with hexagon coordinates
-     * @param pWidth    Grid width
-     * @param pHeight   Grid Height
-     * @param pOwner    FleetGrid owner
-     */
-    public FleetGridHexagon(int pWidth, int pHeight, Player pOwner){
-        super(pWidth, pHeight, pOwner);
+    protected Weapon(){
+    
     }
     
     
@@ -52,15 +47,12 @@ public class FleetGridHexagon extends FleetGridModel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    @Override
-    public BoxMap getNextBoxMap(int pX, int pY){
-        return null; //To Do
-    }
     
     
     
     
     
+
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
