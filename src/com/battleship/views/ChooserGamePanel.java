@@ -26,6 +26,8 @@ public class ChooserGamePanel extends JPanel{
     // CONSTRUCTOR
     //**************************************************************************
     public ChooserGamePanel(){
+        this.setLayout(null);
+        
         b_ia            = new JButton("Jouer contre l'IA");
         b_2players      = new JButton("Jouer à deux joueurs");
         b_lan           = new JButton("Jouer en réseau local");
