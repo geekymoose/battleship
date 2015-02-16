@@ -16,12 +16,15 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Jessica FAVIN
  */
 public class ApplicationFrame extends JFrame implements GraphicalConstants{
+    Controller c;
+    ChatPanel chatPanel = new ChatPanel();
 
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
 
-    public ApplicationFrame() {
+    public ApplicationFrame(Controller c) {
+        this.c = c;
         this.pack();
         this.setSize(FRAME_SIZE_L, FRAME_SIZE_H);
         this.setLocationRelativeTo(null);

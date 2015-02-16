@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/views/ScorePanel.java</file>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/views/PlaceFleetPanel.java</file>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/views/ApplicationFrame.java</file>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/models/GameModel.java</file>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/views/ChatPanel.java</file>
+            <file>file:/media/anthony/Data/Anthony/Lab/JAVA/battleship/src/com/battleship/views/FleetPanel.java</file>
+        </group>
     </open-files>
 </project-private>
