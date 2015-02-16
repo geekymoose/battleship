@@ -71,7 +71,7 @@ public class ChatPanel extends JPanel {
                         String sentence = tf_sentence.getText();
                         ta_chat.append(sentence);
                         ta_chat.setCaretPosition(ta_chat.getText().length());
-                        //sendToController(sentence); // Envoyer le message au server pour l'envoyer à l'autre user
+                        //sendToServer(sentence); // Envoyer le message au server pour l'envoyer à l'autre user
                         tf_sentence.setText("");
                     }
                 }

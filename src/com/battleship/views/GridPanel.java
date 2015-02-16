@@ -1,24 +1,22 @@
 /* 
- * Creation : 11 févr. 2015
+ * Creation : 16 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 package com.battleship.views;
 
-import javax.swing.JPanel;
-
 
 
 /**
- * @date    11 févr. 2015
+ * @date    16 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceFleetGridPanel extends JPanel{
+public class GridPanel {
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public PlaceFleetGridPanel(){
+    public GridPanel(){
 
     }
 
