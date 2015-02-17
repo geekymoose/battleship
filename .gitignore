@@ -15,7 +15,4 @@ hs_err_pid*
 #Personal ignore
 .svn*
 *~
-<<<<<<< HEAD
-=======
 *private*
->>>>>>> 28a64348244c465384c126eda1a9107a78137b74

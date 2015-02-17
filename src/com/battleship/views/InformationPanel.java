@@ -5,9 +5,9 @@
 package com.battleship.views;
 
 import com.battleship.constants.GraphicalConstants;
-import com.battleship.observer.Observable;
-import com.battleship.observer.Observer;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -84,9 +84,8 @@ public class InformationPanel extends JPanel implements GraphicalConstants, Obse
     // PATTERN OBSERVER
     //**************************************************************************
     @Override
-    public void update(Observable obs) {
+    public void update(Observable o, Object arg){
         // Met à jour le score, pour les infos on court-cricuite sans passer par l'oberver
         // via la methode printInfoMessage qui ajoute un message directement
     }
-
 }
