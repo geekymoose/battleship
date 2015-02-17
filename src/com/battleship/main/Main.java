@@ -1,32 +1,34 @@
 /* 
- * Creation : 11 févr. 2015
+ * Creation : 17 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+package com.battleship.main;
 
-import javax.swing.JPanel;
+import com.battleship.views.ApplicationFrame;
 
 
 
 /**
- * affiche une grille drag & drop dans laquelle on place les bateau du dock
- * @date    11 févr. 2015
+ * @date    17 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceFleetPanel extends JPanel implements CurrentView{
+public class Main {
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public PlaceFleetPanel(){
+    public Main(){
 
     }
 
     //**************************************************************************
     // METHODS
     //**************************************************************************
-
+    public static void main(String[] args){
+        ApplicationFrame game = new ApplicationFrame();
+    }
+    
     //**************************************************************************
     // SETTERS / GETTERS
     //**************************************************************************
