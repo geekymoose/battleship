@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceFleetPanel extends JPanel{
+public class PlaceFleetPanel extends JPanel implements CurrentView{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
