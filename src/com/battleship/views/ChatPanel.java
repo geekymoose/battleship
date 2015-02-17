@@ -30,7 +30,7 @@ public class ChatPanel extends JPanel {
     public ChatPanel() {
         this.setLayout(null);
         initComponents();
-        configureChat();
+        setupChat();
         addEachComponents();
     }
 
@@ -43,7 +43,7 @@ public class ChatPanel extends JPanel {
         sp_scroll = new JScrollPane();
     }
 
-    private void configureChat() {
+    private void setupChat() {
         ta_chat = new JTextArea();
         ta_chat.setLineWrap(true);
         ta_chat.setEditable(false);
@@ -62,6 +62,7 @@ public class ChatPanel extends JPanel {
         ta_chat.setCaretPosition(ta_chat.getText().length());
     }
 
+    //Peut être à changer un peu pour eviter d'appuyer sur enter par erreur
     public void sendMessage() {
         tf_sentence.addKeyListener(
             new KeyListener() {
@@ -71,7 +72,7 @@ public class ChatPanel extends JPanel {
                         String sentence = tf_sentence.getText();
                         ta_chat.append(sentence);
                         ta_chat.setCaretPosition(ta_chat.getText().length());
-                        //sendToController(sentence); // Envoyer le message au server pour l'envoyer à l'autre user
+                        //sendToServer(sentence); // Envoyer le message au server pour l'envoyer à l'autre user
                         tf_sentence.setText("");
                     }
                 }

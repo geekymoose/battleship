@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooserGamePanel extends JPanel{
+public class ChooseGamePanel extends JPanel implements CurrentView{
     JButton b_ia;
     JButton b_2players;
     JButton b_lan;
@@ -25,7 +25,7 @@ public class ChooserGamePanel extends JPanel{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public ChooserGamePanel(){
+    public ChooseGamePanel(){
         this.setLayout(null);
         
         b_ia            = new JButton("Jouer contre l'IA");
@@ -43,9 +43,7 @@ public class ChooserGamePanel extends JPanel{
     // METHODS
     //**************************************************************************
     
-    public void initButtons(){
-        
-    }
+ 
     //**************************************************************************
     // SETTERS / GETTERS
     //**************************************************************************

@@ -1,25 +1,22 @@
 /* 
- * Creation : 11 févr. 2015
+ * Creation : 16 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 package com.battleship.views;
 
-import javax.swing.JPanel;
-
 
 
 /**
- * Panel qui contient les armes / et infos du joueur
- * @date    11 févr. 2015
+ * @date    16 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ScorePanel extends JPanel{
+public class GridPanel {
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public ScorePanel(){
+    public GridPanel(){
 
     }
 
