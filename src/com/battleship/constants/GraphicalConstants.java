@@ -21,7 +21,8 @@ public interface GraphicalConstants {
     public static final     String  FRAME_TITLE = "BATTLESHIP";
     
     //**************************************************************************
-    // CONSTRUCTOR
+    // INFORMATION PANEL
     //**************************************************************************
+    public static final     String  INFORMATION_TITLE = "BATTLESHIP";
     
 }

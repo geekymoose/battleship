@@ -55,6 +55,14 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants, Obse
     @Override
     public void update(Observable obs) {
         // Variable dans le model qui dit dans quel état doit être la view
+        int varModel = 10;
+        
+        switch(varModel){
+            case 0: currentView = new ChooseGamePanel();
+            case 1: currentView = new ChooseGridPanel();
+            case 2: currentView = new PlaceFleetPanel();
+            case 3: currentView = new GamePanel();
+        }
     }
      
 }
