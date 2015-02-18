@@ -7,6 +7,8 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.models.game.Player;
+
 
 
 
@@ -16,6 +18,13 @@ package com.battleship.models.weapons;
  * <p>
  * public class Bomb<br/>
  * extends Weapon
+ * </p>
+ * <p>
+ * Type of weapon that has a shotTypeBomb shotType meaning it can only shoot 
+ * like a bomb.
+ * The center compartment (the compartment that was clicked on) and all 
+ * the neighbouring compartment are hit (nine compartments hit with a square grid 
+ * and seven with an hexagon grid).
  * </p>
  *
  * 
@@ -37,8 +46,8 @@ public class Bomb extends Weapon{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public Bomb(){
-    
+    public Bomb(Player pOwner, int pAmmo){
+        super(new shotTypeBomb(), pOwner, pAmmo);
     }
     
     

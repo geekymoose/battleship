@@ -7,6 +7,9 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.behaviors.Target;
+import com.battleship.models.game.FleetGridModel;
+
 
 
 
@@ -50,7 +53,27 @@ public class ShotTypeMissile implements ShotType{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    
+    @Override
+    public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
+        if(pTarget[pY][pX].isValideTarget()){
+            pTarget[pY][pX].hit();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
+        if(pTarget[pY][pX].isValideTarget()){
+            pTarget[pY][pX].hit();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     
     

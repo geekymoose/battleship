@@ -7,6 +7,11 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.behaviors.Target;
+import com.battleship.models.game.FleetGridModel;
+import com.battleship.models.game.FleetGridSquare;
+import com.battleship.models.game.Player;
+
 
 
 
@@ -26,7 +31,9 @@ public abstract class Weapon {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    
+    protected int ammo;
+    protected final ShotType shot;
+    protected Player owner;
     
     
     
@@ -35,8 +42,10 @@ public abstract class Weapon {
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    protected Weapon(){
-    
+    protected Weapon(int pAmmo, ShotType pShot, Player pOwner){
+        this.ammo       = pAmmo;
+        this.shot       = pShot;
+        this.owner      = pOwner;
     }
     
     
@@ -47,7 +56,14 @@ public abstract class Weapon {
     //**************************************************************************
     // Functions
     //**************************************************************************
-    
+    protected boolean fireAt(int pX, int pY, Target[][] pTarget, FleetGridModel grid){
+        if(grid instanceof FleetGridSquare){
+            return shot.fireSquareGrid(pX, pY, pTarget);
+        }
+        else{
+            return shot.fireHexagonGrid(pX, pY, pTarget);
+        }
+    }
     
     
     
@@ -56,4 +72,11 @@ public abstract class Weapon {
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
+    protected void setAmmo(int pAmmo){
+        this.ammo=pAmmo;
+    }
+    
+    protected void setOwner(Player pOwner){
+        this.owner=pOwner;
+    }
 }
