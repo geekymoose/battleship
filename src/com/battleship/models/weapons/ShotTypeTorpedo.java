@@ -7,6 +7,9 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.behaviors.Target;
+import com.battleship.models.game.FleetGridModel;
+
 
 
 
@@ -50,7 +53,35 @@ public class ShotTypeTorpedo implements ShotType{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    
+    @Override
+    public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
+        if(pTarget[pY][pX].isValideTarget()){
+            pTarget[pY][pX].hit();
+            pTarget[pY-1][pX].hit();
+            pTarget[pY+1][pX].hit();
+            pTarget[pY][pX-1].hit();
+            pTarget[pY][pX+1].hit();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
+        if(pTarget[pY][pX].isValideTarget()){
+            pTarget[pY][pX].hit();
+            pTarget[pY][pX-1].hit();
+            pTarget[pY][pX+1].hit();
+            pTarget[pY+1][pX-1].hit();
+            pTarget[pY+1][pX+1].hit();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     
     
