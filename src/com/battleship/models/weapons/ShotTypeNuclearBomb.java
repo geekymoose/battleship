@@ -40,35 +40,44 @@ public class ShotTypeNuclearBomb implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValidTarget()){
-            for(int i=-3; i<4; i++){
-                for(int j=-3; j<4; j++){
+        for(int i=-3; i<4; i++){
+            for(int j=-3; j<4; j++){
+                try{
                     pTarget[pX+i][pY+j].hit();
+                } catch(ArrayIndexOutOfBoundsException ex){
+                    //Means this square is not in the Target matrix (Out of range)
                 }
             }
-            return true;
         }
-        else{
-            return false;
-        }
+        return true;
     }
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValidTarget()){
-            for(int i=-1; i<2; i++){
-                for(int j=-2; j<3; j++){
+        for(int i=-1; i<2; i++){
+            for(int j=-2; j<3; j++){
+                try{
                     pTarget[pY+i][pX+j].hit();
+                } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+                    //Means this square is not in the Target matrix (Out of range)
                 }
             }
+        }
+
+        /*
+         * ATTENTION
+         * See fireHexagonGrid in ShotTYpeBomb for information about this try
+         */
+        try{
             pTarget[pY-1][pX].hit();
             pTarget[pY+2][pX-1].hit();
             pTarget[pY+2][pX].hit();
             pTarget[pY+2][pX+1].hit();
-            return true;
         }
-        else{
-            return false;
+        catch(ArrayIndexOutOfBoundsException ex){
+            //Nothing
+
         }
+        return true;
     }
 }
