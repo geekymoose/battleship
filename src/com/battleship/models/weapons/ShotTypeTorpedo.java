@@ -41,31 +41,37 @@ public class ShotTypeTorpedo implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValidTarget()){
+        /*
+         * ATTENTION
+         * See fireHexagonGrid in ShotTYpeBomb for information about this try
+         */
+        try{
             pTarget[pY][pX].hit();
             pTarget[pY-1][pX].hit();
             pTarget[pY+1][pX].hit();
             pTarget[pY][pX-1].hit();
             pTarget[pY][pX+1].hit();
-            return true;
+        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+            //Means this square is not in the Target matrix (Out of range)
         }
-        else{
-            return false;
-        }
+        return true;
     }
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValidTarget()){
+        /*
+         * ATTENTION
+         * See fireHexagonGrid in ShotTYpeBomb for information about this try
+         */
+        try{
             pTarget[pY][pX].hit();
             pTarget[pY][pX-1].hit();
             pTarget[pY][pX+1].hit();
             pTarget[pY+1][pX-1].hit();
             pTarget[pY+1][pX+1].hit();
-            return true;
+        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+            //Means this square is not in the Target matrix (Out of range)
         }
-        else{
-            return false;
-        }
+        return true;
     }
 }

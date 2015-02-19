@@ -40,22 +40,27 @@ public class ShotTypeBomb implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValidTarget()){
-            for(int i=-1; i<2; i++){
-                for(int j=-1; j<2; j++){
+        for(int i=-1; i<2; i++){
+            for(int j=-1; j<2; j++){
+                try{
                     pTarget[pX+i][pY+j].hit();
+                } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+                    //Means this square is not in the Target matrix (Out of range)
                 }
             }
-            return true;
         }
-        else{
-            return false;
-        }
+        return true;
     }
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValidTarget()){
+        /*
+         * ATTENTION!!!!!!!
+         * I'm not sure it's going to work. I don't remember me if try will try 
+         * every one even if the first one throws exeception or if it will stop 
+         * at the first throw. (In this case, we have to do in another way)
+         */
+        try{
             pTarget[pY-1][pX].hit();
             pTarget[pY][pX-1].hit();
             pTarget[pY][pX].hit();
@@ -63,10 +68,9 @@ public class ShotTypeBomb implements ShotType{
             pTarget[pY+1][pX-1].hit();
             pTarget[pY+1][pX].hit();
             pTarget[pY+1][pX+1].hit();
-            return true;
+        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+            //Means this square is not in the Target matrix (Out of range)
         }
-        else{
-            return false;
-        }
+        return true;
     } 
 }

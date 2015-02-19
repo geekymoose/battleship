@@ -40,23 +40,11 @@ public class ShotTypeMissile implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValidTarget()){
-            pTarget[pY][pX].hit();
-            return true;
-        }
-        else{
-            return false;
-        }
+        return pTarget[pY][pX].hit(); //pX pY must to be valid position
     }
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValidTarget()){
-            pTarget[pY][pX].hit();
-            return true;
-        }
-        else{
-            return false;
-        }
+        return pTarget[pY][pX].hit();
     }
 }
