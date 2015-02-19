@@ -87,9 +87,6 @@ public abstract class FleetGridModel{
      * @return BoxMap at x:y if exists, otherwise, return null
      */
     public BoxMap getBoxMapAt(int pX, int pY){
-        /*
-         * Check if coordinates are on the grid, otherwise, return null
-         */
         if (pX<0 || pX>=this.gridWidth || pY<0 || pY>=this.gridHeight){
             return null;
         }

@@ -17,6 +17,8 @@ package com.battleship.exceptions;
  *
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class ForbiddenAction extends Exception {
 

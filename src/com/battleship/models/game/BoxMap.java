@@ -6,7 +6,7 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.constants.BoatsConstants;
-import com.battleship.models.sprites.Sprite;
+import com.battleship.behaviors.Sprite;
 
 
 
@@ -41,6 +41,7 @@ public abstract class BoxMap implements Target, BoatsConstants{
     protected   final int               posX;
     protected   final int               posY;
     protected   final FleetGridModel    grid;
+    public      boolean                 isTargeted; //Used for Target interface
     
     
     
@@ -61,6 +62,7 @@ public abstract class BoxMap implements Target, BoatsConstants{
         this.posX       = pX;
         this.posY       = pY;
         this.grid       = pGrid;
+        this.isTargeted = false;
     }
     
     
@@ -87,13 +89,29 @@ public abstract class BoxMap implements Target, BoatsConstants{
     // Functions from Target implements
     //**************************************************************************
     @Override
-    public void hit(){
-    
+    public boolean hit(){
+        return this.content.hit();
     }
 
     @Override
-    public boolean isValideTarget(){
-        return false;
+    public boolean isValidTarget(){
+        return this.content.canBeHit();
+    }
+    
+    @Override
+    public boolean isTargeted(){
+        return this.isTargeted;
+    }
+    
+    @Override
+    public boolean aim(){
+        this.isTargeted = true;
+        return true;
+    }
+    
+    @Override
+    public void stopAim(){
+        this.isTargeted = false;
     }
     
     

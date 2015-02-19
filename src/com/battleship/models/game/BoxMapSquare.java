@@ -4,7 +4,7 @@
  */
 package com.battleship.models.game;
 
-import com.battleship.models.sprites.Sprite;
+import com.battleship.behaviors.Sprite;
 
 
 
@@ -21,6 +21,7 @@ import com.battleship.models.sprites.Sprite;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see     GridFleetModel
  * @see     BoxMap
  */

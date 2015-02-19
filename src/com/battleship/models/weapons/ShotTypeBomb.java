@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
-import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -30,32 +29,18 @@ import com.battleship.models.game.FleetGridModel;
  */
 public class ShotTypeBomb implements ShotType{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     public ShotTypeBomb(){
-    
     }
     
     
-    
-    
-    
-
     //**************************************************************************
     // Functions
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValideTarget()){
+        if(pTarget[pX][pY].isValidTarget()){
             for(int i=-1; i<2; i++){
                 for(int j=-1; j<2; j++){
                     pTarget[pX+i][pY+j].hit();
@@ -70,7 +55,7 @@ public class ShotTypeBomb implements ShotType{
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValideTarget()){
+        if(pTarget[pX][pY].isValidTarget()){
             pTarget[pY-1][pX].hit();
             pTarget[pY][pX-1].hit();
             pTarget[pY][pX].hit();
@@ -83,15 +68,5 @@ public class ShotTypeBomb implements ShotType{
         else{
             return false;
         }
-    }
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
-
-    
+    } 
 }

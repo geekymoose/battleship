@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
-import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -23,31 +22,17 @@ import com.battleship.models.game.FleetGridModel;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
 public class ShotTypeMissile implements ShotType{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     public ShotTypeMissile(){
-    
     }
-    
-    
-    
-    
     
 
     //**************************************************************************
@@ -55,7 +40,7 @@ public class ShotTypeMissile implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValideTarget()){
+        if(pTarget[pY][pX].isValidTarget()){
             pTarget[pY][pX].hit();
             return true;
         }
@@ -66,7 +51,7 @@ public class ShotTypeMissile implements ShotType{
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValideTarget()){
+        if(pTarget[pY][pX].isValidTarget()){
             pTarget[pY][pX].hit();
             return true;
         }
@@ -74,12 +59,4 @@ public class ShotTypeMissile implements ShotType{
             return false;
         }
     }
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
 }

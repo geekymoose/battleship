@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
-import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -34,6 +33,7 @@ public interface ShotType {
      * @return true if the target was hit
      */
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget);
+    
     /**
      * 
      * @param pX abscissa of the compartment shot in the grid pTarget

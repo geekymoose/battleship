@@ -6,7 +6,8 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.constants.FleetGridConstants;
-import com.battleship.models.weapons.Weapon;
+import com.battleship.constants.GameConstants;
+import com.battleship.models.weapons.*;
 import java.util.ArrayList;
 
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class Player implements FleetGridConstants{
+public class Player implements FleetGridConstants, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -38,7 +39,7 @@ public class Player implements FleetGridConstants{
     private     FleetGridModel          fleetGrid;
     private     ArrayList<Weapon>       listWeapons;
     private     int                     score;
-    private     Weapon                  currentWeapon;
+    private     int                     currentWeaponIndex;
     
     
     
@@ -49,13 +50,18 @@ public class Player implements FleetGridConstants{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new player
+     * Create a new player. Player name is unknown, score = 0 
+     * List weapon is fill with the default weapon and fleetGrid is not set
      */
     private Player() {
-        this.name           = "";
-        this.score          = 0;
-        this.listWeapons    = new ArrayList();
-        this.fleetGrid      = null;
+        this.name               = "Unknown";
+        this.score              = 0;
+        this.listWeapons        = new ArrayList();
+        this.fleetGrid          = null;
+        
+        //Add default weapon and set current weapon to this weapon
+        this.listWeapons.add(new Missile(this, INFINITE));
+        this.currentWeaponIndex = 0;
     }
     
     /**
@@ -85,23 +91,66 @@ public class Player implements FleetGridConstants{
     // Functions
     //**************************************************************************
     /**
-     * Switch player Weapon. get the next one or the previous one (Depend of 
-     * controller action, for example, a wheel up/down movement)
+     * Switch player weapon. Get the next player weapon.
      */
-    public final void switchWeapon() {
-        //To do: switch weapon
+    public void switchWeaponNext() {
+        this.currentWeaponIndex++;
+        if(this.currentWeaponIndex>=this.listWeapons.size()){
+            this.currentWeaponIndex = 0;
+        }
+    }
+    
+    /**
+     * Switch player weapon. Get the previous player weapon.
+     */
+    public void switchWeaponPrevious(){
+        this.currentWeaponIndex--;
+        if(this.currentWeaponIndex<0){
+            this.currentWeaponIndex = this.listWeapons.size();
+        }
+    }
+    
+    /**
+     * Switch weapon to the one at position pValue. Position start a 0, means that 
+     * if player got 3 weapons, get number 2 return the last weapon. Do nothing 
+     * in case of invalid value
+     * @param pValue weapon index to switch with
+     */
+    public void switchWeaponWith(int pValue){
+        if(pValue<0 || pValue >= this.listWeapons.size()){
+            return;
+        }
+        this.currentWeaponIndex = pValue;
     }
     
     /**
      * Try to launch a shot at position pX, pY
-     * @param pX
-     * @param pY
-     * @param pWhere
+     * @param pX x target coordinate in the Target matrix
+     * @param pY y target coordinate in the Target matrix
+     * @param pWhere target matrix
      * @return true if is able to shoot, otherwise, return false
      */
-    public boolean shootAt(int pX, int pY, Target[] pWhere) {
-        //return this.currentWeapon.fire();
-        return false; //To Di
+    public boolean shootAt(int pX, int pY, Target[][] pWhere) {
+        Target target =  pWhere[pY][pX];
+        if(target.isValidTarget()){
+            this.listWeapons.get(this.currentWeaponIndex)
+                            .fireAt(pX, pY, pWhere, this.fleetGrid);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Aim a target. 
+     * @param pX x target coordinate in the Target matrix
+     * @param pY y target coordinate in the Target matrix
+     * @param pWhere target matrix
+     * @return true if can be aimed by player, otherwise, return false
+     */
+    public boolean aimAt(int pX, int pY, Target[][] pWhere){
+        Target target =  pWhere[pY][pX];
+        //To do in weapon, then, add here 
+        return false;
     }
     
     
@@ -116,7 +165,7 @@ public class Player implements FleetGridConstants{
      * Return current player's name
      * @return name of this player
      */
-    public final String getName() {
+    public String getName() {
         return this.name;
     }
     
@@ -124,7 +173,12 @@ public class Player implements FleetGridConstants{
      * Set player name
      * @param pValue new player name, if is not a String or empty, throw exception
      */
-    public final void setName(String pValue) {
-        //Add exception and check if valide
+    public void setName(String pValue) {
+        /*
+         * ATTENTION
+         * To finish!!
+         * Add exception and check if valid name (Not empty, valid lenght...)
+         */
+        this.name = pValue;
     }
 }

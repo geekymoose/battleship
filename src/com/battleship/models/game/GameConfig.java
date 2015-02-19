@@ -28,11 +28,13 @@ import com.battleship.constants.GameConstants;
  *  <li>Grid type: square or hexagon</li>
  *  </ul>
  * </p>
+ * 
  *
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see GameModel
  */
 public class GameConfig implements GameConstants{

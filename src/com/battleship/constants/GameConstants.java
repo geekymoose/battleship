@@ -41,4 +41,11 @@ public interface GameConstants {
     //**************************************************************************
     public static int       NB_MIN_PLAYERS              = 1;
     public static int       NB_MAX_PLAYERS              = 2;
+    
+    
+    
+    //**************************************************************************
+    // Weapon constants
+    //**************************************************************************
+    public static int       INFINITE                    = -42;
 }
