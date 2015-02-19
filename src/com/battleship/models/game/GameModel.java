@@ -89,8 +89,8 @@ public class GameModel implements GameConstants{
         if(this.isFull()){
             throw new ForbiddenAction(Msg.ERR_UNABLE_ADD_PLAYER);
         }
+        //Add player and then, create the player fleet Grid
         this.listPlayers[this.currentNbPlayers] = pPlayer;
-        //Create the player fleet Grid
         this.listPlayers[this.currentNbPlayers].initFleetGrid(this.gridWidth, 
                                                               this.gridHeight, 
                                                               this.gridType);

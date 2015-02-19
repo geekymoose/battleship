@@ -5,32 +5,31 @@
 package com.battleship.main;
 
 import com.battleship.views.ApplicationFrame;
+import java.awt.EventQueue;
 
 
 
 /**
+ * 
  * @date    17 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
 public class Main {
-    //**************************************************************************
-    // CONSTRUCTOR
-    //**************************************************************************
-    public Main(){
-
-    }
-
-    //**************************************************************************
-    // METHODS
-    //**************************************************************************
+    /**
+     * Launch the program
+     * @param args 
+     */
     public static void main(String[] args){
-        ApplicationFrame game = new ApplicationFrame();
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ApplicationFrame game = new ApplicationFrame();
+                game.pack();
+                game.setLocationRelativeTo(null);
+                game.setVisible(true);
+            }
+        });
     }
-    
-    //**************************************************************************
-    // SETTERS / GETTERS
-    //**************************************************************************
-
 }

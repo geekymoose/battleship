@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
-import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -23,21 +22,12 @@ import com.battleship.models.game.FleetGridModel;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
 public class ShotTypeTorpedo implements ShotType{
-    //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
@@ -45,17 +35,13 @@ public class ShotTypeTorpedo implements ShotType{
     
     }
     
-    
-    
-    
-    
 
     //**************************************************************************
     // Functions
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValideTarget()){
+        if(pTarget[pY][pX].isValidTarget()){
             pTarget[pY][pX].hit();
             pTarget[pY-1][pX].hit();
             pTarget[pY+1][pX].hit();
@@ -70,7 +56,7 @@ public class ShotTypeTorpedo implements ShotType{
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pY][pX].isValideTarget()){
+        if(pTarget[pY][pX].isValidTarget()){
             pTarget[pY][pX].hit();
             pTarget[pY][pX-1].hit();
             pTarget[pY][pX+1].hit();
@@ -82,12 +68,4 @@ public class ShotTypeTorpedo implements ShotType{
             return false;
         }
     }
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
 }

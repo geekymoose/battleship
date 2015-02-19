@@ -3,7 +3,9 @@
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 
-package com.battleship.models.sprites;
+package com.battleship.behaviors;
+
+import com.battleship.models.weapons.ShotType;
 
 
 
@@ -26,8 +28,16 @@ package com.battleship.models.sprites;
 public interface Sprite {
     
     /**
-     * Hit sprite by a shot
+     * Hit sprite by a shot.
      * @return true if sprite hit successfully, otherwise, return false
      */
     public boolean hit();
+    
+    
+    /**
+     * Check if this sprite could be hit (For example, this sprite could have
+     * already been hit.
+     * @return true if can be hit, otherwise, return false
+     */
+    public boolean canBeHit();
 }

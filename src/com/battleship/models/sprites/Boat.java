@@ -5,6 +5,7 @@
 
 package com.battleship.models.sprites;
 
+import com.battleship.behaviors.Sprite;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 
@@ -28,19 +29,28 @@ import com.battleship.models.game.FleetGridModel;
  * </ul>
  *
  *
- * @date Feb 11. 2015
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
- * @author Contsantin MASSON
+ * @date    Feb 11. 2015
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
+ * @author  Contsantin MASSON
  */
-public abstract class Boat implements Sprite{
+public abstract class Boat{
+    //**************************************************************************
+    // Constants - Variables
+    //**************************************************************************
     protected String            kindOfBoat;
     protected int               nbLives;
     protected int               orientation;
     protected Compartment[]     tabCompartments;
     protected FleetGridModel    grid;
-
-
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Constructors - Initialization
+    //**************************************************************************
     /**
      * Create a new Boat. Boat has a default orientation, even if it is not
      * already placed on the grid. The FleetGridModel is the boat location (In
@@ -65,8 +75,14 @@ public abstract class Boat implements Sprite{
             //tabCompartment[i]=new Compartment();
         }
     }
-
-
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
     /**
      * Check if boat is dead
      *
@@ -97,8 +113,11 @@ public abstract class Boat implements Sprite{
         //To Do mother fucker
         return false;
     }
-
-
+    
+    
+    
+    
+    
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -111,7 +130,6 @@ public abstract class Boat implements Sprite{
         return tabCompartments[0].getBoxPosition();
     }
 
-
     /**
      * Return current number lives
      *
@@ -120,7 +138,6 @@ public abstract class Boat implements Sprite{
     public int getNbLives(){
         return nbLives;
     }
-
 
     /**
      * Return current orientation
@@ -131,7 +148,6 @@ public abstract class Boat implements Sprite{
         return orientation;
     }
 
-
     /**
      * Change current orientation. Boat position will be recalculated
      *
@@ -141,13 +157,32 @@ public abstract class Boat implements Sprite{
         this.orientation = pValue;
         this.calculBoatPositions();
     }
-
-
-
-    //----------------------------------INTERN CLASS-----------------------------
-    /*
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Inner class : Compartment
+    //**************************************************************************
+    /**
+     * <h1>Boat.Compartment</h1>
+     * <p>
+     * protected class Compartment<br/>
+     * implements Sprite
+     * </p>
+     * <p>
      * Boat is compound of compartment. Each compartment must be placed on the
      * map and could be hit, destroyed etc
+     * </p>
+     * 
+     * @date    Feb 11. 2015
+     * @author  Anthony CHAFFOT
+     * @author  Jessica FAVIN
+     * @author  Contsantin MASSON
+     * 
+     * @see Boat
+     * @see Sprite
      */
     protected class Compartment implements Sprite {
         protected boolean   isDestroyed;
@@ -174,17 +209,6 @@ public abstract class Boat implements Sprite{
         protected boolean isDestroyed(){
             return isDestroyed;
         }
-
-
-        @Override
-        public boolean hit(){
-            if(this.isDestroyed){
-                return false; //Already hit dude
-            }
-            Boat.this.lostOneLife();
-            return true; //Boat hit
-        }
-        
         
         /**
          * Return the current position. Position is a BoxMap
@@ -193,37 +217,23 @@ public abstract class Boat implements Sprite{
         protected BoxMap getBoxPosition(){
             return this.boxPosition;
         }
-    } //----------------------------------END INTERN CLASS----------------------
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Deprecated functions (Might be deleted later)
-    //**************************************************************************
-    /*
-     * @deprecated Hit compartment at position x:y. This coordinates are the
-     * grid position of the compartment. Note, if x:y should be a valid
-     * coordinates (Means there is actually a compartment of this boat at x:y.
-     * But, in case of bad coordinate, nothing is changed.
-     * @param pX abscissa in the GridFleetModel
-     * @param pY ordinate in the GridFleetModel
-     * @return constant WAS_HIT if boat successfully hit, otherwise, return
-     *         NOT_HIT
-     */
-    /*
-    private int hitCompartmentAt(int pX, int pY){ //Use to be public
-        Compartment currentCompartment;
-        Point hitPoint = new Point(pX, pY);
-        for(int i = 0; i < tabCompartments.length; i++) {
-            currentCompartment = tabCompartments[i];
-            if(currentCompartment.getCoordinates().equals(hitPoint)){
-                currentCompartment.receiveDamage();
-                return BoatsConstants.WAS_HIT;
+        
+
+        //**********************************************************************
+        // Sprite implements 
+        //**********************************************************************
+        @Override
+        public boolean hit(){
+            if(this.isDestroyed){
+                return false; //Already hit dude
             }
+            Boat.this.lostOneLife();
+            return true; //Boat hit
         }
-        return BoatsConstants.NOT_HIT;
-    }
-    * */
+
+        @Override
+        public boolean canBeHit(){
+            return isDestroyed;
+        }
+    } //----------------------------------END INNER CLASS-----------------------
 }

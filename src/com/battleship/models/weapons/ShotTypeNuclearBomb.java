@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
-import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -23,31 +22,17 @@ import com.battleship.models.game.FleetGridModel;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
 public class ShotTypeNuclearBomb implements ShotType{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     public ShotTypeNuclearBomb(){
-    
     }
-    
-    
-    
-    
     
 
     //**************************************************************************
@@ -55,7 +40,7 @@ public class ShotTypeNuclearBomb implements ShotType{
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValideTarget()){
+        if(pTarget[pX][pY].isValidTarget()){
             for(int i=-3; i<4; i++){
                 for(int j=-3; j<4; j++){
                     pTarget[pX+i][pY+j].hit();
@@ -70,7 +55,7 @@ public class ShotTypeNuclearBomb implements ShotType{
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        if(pTarget[pX][pY].isValideTarget()){
+        if(pTarget[pX][pY].isValidTarget()){
             for(int i=-1; i<2; i++){
                 for(int j=-2; j<3; j++){
                     pTarget[pY+i][pX+j].hit();
@@ -86,12 +71,4 @@ public class ShotTypeNuclearBomb implements ShotType{
             return false;
         }
     }
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
 }
