@@ -7,6 +7,7 @@ package com.battleship.models.game;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.BoatsConstants;
 import com.battleship.behaviors.Sprite;
+import com.battleship.models.sprites.Water;
 
 
 
@@ -80,6 +81,15 @@ public abstract class BoxMap implements Target, BoatsConstants{
      * @return next BoxMap, null if there is no next BoxMap (Border reached)
      */
     public abstract BoxMap getNextBoxMap(int pDirection);
+    
+    /**
+     * Check is this BoxMap is empty : there is only water here (Means content 
+     * is instance of Water
+     * @return true if empty, otherwise, return false
+     */
+    public boolean isEmpty(){
+        return (this.content instanceof Water);
+    }
     
     
     
