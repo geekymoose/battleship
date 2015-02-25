@@ -11,12 +11,13 @@ import java.awt.EventQueue;
 
 /**
  * 
- * @date    17 févr. 2015
+ * @date    Feb 17, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
 public class Main {
+    
     /**
      * Launch the program
      * @param args 

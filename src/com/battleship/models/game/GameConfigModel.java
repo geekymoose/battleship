@@ -11,10 +11,10 @@ import com.battleship.constants.GameConstants;
 
 
 /**
- * <h1>GameConfig</h1>
+ * <h1>GameConfigModel</h1>
  * <p>
- * public class GameConfig
- * </p>
+ public class GameConfigModel
+ </p>
  * 
  * <p>
  * Configuration for a new GameModel: it keeps the game configuration.<br/>
@@ -37,7 +37,7 @@ import com.battleship.constants.GameConstants;
  * 
  * @see GameModel
  */
-public class GameConfig implements GameConstants{
+public class GameConfigModel implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -55,7 +55,7 @@ public class GameConfig implements GameConstants{
     /**
      * Create a new empty GameConfig. All data are loaded with default values.
      */
-    public GameConfig(){
+    public GameConfigModel(){
         this.defaultConfig();
     }
     

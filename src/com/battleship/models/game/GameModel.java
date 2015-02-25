@@ -19,9 +19,9 @@ import com.battleship.exceptions.ForbiddenAction;
  * </p>
  * 
  * <p>
- * This class manage the game. Game is set by a configuration which is 
- * a GameConfig class.
- * </p>
+ This class manage the game. Game is set by a configuration which is 
+ a GameConfigModel class.
+ </p>
  *
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
@@ -50,12 +50,12 @@ public class GameModel implements GameConstants{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Constructor: create a new GameModel from a GameConfig class<br/>
-     * Set the configuration from GameConfig. After creation, basement config 
+     * Constructor: create a new GameModel from a GameConfigModel class<br/>
+ Set the configuration from GameConfigModel. After creation, basement config 
      * could not be changed anymore (As gridWidth, gridHeight and gridType)
      * @param pConfig configuration to set
      */
-    public GameModel(GameConfig pConfig) {
+    public GameModel(GameConfigModel pConfig) {
         this.gridWidth              = pConfig.getGridWidth();
         this.gridHeight             = pConfig.getGridHeight();
         this.gridType               = pConfig.getGridType();
@@ -111,11 +111,6 @@ public class GameModel implements GameConstants{
     
     private void switchTurnBehaviors() {
         
-    }
-    
-    
-    public void tryShootAt(int pX,  int pY){
-    
     }
     
     

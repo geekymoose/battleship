@@ -85,7 +85,6 @@ public abstract class Boat{
     //**************************************************************************
     /**
      * Check if boat is dead
-     *
      * @return true if the boat has sinked (is dead), otherwise, false
      */
     public boolean isDead(){
@@ -110,8 +109,15 @@ public abstract class Boat{
      * @return true if position is valid, otherwise, return false
      */
     public boolean calculBoatPositions(){
-        //To Do mother fucker
-        return false;
+        boolean isValid = true;
+        for(int k=1; k<this.tabCompartments.length;k++){
+            BoxMap next = this.tabCompartments[k-1].boxPosition.getNextBoxMap(orientation);
+            if(next==null || !next.isEmpty()){
+                isValid = false;
+            }
+            this.tabCompartments[k].boxPosition = next;
+        }
+        return isValid;
     }
     
     
@@ -122,8 +128,7 @@ public abstract class Boat{
     // Getters - Setters
     //**************************************************************************
     /**
-     * Return BoxMap position of the front compartment 
-     * 
+     * Return BoxMap position of the front compartment
      * @return coordinates of the upper left boat compartment
      */
     public BoxMap getFrontPosition(){
@@ -132,7 +137,6 @@ public abstract class Boat{
 
     /**
      * Return current number lives
-     *
      * @return current number lives
      */
     public int getNbLives(){
@@ -141,7 +145,6 @@ public abstract class Boat{
 
     /**
      * Return current orientation
-     *
      * @return current orientation
      */
     public int getOrientation(){
@@ -150,7 +153,6 @@ public abstract class Boat{
 
     /**
      * Change current orientation. Boat position will be recalculated
-     *
      * @param pValue new orientation
      */
     public void setOrientation(int pValue){
