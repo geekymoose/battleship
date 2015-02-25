@@ -5,26 +5,28 @@
 package com.battleship.views;
 
 import com.battleship.constants.GraphicalConstants;
-import com.battleship.observer.Observable;
-import com.battleship.observer.Observer;
+import com.battleship.observers.ObservableGame;
+import com.battleship.observers.ObserverGame;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
- * @date 11 févr. 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @date    11 févr. 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
-public class ApplicationFrame extends JFrame implements GraphicalConstants, Observer{
+public class ApplicationFrame extends JFrame implements GraphicalConstants, ObserverGame{
     CurrentView currentView;
-
+    
+    
+    
+    
+    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-
     public ApplicationFrame() {
         this.pack();
         this.setSize(FRAME_SIZE_L, FRAME_SIZE_H);
@@ -38,22 +40,31 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants, Obse
         this.getContentPane().add((Component) currentView);
     }
     
-   
+    
+    
+    
+    
     //**************************************************************************
     // METHODS
     //**************************************************************************
     
-
+    
+    
+    
+    
     //**************************************************************************
     // SETTERS / GETTERS
     //**************************************************************************
-     
+    
+    
+    
+    
+    
     //**************************************************************************
     // PATTERN OBSERVER
     //**************************************************************************
-
     @Override
-    public void update(Observable obs) {
+    public void update(ObservableGame o, Object arg){
         // Variable dans le model qui dit dans quel état doit être la view
         int varModel = 10;
         
@@ -64,5 +75,4 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants, Obse
             case 3: currentView = new GamePanel();
         }
     }
-     
 }

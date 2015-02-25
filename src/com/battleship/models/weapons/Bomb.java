@@ -38,6 +38,6 @@ public class Bomb extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Bomb(Player pOwner, int pAmmo){
-        super(new shotTypeBomb(), pOwner, pAmmo);
+        super(new ShotTypeBomb(), pOwner, pAmmo);
     }
 }

@@ -26,6 +26,7 @@ import com.battleship.behaviors.Target;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * @see     ShotType
  */
 public class ShotTypeTorpedo implements ShotType{
     //**************************************************************************

@@ -19,6 +19,7 @@ import com.battleship.models.game.Player;
  * public class Torpedo<br/>
  * extends Weapon
  * </p>
+ * 
  * <p>
  * Type of weapon that has a shotTypeTorpedo shotType meaning it can only shoot 
  * like a torpedo.
@@ -28,16 +29,16 @@ import com.battleship.models.game.Player;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class Torpedo {
+public class Torpedo extends Weapon{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     public Torpedo(Player pOwner, int pAmmo){
-        super(new shotTypeTorpedo(), pOwner, pAmmo);
+        super(new ShotTypeTorpedo(), pOwner, pAmmo);
     }
 }
