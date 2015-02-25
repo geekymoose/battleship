@@ -22,7 +22,7 @@ import com.battleship.models.game.Player;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT

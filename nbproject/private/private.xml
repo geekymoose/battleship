@@ -4,30 +4,43 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/behaviors/Target.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/NuclearBomb.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/ShotTypeBomb.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/FleetGridSquare.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/Player.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/behaviors/Sprite.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/BoxMap.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/GameModel.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/BoxMapSquare.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/main/Main.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/constants/BoatsConstants.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/views/ApplicationFrame.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/observers/Observable.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/FleetGridModel.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Submarine.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/ShotTypeNuclearBomb.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Cruiser.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/Torpedo.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/views/ChooseGridPanel.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Water.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/constants/Msg.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/exceptions/ForbiddenAction.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/Weapon.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Boat.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/Missile.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/Bomb.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/ShotTypeMissile.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Battleship.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/views/CurrentView.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/FleetGridHexagon.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/ShotTypeTorpedo.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/constants/GraphicalConstants.java</file>
-            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/sprites/Sprite.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/BoxMapHexagon.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/views/InformationPanel.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/game/GameConfig.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/models/weapons/ShotType.java</file>
             <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/constants/GameConstants.java</file>
+            <file>file:/mnt/Gnorps/Flex/W-Computing/battleship/src/com/battleship/views/ChooseGamePanel.java</file>
         </group>
     </open-files>
 </project-private>

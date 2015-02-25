@@ -5,8 +5,6 @@
 
 package com.battleship.behaviors;
 
-import com.battleship.models.weapons.ShotType;
-
 
 
 
