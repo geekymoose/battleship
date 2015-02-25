@@ -36,6 +36,6 @@ public class Missile extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Missile(Player pOwner, int pAmmo){
-        super(new shotTypeMissile(), pOwner, pAmmo);
+        super(new ShotTypeMissile(), pOwner, pAmmo);
     }
 }

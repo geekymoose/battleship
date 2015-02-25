@@ -22,10 +22,11 @@ import com.battleship.behaviors.Target;
  *
  *
  * 
- * @date Feb 15, 2015
+ * @date    Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * @see     ShotType
  */
 public class ShotTypeBomb implements ShotType{
     //**************************************************************************

@@ -5,37 +5,35 @@
 
 package com.battleship.observers;
 
-import java.util.Observer;
-
 
 
 /**
- * <h1>Observable</h1>
- * <p>public interface Observable</p>
+ * <h1>ObservableGame</h1>
+ * <p>public interface ObservableGame</p>
  * 
  * <p>
- * This class represents an Observable object. 
+ * This class represents an ObservableGame object. 
  * </p>
  *
  * @date    Feb 11, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see     java.lang.Observer
+ * @see     ObserverGame
  * 
  */
-public interface Observable{
+public interface ObservableGame{
     /**
      * Add an observer of the model
      * @param o Observer
      */
-    public void registerObserver(Observer o);
+    public void registerObserver(ObserverGame o);
     
     /**
      * Delete an observer
      * @param o Observer
      */
-    public void deleteObserver(Observer o);
+    public void deleteObserver(ObserverGame o);
     
     /**
      * Notify any observers

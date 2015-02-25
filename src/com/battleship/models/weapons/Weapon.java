@@ -48,7 +48,7 @@ public abstract class Weapon {
      * @param pShot     ShotType
      * @param pOwner    weapon owner
      */
-    protected Weapon(int pAmmo, ShotType pShot, Player pOwner){
+    protected Weapon(ShotType pShot, Player pOwner, int pAmmo){
         this.ammo       = pAmmo;
         this.shot       = pShot;
         this.owner      = pOwner;
