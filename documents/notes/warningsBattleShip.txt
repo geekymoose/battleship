@@ -1,0 +1,3 @@
+In GameMode - AddPlayer
+    * Check if player not already in an another gameModel
+    * Check if player to add is not already in this game
