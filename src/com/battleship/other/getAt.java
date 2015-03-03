@@ -33,103 +33,89 @@ public class getAt {
 
     public Point getUpperLeftCoordinates(Boat pBoat) {
         if (pBoat.grid instanceof FleetGridSquare) {
-            return getUpperLeftCoordinatesSquare(Boat pBoat
-          
-            );
-      }
-      else{
-         return getUpperLeftCoordinatesHexagon(Boat pBoat
-        
-    
+            return getUpperLeftCoordinatesSquare(pBoat);
+        } else {
+            return getUpperLeftCoordinatesHexagon(pBoat);
+        }
+    }
 
-    );
-      }
-   }
-   
-   public Point getCenterImg(Boat pBoat) {
+    public Point getCenterImg(Boat pBoat) {
         if (pBoat.grid instanceof FleetGridSquare) {
-            return getCenterImgSquare(Boat pBoat
-          
-            );
-      }
-      else{
-         return getCenterImgHexagon(Boat pBoat
-        
-    
+            return getCenterImgSquare(pBoat);
+        } else {
+            return getCenterImgHexagon(pBoat);
+        }
+    }
 
-    );
-      }
-   }
-   
-   public Point getFrontPositionImg(Boat pBoat) {
+    public Point getFrontPositionImg(Boat pBoat) {
         if (pBoat.grid instanceof FleetGridSquare) {
-            return getFrontPositionImgSquare(Boat pBoat
-          
+            return getFrontPositionImgSquare(pBoat
             );
-      }
-      else{
-         return getFrontPositionImgHexagon(Boat pBoat
-        
-    
-
-    );
-      }
-   }
+        } else {
+            return getFrontPositionImgHexagon(pBoat);
+        }
+    }
 ///////////////////////////////////////////////////////////////////////////
-   public Point getCenterImgSquare(Boat pBoat) {
+
+    public Point getCenterImgSquare(Boat pBoat) {
         //vertical boat
-        if (pBoat.getOrientation() == 1) {
-            return new Point(pBoat.getFrontPosition().getPosX() * 40 + 20,
-                    pBoat.getFrontPosition().getPosY() * 40 + pBoat.tabCompartments.length * 40 / 2);
+        if (pBoat.getOrientation()==1) {
+            return new Point(pBoat.getFrontPosition().getPosX()*40+20,
+                    pBoat.getFrontPosition().getPosY()*40+pBoat.tabCompartments.length*40 / 2);
         } //horizontal boat
         else {
-            return new Point(pBoat.getFrontPosition().getPosX() * 40 + pBoat.tabCompartments.length * 40 / 2,
-                    pBoat.getFrontPosition().getPosY() * 40 + 20);
+            return new Point(pBoat.getFrontPosition().getPosX()*40+pBoat.tabCompartments.length*40/2,
+                    pBoat.getFrontPosition().getPosY()*40+20);
         }
     }
 
     public Point getUpperLeftCoordinatesSquare(Boat pBoat) {
-        return new Point(pBoat.getFrontPosition().getPosX() * 40,
-                pBoat.getFrontPosition().getPosY() * 40);
+        return new Point(pBoat.getFrontPosition().getPosX()*40,
+                pBoat.getFrontPosition().getPosY()*40);
     }
 
     public Point getFrontPositionImgSquare(Boat pBoat) {
-        return new Point(pBoat.getFrontPosition().getPosX() * 40 + 20,
-                pBoat.getFrontPosition().getPosY() * 40 + 20);
+        return new Point(pBoat.getFrontPosition().getPosX()*40+20,
+                pBoat.getFrontPosition().getPosY()*40+20);
     }
 
-   ///////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
     //This section is completely effed up cause I don't know how to calculate the coordinates//
     ///////////////////////////////////////////////////////////////////////////////////////////
     public Point getCenterImgHexagon(Boat pBoat) {
         //vertical boat
-        if (pBoat.getOrientation() == 1) {
-            return new Point(pBoat.getFrontPosition().getPosX() + 20,
-                    pBoat.getFrontPosition().getPosY() + pBoat.tabCompartments.length * 40 / 2);
+        if (pBoat.getOrientation()==1) {
+            return new Point(pBoat.getFrontPosition().getPosX()+20,
+                    pBoat.getFrontPosition().getPosY()+pBoat.tabCompartments.length*40/2);
         } //horizontal boat
         else {
             //set to the right
-            if (pBoat.getOrientation() == 3) {
-                return new Point(pBoat.getFrontPosition().getPosX() + pBoat.tabCompartments.length * 40 / 2,
-                        pBoat.getFrontPosition().getPosY() + 20);
+            if (pBoat.getOrientation()==3) {
+                return new Point(pBoat.getFrontPosition().getPosX()+pBoat.tabCompartments.length*40/2,
+                        pBoat.getFrontPosition().getPosY()+20);
             } //set to the left
             else {
-                return new Point(pBoat.getFrontPosition().getPosX() - pBoat.tabCompartments.length * 40 / 2,
-                        pBoat.getFrontPosition().getPosY() + 20);
+                return new Point(pBoat.getFrontPosition().getPosX()-pBoat.tabCompartments.length*40/2,
+                        pBoat.getFrontPosition().getPosY()+20);
             }
         }
     }
 
     public Point getUpperLeftCoordinatesHexagon(Boat pBoat) {
-        if (pBoat.getOrientation() == 4) {
+        if (pBoat.getOrientation()==4) {
             /*
              getFrontPosition en cas de bateau en diagonal vers la gauche
              retourne les coordonées de la boxmap en bas à gaueche?
              return new Point(??,??);
              */
+            return null;
         } else {
-            return new Point(pBoat.getFrontPosition().getPosX() * 40,
-                    pBoat.getFrontPosition().getPosY() * 40);
+            return new Point(pBoat.getFrontPosition().getPosX()*40,
+                    pBoat.getFrontPosition().getPosY()*40);
         }
+    }
+    
+    public Point getFrontPositionImgHexagon(Boat pBoat){
+        return null;
     }
 }
