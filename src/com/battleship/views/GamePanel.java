@@ -5,6 +5,10 @@
 package com.battleship.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import javax.swing.JPanel;
 
 
@@ -17,39 +21,59 @@ import javax.swing.JPanel;
  * @author  Jessica FAVIN
  */
 public class GamePanel extends JPanel implements CurrentView{
-    JPanel centerPane;
+    Controller c;
+    JPanel p_centerPane;
+    
     InformationPanel p_info;
     FleetPanel p_fleet;
     RadarPanel p_radar;
     ChatPanel p_chat;
+    HeadBar p_headbar = new HeadBar();
+    GridBagConstraints gc = new GridBagConstraints();
     
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public GamePanel(){
+    public GamePanel(Controller cParam){
+        this.c = cParam;
         this.setLayout(new BorderLayout());
-        
         initComponents();
-        this.add(p_info, BorderLayout.WEST);
-        this.add(centerPane, BorderLayout.CENTER);
-        this.add(p_chat, BorderLayout.EAST);
         
+        this.add(p_headbar, BorderLayout.NORTH);
+        this.add(p_centerPane, BorderLayout.CENTER);
+        this.add(p_chat, BorderLayout.EAST);
+        this.add(p_info, BorderLayout.SOUTH);
     }
 
     //**************************************************************************
     // METHODS
     //**************************************************************************
     private void initComponents(){
-        centerPane = new JPanel();
-        centerPane.setLayout(new BorderLayout());
+        p_centerPane = new JPanel();
+        p_centerPane.setLayout(new GridBagLayout()); 
+        p_centerPane.setBackground(Color.red);
         
         p_info = new InformationPanel();
-        p_fleet = new FleetPanel();
-        p_radar = new RadarPanel();
-        p_chat = new ChatPanel();
+        p_info.setBackground(Color.ORANGE);
         
-        centerPane.add(p_radar, BorderLayout.NORTH);
-        centerPane.add(p_fleet, BorderLayout.SOUTH);
+        p_fleet = new FleetPanel();
+        p_fleet.setBackground(Color.CYAN);
+        
+        p_radar = new RadarPanel();
+        p_radar.setBackground(Color.DARK_GRAY);
+        
+        p_chat = new ChatPanel();
+        p_chat.setBackground(Color.PINK);
+        
+        //Mettre les deux panels dans des center de borderlayout
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.insets = new Insets(10, 10, 0, 10);
+        gc.gridx = 0;
+        gc.gridy = 0;
+        p_centerPane.add(p_radar, gc);
+        gc.gridx = 1;
+        gc.gridy = 0;
+        p_centerPane.add(p_fleet, gc);
     }
     
     //**************************************************************************

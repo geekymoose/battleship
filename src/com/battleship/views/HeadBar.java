@@ -1,27 +1,36 @@
 /* 
- * Creation : 11 févr. 2015
+ * Creation : 3 mars 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 package com.battleship.views;
 
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 
 /**
- * affiche une grille drag & drop dans laquelle on place les bateau du dock
- * @date    11 févr. 2015
+ * @date    3 mars 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceFleetPanel extends JPanel implements CurrentView{
-    Controller c;
+public class HeadBar extends JPanel{
+    JLabel l_title = new JLabel("BATTLESHIP");
+    JLabel l_music = new JLabel("MUSIC");
+    JLabel l_theme = new JLabel("THEME");
+    JPanel p_logo = new JPanel();
+    JPanel p_theme = new JPanel();
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public PlaceFleetPanel(Controller cParam){
-        this.c = cParam;
+    public HeadBar(){
+        this.setLayout(new BorderLayout());
+        this.add(l_title, BorderLayout.WEST);
+        p_theme.add(l_theme);
+        p_theme.add(l_music);
+        this.add(p_theme, BorderLayout.EAST);
     }
 
     //**************************************************************************
