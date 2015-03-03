@@ -5,9 +5,16 @@
 package com.battleship.views;
 
 import com.battleship.constants.GraphicalConstants;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,36 +38,59 @@ public class InformationPanel extends JPanel implements GraphicalConstants, Obse
     private JLabel l_score;
     private JLabel l_weapons;
 
-    private JPanel p_weapons;
+    private JPanel p_west;
+    private JPanel p_center;
+    private JPanel p_east;
+    
+    private JPanel p_container;
+    
+    private JButton b_w1;
+    
+    private GridBagConstraints gc = new GridBagConstraints();
 
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
     public InformationPanel() {
-        this.setLayout(new GridLayout(8, 1));
         initComponents();
+        addEachComponents();
+        //setSizes();
     }
 
     //**************************************************************************
     // METHODS
     //**************************************************************************
     private void initComponents() {
+        this.setLayout(new BorderLayout());
         l_title = new JLabel(INFORMATION_TITLE);
-        l_scoreTitle = new JLabel("Score");
+        l_scoreTitle = new JLabel("Score : ");
         l_score = new JLabel("0");
         l_weapons = new JLabel("Weapons");
         ta_info = new JTextArea();
-        p_weapons = new JPanel();
+        b_w1 = new JButton("W1");
+        p_west = new JPanel();
+        p_east = new JPanel();
+        p_center = new JPanel();
+        
+        p_container = new JPanel();
         setupTextArea();
+    }
+    
+    private void setSizes(){
+        b_w1.setPreferredSize(new Dimension(50,50));
     }
 
     private void addEachComponents() {
-        this.add(l_title);
-        this.add(ta_info);
-        this.add(l_scoreTitle);
-        this.add(l_score);
-        this.add(l_weapons);
-        this.add(p_weapons);
+        p_west.add(ta_info);
+        p_center.add(l_scoreTitle);
+        p_center.add(l_score);
+        p_east.add(l_weapons);
+        p_east.add(b_w1);
+        
+        this.add(p_west, BorderLayout.WEST);
+        this.add(p_center, BorderLayout.CENTER);
+        this.add(p_east, BorderLayout.EAST);
+        
     }
 
     private void setupTextArea() {
@@ -74,10 +104,6 @@ public class InformationPanel extends JPanel implements GraphicalConstants, Obse
     public void printInfoMessage(String string) {
         ta_info.append(string);
         ta_info.setCaretPosition(ta_info.getText().length());
-    }
-
-    private void addEachWeapons() {
-        //p_weapons.add(this);
     }
 
     //**************************************************************************
