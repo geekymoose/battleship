@@ -1,0 +1,35 @@
+after choosing game mode (IA / 2v2 / Lan / Internet), different page are displayed
+
+
+IA
+    Config the game (ConfigGamePanel)
+    Place Boats on the Fleet (PlaceBoatsPanel)
+    Start the Game (GamePanel)
+    Display window gg or looser at the end
+
+    
+2v2
+    Config the game with also player name (ConfigGamePanel)
+    
+    Display Black window with message like 'Player 1 must place boats'
+    Place Boats for player 1
+    Display Black window with message like 'Player 2 must place boats'
+    Place Boats for player 2
+    
+    Display black window with message like 'Player 1 begin'
+    Start the game (Each turn , display black window with player that has to play)
+    
+    Display window gg or looser at the end
+    
+
+LAN
+    Display 'Lan room' (With button create game)
+    Config game (Called by button create game)
+    
+    wait for second player, when found, Place Boats
+    
+    wait for second player, when finished for the 2 players, start game
+    
+Internet
+    Login page
+    then, same as LAN

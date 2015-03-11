@@ -2,9 +2,10 @@
  * Creation : 11 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+package com.battleship.views.app;
 
-import Controller.Controller;
+import com.battleship.views.interfaces.ApplicationView;
+import com.battleship.views.interfaces.CurrentView;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,47 +15,57 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
+
+
+
 /**
- * Choix au début du style de partie 1v1 ou en ligne etc ...
+ * <h1></h1>
  *
- * @date 11 févr. 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @date    11 févr. 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class ChooseGamePanel extends JPanel implements CurrentView {
-
-    Controller c;
-    JButton b_ia;
-    JButton b_2players;
-    JButton b_lan;
-    JButton b_internet;
-    JPanel p_container;
-    GridBagConstraints gc = new GridBagConstraints();
-
+    private     ApplicationView     parent;
+    private     JPanel              p_container;
+    private     GridBagConstraints  gc;
+    
+    //Buttons
+    private     JButton             b_ia;
+    private     JButton             b_2players;
+    private     JButton             b_lan;
+    private     JButton             b_internet;
+    
+    
+    
+    
+    
     //**************************************************************************
-    // CONSTRUCTOR
+    // CONSTRUCTOR - INITIALIZATION
     //**************************************************************************
-
-    public ChooseGamePanel(Controller cParam) {
-        this.c = cParam;
-        this.setLayout(new BorderLayout());
-        p_container = new JPanel();
-        initComponents();
-        setBtnActions();
-        this.add(p_container, BorderLayout.CENTER);
+    /**
+     * Create a choose Game Panel
+     * @param pParent parent Frame
+     */
+    public ChooseGamePanel(ApplicationView pParent) {
+        this.parent     = pParent;
+        this.initComponents();
     }
-
-    //**************************************************************************
-    // METHODS
-    //**************************************************************************
+    
     private void initComponents() {
-        b_ia = new JButton("Jouer contre l'IA");
-        b_2players = new JButton("Jouer à deux joueurs");
-        b_lan = new JButton("Jouer en réseau local");
-        b_internet = new JButton("Jouer sur internet");
+        this.p_container= new JPanel();
+        this.gc         = new GridBagConstraints();
+        this            .setLayout(new BorderLayout());
+        this.p_container.setLayout(new GridBagLayout());
+        
+        //Create buttons 
+        b_ia            = new JButton("Playe against AI");
+        b_2players      = new JButton("2 Players mode");
+        b_lan           = new JButton("Lan");
+        b_internet      = new JButton("Internet");
 
-        p_container.setLayout(new GridBagLayout());
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.insets = new Insets(10, 10, 0, 10);
         gc.gridx = 0;
@@ -72,43 +83,45 @@ public class ChooseGamePanel extends JPanel implements CurrentView {
         gc.gridx = 0;
         gc.gridy = 3;
         p_container.add(b_internet, gc);
+        
+        this.setBtnActions();
+        this.add(p_container, BorderLayout.CENTER);
     }
-
-    /**
-     * 0 : Main Menu ChooseGame 1 : ChooseGrid 2 : PlaceFleet 3 : GamePanel
+    
+    
+    /*
+     * Create actionListener for the buttons
+     * Each button call the new JPanel for this application (Parent)
      */
-    public void setBtnActions() {
+    private void setBtnActions() {
         b_ia.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.m.setState(1);
+                    parent.displayConfigGamePanel();
                 }
             }
         );
         b_2players.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.m.setState(2);
                 }
             }
         );
         b_lan.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.m.setState(3);
                 }
             }
         );
         b_internet.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.m.setState(1);
                 }
             }
         );
-    }
-
-    //**************************************************************************
-    // SETTERS / GETTERS
-    //**************************************************************************
+    }//End setBtnActions
 }

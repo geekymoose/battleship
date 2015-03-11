@@ -7,6 +7,10 @@ package com.battleship.constants;
 
 
 /**
+ * <h1>GraphicalConstants</h1>
+ * <p>public interface GraphicalConstants</p>
+ * <p>All constants used for the view</p>
+ * 
  * @date    11 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT

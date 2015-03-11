@@ -27,7 +27,7 @@ public interface ObservableGame{
      * Add an observer of the model
      * @param o Observer
      */
-    public void registerObserver(ObserverGame o);
+    public void addObserver(ObserverGame o);
     
     /**
      * Delete an observer

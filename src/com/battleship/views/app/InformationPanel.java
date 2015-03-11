@@ -2,16 +2,12 @@
  * Creation : 11 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+package com.battleship.views.app;
 
 import com.battleship.constants.GraphicalConstants;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
@@ -20,13 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+
+
+
+
+// Panel qui contient les armes / et infos du joueur => EN + Javadoc
 /**
- * Panel qui contient les armes / et infos du joueur
  *
- * @date 11 févr. 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ *
+ * @date    11 févr. 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class InformationPanel extends JPanel implements GraphicalConstants, Observer {
 
