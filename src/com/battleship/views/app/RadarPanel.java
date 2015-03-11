@@ -1,22 +1,25 @@
 /* 
- * Creation : 16 févr. 2015
+ * Creation : 11 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+package com.battleship.views.app;
+
+import javax.swing.JPanel;
 
 
 
 /**
- * @date    16 févr. 2015
+ * Affiche sur une grille les positions touchées et cache les bateaux enemis
+ * @date    11 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GridPanel {
+public class RadarPanel extends JPanel{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public GridPanel(){
+    public RadarPanel(){
 
     }
 

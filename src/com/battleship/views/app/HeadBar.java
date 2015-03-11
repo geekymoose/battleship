@@ -2,7 +2,7 @@
  * Creation : 3 mars 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+package com.battleship.views.app;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -10,7 +10,10 @@ import javax.swing.JPanel;
 
 
 
+
+
 /**
+ * 
  * @date    3 mars 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT

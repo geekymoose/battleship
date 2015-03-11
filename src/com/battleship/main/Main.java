@@ -4,7 +4,7 @@
  */
 package com.battleship.main;
 
-import com.battleship.views.ApplicationFrame;
+import com.battleship.views.app.ApplicationFrame;
 import java.awt.EventQueue;
 
 

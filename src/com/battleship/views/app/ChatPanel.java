@@ -2,12 +2,11 @@
  * Creation : 11 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views;
+
+package com.battleship.views.app;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
@@ -15,7 +14,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
+
+
 /**
+ * <h1></h1>
+ * 
+ * 
  * @date 11 févr. 2015
  * @author Constantin MASSON
  * @author Anthony CHAFFOT
