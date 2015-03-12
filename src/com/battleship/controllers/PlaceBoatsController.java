@@ -4,24 +4,25 @@
  */
 package com.battleship.controllers;
 
+import com.battleship.models.game.GameModel;
+import com.battleship.views.app.PlaceBoatsPanel;
+
 
 
 
 
 /**
- * <h1>ConfigGameController</h1>
- * <p>public class ConfigGameController</p>
+ * <h1>PlaceBoatsController</h1>
+ * <p>public class PlaceBoatsController</p>
  * 
- * <p>Controller for ConfigGame model</p>
+ * <p>Controller</p>
  *
  * @date    Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see     GameConfigModel
- * @see     GameConfigView
  */
-public class ConfigGameController {
+public class PlaceBoatsController {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -34,7 +35,7 @@ public class ConfigGameController {
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public ConfigGameController(){
+    public PlaceBoatsController(PlaceBoatsPanel pView, GameModel pModel){
     
     }
     

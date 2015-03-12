@@ -21,10 +21,10 @@ import javax.swing.JTextField;
  * <h1></h1>
  * 
  * 
- * @date 11 févr. 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @date    Feb 11. 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class ChatPanel extends JPanel {
     private JPanel p_sentence;

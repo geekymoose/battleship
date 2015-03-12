@@ -4,8 +4,9 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.views.interfaces.ApplicationView;
-import com.battleship.views.interfaces.CurrentView;
+import com.battleship.constants.Roots;
+import com.battleship.views.tools.ApplicationView;
+import com.battleship.views.tools.ViewPage;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,22 +23,22 @@ import javax.swing.JPanel;
 /**
  * <h1></h1>
  *
- * @date    11 févr. 2015
+ * @date    Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooseGamePanel extends JPanel implements CurrentView {
-    private     ApplicationView     parent;
-    private     JPanel              p_container;
-    private     GridBagConstraints  gc;
+public class ChooseGamePanel extends JPanel implements ViewPage {
+    private     final ApplicationView   parent;
+    private     JPanel                  p_container;
+    private     GridBagConstraints      gc;
     
     //Buttons
-    private     JButton             b_ia;
-    private     JButton             b_2players;
-    private     JButton             b_lan;
-    private     JButton             b_internet;
-    
+    private     JButton                 b_ia;
+    private     JButton                 b_2players;
+    private     JButton                 b_lan;
+    private     JButton                 b_internet;
+        
     
     
     
@@ -94,11 +95,10 @@ public class ChooseGamePanel extends JPanel implements CurrentView {
      * Each button call the new JPanel for this application (Parent)
      */
     private void setBtnActions() {
-        b_ia.addActionListener(
-            new ActionListener() {
+        b_ia.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    parent.displayConfigGamePanel();
+                    parent.rooting(Roots.CONFIG);
                 }
             }
         );
@@ -106,6 +106,7 @@ public class ChooseGamePanel extends JPanel implements CurrentView {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    //To do later
                 }
             }
         );
@@ -113,6 +114,7 @@ public class ChooseGamePanel extends JPanel implements CurrentView {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    //To do later
                 }
             }
         );
@@ -120,6 +122,7 @@ public class ChooseGamePanel extends JPanel implements CurrentView {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    //To do later
                 }
             }
         );

@@ -10,21 +10,21 @@ package com.battleship.observers;
 
 
 /**
- * <h1>ObserverGame</h1>
- * <p>public interface ObserverGame</p>
+ * <h1>ObserverModel</h1>
+ * <p>public interface ObserverModel</p>
  *
  * @date    Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see     ObservableGame
+ * @see     ObservableModel
  */
-public interface ObserverGame {
+public interface ObserverModel {
     
     /**
      * This method is called whenever the observed object is changed.
      * @param o     the observable object.
      * @param arg   an argument passed to the notifyObservers method.
      */
-    void update(ObservableGame o, Object arg);
+    void update(ObservableModel o, Object arg);
 }

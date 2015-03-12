@@ -3,7 +3,7 @@
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 
-package com.battleship.views.interfaces;
+package com.battleship.views.tools;
 
 /**
  * <h1></h1>
@@ -16,6 +16,6 @@ package com.battleship.views.interfaces;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public interface CurrentView {
+public interface ViewPage {
     
 }

@@ -14,21 +14,23 @@ import java.util.ArrayList;
 
 
 /**
- * <h1>AccountSession</h1>
- * <p>public class AccountSession</p>
+ * <h1>Session</h1>
+ * <p>public class Session</p>
+ * 
  * <p>
  * This class is used for account. It represent the current logged session. <br/>
- * When user launch the game program, AccountSession is created. According to 
- * game mode, the AccountSession need a internet loggin or local loggin. (Or no 
+ * When user launch the game program, Session is created. According to 
+ * game mode, the Session need a web login or local login. (Or no 
  * login at all). 
  * </p>
  *
+ * 
  * @date    Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class AccountSession {
+public class Session {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -63,12 +65,18 @@ public class AccountSession {
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public AccountSession(){
-        
+    /**
+     * Start the session
+     * user is not logged yet
+     */
+    public Session(){
+        this.isConnected = false;
     }
     
     public void initAccount(){
-        
+        this.name           = "Unknown";
+        this.isConnected    = false;
+        this.player         = new Player();
     }
     
     
