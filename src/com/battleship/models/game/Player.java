@@ -53,7 +53,7 @@ public class Player implements FleetGridConstants, GameConstants{
      * Create a new player. Player name is unknown, score = 0 
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
-    private Player() {
+    public Player() {
         this.name               = "Unknown";
         this.score              = 0;
         this.listWeapons        = new ArrayList();

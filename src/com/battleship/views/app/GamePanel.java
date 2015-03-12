@@ -4,8 +4,8 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.views.interfaces.ApplicationView;
-import com.battleship.views.interfaces.CurrentView;
+import com.battleship.views.tools.ApplicationView;
+import com.battleship.views.tools.ViewPage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GamePanel extends JPanel implements CurrentView{
+public class GamePanel extends JPanel implements ViewPage{
     private     ApplicationView     parent;
     private     JPanel              p_centerPane;
     

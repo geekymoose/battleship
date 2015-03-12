@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.constants.GameConstants;
+import com.battleship.main.DebugTrack;
 
 
 
@@ -13,8 +14,9 @@ import com.battleship.constants.GameConstants;
 /**
  * <h1>GameConfigModel</h1>
  * <p>
- public class GameConfigModel
- </p>
+ * public class GameConfigModel<br/>
+ * extends Model
+ * </p>
  * 
  * <p>
  * Configuration for a new GameModel: it keeps the game configuration.<br/>
@@ -37,7 +39,7 @@ import com.battleship.constants.GameConstants;
  * 
  * @see GameModel
  */
-public class GameConfigModel implements GameConstants{
+public class GameConfigModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -56,6 +58,7 @@ public class GameConfigModel implements GameConstants{
      * Create a new empty GameConfig. All data are loaded with default values.
      */
     public GameConfigModel(){
+        DebugTrack.displayMsg(" * Create GameConfigModel Model");
         this.defaultConfig();
     }
     
@@ -66,6 +69,17 @@ public class GameConfigModel implements GameConstants{
         this.gridWidth  = GRID_DEFAULT_WIDTH;
         this.gridHeight = GRID_DEFAULT_HEIGHT;
         this.gridType   = GRID_TYPE_SQUARE;
+        this.notifyObservers(null);
+    }
+    
+    /**
+     * Check if current config is default config
+     * @return true if default config, otherwise,return false
+     */
+    public boolean isDefaultConfig(){
+        return      this.gridWidth  == GRID_DEFAULT_WIDTH   &&
+                    this.gridHeight == GRID_DEFAULT_HEIGHT  &&
+                    this.gridType   == GRID_TYPE_SQUARE;
     }
     
     
@@ -87,7 +101,6 @@ public class GameConfigModel implements GameConstants{
     
     
     
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -126,6 +139,7 @@ public class GameConfigModel implements GameConstants{
         if(pValue>=GRID_MIN_WIDTH && pValue<=GRID_MAX_WIDTH){
             this.gridWidth = pValue;
         }
+        this.notifyObservers(null);
     }
 
     /**
@@ -138,6 +152,7 @@ public class GameConfigModel implements GameConstants{
         if(pValue>=GRID_MIN_HEIGHT && pValue<=GRID_MAX_HEIGHT){
             this.gridHeight = pValue;
         }
+        this.notifyObservers(null);
     }
 
     /**
@@ -148,5 +163,6 @@ public class GameConfigModel implements GameConstants{
         if(pValue==GRID_TYPE_SQUARE || pValue<=GRID_TYPE_HEXAGON){
             this.gridType = pValue;
         }
+        this.notifyObservers(null);
     }
 }

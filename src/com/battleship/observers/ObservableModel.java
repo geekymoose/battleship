@@ -8,36 +8,36 @@ package com.battleship.observers;
 
 
 /**
- * <h1>ObservableGame</h1>
- * <p>public interface ObservableGame</p>
+ * <h1>ObservableModel</h1>
+ * <p>public interface ObservableModel</p>
  * 
  * <p>
- * This class represents an ObservableGame object. 
- * </p>
+ This class represents an ObservableModel object. 
+ </p>
  *
  * @date    Feb 11, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see     ObserverGame
+ * @see     ObserverModel
  * 
  */
-public interface ObservableGame{
+public interface ObservableModel{
     /**
      * Add an observer of the model
      * @param o Observer
      */
-    public void addObserver(ObserverGame o);
+    public void addObserver(ObserverModel o);
     
     /**
      * Delete an observer
      * @param o Observer
      */
-    public void deleteObserver(ObserverGame o);
+    public void deleteObserver(ObserverModel o);
     
     /**
      * Notify any observers
      * @param obj element to update in the observer object
      */
-    public void notifyObserver(Object obj);
+    public void notifyObservers(Object obj);
 }
