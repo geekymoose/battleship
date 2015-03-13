@@ -5,8 +5,9 @@
 package com.battleship.views.app;
 
 import com.battleship.constants.Roots;
-import com.battleship.views.tools.ApplicationView;
-import com.battleship.views.tools.ViewPage;
+import com.battleship.exceptions.ExecError;
+import com.battleship.views.tools.*;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,8 +29,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooseGamePanel extends JPanel implements ViewPage {
-    private     final ApplicationView   parent;
+public class ChooseGamePanel extends PagePanel {
     private     JPanel                  p_container;
     private     GridBagConstraints      gc;
     
@@ -48,10 +48,11 @@ public class ChooseGamePanel extends JPanel implements ViewPage {
     //**************************************************************************
     /**
      * Create a choose Game Panel
-     * @param pParent parent Frame
+     * @param pFrame Frame containing this panel
+     * @throws ExecError error if unable to create this panel
      */
-    public ChooseGamePanel(ApplicationView pParent) {
-        this.parent     = pParent;
+    public ChooseGamePanel(WindowFrame pFrame) throws ExecError {
+        super(pFrame);
         this.initComponents();
     }
     
@@ -89,6 +90,9 @@ public class ChooseGamePanel extends JPanel implements ViewPage {
         this.add(p_container, BorderLayout.CENTER);
     }
     
+    @Override
+    public void initPage(){
+    }
     
     /*
      * Create actionListener for the buttons
@@ -98,7 +102,7 @@ public class ChooseGamePanel extends JPanel implements ViewPage {
         b_ia.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    parent.rooting(Roots.CONFIG);
+                    frame.rooting(Roots.CONFIG, null);
                 }
             }
         );
@@ -127,4 +131,14 @@ public class ChooseGamePanel extends JPanel implements ViewPage {
             }
         );
     }//End setBtnActions
+    
+    @Override
+    protected void goNextPage(){
+        //Not used
+    }
+
+    @Override
+    protected void goPreviousPage(){
+        //Not used
+    }
 }

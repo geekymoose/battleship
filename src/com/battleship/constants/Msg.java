@@ -14,6 +14,8 @@ package com.battleship.constants;
  *
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
+ * @author  Jessica FAVIN
+ * @author  Anthony CHAFFOT
  */
 public interface Msg {
     public static String ERR_UNABLE_ADD_PLAYER  = "Unable to join the party: it's full";

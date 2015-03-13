@@ -7,6 +7,7 @@ package com.battleship.models.game;
 import com.battleship.constants.GameConstants;
 import com.battleship.constants.Msg;
 import com.battleship.exceptions.ForbiddenAction;
+import com.battleship.main.DebugTrack;
 
 
 
@@ -15,20 +16,21 @@ import com.battleship.exceptions.ForbiddenAction;
 /**
  * <h1>GameModel</h1>
  * <p>
- * public class GameModel
+ * public class GameModel<br/>
+ * extends Model
  * </p>
  * 
  * <p>
- This class manage the game. Game is set by a configuration which is 
- a GameConfigModel class.
- </p>
+ * This class manage the game. Game is set by a configuration which is 
+ * a GameConfigModel class.
+ * </p>
  *
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class GameModel implements GameConstants{
+public class GameModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -56,6 +58,7 @@ public class GameModel implements GameConstants{
      * @param pConfig configuration to set
      */
     public GameModel(GameConfigModel pConfig) {
+        DebugTrack.showInitMsg("Create GameModel");
         this.gridWidth              = pConfig.getGridWidth();
         this.gridHeight             = pConfig.getGridHeight();
         this.gridType               = pConfig.getGridType();

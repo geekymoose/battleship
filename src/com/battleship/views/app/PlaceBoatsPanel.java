@@ -5,26 +5,27 @@
 package com.battleship.views.app;
 
 import com.battleship.controllers.PlaceBoatsController;
-import com.battleship.controllers.PooFactory;
-import com.battleship.views.tools.ApplicationView;
-import com.battleship.views.tools.ViewPage;
-import javax.swing.JPanel;
-
-
+import com.battleship.exceptions.ExecError;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverModel;
+import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.WindowFrame;
 
 
 
 /**
  *
  * 
- * @date    11 févr. 2015
+ * @date    Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceBoatsPanel extends JPanel implements ViewPage{
-    private     final ApplicationView           app;
+public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     private     final PlaceBoatsController      controller;
+    
+    private     DockPanel                       dock;
+    
     
     
     
@@ -35,11 +36,31 @@ public class PlaceBoatsPanel extends JPanel implements ViewPage{
     //**************************************************************************
     /**
      * 
-     * @param pApp      Application containing this panel
+     * @param pFrame        Frame containing this panel
+     * @param pController   Controller for this page
+     * @throws ExecError error if unable to create this panel
      */
-    public PlaceBoatsPanel(ApplicationView pApp){
-        //this.controller = PooFactory.loadConfigGame(this);
-        this.controller = null;
-        this.app = pApp;
+    public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) 
+    throws ExecError{
+        super(pFrame);
+        if(pController==null){ throw new ExecError(); }
+        this.controller = pController;
+    }
+    
+    @Override
+    public void initPage(){
+    }
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+    
+    }
+    
+    @Override
+    protected void goNextPage(){
+    }
+    
+    @Override
+    protected void goPreviousPage(){
     }
 }

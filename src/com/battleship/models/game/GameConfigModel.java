@@ -58,7 +58,7 @@ public class GameConfigModel extends Model implements GameConstants{
      * Create a new empty GameConfig. All data are loaded with default values.
      */
     public GameConfigModel(){
-        DebugTrack.displayMsg(" * Create GameConfigModel Model");
+        DebugTrack.showInitMsg("Create GameConfigModel Model");
         this.defaultConfig();
     }
     
@@ -70,16 +70,6 @@ public class GameConfigModel extends Model implements GameConstants{
         this.gridHeight = GRID_DEFAULT_HEIGHT;
         this.gridType   = GRID_TYPE_SQUARE;
         this.notifyObservers(null);
-    }
-    
-    /**
-     * Check if current config is default config
-     * @return true if default config, otherwise,return false
-     */
-    public boolean isDefaultConfig(){
-        return      this.gridWidth  == GRID_DEFAULT_WIDTH   &&
-                    this.gridHeight == GRID_DEFAULT_HEIGHT  &&
-                    this.gridType   == GRID_TYPE_SQUARE;
     }
     
     
@@ -95,6 +85,25 @@ public class GameConfigModel extends Model implements GameConstants{
      */
     public void resetConfig(){
         this.defaultConfig();
+    }
+    
+    /**
+     * Check if current config is default config
+     * @return true if default config, otherwise,return false
+     */
+    public boolean isDefaultConfig(){
+        return      this.gridWidth  == GRID_DEFAULT_WIDTH   &&
+                    this.gridHeight == GRID_DEFAULT_HEIGHT  &&
+                    this.gridType   == GRID_TYPE_SQUARE;
+    }
+    
+    /**
+     * Check if config is valid
+     * @return true if valid, otherwise, return false
+     */
+    public boolean isValid(){
+        //It should be always true atm, bu could be false with name player etc
+        return true;
     }
     
     

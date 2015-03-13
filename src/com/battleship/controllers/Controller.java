@@ -34,10 +34,16 @@ public abstract class Controller <V,M>{
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
+    protected Controller(M pModel) throws ExecError{
+        if(pModel==null){
+            throw new ExecError();
+        }
+        this.model          = pModel;
+    }
+    
     /**
      * Create a new Controller linked with a view a model
      * @param pView     View linked with this controller
@@ -50,5 +56,24 @@ public abstract class Controller <V,M>{
         }
         this.view           = pView;
         this.model          = pModel;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Add a view for this controller.
+     * @param pView view to link with this controller
+     * @throws com.battleship.exceptions.ExecError
+     */
+    public void setView(V pView) throws ExecError{
+        if(pView==null){
+            throw new ExecError();
+        }
+        this.view           = pView;
     }
 }

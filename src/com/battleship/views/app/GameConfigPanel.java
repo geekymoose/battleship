@@ -7,14 +7,13 @@ package com.battleship.views.app;
 import com.battleship.constants.GameConstants;
 import com.battleship.constants.Roots;
 import com.battleship.controllers.GameConfigController;
-import com.battleship.controllers.PooFactory;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
-import com.battleship.views.tools.ApplicationView;
-import com.battleship.views.tools.ViewPage;
+import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -34,13 +33,10 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GameConfigPanel extends JPanel implements ViewPage, 
-                                                       ObserverModel,
-                                                       GameConstants,
-                                                       Roots{
-    private     final ApplicationView   app;
+public class GameConfigPanel extends PagePanel implements ObserverModel,
+                                                            GameConstants,
+                                                            Roots{
     private     GameConfigController    controller;
-    
     private     JPanel                  p_buttons;
     private     JPanel                  p_validate;
     private     JPanel                  p_center;
@@ -69,15 +65,18 @@ public class GameConfigPanel extends JPanel implements ViewPage,
     //**************************************************************************
     /**
      * Create a new ConfigGamePanel
-     * @param pApp Application containing this panel
-     * @throws ExecError error if unable to create controller
+     * @param pFrame        Frame containing this panel
+     * @param pController   Controller for this page
+     * @throws ExecError error if unable to create this panel
      */
-    public GameConfigPanel(ApplicationView pApp) throws ExecError{
-        this.controller = PooFactory.loadConfigGame(this);
-        this.app        = pApp;
+    public GameConfigPanel(WindowFrame pFrame, GameConfigController pController) 
+    throws ExecError{
+        super(pFrame);
+        if(pController==null){
+            throw new ExecError();
+        }
+        this.controller = pController;
         this.initComponents();
-        //Set default config, must be called after PooFactory
-        this.controller.resetDefaultConfig();
     }
     
     private void initComponents(){
@@ -98,9 +97,9 @@ public class GameConfigPanel extends JPanel implements ViewPage,
         b_hexa          = new JButton("Hexagonal");
         
         
-        p_buttons       .add(l_indication, BorderLayout.NORTH);
         p_center        .add(b_square);
         p_center        .add(b_hexa);
+        p_buttons       .add(l_indication, BorderLayout.NORTH);
         p_buttons       .add(p_center, BorderLayout.CENTER);
         
         p_validate      .add(b_back);
@@ -113,6 +112,11 @@ public class GameConfigPanel extends JPanel implements ViewPage,
         this.setBtnActions();
     }
     
+    @Override
+    public void initPage(){
+        this.controller.resetDefaultConfig();
+    }
+    
     /*
      * Create actionListener for the buttons
      * Each button call the new JPanel for this application (Parent)
@@ -121,8 +125,8 @@ public class GameConfigPanel extends JPanel implements ViewPage,
         b_validate.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.displayMsg("Valid Config Game");
-                    app.rooting(PLACE_BOATS);
+                    DebugTrack.showExecMsg("Valid Config Game");
+                    goNextPage();
                 }
             }
         );
@@ -130,7 +134,7 @@ public class GameConfigPanel extends JPanel implements ViewPage,
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.displayMsg("Reset config");
+                    DebugTrack.showExecMsg("Reset config");
                     controller.resetDefaultConfig();
                 }
             }
@@ -139,8 +143,8 @@ public class GameConfigPanel extends JPanel implements ViewPage,
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.displayMsg("Return back");
-                    //To do later
+                    DebugTrack.showExecMsg("Return back");
+                    goPreviousPage();
                 }
             }
         );
@@ -148,7 +152,7 @@ public class GameConfigPanel extends JPanel implements ViewPage,
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.displayMsg("Square grid selected");
+                    DebugTrack.showExecMsg("Square grid selected");
                     controller.changeGridType(GRID_TYPE_SQUARE);
                 }
             }
@@ -157,7 +161,7 @@ public class GameConfigPanel extends JPanel implements ViewPage,
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.displayMsg("Hexa grid selected");
+                    DebugTrack.showExecMsg("Hexa grid selected");
                     controller.changeGridType(GRID_TYPE_HEXAGON);
                 }
             }
@@ -194,5 +198,23 @@ public class GameConfigPanel extends JPanel implements ViewPage,
         } else {
             this.b_reset.setEnabled(true);
         }
+    }
+    
+    @Override
+    protected void goNextPage(){
+        //Add management for different kind of game
+        if(this.controller.isValidConfig()){
+            frame.rooting(PLACE_BOATS, null);
+        }
+        else{
+            DebugTrack.showErrMsg("Config not valid yet");
+            //Display message 'not valid'
+        }
+    }
+    
+    @Override
+    protected void goPreviousPage(){
+        DebugTrack.showErrMsg("Previous page to do");
+        //To do later
     }
 }

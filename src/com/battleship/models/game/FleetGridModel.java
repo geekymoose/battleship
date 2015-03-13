@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * </p>
  * 
  * <h2>Grid Type</h2>
- * <p> There are different kind of FleetGrid<p>
+ * <p> There are different kind of FleetGrid</p>
  *  <ul>
  *      <li>FleetGridSquare</li>
  *      <li>FleetGridHexagon</li>

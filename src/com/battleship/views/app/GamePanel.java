@@ -4,8 +4,9 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.views.tools.ApplicationView;
-import com.battleship.views.tools.ViewPage;
+import com.battleship.exceptions.ExecError;
+import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -17,7 +18,6 @@ import javax.swing.JPanel;
 
 
 
-//Contient Radar, fleet, score, chat (Panel englobant)
 /**
  * 
  * 
@@ -26,8 +26,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GamePanel extends JPanel implements ViewPage{
-    private     ApplicationView     parent;
+public class GamePanel extends PagePanel{
     private     JPanel              p_centerPane;
     
     private     InformationPanel    p_info;
@@ -46,13 +45,18 @@ public class GamePanel extends JPanel implements ViewPage{
     //**************************************************************************
     /**
      * Create a new Game panel
-     * @param pParent parent Application
+     * @param pFrame Frame containing this panel
+     * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(ApplicationView pParent){
-        this.parent     = pParent;
+    public GamePanel(WindowFrame pFrame) throws ExecError{
+        super(pFrame);
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
         initComponents();
+    }
+    
+    @Override
+    public void initPage(){
     }
     
     
@@ -94,5 +98,13 @@ public class GamePanel extends JPanel implements ViewPage{
         this.add(p_centerPane, BorderLayout.CENTER);
         this.add(p_chat, BorderLayout.EAST);
         this.add(p_info, BorderLayout.SOUTH);
+    }
+    
+    @Override
+    protected void goNextPage(){
+    }
+    
+    @Override
+    protected void goPreviousPage(){
     }
 }

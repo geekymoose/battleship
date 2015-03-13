@@ -20,13 +20,16 @@ public interface GraphicalConstants {
     //**************************************************************************
     // FRAME CONSTANTS
     //**************************************************************************
-    public static final     int     FRAME_SIZE_H = 500;
-    public static final     int     FRAME_SIZE_L = 600;
-    public static final     String  FRAME_TITLE = "BATTLESHIP";
+    public static final     int         FRAME_SIZE_H        = 500;
+    public static final     int         FRAME_SIZE_L        = 600;
+    public static final     String      FRAME_TITLE         = "Battleship";
     
     //**************************************************************************
     // INFORMATION PANEL
     //**************************************************************************
-    public static final     String  INFORMATION_TITLE = "BATTLESHIP";
+    public static final     String      INFORMATION_TITLE   = "Battleship";
     
+    
+    public static final     String      DEFAULT_THEME_PATH = "data/theme/";
+    public static final     String      DEFAULT_THEME_NAME = "default";
 }
