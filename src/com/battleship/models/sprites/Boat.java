@@ -21,11 +21,11 @@ import com.battleship.models.game.FleetGridModel;
  * <p>
  * Define a boat item. Every one in the fleet must extends boat.</p>
  * <ul>
- * <li>AircraftCarrier</li>
- * <li>Battleship</li>
- * <li>Submarine</li>
- * <li>Cruiser</li>
- * <li>Destroyer</li>
+ *  <li>AircraftCarrier</li>
+ *  <li>Battleship</li>
+ *  <li>Submarine</li>
+ *  <li>Cruiser</li>
+ *  <li>Destroyer</li>
  * </ul>
  *
  *

@@ -4,10 +4,12 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.views.tools.ViewPage;
+import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
+import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 
 
@@ -23,13 +25,12 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class Error404View extends JPanel implements ViewPage{
+public class Error404View extends PagePanel{
     //**************************************************************************
     // Variables - Constants
     //**************************************************************************
-    private     final int   idError;
-    private     String      msg;
-    private     JLabel      l_message;
+    private     final String        msg;
+    private     final JLabel        l_message;
     
     
     
@@ -40,31 +41,30 @@ public class Error404View extends JPanel implements ViewPage{
     //**************************************************************************
     /**
      * Create error 404 page with specific error message from id constants
-     * @param pIdError id for error message
+     * @param pFrame    Frame containing this panel
+     * @param pMsg      message to display
+     * @throws ExecError
      */
-    public Error404View(int pIdError){
-        this.idError = pIdError;
-        this.initComponents();
+    public Error404View(WindowFrame pFrame, String pMsg) throws ExecError{
+        super(pFrame);
+        this.msg = pMsg;
+        this.setLayout(new BorderLayout());
+        this.l_message = new JLabel(pMsg);
+        this.add(this.l_message, BorderLayout.CENTER);
+        DebugTrack.showErrMsg("Page Error404 with message: "+this.msg);
     }
     
-    /*
-     * Init comp
-     */
-    private void initComponents(){
-        this.setLayout(new BorderLayout());
-        this.l_message = new JLabel();
-        
-        //Create error message
-        switch (idError){
-            case 404:
-                this.msg = "Page not found :/";
-                break;
-            default:
-                this.msg = "Unkown error";
-                break;
-        }
-        
-        this.l_message.setText(msg);
-        this.add(this.l_message, BorderLayout.CENTER);
+    @Override
+    public void initPage(){
+    }
+    
+    @Override
+    protected void goNextPage(){
+        //Not used
+    }
+    
+    @Override
+    protected void goPreviousPage(){
+        //Not used
     }
 }

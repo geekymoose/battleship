@@ -4,3 +4,6 @@ In GameMode - AddPlayer
 
 In Application - Rooting
 	* Add rooter
+
+In GameConfigPanel 
+	* Add slider for size

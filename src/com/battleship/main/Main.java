@@ -27,8 +27,6 @@ public class Main {
             @Override
             public void run() {
                 ApplicationFrame game = new ApplicationFrame();
-                game.pack();
-                game.setLocationRelativeTo(null);
                 game.setVisible(true);
             }
         });

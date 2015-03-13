@@ -5,10 +5,10 @@
 package com.battleship.views.app;
 
 
-import com.battleship.views.tools.ApplicationView;
-import com.battleship.views.tools.ViewPage;
+import com.battleship.views.tools.*;
 import com.battleship.constants.GraphicalConstants;
 import com.battleship.constants.Roots;
+import static com.battleship.controllers.SwingFactory.*;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.Session;
 import javax.swing.JFrame;
@@ -29,7 +29,7 @@ import javax.swing.JPanel;
  * @author  Jessica FAVIN
  */
 public class ApplicationFrame extends JFrame implements GraphicalConstants, 
-                                                        ApplicationView {
+                                                        WindowFrame {
     //**************************************************************************
     // Variables and Constants
     //**************************************************************************
@@ -38,15 +38,23 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * is only a Frame container for a page to display. mainContent is this page.
      * @var mainContent
      */
-    private     ViewPage        p_mainContent;
+    private     PagePanel       p_mainContent;
     
     /**
      * Save user data. When user start the game, a empty session is created (No data) 
      * Depending of the game mode (AI / 2v2 / LAN / Internet), the session is 
      * set with data (For example, it save current game type and recover 
      * weapons user have got)
+     * @var session
      */
-    private     Session  session; //User session
+    private     Session         session; //User session
+    
+    /**
+     * Manager for theme. It save current theme and enable to change with 
+     * other theme
+     * @var theme
+     */
+    private     ThemeManager    theme;
     
     
     
@@ -74,8 +82,16 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * When the app start, user is only
      */
     private void initComponents(){
-        this.p_mainContent  = new ChooseGamePanel(this);
         this.session        = new Session();
+        this.theme          = new ThemeManager(DEFAULT_THEME_PATH);
+        try {
+            this.theme.loadTheme(DEFAULT_THEME_NAME);
+        } catch(ExecError ex) {
+            //this.rooting(ERROR, ex);
+            //this.getContentPane().add((JPanel)p_mainContent);
+            //return;
+        }
+        this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
     
@@ -95,26 +111,43 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
     }
     
     @Override
-    public void rooting(int path){
+    public void rooting(int path, Object param){
         this.getContentPane().removeAll();
         
         //Get the requier page
         try{
             switch(path){
-                case Roots.CONFIG:
-                    this.p_mainContent = new GameConfigPanel(this);
-                    break;
                 case Roots.CHOOSE_GAME:
                     this.p_mainContent = new ChooseGamePanel(this);
                     break;
-                case Roots.PLACE_BOATS:
-                    this.p_mainContent = new PlaceBoatsPanel(this);
+                    
+                case Roots.CONFIG:
+                    this.p_mainContent = loadConfigGame(this);
                     break;
+                    
+                case Roots.PLACE_BOATS:
+                    this.p_mainContent = loadPlaceBoats(this);
+                    break;
+                    
+                case Roots.ERROR:
+                    if(!(param instanceof ExecError)){
+                        throw new ExecError(404);
+                    } 
+                    else {
+                        ExecError er = (ExecError)param;
+                        this.p_mainContent = new Error404View(this, er.getMessage());
+                    }
+                    break;
+                    
                 default:
                     throw new ExecError(404); //Page not found
             }
         } catch(ExecError ex){
-            this.p_mainContent = new Error404View(ex.getIdError());
+            try {
+                this.p_mainContent = new Error404View(this, ex.getMessage());
+            } catch(ExecError ex1) {
+                //Should never happen
+            }
         }
         
         //Actualize components

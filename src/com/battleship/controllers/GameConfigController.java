@@ -7,7 +7,6 @@ package com.battleship.controllers;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
-import com.battleship.views.app.GameConfigPanel;
 
 
 
@@ -35,13 +34,12 @@ public class GameConfigController extends Controller{
     //**************************************************************************
     /**
      * Create a new controller for GameConfig
-     * @param pView     View linked with this controller
-     * @param pModel    Model managed by this controller
+     * @param pModel Model managed by this controller
      * @throws ExecError throws if pView or pMode is null
      */
-    public GameConfigController(GameConfigPanel pView, GameConfigModel pModel) throws ExecError{
-        super(pView, pModel);
-        DebugTrack.displayMsg(" * Create GameConfigController controller");
+    public GameConfigController(GameConfigModel pModel) throws ExecError{
+        super(pModel);
+        DebugTrack.showInitMsg("Create GameConfigController controller");
     }
     
     
@@ -57,6 +55,15 @@ public class GameConfigController extends Controller{
     public void resetDefaultConfig(){
         ((GameConfigModel)this.model).resetConfig();
     }
+    
+    /**
+     * Check if config is valid
+     * @return true if valid, otherwise, return false
+     */
+    public boolean isValidConfig(){
+        return ((GameConfigModel)this.model).isValid();
+    }
+    
     /**
      * Change current grid width by new value.
      * See model function for further information

@@ -4,8 +4,9 @@
  */
 package com.battleship.controllers;
 
+import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameModel;
-import com.battleship.views.app.PlaceBoatsPanel;
 
 
 
@@ -22,7 +23,7 @@ import com.battleship.views.app.PlaceBoatsPanel;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class PlaceBoatsController {
+public class PlaceBoatsController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -35,8 +36,14 @@ public class PlaceBoatsController {
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public PlaceBoatsController(PlaceBoatsPanel pView, GameModel pModel){
-    
+    /**
+     * Create a new Controller for PlaceBoatsPanel
+     * @param pModel Model managed by this controller
+     * @throws ExecError throws if pView or pMode is null
+     */
+    public PlaceBoatsController(GameModel pModel) throws ExecError{
+        super(pModel);
+        DebugTrack.showInitMsg("Create GameConfigController controller");
     }
     
     

@@ -32,18 +32,26 @@ public abstract class DebugTrack {
     // Functions
     //**************************************************************************
     /**
-     * Display information message. then return line
+     * Display message about initialization as a class creation.
      * @param str message to display
      */
-    public static void displayMsg(String str){
-        System.out.println(str+"\n");
+    public static void showInitMsg(String str){
+        System.out.println(" * "+str);
+    }
+    
+    /**
+     * Display message about program execution as button processed etc
+     * @param str message to display
+     */
+    public static void showExecMsg(String str){
+        System.out.println(" -> "+str);
     }
     
     /**
      * Display error message, then return line
      * @param str message to display
      */
-    public static void displayErrorMsg(String str){
-        System.err.println(str+"\n");
+    public static void showErrMsg(String str){
+        System.err.println(str);
     }
 }

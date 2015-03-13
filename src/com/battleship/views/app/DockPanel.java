@@ -4,32 +4,57 @@
  */
 package com.battleship.views.app;
 
-import javax.swing.JPanel;
+import com.battleship.views.tools.ContentPanel;
 
 
 
 /**
+ * <h1>DockPanel</h1>
+ * <p>
+ * public class DockPanel<br/>
+ * extends ContentPanel
+ * </p>
+ * <p>
+ * Display the dock with all boats to place on the grid.
+ * </p>
  * 
- * 
- * @date    11 févr. 2015
+ * @date    Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class DockPanel extends JPanel{
+public class DockPanel extends ContentPanel{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
+    /**
+     * Create a new DockPanel
+     */
     public DockPanel(){
-
+        
     }
-
+    
+    
+    
+    
+    
     //**************************************************************************
     // METHODS
     //**************************************************************************
-
+    
+    
+    
+    
+    
     //**************************************************************************
     // SETTERS / GETTERS
     //**************************************************************************
-
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Inner class
+    //**************************************************************************
 }
