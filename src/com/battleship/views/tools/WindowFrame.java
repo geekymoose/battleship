@@ -36,4 +36,10 @@ public interface WindowFrame {
      * @see Root interface with path constants values
      */
     public void rooting(int path, Object param);
+    
+    /**
+     * Return current WindowFrame theme
+     * @return theme used
+     */
+    public Theme getTheme();
 }

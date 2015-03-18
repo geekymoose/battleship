@@ -4,6 +4,8 @@
  */
 package com.battleship.constants;
 
+import java.awt.Dimension;
+
 
 
 /**
@@ -32,4 +34,12 @@ public interface GraphicalConstants {
     
     public static final     String      DEFAULT_THEME_PATH = "data/theme/";
     public static final     String      DEFAULT_THEME_NAME = "default";
+    
+    
+    
+    //**************************************************************************
+    // Dimension Constants
+    //**************************************************************************
+    public static final     Dimension   DIM_DOCK_PANEL      = new Dimension(250, 0);
+    public static final     Dimension   DIM_DOCK_BOAT       = new Dimension(250, 50);
 }

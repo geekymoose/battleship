@@ -10,6 +10,7 @@ import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
+import java.awt.BorderLayout;
 
 
 
@@ -30,7 +31,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     
     
     
-    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
@@ -45,8 +45,22 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
         super(pFrame);
         if(pController==null){ throw new ExecError(); }
         this.controller = pController;
+        this.initComponents();
     }
     
+    private void initComponents() throws ExecError{
+        this.setLayout(new BorderLayout());
+        this.dock = new DockPanel(this);
+        this.add(dock, BorderLayout.EAST);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Override from PagePanel
+    //**************************************************************************
     @Override
     public void initPage(){
     }

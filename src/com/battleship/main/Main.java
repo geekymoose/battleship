@@ -7,8 +7,6 @@ package com.battleship.main;
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.app.ApplicationFrame;
 import java.awt.EventQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
