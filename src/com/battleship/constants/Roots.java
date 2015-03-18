@@ -22,5 +22,4 @@ public interface Roots {
     public static int       CHOOSE_GAME             = 101;
     public static int       CONFIG                  = 102;
     public static int       PLACE_BOATS             = 103;
-    public static int       ERROR                   = 104;
 }

@@ -65,8 +65,9 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
     //**************************************************************************
     /**
      * Create a new Application Frame
+     * @throws ExecError
      */
-    public ApplicationFrame() {
+    public ApplicationFrame() throws ExecError {
         this.setTitle(FRAME_TITLE);
         this.setSize(FRAME_SIZE_L, FRAME_SIZE_H);
         this.setAlwaysOnTop(false);
@@ -81,16 +82,10 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * Create the new Session, it is linked with user currently using this app 
      * When the app start, user is only
      */
-    private void initComponents(){
-        this.session        = new Session();
-        this.theme          = new ThemeManager(DEFAULT_THEME_PATH);
-        try {
-            this.theme.loadTheme(DEFAULT_THEME_NAME);
-        } catch(ExecError ex) {
-            //this.rooting(ERROR, ex);
-            //this.getContentPane().add((JPanel)p_mainContent);
-            //return;
-        }
+    private void initComponents() throws ExecError{
+        this.session    = new Session();
+        this.theme      = new ThemeManager(DEFAULT_THEME_PATH);
+        this.theme.loadTheme(DEFAULT_THEME_NAME);
         this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
@@ -127,16 +122,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
                     
                 case Roots.PLACE_BOATS:
                     this.p_mainContent = loadPlaceBoats(this);
-                    break;
-                    
-                case Roots.ERROR:
-                    if(!(param instanceof ExecError)){
-                        throw new ExecError(404);
-                    } 
-                    else {
-                        ExecError er = (ExecError)param;
-                        this.p_mainContent = new Error404View(this, er.getMessage());
-                    }
                     break;
                     
                 default:
