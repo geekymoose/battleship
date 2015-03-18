@@ -115,24 +115,4 @@ public class ThemeManager{
     public Theme getCurrentTheme(){
         return this.currentTheme;
     }
-    
-    /**
-     * Get a specific image from current theme. Get image from its id. Let see 
-     * documentation about link between image and id value. If id value 
-     * doesn't exists, return null and display a JOptionPane with warning
-     * @param pImageId id value for this image
-     * @return image if exists, otherwise, return null
-     */
-    public Image getImg(int pImageId){
-        try {
-            return this.currentTheme.getImg(pImageId);
-        } catch(ExecError ex) {
-            JOptionPane opt = new JOptionPane();
-            opt.showMessageDialog(  null, 
-                                    "Image "+pImageId+" doesn't exists",
-                                    "Unable to load image", 
-                                    JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-    }
 }

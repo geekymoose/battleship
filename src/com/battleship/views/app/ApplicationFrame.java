@@ -54,7 +54,7 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * other theme
      * @var theme
      */
-    private     ThemeManager    theme;
+    private     ThemeManager    themeManager;
     
     
     
@@ -83,9 +83,9 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * When the app start, user is only
      */
     private void initComponents() throws ExecError{
-        this.session    = new Session();
-        this.theme      = new ThemeManager(DEFAULT_THEME_PATH);
-        this.theme.loadTheme(DEFAULT_THEME_NAME);
+        this.session        = new Session();
+        this.themeManager   = new ThemeManager(DEFAULT_THEME_PATH);
+        this.themeManager.loadTheme(DEFAULT_THEME_NAME);
         this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
@@ -97,14 +97,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
-     * Return the session for current Application
-     * @return Session used by this application
-     */
-    public Session getSession(){
-        return this.session;
-    }
-    
     @Override
     public void rooting(int path, Object param){
         this.getContentPane().removeAll();
@@ -140,6 +132,26 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
         this.getContentPane().revalidate();
         this.pack();
         this.setLocationRelativeTo(null);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return the session for current Application
+     * @return Session used by this application
+     */
+    public Session getSession(){
+        return this.session;
+    }
+    
+    @Override
+    public Theme getTheme(){
+        return this.themeManager.getCurrentTheme();
     }
 }
 

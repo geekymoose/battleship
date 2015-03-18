@@ -61,7 +61,6 @@ public abstract class PagePanel extends JPanel{
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -82,4 +81,29 @@ public abstract class PagePanel extends JPanel{
      * Go at the previous page, if no previous page, do nothing
      */
     protected abstract void goPreviousPage();
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Get current parent frame where Page Panel is placed in
+     * @return Window Frame 
+     */
+    public WindowFrame getFrame(){
+        return this.frame;
+    }
+    
+    /**
+     * 
+     * Return current WindowFrame theme
+     * @return Theme 
+     * @see Theme
+     */
+    public Theme getTheme(){
+        return this.frame.getTheme();
+    }
 }

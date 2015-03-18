@@ -5,6 +5,8 @@
 
 package com.battleship.views.tools;
 
+import com.battleship.constants.GraphicalConstants;
+import com.battleship.exceptions.ExecError;
 import javax.swing.JPanel;
 
 
@@ -24,20 +26,52 @@ import javax.swing.JPanel;
  * @author Constantin MASSON
  * @date Mar 13, 2015
  */
-public abstract class ContentPanel extends JPanel{
+public abstract class ContentPanel extends JPanel implements GraphicalConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    protected   PagePanel       parentPage;
     
     
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public ContentPanel(){
+    /**
+     * Create a new Content panel include in a PagePanel. 
+     * @param pParentPage PagePanel which contains this ContentPanel
+     * @throws ExecError 
+     */
+    public ContentPanel(PagePanel pParentPage) throws ExecError{
+        if(pParentPage == null){
+            throw new ExecError();
+        }
+        this.parentPage = pParentPage;
+    }
     
+    
+    
+    
+    
+    //**************************************************************************
+    // Geters - Setters
+    //**************************************************************************
+    /**
+     * Get current parentPage
+     * @return PagePanel parent
+     */
+    public PagePanel getParentPage(){
+        return this.parentPage;
+    }
+    
+    /**
+     * Return current parent PagePanel theme
+     * @return Theme 
+     * @see Theme
+     */
+    public Theme getTheme(){
+        return this.parentPage.getTheme();
     }
 }

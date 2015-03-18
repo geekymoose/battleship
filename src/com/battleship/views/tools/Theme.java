@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 
 
@@ -119,10 +120,34 @@ public class Theme{
      * @throws ExecError thrown if unable to load theme
      */
     private void loadTheme() throws ExecError{
-        //Load destroyer img
-        String pathDestroyer = this.path+this.dirDestroyer;
-        this.loadImage(pathDestroyer, "0342.png");
-        this.loadImage(pathDestroyer, "3784.png");
+        //Create path values
+        String pathAircraftCarrier  = this.path+this.dirAircraftCarrier;
+        String pathBattleship       = this.path+this.dirBattleship;
+        String pathSubmarine        = this.path+this.dirSubmarine;
+        String pathCruiser          = this.path+this.dirCruiser;
+        String pathDestroyer        = this.path+this.dirDestroyer;
+        
+        //Load IMG AirCreaft Carrier
+        this.loadImage(pathAircraftCarrier, "5000", "png");
+        this.loadImage(pathAircraftCarrier, "5001", "png");
+        
+        //Load IMG Battleship
+        this.loadImage(pathBattleship, "4000", "png");
+        this.loadImage(pathBattleship, "4001", "png");
+        
+        //Load IMG Submarine
+        this.loadImage(pathSubmarine, "3002", "png");
+        this.loadImage(pathSubmarine, "3003", "png");
+        
+        //Load IMG Cruiser
+        this.loadImage(pathCruiser, "3000", "png");
+        this.loadImage(pathCruiser, "3001", "png");
+        
+        //Load IMG Submarine
+        this.loadImage(pathDestroyer, "2000", "png");
+        this.loadImage(pathDestroyer, "2001", "png");
+        
+        
         
         if(!this.listMissingImg.isEmpty()){
             throw new ExecError();
@@ -133,15 +158,16 @@ public class Theme{
      * Load one image in the theme, it will be added in list of loaded image.
      * If unable to load this image, img will be 
      * added in the list of unloaded image.
-     * @param path where image to load is placed
-     * @param name image name
-     * @return img if loaded, otherwise, return null
+     * @param path  where image to load is placed
+     * @param name  image name (Without extension)
+     * @param ext   image extension
+     * @return image if loaded, otherwise, return null
      * @throws ExecError 
      */
-    private void loadImage(String path, String name) throws ExecError{
+    private void loadImage(String path, String name, String ext) throws ExecError{
         try {
-            Image img = ImageIO.read(new File(path+name));
-            this.listImg.put(0342, img);
+            Image img = ImageIO.read(new File(path+name+"."+ext));
+            this.listImg.put(Integer.valueOf(name), img);
         } catch(IOException ex) {
             this.listMissingImg.add(name);
         }
@@ -163,6 +189,29 @@ public class Theme{
     }
     
     /**
+     * Return image linked with pImageId value. If no image are linked with, 
+     * return null and display JOptionPane warning message
+     * @param pImageId id value for image to display
+     * @return image if exists, otherwise, return null
+     */
+    public Image getImg(int pImageId){
+        Image img =  this.listImg.get(pImageId);
+        if(img==null){
+            DebugTrack.showErrMsg("Wrong image id!!!");
+            
+            
+            JOptionPane opt = new JOptionPane();
+            opt.showMessageDialog(null, 
+                                    "Image "+pImageId+" doesn't exists",
+                                    "Unable to load image", 
+                                    JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return img;
+    }
+    
+    /**
+     * @deprecated
      * Get an specific image. Parameter is the image id (See html documentation 
      * for further informations). If this id doesn't exists, throw ExecError 
      * exception
@@ -170,7 +219,7 @@ public class Theme{
      * @return Image
      * @throws ExecError
      */
-    public Image getImg(int pImageId) throws ExecError{
+    public Image getImgDeprecated (int pImageId) throws ExecError{
         Image img =  this.listImg.get(pImageId);
         if(img==null){
             throw new ExecError();
