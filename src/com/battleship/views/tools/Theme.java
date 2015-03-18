@@ -85,7 +85,7 @@ public class Theme{
         try{
             this.theme              = new File(pPath+pTheme); //Could throw Exception
             this.name               = pTheme;
-            this.path               = pPath;
+            this.path               = pPath+pTheme+"/";
             this.listImg            = new HashMap();
             this.listMissingImg     = new ArrayList();
             if(!this.theme.isDirectory()){
@@ -121,7 +121,6 @@ public class Theme{
     private void loadTheme() throws ExecError{
         //Load destroyer img
         String pathDestroyer = this.path+this.dirDestroyer;
-        System.out.println("DEBUG: "+pathDestroyer);
         this.loadImage(pathDestroyer, "0342.png");
         this.loadImage(pathDestroyer, "3784.png");
         
@@ -172,10 +171,10 @@ public class Theme{
      * @throws ExecError
      */
     public Image getImg(int pImageId) throws ExecError{
-        Image i =  this.listImg.get(pImageId);
-        if(i==null){
+        Image img =  this.listImg.get(pImageId);
+        if(img==null){
             throw new ExecError();
         }
-        return i;
+        return img;
     }
 }
