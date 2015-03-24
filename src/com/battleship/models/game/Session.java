@@ -3,9 +3,8 @@
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 
-package com.battleship.main;
+package com.battleship.models.game;
 
-import com.battleship.models.game.Player;
 import com.battleship.models.weapons.Weapon;
 import java.util.ArrayList;
 
@@ -38,6 +37,12 @@ public class Session {
      * Account name, cannot be changed later
      */
     private     String              name;
+    
+    /**
+     * Current game mode for this session
+     * @var int gameMode
+     */
+    private     int                 gameMode;
     
     /**
      * Current account connection status : logged or not
@@ -97,11 +102,27 @@ public class Session {
     // Getters - Setters
     //**************************************************************************
     /**
+     * Return current game mode used by this session
+     * @return int game mode
+     */
+    public int getGameMode(){
+        return this.gameMode;
+    }
+    
+    /**
      * Return player used by this account
      * @return Player
      */
     public Player getPlayer(){
         return this.player;
+    }
+    
+    /**
+     * Set a new game mode for this Session
+     * @param pValue 
+     */
+    public void setGameMode(int pValue){
+        this.gameMode = pValue;
     }
     
     /**

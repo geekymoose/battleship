@@ -42,6 +42,11 @@ public interface GameConstants {
     public static int       NB_MIN_PLAYERS              = 1;
     public static int       NB_MAX_PLAYERS              = 2;
     
+    public static int       MODE_AI                     = 1;
+    public static int       MODE_V2                     = 2;
+    public static int       MODE_LAN                    = 3;
+    public static int       MODE_INTERNET               = 4;
+    
     
     
     //**************************************************************************

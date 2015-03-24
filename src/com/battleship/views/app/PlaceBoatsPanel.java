@@ -46,6 +46,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
         if(pController==null){ throw new ExecError(); }
         this.controller = pController;
         this.initComponents();
+        this.setPreferredSize(DIM_PLACE_BOAT);
     }
     
     private void initComponents() throws ExecError{

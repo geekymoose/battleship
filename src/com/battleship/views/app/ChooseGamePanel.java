@@ -4,8 +4,10 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.constants.Roots;
 import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
 import com.battleship.views.tools.*;
 
 import java.awt.BorderLayout;
@@ -29,7 +31,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooseGamePanel extends PagePanel {
+public class ChooseGamePanel extends PagePanel implements GameConstants{
     private     JPanel                  p_container;
     private     GridBagConstraints      gc;
     
@@ -92,6 +94,7 @@ public class ChooseGamePanel extends PagePanel {
     
     @Override
     public void initPage(){
+        //Not used
     }
     
     /*
@@ -102,6 +105,8 @@ public class ChooseGamePanel extends PagePanel {
         b_ia.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    DebugTrack.showExecMsg("Game mode : AI");
+                    ((ApplicationFrame)frame).getSession().setGameMode(MODE_AI);
                     frame.rooting(Roots.CONFIG, null);
                 }
             }
@@ -110,6 +115,7 @@ public class ChooseGamePanel extends PagePanel {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    DebugTrack.showExecMsg("Game mode : V2");
                     //To do later
                 }
             }
@@ -118,6 +124,7 @@ public class ChooseGamePanel extends PagePanel {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    DebugTrack.showExecMsg("Game mode : LAN");
                     //To do later
                 }
             }
@@ -126,6 +133,7 @@ public class ChooseGamePanel extends PagePanel {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    DebugTrack.showExecMsg("Game mode : Internet");
                     //To do later
                 }
             }

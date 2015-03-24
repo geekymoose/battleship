@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -193,6 +194,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                 break;
         }
         
+        //Button reset state
         if(((GameConfigModel)o).isDefaultConfig()){
             this.b_reset.setEnabled(false);
         } else {
@@ -202,9 +204,19 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     @Override
     protected void goNextPage(){
-        //Add management for different kind of game
+        int mode = ((ApplicationFrame)this.frame).getSession().getGameMode();
         if(this.controller.isValidConfig()){
-            frame.rooting(PLACE_BOATS, null);
+            switch(mode){
+                case MODE_AI:
+                    frame.rooting(PLACE_BOATS, null);
+                    break;
+                case MODE_V2:
+                    break;
+                case MODE_LAN:
+                    break;
+                case MODE_INTERNET:
+                    break;
+            }
         }
         else{
             DebugTrack.showErrMsg("Config not valid yet");
@@ -214,7 +226,30 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     @Override
     protected void goPreviousPage(){
-        DebugTrack.showErrMsg("Previous page to do");
-        //To do later
+        JOptionPane opt = new JOptionPane();
+        int choice = opt.showConfirmDialog(null, 
+                              "Are you sure you want to go back? "
+                               +"Current configuration could be lost",
+                              "Warning",
+                              JOptionPane.YES_NO_CANCEL_OPTION, 
+                              JOptionPane.QUESTION_MESSAGE);
+        
+        if(choice==JOptionPane.OK_OPTION){
+            int mode = ((ApplicationFrame)this.frame).getSession().getGameMode();
+            if(this.controller.isValidConfig()){
+                switch(mode){
+                    case MODE_AI:
+                        frame.rooting(CHOOSE_GAME, null);
+                        break;
+                    case MODE_V2:
+                        break;
+                    case MODE_LAN:
+                        break;
+                    case MODE_INTERNET:
+                        break;
+                }
+            }
+        }
     }
+    
 }

@@ -65,13 +65,4 @@ public abstract class ContentPanel extends JPanel implements GraphicalConstants{
     public PagePanel getParentPage(){
         return this.parentPage;
     }
-    
-    /**
-     * Return current parent PagePanel theme
-     * @return Theme 
-     * @see Theme
-     */
-    public Theme getTheme(){
-        return this.parentPage.getTheme();
-    }
 }

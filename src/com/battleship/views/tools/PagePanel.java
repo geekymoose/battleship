@@ -5,6 +5,7 @@
 
 package com.battleship.views.tools;
 
+import com.battleship.constants.GraphicalConstants;
 import com.battleship.exceptions.ExecError;
 import javax.swing.JPanel;
 
@@ -31,7 +32,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class PagePanel extends JPanel{
+public abstract class PagePanel extends JPanel implements GraphicalConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -95,15 +96,5 @@ public abstract class PagePanel extends JPanel{
      */
     public WindowFrame getFrame(){
         return this.frame;
-    }
-    
-    /**
-     * 
-     * Return current WindowFrame theme
-     * @return Theme 
-     * @see Theme
-     */
-    public Theme getTheme(){
-        return this.frame.getTheme();
     }
 }

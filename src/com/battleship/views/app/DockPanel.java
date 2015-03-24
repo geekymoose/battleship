@@ -7,7 +7,7 @@ package com.battleship.views.app;
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
-import java.awt.Color;
+import com.battleship.views.tools.ThemeManager;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -50,7 +50,6 @@ public class DockPanel extends ContentPanel{
      */
     public DockPanel(PagePanel pParentPage) throws ExecError{
         super(pParentPage);
-        this.setPreferredSize(DIM_DOCK_PANEL);
         this.initComponents();
     }
     
@@ -108,7 +107,7 @@ public class DockPanel extends ContentPanel{
         @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(getTheme().getImg(this.currentImg), 0, 0, this);
+            g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, this);
         }
         
         @Override
