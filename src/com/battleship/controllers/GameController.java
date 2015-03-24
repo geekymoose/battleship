@@ -1,30 +1,31 @@
-/* 
- * Creation:    Feb 25, 2015
- * Project Computer Science L2 Semester 4 - BattleShip
+/*
+ * Class :      GameController
+ * Creation:    Mar 24, 2015
+ * Author :     Constantin MASSON
+ * 
  */
+
 package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameModel;
-import com.battleship.models.game.PlaceBoatsModel;
 
 
 
 
 
 /**
- * <h1>PlaceBoatsController</h1>
- * <p>public class PlaceBoatsController</p>
- * 
- * <p>Controller</p>
+ * <h1>GameController</h1>
+ * <p>
+ * public class GameController<br/>
+ * extends Controller
+ * </p>
  *
- * @date    Feb 25, 2015
- * @author  Constantin MASSON
- * @author  Jessica FAVIN
- * @author  Anthony CHAFFOT
+ * @author Constantin MASSON
+ * @date Mar 24, 2015
  */
-public class PlaceBoatsController extends Controller{
+public class GameController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -38,13 +39,13 @@ public class PlaceBoatsController extends Controller{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new Controller for PlaceBoatsPanel
+     * Create a new controller for game model and game panel view
      * @param pModel Model managed by this controller
      * @throws ExecError throws if pView or pMode is null
      */
-    public PlaceBoatsController(PlaceBoatsModel pModel) throws ExecError{
+    public GameController(GameModel pModel) throws ExecError{
         super(pModel);
-        DebugTrack.showInitMsg("Create GameConfigController controller");
+        DebugTrack.showInitMsg("Create GameController controller");
     }
     
     

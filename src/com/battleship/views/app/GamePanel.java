@@ -4,7 +4,10 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
@@ -16,25 +19,28 @@ import javax.swing.JPanel;
 
 
 
-
-
 /**
- * 
+ * <h1>GamePanel</h1>
+ * <p>
+ * public class GamePanel<br/>
+ * extends PagePanel
+ * </p>
  * 
  * @date    11 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GamePanel extends PagePanel{
-    private     JPanel              p_centerPane;
+public class GamePanel extends PagePanel implements ObserverModel{
+    private     final GameController    controller;
+    private     JPanel                  p_centerPane;
     
-    private     InformationPanel    p_info;
-    private     FleetPanel          p_fleet;
-    private     RadarPanel          p_radar;
-    private     ChatPanel           p_chat;
-    private     HeadBar             p_headbar;
-    private     GridBagConstraints  gc;
+    private     InformationPanel        p_info;
+    private     FleetPanel              p_fleet;
+    private     RadarPanel              p_radar;
+    private     ChatPanel               p_chat;
+    private     HeadBar                 p_headbar;
+    private     GridBagConstraints      gc;
     
     
     
@@ -46,13 +52,16 @@ public class GamePanel extends PagePanel{
     /**
      * Create a new Game panel
      * @param pFrame Frame containing this panel
+     * @param pController Controller for this page
      * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(WindowFrame pFrame) throws ExecError{
+    public GamePanel(WindowFrame pFrame, GameController pController) throws ExecError{
         super(pFrame);
+        if(pController==null){ throw new ExecError(); }
+        this.controller = pController;
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
-        initComponents();
+        this.initComponents();
     }
     
     @Override
@@ -106,5 +115,10 @@ public class GamePanel extends PagePanel{
     
     @Override
     protected void goPreviousPage(){
+    }
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+    
     }
 }

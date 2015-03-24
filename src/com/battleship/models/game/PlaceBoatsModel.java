@@ -1,30 +1,29 @@
-/* 
- * Creation:    Feb 25, 2015
- * Project Computer Science L2 Semester 4 - BattleShip
+/*
+ * Class :      PlaceBoatsModel
+ * Creation:    Mar 24, 2015
+ * Author :     Constantin MASSON
+ * 
  */
-package com.battleship.controllers;
 
-import com.battleship.exceptions.ExecError;
-import com.battleship.main.DebugTrack;
-import com.battleship.models.game.GameModel;
-import com.battleship.models.game.PlaceBoatsModel;
+package com.battleship.models.game;
 
 
 
 
 
 /**
- * <h1>PlaceBoatsController</h1>
- * <p>public class PlaceBoatsController</p>
- * 
- * <p>Controller</p>
+ * <h1>PlaceBoatsModel</h1>
+ * <p>
+ public class PlaceBoatsModel<br/>
+ * extends Model
+ * </p>
  *
- * @date    Feb 25, 2015
+ * @date Mar 24, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class PlaceBoatsController extends Controller{
+public class PlaceBoatsModel extends Model{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -37,14 +36,8 @@ public class PlaceBoatsController extends Controller{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    /**
-     * Create a new Controller for PlaceBoatsPanel
-     * @param pModel Model managed by this controller
-     * @throws ExecError throws if pView or pMode is null
-     */
-    public PlaceBoatsController(PlaceBoatsModel pModel) throws ExecError{
-        super(pModel);
-        DebugTrack.showInitMsg("Create GameConfigController controller");
+    public PlaceBoatsModel(){
+    
     }
     
     

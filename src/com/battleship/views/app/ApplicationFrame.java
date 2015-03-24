@@ -8,7 +8,7 @@ package com.battleship.views.app;
 import com.battleship.views.tools.*;
 import com.battleship.constants.GraphicalConstants;
 import com.battleship.constants.Roots;
-import static com.battleship.controllers.SwingFactory.*;
+import com.battleship.controllers.SwingFactory;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.game.Session;
 import javax.swing.JFrame;
@@ -67,8 +67,8 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * When the app start, user is only
      */
     private void initComponents() throws ExecError{
-        Session.createSession();
-        ThemeManager.createThemeManager();
+        Session         .createSession();
+        ThemeManager    .createThemeManager();
         this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
@@ -92,11 +92,15 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
                     break;
                     
                 case Roots.CONFIG:
-                    this.p_mainContent = loadConfigGame(this);
+                    this.p_mainContent = SwingFactory.loadConfigGame(this);
                     break;
                     
                 case Roots.PLACE_BOATS:
-                    this.p_mainContent = loadPlaceBoats(this);
+                    this.p_mainContent = SwingFactory.loadPlaceBoats(this);
+                    break;
+                    
+                case Roots.GAME:
+                    this.p_mainContent  = SwingFactory.loadGame(this);
                     break;
                     
                 default:

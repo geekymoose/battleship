@@ -76,7 +76,7 @@ public class Session {
     private void initAccount(){
         this.name           = "Unknown";
         this.isConnected    = false;
-        this.player         = new Player();
+        this.player         = new PlayerHuman();
     }
     
     
