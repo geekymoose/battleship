@@ -21,6 +21,13 @@ import java.util.ArrayList;
  * When user launch the game program, Session is created. According to 
  * game mode, the Session need a web login or local login. (Or no 
  * login at all). 
+ * <br/>
+ * Save user data. When user start the game, a empty session is created (No data) 
+ * Depending of the game mode (AI / 2v2 / LAN / Internet), the session is 
+ * set with data (For example, it save current game type and recover 
+ * weapons user have got)
+ * <br/>
+ * Pattern Singleton is used for Session
  * </p>
  *
  * 
@@ -33,40 +40,17 @@ public class Session {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    /**
-     * Account name, cannot be changed later
-     */
+    private     static Session      singleton = null;
     private     String              name;
-    
-    /**
-     * Current game mode for this session
-     * @var int gameMode
-     */
     private     int                 gameMode;
-    
-    /**
-     * Current account connection status : logged or not
-     */
     private     boolean             isConnected;
-    
-    /**
-     * List a weapon. User can buy more weapon. A player got all weapons the account 
-     * bounded with has got. (All account has got the default weapon)
-     */
     private     ArrayList<Weapon>   listWeapon;
-    
-    /**
-     * Player account is playing with. Note it is used only during a game, otherwise, 
-     * this class is null
-     * @var Player
-     */
-    private     Player              player;
+    private     Player              player; //used only during a game
     
     
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
@@ -74,11 +58,22 @@ public class Session {
      * Start the session
      * user is not logged yet
      */
-    public Session(){
+    private Session(){
         this.isConnected = false;
     }
     
-    public void initAccount(){
+    /**
+     * Create a new Session
+     */
+    public static void createSession(){
+        Session.singleton = new Session();
+        Session.singleton.initAccount();
+    }
+    
+    /**
+     * Initialize session status
+     */
+    private void initAccount(){
         this.name           = "Unknown";
         this.isConnected    = false;
         this.player         = new Player();
@@ -88,7 +83,6 @@ public class Session {
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -97,7 +91,6 @@ public class Session {
     
     
     
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -105,31 +98,31 @@ public class Session {
      * Return current game mode used by this session
      * @return int game mode
      */
-    public int getGameMode(){
-        return this.gameMode;
+    public static int getGameMode(){
+        return Session.singleton.gameMode;
     }
     
     /**
      * Return player used by this account
      * @return Player
      */
-    public Player getPlayer(){
-        return this.player;
+    public static Player getPlayer(){
+        return Session.singleton.player;
     }
     
     /**
      * Set a new game mode for this Session
      * @param pValue 
      */
-    public void setGameMode(int pValue){
-        this.gameMode = pValue;
+    public static void setGameMode(int pValue){
+        Session.singleton.gameMode = pValue;
     }
     
     /**
      * Set the player of this account
      * @param pPlayer 
      */
-    public void setPlayer(Player pPlayer){
-        this.player = pPlayer;
+    public static void setPlayer(Player pPlayer){
+        Session.singleton.player = pPlayer;
     }
 }

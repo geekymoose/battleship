@@ -8,6 +8,7 @@ import com.battleship.constants.GameConstants;
 import com.battleship.constants.Roots;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.Session;
 import com.battleship.views.tools.*;
 
 import java.awt.BorderLayout;
@@ -106,7 +107,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : AI");
-                    ((ApplicationFrame)frame).getSession().setGameMode(MODE_AI);
+                    Session.setGameMode(MODE_AI);
                     frame.rooting(Roots.CONFIG, null);
                 }
             }

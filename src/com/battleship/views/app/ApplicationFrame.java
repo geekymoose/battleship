@@ -40,15 +40,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      */
     private     PagePanel       p_mainContent;
     
-    /**
-     * Save user data. When user start the game, a empty session is created (No data) 
-     * Depending of the game mode (AI / 2v2 / LAN / Internet), the session is 
-     * set with data (For example, it save current game type and recover 
-     * weapons user have got)
-     * @var session
-     */
-    private     Session         session; //User session
-    
     
     
     
@@ -76,7 +67,7 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * When the app start, user is only
      */
     private void initComponents() throws ExecError{
-        this.session        = new Session();
+        Session.createSession();
         ThemeManager.createThemeManager();
         this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
@@ -124,21 +115,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
         this.getContentPane().revalidate();
         this.pack();
         this.setLocationRelativeTo(null);
-    }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
-    /**
-     * Return the session for current Application
-     * @return Session used by this application
-     */
-    public Session getSession(){
-        return this.session;
     }
 }
 
