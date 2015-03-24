@@ -20,7 +20,7 @@ public class RadarPanel extends JPanel{
     // CONSTRUCTOR
     //**************************************************************************
     public RadarPanel(){
-
+        this.add(new HexaGrid_DEBUG());
     }
 
     //**************************************************************************

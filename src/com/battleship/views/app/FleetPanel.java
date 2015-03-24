@@ -22,7 +22,7 @@ public class FleetPanel extends JPanel{
     // CONSTRUCTOR
     //**************************************************************************
     public FleetPanel(){
-
+        this.add(new HexaGrid_DEBUG());
     }
 
     //**************************************************************************
