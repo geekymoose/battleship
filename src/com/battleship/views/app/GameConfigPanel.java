@@ -10,6 +10,7 @@ import com.battleship.controllers.GameConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
+import com.battleship.models.game.Session;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
@@ -204,7 +205,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     @Override
     protected void goNextPage(){
-        int mode = ((ApplicationFrame)this.frame).getSession().getGameMode();
+        int mode = Session.getGameMode();
         if(this.controller.isValidConfig()){
             switch(mode){
                 case MODE_AI:
@@ -235,7 +236,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                               JOptionPane.QUESTION_MESSAGE);
         
         if(choice==JOptionPane.OK_OPTION){
-            int mode = ((ApplicationFrame)this.frame).getSession().getGameMode();
+        int mode = Session.getGameMode();
             if(this.controller.isValidConfig()){
                 switch(mode){
                     case MODE_AI:
