@@ -40,6 +40,7 @@ public interface GraphicalConstants {
     //**************************************************************************
     // Dimension Constants
     //**************************************************************************
-    public static final     Dimension   DIM_DOCK_PANEL      = new Dimension(250, 0);
+    public static final     Dimension   DIM_PLACE_BOAT      = new Dimension(600, 250);
+    public static final     Dimension   DIM_DOCK            = new Dimension(250, 0);
     public static final     Dimension   DIM_DOCK_BOAT       = new Dimension(250, 50);
 }

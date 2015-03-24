@@ -10,7 +10,7 @@ import com.battleship.constants.GraphicalConstants;
 import com.battleship.constants.Roots;
 import static com.battleship.controllers.SwingFactory.*;
 import com.battleship.exceptions.ExecError;
-import com.battleship.main.Session;
+import com.battleship.models.game.Session;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -49,13 +49,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      */
     private     Session         session; //User session
     
-    /**
-     * Manager for theme. It save current theme and enable to change with 
-     * other theme
-     * @var theme
-     */
-    private     ThemeManager    themeManager;
-    
     
     
     
@@ -84,8 +77,7 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      */
     private void initComponents() throws ExecError{
         this.session        = new Session();
-        this.themeManager   = new ThemeManager(DEFAULT_THEME_PATH);
-        this.themeManager.loadTheme(DEFAULT_THEME_NAME);
+        ThemeManager.createThemeManager();
         this.rooting(Roots.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
@@ -147,11 +139,6 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      */
     public Session getSession(){
         return this.session;
-    }
-    
-    @Override
-    public Theme getTheme(){
-        return this.themeManager.getCurrentTheme();
     }
 }
 

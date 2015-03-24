@@ -5,13 +5,12 @@
 
 package com.battleship.views.tools;
 
+import com.battleship.constants.GraphicalConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 
 
@@ -20,10 +19,12 @@ import javax.swing.JOptionPane;
 /**
  * <h1>ThemeManager</h1>
  * <p>public class ThemeManager</p>
- * <p>Manage the theme. Work with class Theme (which save image etc). This class 
+ * <p>
+ * Manage the theme. Work with class Theme (which save image etc). This class 
  * manage the themes loaded and available. Data for themes (As image etc) must 
  * be placed in a specific folder. Default theme folder is given at 
- * ThemeManager creation. It could be changed later. </p>
+ * ThemeManager creation. It could be changed later.
+ * </p>
  *
  * @date    Mar 14, 2015
  * @author  Constantin MASSON
@@ -33,10 +34,12 @@ import javax.swing.JOptionPane;
  * @see ThemeConstants
  * @see Theme
  */
-public class ThemeManager{
+public class ThemeManager implements GraphicalConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private     static ThemeManager     singleton = null;
+    
     private     HashMap<String,Theme>   listLoadedTheme;
     private     Theme                   currentTheme;
     private     String                  themePath;
@@ -55,16 +58,27 @@ public class ThemeManager{
      *                      pDefaultPath must be this path (Do not forget the 
      *                      last '/'
      */
-    public ThemeManager(String pDefaultPath){
+    private ThemeManager() throws ExecError{
         DebugTrack.showInitMsg("Create Theme manager");
         this.listLoadedTheme    = new HashMap();
-        this.themePath          = pDefaultPath;
-    }    
+        this.themePath          = DEFAULT_THEME_PATH;
+    }
+    
+    /**
+     * Create theme manager and load default theme. Must be called before over 
+     * function from ThemeManager
+     * @throws ExecError if unable to create ThemeManager
+     */
+    public static void createThemeManager() throws ExecError{
+        ThemeManager.singleton = new ThemeManager();
+        ThemeManager.singleton.loadTheme(DEFAULT_THEME_NAME);
+    }
     
     
     
     
-
+    
+    
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -85,13 +99,6 @@ public class ThemeManager{
         this.currentTheme = t;
     }
     
-    
-    
-    
-    
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
     /**
      * Return all theme found in the current theme folder (Where every theme 
      * are placed). Throw ExecError in case of trouble
@@ -108,11 +115,27 @@ public class ThemeManager{
         return listThemeNames;
     }
     
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
     /**
-     * Get current theme used by application
+     * Get current theme used by application. createThemeManager must have been 
+     * called before!!!
      * @return current theme
      */
-    public Theme getCurrentTheme(){
-        return this.currentTheme;
+    public static Theme getTheme(){
+        return ThemeManager.singleton.currentTheme;
+    }
+    
+    /**
+     * Return ThemeManager,createThemeManager must have been called before!!!
+     * @return ThemeManager
+     */
+    public static ThemeManager getThemeManager(){
+        return ThemeManager.singleton;
     }
 }
