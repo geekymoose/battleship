@@ -209,21 +209,4 @@ public class Theme{
         }
         return img;
     }
-    
-    /**
-     * @deprecated
-     * Get an specific image. Parameter is the image id (See html documentation 
-     * for further informations). If this id doesn't exists, throw ExecError 
-     * exception
-     * @param pImageId image id 
-     * @return Image
-     * @throws ExecError
-     */
-    public Image getImgDeprecated (int pImageId) throws ExecError{
-        Image img =  this.listImg.get(pImageId);
-        if(img==null){
-            throw new ExecError();
-        }
-        return img;
-    }
 }

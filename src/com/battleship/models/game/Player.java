@@ -22,7 +22,8 @@ import java.util.ArrayList;
  * 
  * <p>
  * This class represent a player during a battleship game. Data could be loaded 
- * from account or new created but player instance is only for one game.
+ * from account or new created but player instance is only for one game. <br/>
+ * There are different kind of player : AI and human player
  * </p>
  *
  * 
@@ -30,8 +31,11 @@ import java.util.ArrayList;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
+ * @see PlayerAI
+ * @see PlayerHuman
  */
-public class Player implements FleetGridConstants, GameConstants{
+public abstract class Player implements FleetGridConstants, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************

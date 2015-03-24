@@ -9,7 +9,9 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
+import com.battleship.models.game.PlaceBoatsModel;
 import com.battleship.views.app.GameConfigPanel;
+import com.battleship.views.app.GamePanel;
 import com.battleship.views.app.PlaceBoatsPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
@@ -37,11 +39,15 @@ public abstract class SwingFactory {
     //**************************************************************************
     // Data
     //**************************************************************************
+    //Models 
     private static GameConfigModel  model_gameConfig        = null;
+    private static PlaceBoatsModel  model_placeBoatsModel   = null;
     private static GameModel        model_gameModel         = null;
     
+    //Views
     private static GameConfigPanel  view_gameConfigPanel    = null;
     private static PlaceBoatsPanel  view_placeBoatsPanel    = null;
+    private static GamePanel        view_game               = null;
     
     
     
@@ -78,20 +84,41 @@ public abstract class SwingFactory {
      * @return PagePanel PlaceBoatsPanel created
      * @throws ExecError if unable to create the panel
      */
-    public static PagePanel loadPlaceBoats(WindowFrame pFrame) 
-    throws ExecError{
+    public static PagePanel loadPlaceBoats(WindowFrame pFrame) throws ExecError{
         if(SwingFactory.view_placeBoatsPanel!=null){
             DebugTrack.showExecMsg("PlaceBoatsPanel already loaded");
             return SwingFactory.view_placeBoatsPanel;
         }
-        GameModel               m = new GameModel(SwingFactory.model_gameConfig);
+        PlaceBoatsModel         m = new PlaceBoatsModel();
         PlaceBoatsController    c = new PlaceBoatsController(m);
         PlaceBoatsPanel         v = new PlaceBoatsPanel(pFrame, c);
         m.addObserver(v);
         c.setView(v);
         v.initPage();
-        SwingFactory.model_gameModel      = m;
-        SwingFactory.view_placeBoatsPanel = v;
+        SwingFactory.model_placeBoatsModel  = m;
+        SwingFactory.view_placeBoatsPanel   = v;
+        return v;
+    }
+    
+    /**
+     * Create Model / View / Controller for Game 
+     * @param pFrame frame containing ConfigGamePanel
+     * @return PagePanel PlaceBoatsPanel created
+     * @throws ExecError if unable to create the panel
+     */
+    public static PagePanel loadGame(WindowFrame pFrame) throws ExecError{
+        if(SwingFactory.view_game != null){
+            DebugTrack.showExecMsg("Game already loaded");
+            return SwingFactory.view_game;
+        }
+        GameModel               m = new GameModel(SwingFactory.model_gameConfig);
+        GameController          c = new GameController(m);
+        GamePanel               v = new GamePanel(pFrame, c);
+        m.addObserver(v);
+        c.setView(v);
+        v.initPage();
+        SwingFactory.model_gameModel    = m;
+        SwingFactory.view_game          = v;
         return v;
     }
 }
