@@ -47,6 +47,9 @@ public interface GameConstants {
     public static int       MODE_LAN                    = 3;
     public static int       MODE_INTERNET               = 4;
     
+    public static int       CREATE_GAME                 = 1;
+    public static int       JOIN_GAME                   = 2;
+    
     
     
     //**************************************************************************
