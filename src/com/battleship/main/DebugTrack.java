@@ -19,17 +19,9 @@ package com.battleship.main;
  * @author  Jessica FAVIN
  */
 public abstract class DebugTrack {
+    
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Functions
+    // Data Information Message
     //**************************************************************************
     /**
      * Display message about initialization as a class creation.
@@ -47,6 +39,34 @@ public abstract class DebugTrack {
         System.out.println(" -> "+str);
     }
     
+    /**
+     * Display data about a constant created (From XML file or other)
+     * @param name      constant name in program execution
+     * @param value     constant actual value
+     */
+    public static void showInitConstant(String name, String value){
+        while(name.length()<15){ name += " "; }
+        System.out.println(" * Constants -> name : "+name+"\t-\tvalue : "+value);
+    }
+    
+    /**
+     * Display a message about loaded element as image for a theme. 
+     * will show a formated message with type of data loaded and then, value
+     * @param type  data type
+     * @param value value created
+     */
+    public static void showInitData(String type, String value){
+        while(type.length()<15){ type += " "; }
+        System.out.println(" *** Loaded -> type : "+type+"\t-\tvalue : "+value);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Error message
+    //**************************************************************************
     /**
      * Display error message, then return line
      * @param str message to display

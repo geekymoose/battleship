@@ -154,22 +154,28 @@ public class Theme{
         }
     }
     
+    
+    
+    
     /**
-     * Load one image in the theme, it will be added in list of loaded image.
-     * If unable to load this image, img will be 
-     * added in the list of unloaded image.
-     * @param path  where image to load is placed
-     * @param name  image name (Without extension)
-     * @param ext   image extension
+     * Load image in the theme, it will be added in list of loaded image.
+     * If unable to load this image, image will be added in the 
+     * list of unloaded image. Multiple image (With same extension and same path) 
+     * can be loaded at the same time.
+     * @param path      where images to load are placed
+     * @param ext       image extension
+     * @param pNames    image name (Without extension)
      * @return image if loaded, otherwise, return null
      * @throws ExecError 
      */
-    private void loadImage(String path, String name, String ext) throws ExecError{
-        try {
-            Image img = ImageIO.read(new File(path+name+"."+ext));
-            this.listImg.put(Integer.valueOf(name), img);
-        } catch(IOException ex) {
-            this.listMissingImg.add(name);
+    private void loadImage(String path, String ext, String... pNames) throws ExecError{
+        for(String imgName : pNames){
+            try {
+                Image img = ImageIO.read(new File(path+imgName+"."+ext));
+                this.listImg.put(Integer.valueOf(imgName), img);
+            } catch(IOException ex) {
+                this.listMissingImg.add(imgName+ext);
+            }
         }
     }
     
