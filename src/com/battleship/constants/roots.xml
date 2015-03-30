@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rooter>
+    <constants>
+        <integer>
+            <val id="choose-game">101</val>
+            <val id="config">102</val>
+            <val id="place-boats">103</val>
+            <val id="game">42</val>
+        </integer>
+    </constants>
+</rooter>

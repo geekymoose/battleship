@@ -4,6 +4,7 @@
  */
 package com.battleship.exceptions;
 
+import com.battleship.main.DebugTrack;
 import java.util.ArrayList;
 
 
@@ -104,10 +105,6 @@ public class ExecError extends Exception {
     //**************************************************************************
     // Functions
     //**************************************************************************
-
-
-    
-    
     /*
      * Load the error message from id error
      * Error family
@@ -115,29 +112,44 @@ public class ExecError extends Exception {
      * @param data is some extra iformation about error
      */
     private String loadErrorMessage(){
+        String str;
         switch (this.idError){
             
             //General error
             case 404:
-                return "Page not found :/";
+                str = "Page not found :/";
+                break;
             
                 
             //Theme error
             case 501:
-                return "Unable to display themes list";
+                str = "Unable to display themes list";
+                break;
                 
             case 502:
-                return "Unable to load the theme! "
+                str = "Unable to load the theme! "
                        +"Theme "+this.extraData
                        +" doesn't exists in theme folder";
+                break;
             
             case 503:
-                return "Unable to load theme, some file are missing! "
+                str = "Unable to load theme, some file are missing! "
                        +"Files "+this.extraData+"are missing!";
+                break;
             
+            //XML DOM Parser error
+            case 604:
+                str = "Error with xml files";
+                break;
+                
+            //Default error
             default:
-                return  "Unkown error";
+                str = "Unkown error";
+                break;
         }
+        
+        DebugTrack.showErrMsg(str);
+        return str;
     }
     
     

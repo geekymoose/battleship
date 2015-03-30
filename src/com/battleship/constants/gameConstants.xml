@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <constants>
+        <integer>
+            
+            <boats>
+                <state>
+                    <val id="was-hit">1</val>
+                    <val id="not-hit">2</val>
+                </state>
+                <position>
+                    <val id="vertical-boat">1</val>
+                    <val id="horizontal-boat">2</val>
+                    <val id="standing-right-boat">3</val>
+                    <val id="standing-left-boat">4</val>
+                </position>
+            </boats>
+
+            <fleet-grid-type>
+                <val id="square-grid">1</val>
+                <val id="hexagon-grid">2</val>
+            </fleet-grid-type>
+
+            <game>
+                <val id="nb-min-players">1</val>
+                <val id="nb-max-players">2</val>
+                <val id="mode-ai">1</val>
+                <val id="mode-v2">2</val>
+                <val id="mode-lan">3</val>
+                <val id="mode-internet">4</val>
+                <val id="create-game">1</val>
+                <val id="join-game">1</val>
+            </game>
+
+            <weapons>
+                <val id="amo-infinite">-42</val>
+            </weapons>
+            
+        </integer>
+        
+    </constants>
+</root>

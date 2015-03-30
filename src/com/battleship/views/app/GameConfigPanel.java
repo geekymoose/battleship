@@ -4,8 +4,6 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.constants.GameConstants;
-import com.battleship.constants.Roots;
 import com.battleship.controllers.GameConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -13,6 +11,7 @@ import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.Session;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
@@ -35,9 +34,16 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GameConfigPanel extends PagePanel implements ObserverModel,
-                                                            GameConstants,
-                                                            Roots{
+public class GameConfigPanel extends PagePanel implements ObserverModel{
+    private     final int               MODE_AI;
+    private     final int               MODE_V2;
+    private     final int               MODE_LAN;
+    private     final int               MODE_INTERNET;
+    
+    private     final int               GRID_TYPE_SQUARE;
+    private     final int               GRID_TYPE_HEXAGON;
+    
+    
     private     GameConfigController    controller;
     private     JPanel                  p_buttons;
     private     JPanel                  p_validate;
@@ -77,10 +83,19 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         if(pController==null){
             throw new ExecError();
         }
-        this.controller = pController;
+        this.controller         = pController;
+        this.MODE_AI            = Config.getGameConst_int("mode-ai");
+        this.MODE_V2            = Config.getGameConst_int("mode-v2");
+        this.MODE_LAN           = Config.getGameConst_int("mode-lan");
+        this.MODE_INTERNET      = Config.getGameConst_int("mode-internet");
+        this.GRID_TYPE_HEXAGON  = Config.getGameConst_int("hexagon-grid");
+        this.GRID_TYPE_SQUARE   = Config.getGameConst_int("square-grid");
         this.initComponents();
     }
     
+    /*
+     * Init components
+     */
     private void initComponents(){
         this.p_buttons  = new JPanel();
         this.p_validate = new JPanel();
@@ -184,15 +199,12 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         this.gridType   = ((GameConfigModel)o).getGridType();
         
         //Set buttons state for grid type and reset button
-        switch (this.gridType){
-            case GRID_TYPE_SQUARE:
-                this.b_square   .setEnabled(false);
-                this.b_hexa     .setEnabled(true);
-                break;
-            case GRID_TYPE_HEXAGON:
-                this.b_square       .setEnabled(true);
-                this.b_hexa     .setEnabled(false);
-                break;
+        if(this.gridType == this.GRID_TYPE_SQUARE){
+            this.b_square   .setEnabled(false);
+            this.b_hexa     .setEnabled(true);
+        } else if(this.gridType == this.GRID_TYPE_HEXAGON){
+            this.b_square       .setEnabled(true);
+            this.b_hexa     .setEnabled(false);
         }
         
         //Button reset state
@@ -207,17 +219,15 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     protected void goNextPage(){
         int mode = Session.getGameMode();
         if(this.controller.isValidConfig()){
-            switch(mode){
-                case MODE_AI:
-                    frame.rooting(PLACE_BOATS, null);
-                    break;
-                case MODE_V2:
-                    break;
-                case MODE_LAN:
-                    break;
-                case MODE_INTERNET:
-                    break;
-            }
+                if(mode == this.MODE_AI){
+                    frame.rooting(Config.getRootsConst("place-boats"), null);
+                } else if(mode == this.MODE_V2){
+                    //To do
+                } else if(mode == this.MODE_LAN){
+                    
+                } else if (mode == this.MODE_INTERNET){
+                    
+                }
         }
         else{
             DebugTrack.showErrMsg("Config not valid yet");
@@ -238,16 +248,14 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         if(choice==JOptionPane.OK_OPTION){
         int mode = Session.getGameMode();
             if(this.controller.isValidConfig()){
-                switch(mode){
-                    case MODE_AI:
-                        frame.rooting(CHOOSE_GAME, null);
-                        break;
-                    case MODE_V2:
-                        break;
-                    case MODE_LAN:
-                        break;
-                    case MODE_INTERNET:
-                        break;
+                if(mode == this.MODE_AI){
+                    frame.rooting(Config.getRootsConst("choose-game"), null);
+                } else if(mode == this.MODE_V2){
+                    //To do
+                } else if(mode == this.MODE_LAN){
+                    
+                } else if (mode == this.MODE_INTERNET){
+                    
                 }
             }
         }

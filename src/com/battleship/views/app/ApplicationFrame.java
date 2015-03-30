@@ -6,11 +6,8 @@ package com.battleship.views.app;
 
 
 import com.battleship.views.tools.*;
-import com.battleship.constants.GraphicalConstants;
-import com.battleship.constants.Roots;
 import com.battleship.controllers.SwingFactory;
 import com.battleship.exceptions.ExecError;
-import com.battleship.models.game.Session;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,17 +25,27 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ApplicationFrame extends JFrame implements GraphicalConstants, 
-                                                        WindowFrame {
+public class ApplicationFrame extends JFrame implements WindowFrame {
     //**************************************************************************
     // Variables and Constants
     //**************************************************************************
+    //Constants -> load roots
+    private     final int   CHOOSE_GAME     = Config.getRootsConst("choose-game");
+    private     final int   CONFIG          = Config.getRootsConst("config");
+    private     final int   PLACE_BOATS     = Config.getRootsConst("place-boats");
+    private     final int   GAME            = Config.getRootsConst("game");
+    private     final int   FRAME_SIZE_W    = Config.getDimConst_int("frame-size-width");
+    private     final int   FRAME_SIZE_H    = Config.getDimConst_int("frame-size-height");
+    
+    
+    
+    //Variables 
     /**
      * This is the content displayed at the moment by the application. Application 
      * is only a Frame container for a page to display. mainContent is this page.
      * @var mainContent
      */
-    private     PagePanel       p_mainContent;
+    private     PagePanel   p_mainContent;
     
     
     
@@ -52,8 +59,8 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * @throws ExecError
      */
     public ApplicationFrame() throws ExecError {
-        this.setTitle(FRAME_TITLE);
-        this.setSize(FRAME_SIZE_L, FRAME_SIZE_H);
+        this.setTitle(Config.getDisplayConst_str("frame-title"));
+        this.setSize(FRAME_SIZE_W, FRAME_SIZE_H);
         this.setAlwaysOnTop(false);
         //this.setResizable(false);
         this.setResizable(true); //DEBUG
@@ -67,9 +74,7 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
      * When the app start, user is only
      */
     private void initComponents() throws ExecError{
-        Session         .createSession();
-        ThemeManager    .createThemeManager();
-        this.rooting(Roots.CHOOSE_GAME, null);
+        this.rooting(this.CHOOSE_GAME, null);
         this.getContentPane().add((JPanel)p_mainContent);
     }
     
@@ -86,25 +91,16 @@ public class ApplicationFrame extends JFrame implements GraphicalConstants,
         
         //Get the requier page
         try{
-            switch(path){
-                case Roots.CHOOSE_GAME:
-                    this.p_mainContent = new ChooseGamePanel(this);
-                    break;
-                    
-                case Roots.CONFIG:
-                    this.p_mainContent = SwingFactory.loadConfigGame(this);
-                    break;
-                    
-                case Roots.PLACE_BOATS:
-                    this.p_mainContent = SwingFactory.loadPlaceBoats(this);
-                    break;
-                    
-                case Roots.GAME:
-                    this.p_mainContent  = SwingFactory.loadGame(this);
-                    break;
-                    
-                default:
-                    throw new ExecError(404); //Page not found
+            if(path==this.CHOOSE_GAME){
+                this.p_mainContent = new ChooseGamePanel(this);
+            } else if(path==this.CONFIG){
+                this.p_mainContent = SwingFactory.loadConfigGame(this);
+            } else if(path == this.PLACE_BOATS){
+                this.p_mainContent = SwingFactory.loadPlaceBoats(this);
+            } else if(path == this.GAME){
+                this.p_mainContent  = SwingFactory.loadGame(this);
+            } else {
+                throw new ExecError(404); //Page not found
             }
         } catch(ExecError ex){
             try {

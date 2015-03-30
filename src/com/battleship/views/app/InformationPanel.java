@@ -4,7 +4,7 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.constants.GraphicalConstants;
+import com.battleship.views.tools.Config;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -29,7 +29,7 @@ import javax.swing.JTextArea;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class InformationPanel extends JPanel implements GraphicalConstants, Observer {
+public class InformationPanel extends JPanel implements Observer {
 
     private JTextArea ta_info;
     private JScrollPane sp_scroll;
@@ -63,7 +63,7 @@ public class InformationPanel extends JPanel implements GraphicalConstants, Obse
     //**************************************************************************
     private void initComponents() {
         this.setLayout(new BorderLayout());
-        l_title = new JLabel(INFORMATION_TITLE);
+        //l_title = new JLabel(Config.getDisplayConst_str("information-title"));
         l_scoreTitle = new JLabel("Score : ");
         l_score = new JLabel("0");
         l_weapons = new JLabel("Weapons");

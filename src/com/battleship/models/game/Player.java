@@ -5,9 +5,8 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
-import com.battleship.constants.FleetGridConstants;
-import com.battleship.constants.GameConstants;
 import com.battleship.models.weapons.*;
+import com.battleship.views.tools.Config;
 import java.util.ArrayList;
 
 
@@ -35,7 +34,7 @@ import java.util.ArrayList;
  * @see PlayerAI
  * @see PlayerHuman
  */
-public abstract class Player implements FleetGridConstants, GameConstants{
+public abstract class Player{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -64,7 +63,7 @@ public abstract class Player implements FleetGridConstants, GameConstants{
         this.fleetGrid          = null;
         
         //Add default weapon and set current weapon to this weapon
-        this.listWeapons.add(new Missile(this, INFINITE));
+        this.listWeapons.add(new Missile(this, Config.getGameConst_int("infinite")));
         this.currentWeaponIndex = 0;
     }
     
@@ -77,13 +76,10 @@ public abstract class Player implements FleetGridConstants, GameConstants{
      * @param pGridType     Grid Type (Could be square or hexagon)
      */
     public void initFleetGrid(int pGridWidth, int pGridHeight, int pGridType) {
-        switch(pGridType){
-            case GRID_SQUARE:
+        if(pGridType == Config.getGameConst_int("grid-square")){
                 this.fleetGrid  = new FleetGridSquare(pGridWidth, pGridHeight, this);
-                break;
-            case GRID_HEXAGON:
+        } else {
                 this.fleetGrid  = new FleetGridHexagon(pGridWidth, pGridHeight, this);
-                break;
         }
     }
     

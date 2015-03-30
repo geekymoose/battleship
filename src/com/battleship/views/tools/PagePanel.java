@@ -5,7 +5,6 @@
 
 package com.battleship.views.tools;
 
-import com.battleship.constants.GraphicalConstants;
 import com.battleship.exceptions.ExecError;
 import javax.swing.JPanel;
 
@@ -32,7 +31,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class PagePanel extends JPanel implements GraphicalConstants{
+public abstract class PagePanel extends JPanel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
