@@ -4,7 +4,6 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.constants.GraphicalConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,7 +27,7 @@ import javax.swing.JPanel;
  * @author Anthony CHAFFOT
  * @author Jessica FAVIN
  */
-public class HexaGrid_DEBUG extends JPanel implements GraphicalConstants {
+public class HexaGrid_DEBUG extends JPanel{
 
     //Model m;
 

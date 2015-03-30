@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    
+<theme>
+	<constants>
+        <string>
+            <default>
+                <val id="default-theme-folder-path">data/theme/</val>
+                <val id="default-theme-name">default</val>
+            </default>
+        </string>
+	</constants>
+
+
+	<image>
+        <boats>
+            <aircraft>
+                <img type="static" ext="png">5000</img>
+                <img type="static" ext="png">5001</img>
+            </aircraft>
+
+            <battleship>
+                <img type="static" ext="png">4000</img>
+                <img type="static" ext="png">4001</img>
+            </battleship>
+
+            <submarine>
+                <img type="static" ext="png">3002</img>
+                <img type="static" ext="png">3003</img>
+            </submarine>
+
+            <cruiser>
+                <img type="static" ext="png">3000</img>
+                <img type="static" ext="png">3001</img>
+            </cruiser>
+
+            <destroyer>
+                <img type="static" ext="png">2000</img>
+                <img type="static" ext="png">2001</img>
+            </destroyer>
+        </boats>
+        
+		<ui>
+			<buttons>
+			</buttons>
+            
+            <explosion>
+            </explosion>
+		</ui>
+	</image>
+</theme>

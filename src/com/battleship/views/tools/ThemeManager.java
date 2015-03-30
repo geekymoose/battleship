@@ -5,7 +5,6 @@
 
 package com.battleship.views.tools;
 
-import com.battleship.constants.GraphicalConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import java.io.File;
@@ -31,18 +30,15 @@ import java.util.HashMap;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  * 
- * @see ThemeConstants
  * @see Theme
  */
-public class ThemeManager implements GraphicalConstants{
+public class ThemeManager{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     static ThemeManager     singleton = null;
-    
+    private     static ThemeManager     singleton           = null;
     private     HashMap<String,Theme>   listLoadedTheme;
     private     Theme                   currentTheme;
-    private     String                  themePath;
     
     
     
@@ -53,15 +49,11 @@ public class ThemeManager implements GraphicalConstants{
     //**************************************************************************
     /**
      * Create a theme manager
-     * @param pDefaultPath  Default theme folder path. For example, if the folder 
-     *                      with theme is in /hone/user1/apply/theme/
-     *                      pDefaultPath must be this path (Do not forget the 
-     *                      last '/'
+     * @throws ExecError if unable to create ThemeManager
      */
     private ThemeManager() throws ExecError{
         DebugTrack.showInitMsg("Create Theme manager");
         this.listLoadedTheme    = new HashMap();
-        this.themePath          = DEFAULT_THEME_PATH;
     }
     
     /**
@@ -71,9 +63,8 @@ public class ThemeManager implements GraphicalConstants{
      */
     public static void createThemeManager() throws ExecError{
         ThemeManager.singleton = new ThemeManager();
-        ThemeManager.singleton.loadTheme(DEFAULT_THEME_NAME);
+        ThemeManager.singleton.loadTheme(Config.getThemeConst_str("default-theme-name"));
     }
-    
     
     
     
@@ -93,11 +84,12 @@ public class ThemeManager implements GraphicalConstants{
     public void loadTheme(String pName) throws ExecError{
         Theme t = this.listLoadedTheme.get(pName);
         if(t==null){
-            t = new Theme(this.themePath, pName);
+            t = new Theme(pName);
             this.listLoadedTheme.put(pName, t);
         }
         this.currentTheme = t;
     }
+    
     
     /**
      * Return all theme found in the current theme folder (Where every theme 
@@ -105,10 +97,9 @@ public class ThemeManager implements GraphicalConstants{
      * @return ArrayList with all theme name
      * @throws ExecError Exception if unable to display themes (Wrong theme path)
      */
-    public ArrayList<String> getThemeNames() throws ExecError{
+    public ArrayList<String> getAllThemeNames() throws ExecError{
         ArrayList<String> listThemeNames    = new ArrayList();
-        File themeFolder                    = new File(this.themePath);
-        
+        File themeFolder                    = new File(Config.getThemeFolderPath());
         if(!themeFolder.isDirectory()){
             throw new ExecError(501);
         }

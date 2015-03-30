@@ -5,16 +5,12 @@
 
 package com.battleship.views.app;
 
-import static com.battleship.constants.GameConstants.CREATE_GAME;
-import static com.battleship.constants.GameConstants.JOIN_GAME;
-import static com.battleship.constants.Roots.CHOOSE_GAME;
-import static com.battleship.constants.Roots.CONFIG;
-import static com.battleship.constants.Roots.PLACE_BOATS;
 import com.battleship.controllers.LANConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
@@ -106,7 +102,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
         this.add(p_buttons, BorderLayout.EAST);
         
         //A VERIFIER
-        choice = CREATE_GAME;
+        //choice = CREATE_GAME;
         
         this.setBtnAction();
     }
@@ -119,6 +115,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
     @Override
     protected void goNextPage() {
         if(this.controller.isValidConfig()){
+            /*
             switch(choice){
                 case CREATE_GAME:
                     DebugTrack.showExecMsg("Go to GameConfigPanel");
@@ -129,6 +126,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
                     frame.rooting(PLACE_BOATS, null);
                     break;
             }
+            */
         }
     }
 
@@ -143,7 +141,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
                               JOptionPane.QUESTION_MESSAGE);
         
         if(choice2==JOptionPane.OK_OPTION){
-            frame.rooting(CHOOSE_GAME, null);
+            frame.rooting(Config.getRootsConst("choose-game"), null);
         }
     }
 
@@ -171,7 +169,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     DebugTrack.showExecMsg("Select create game");
-                    choice = CREATE_GAME;
+                    //choice = CREATE_GAME;
                 }
             }
         );
@@ -180,7 +178,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     DebugTrack.showExecMsg("select join game");
-                    choice = JOIN_GAME;
+                    //choice = JOIN_GAME;
                 }
             }
         );

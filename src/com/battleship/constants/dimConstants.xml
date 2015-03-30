@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <constants>
+        
+        <integer>
+            <grid>
+                <val id="grid-min-width">10</val>
+                <val id="grid-min-height">10</val>
+                <val id="grid-max-width">15</val>
+                <val id="grid-max-height">15</val>
+                <val id="grid-default-width">10</val>
+                <val id="grid-default-height">10</val>
+            </grid>
+            
+            <frame>
+                <val id="frame-size-width">600</val>
+                <val id="frame-size-height">500</val>
+            </frame>
+        </integer>
+        
+        <dimension>
+            <panel>
+                <val id="dim-place-boat" width="600" height="250"/>
+                <val id="dim-dock" width="250" height="0"/>
+                <val id="dim-dock-boat" width="250" height="50"/>
+            </panel>
+        </dimension>
+        
+    </constants>
+</root>
+    

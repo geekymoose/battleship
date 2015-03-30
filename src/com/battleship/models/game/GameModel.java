@@ -4,10 +4,9 @@
  */
 package com.battleship.models.game;
 
-import com.battleship.constants.GameConstants;
-import com.battleship.constants.Msg;
 import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.main.DebugTrack;
+import com.battleship.views.tools.Config;
 
 
 
@@ -30,13 +29,14 @@ import com.battleship.main.DebugTrack;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class GameModel extends Model implements GameConstants{
+public class GameModel extends Model{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
     private     final int               gridType;
     private     final int               gridWidth;
     private     final int               gridHeight;
+    private     final int               nbMaxPlayer;
     private     Player[]                listPlayers;
     private     int                     counterTurn;
     private     int                     currentNbPlayers;
@@ -62,13 +62,14 @@ public class GameModel extends Model implements GameConstants{
         this.gridWidth              = pConfig.getGridWidth();
         this.gridHeight             = pConfig.getGridHeight();
         this.gridType               = pConfig.getGridType();
+        this.nbMaxPlayer            = Config.getGameConst_int("nb-max-players");
         
         this.counterTurn            = 0;
         this.currentNbPlayers       = 0;
         this.currentPlayerTurn      = 0;
         this.currentEnemyFleetGrid  = null;
         
-        this.listPlayers            = new Player[NB_MAX_PLAYERS];
+        this.listPlayers            = new Player[this.nbMaxPlayer];
         this.listPlayers[0]         = null; //If more than 2 players => Create in loop
         this.listPlayers[1]         = null;
     }
@@ -90,7 +91,7 @@ public class GameModel extends Model implements GameConstants{
      */
     public void addPlayer(Player pPlayer) throws ForbiddenAction{
         if(this.isFull()){
-            throw new ForbiddenAction(Msg.ERR_UNABLE_ADD_PLAYER);
+            throw new ForbiddenAction("Unable to join the party: it's full");
         }
         //Add player and then, create the player fleet Grid
         this.listPlayers[this.currentNbPlayers] = pPlayer;

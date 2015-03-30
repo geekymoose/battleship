@@ -4,12 +4,12 @@
  */
 package com.battleship.views.app;
 
-import static com.battleship.constants.Roots.*;
 import com.battleship.controllers.PlaceBoatsController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
@@ -58,7 +58,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
         if(pController==null){ throw new ExecError(); }
         this.controller = pController;
         this.initComponents();
-        this.setPreferredSize(DIM_PLACE_BOAT);
+        this.setPreferredSize(Config.getDimConst_dim("dim-place-boat"));
     }
     
     private void initComponents() throws ExecError{
@@ -133,7 +133,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     
     @Override
     protected void goNextPage(){
-        this.frame.rooting(GAME, null);
+        this.frame.rooting(Config.getRootsConst("game"), null);
     }
     
     @Override

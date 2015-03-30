@@ -5,6 +5,7 @@
 package com.battleship.views.app;
 
 import com.battleship.exceptions.ExecError;
+import com.battleship.views.tools.Config;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.ThemeManager;
@@ -100,7 +101,7 @@ public class DockPanel extends ContentPanel{
          * Create a new DockBoats
          */
         protected DockBoats(){
-            this.setPreferredSize(DIM_DOCK_BOAT);
+            this.setPreferredSize(Config.getDimConst_dim("dim-dock-boat"));
             this.addMouseListener(this);
         }
         

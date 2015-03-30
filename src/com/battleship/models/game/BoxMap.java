@@ -5,7 +5,6 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
-import com.battleship.constants.BoatsConstants;
 import com.battleship.behaviors.Sprite;
 import com.battleship.models.sprites.Water;
 
@@ -28,13 +27,14 @@ import com.battleship.models.sprites.Water;
  * BoxMap can be targeted by a shoot, that is why it implements Target.
  * </p>
  *
+ * 
  * @date    Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  * @see     GridFleetModel
  */
-public abstract class BoxMap implements Target, BoatsConstants{
+public abstract class BoxMap implements Target{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
