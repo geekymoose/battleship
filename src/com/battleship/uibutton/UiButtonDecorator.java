@@ -7,6 +7,7 @@ package com.battleship.uibutton;
 
 import com.battleship.views.tools.UiElement;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 
 
@@ -53,5 +54,10 @@ public abstract class UiButtonDecorator extends AbstractButton implements UiElem
     @Override
     public void reloadUI(){
         this.uibutton.reloadUI();
+    }
+    
+    @Override
+    public void addActionListener(ActionListener listener){
+        this.uibutton.addActionListener(listener);
     }
 }
