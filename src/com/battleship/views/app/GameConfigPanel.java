@@ -11,6 +11,7 @@ import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.Session;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.uibutton.ImgButton;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
@@ -19,6 +20,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -55,9 +57,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
     
     private     JButton                 b_square;
     private     JButton                 b_hexa;
-    private     JButton                 b_validate;
-    private     JButton                 b_reset;
-    private     JButton                 b_back;
+    private     AbstractButton          b_validate;
+    private     AbstractButton          b_reset;
+    private     AbstractButton          b_back;
     
     //Data
     private     int                     gridWidth;
@@ -107,9 +109,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
         p_center        .setLayout(new GridLayout(1,2));
         
         l_indication    = new JLabel("Choose your kind of grid");
-        b_validate      = new JButton("Validate");
-        b_reset         = new JButton("Reset");
-        b_back          = new JButton("Step back");
+        b_validate      = new ImgButton(406100, 406200, 406300);
+        b_reset         = new ImgButton(405100, 405200, 405300);
+        b_back          = new ImgButton(404100, 404200, 404300);
         b_square        = new JButton("Square");
         b_hexa          = new JButton("Hexagonal");
         

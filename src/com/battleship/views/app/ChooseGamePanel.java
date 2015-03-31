@@ -66,10 +66,10 @@ public class ChooseGamePanel extends PagePanel{
         this.p_container.setLayout(new GridBagLayout());
         
         //Create buttons 
-        b_ia            = new MsgButton("Playe against AI");
-        b_2players      = new MsgButton("2 Players mode",105001, 105002, 105003);
-        b_lan           = new ClickedAnimButton( new MsgButton("Lan", 105001));
-        b_internet      = new MsgButton("Internet");
+        b_ia            = new ImgButton(407100, 407200, 407300);
+        b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300));
+        b_lan           = new ZozoDecorator(new ImgButton(409100, 409200, 409300));
+        b_internet      = new ZozoDecorator(new ImgButton(410100, 410200, 410300));
 
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.insets = new Insets(10, 10, 0, 10);
