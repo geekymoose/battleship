@@ -262,7 +262,7 @@ public class HexaGrid_DEBUG extends JPanel{
             int y = e.getY();
             //pixel to hexa
             Point p = new Point(pxtoHex(e.getX(), e.getY()));
-            System.out.println(p.x + " " + p.y);
+            //System.out.println(p.x + " " + p.y);
             if (p.x < 10 && p.y < 10 && p.x >= 0 && p.y >= 0) {
                 if (p.x < 10 && p.y < 10) {
                     tab[p.x][p.y] = 3;
@@ -308,7 +308,7 @@ public class HexaGrid_DEBUG extends JPanel{
                 }
                 tempX = p.x;
                 tempY = p.y;
-                System.out.println("temp = " + temp + "x=" + p.x + " y=" + p.y);
+                //System.out.println("temp = " + temp + "x=" + p.x + " y=" + p.y);
                 selected[p.x][p.y] = true;
                 repaint();
             } else {
