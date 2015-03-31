@@ -2,17 +2,17 @@
 
     
 <theme>
-	<constants>
+    <constants>
         <string>
             <default>
                 <val id="default-theme-folder-path">data/theme/</val>
                 <val id="default-theme-name">default</val>
             </default>
         </string>
-	</constants>
+    </constants>
 
 
-	<image>
+    <image>
         <boats>
             <aircraft>
                 <img type="static" ext="png">5000</img>
@@ -40,14 +40,41 @@
             </destroyer>
         </boats>
         
-		<ui>
-			<buttons>
-			</buttons>
+        <ui>
+            <buttons>
+                <img type="static" ext="png">404100</img>
+                <img type="static" ext="png">404200</img>
+                <img type="static" ext="png">404300</img>
+                
+                <img type="static" ext="png">405100</img>
+                <img type="static" ext="png">405200</img>
+                <img type="static" ext="png">405300</img>
+                
+                <img type="static" ext="png">406100</img>
+                <img type="static" ext="png">406200</img>
+                <img type="static" ext="png">406300</img>
+                
+                <img type="static" ext="png">407100</img>
+                <img type="static" ext="png">407200</img>
+                <img type="static" ext="png">407300</img>
+                
+                <img type="static" ext="png">408100</img>
+                <img type="static" ext="png">408200</img>
+                <img type="static" ext="png">408300</img>
+                
+                <img type="static" ext="png">409100</img>
+                <img type="static" ext="png">409200</img>
+                <img type="static" ext="png">409300</img>
+                
+                <img type="static" ext="png">410100</img>
+                <img type="static" ext="png">410200</img>
+                <img type="static" ext="png">410300</img>
+            </buttons>
             
             <explosion>
                 <img type="dynamic" ext="png">105001</img>
                 
             </explosion>
-		</ui>
-	</image>
+        </ui>
+    </image>
 </theme>
