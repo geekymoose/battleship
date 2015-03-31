@@ -56,6 +56,10 @@
         </boats>
         
         <ui>
+            <background>
+                <img type="static" ext="jpg">411100</img>
+            </background>
+            
             <buttons>
                 <img type="static" ext="png">404100</img>
                 <img type="static" ext="png">404200</img>
@@ -85,6 +89,8 @@
                 <img type="static" ext="png">410200</img>
                 <img type="static" ext="png">410300</img>
             </buttons>
+            
+            
             
             <explosion>
                 <img type="dynamic" ext="png">105001</img>

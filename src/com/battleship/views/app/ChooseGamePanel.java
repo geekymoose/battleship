@@ -12,8 +12,11 @@ import com.battleship.uibutton.*;
 import com.battleship.views.tools.*;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,6 +64,8 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
      */
     public ChooseGamePanel(WindowFrame pFrame) throws ExecError {
         super(pFrame);
+        Dimension size = Config.getDimValues_dim("dim-general-frame");
+        this.setPreferredSize(size);
         this.initComponents();
     }
     
@@ -69,9 +74,10 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
         this.gc         = new GridBagConstraints();
         this            .setLayout(new BorderLayout());
         this.p_container.setLayout(new GridBagLayout());
+        this.p_container.setOpaque(false);
         
         //Create buttons 
-        b_ia            = new ImgButton(407100, 407200, 407300);
+        b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
         b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300));
         b_lan           = new ZozoDecorator(new ImgButton(409100, 409200, 409300));
         b_internet      = new ZozoDecorator(new ImgButton(410100, 410200, 410300));
@@ -154,5 +160,11 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
     @Override
     protected void goPreviousPage(){
         //Not used
+    }
+    
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image img = ThemeManager.getTheme().getImg(411100);
+        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
     }
 }
