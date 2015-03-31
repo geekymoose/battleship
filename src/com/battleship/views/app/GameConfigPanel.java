@@ -219,15 +219,15 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
     protected void goNextPage(){
         int mode = Session.getGameMode();
         if(this.controller.isValidConfig()){
-                if(mode == this.MODE_AI){
-                    frame.rooting(Config.getRootsConst("place-boats"), null);
-                } else if(mode == this.MODE_V2){
-                    //To do
-                } else if(mode == this.MODE_LAN){
-                    
-                } else if (mode == this.MODE_INTERNET){
-                    
-                }
+            if(mode == this.MODE_AI){
+                frame.rooting(Config.getRootsConst("place-boats"), null);
+            } else if(mode == this.MODE_V2){
+                //To do
+            } else if(mode == this.MODE_LAN){
+
+            } else if (mode == this.MODE_INTERNET){
+
+            }
         }
         else{
             DebugTrack.showErrMsg("Config not valid yet");

@@ -45,6 +45,8 @@
 			</buttons>
             
             <explosion>
+                <img type="dynamic" ext="png">105001</img>
+                
             </explosion>
 		</ui>
 	</image>
