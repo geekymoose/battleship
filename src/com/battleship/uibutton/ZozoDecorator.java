@@ -4,6 +4,7 @@
  */
 package com.battleship.uibutton;
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -30,12 +31,8 @@ public class ZozoDecorator  extends UiButtonDecorator{
         this.uibutton.setDefaultCapable(false);
         this.uibutton.setFocusPainted(false);
         
-        
-        this.uibutton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e){
-            }
-        });
-        
+        int width   = this.uibutton.getIcon().getIconWidth();
+        int height  = this.uibutton.getIcon().getIconHeight();
+        this.uibutton.setPreferredSize(new Dimension(width,height));
     }
 }
