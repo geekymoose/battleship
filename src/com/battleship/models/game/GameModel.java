@@ -62,7 +62,7 @@ public class GameModel extends Model{
         this.gridWidth              = pConfig.getGridWidth();
         this.gridHeight             = pConfig.getGridHeight();
         this.gridType               = pConfig.getGridType();
-        this.nbMaxPlayer            = Config.getGameConst_int("nb-max-players");
+        this.nbMaxPlayer            = Config.getGameValues_int("nb-max-players");
         
         this.counterTurn            = 0;
         this.currentNbPlayers       = 0;

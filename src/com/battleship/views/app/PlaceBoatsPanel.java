@@ -58,7 +58,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
         if(pController==null){ throw new ExecError(); }
         this.controller = pController;
         this.initComponents();
-        this.setPreferredSize(Config.getDimConst_dim("dim-place-boat"));
+        this.setPreferredSize(Config.getDimValues_dim("dim-place-boat"));
     }
     
     private void initComponents() throws ExecError{
@@ -133,7 +133,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     
     @Override
     protected void goNextPage(){
-        this.frame.rooting(Config.getRootsConst("game"), null);
+        this.frame.rooting(Config.getRootsValues("game"), null);
     }
     
     @Override

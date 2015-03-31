@@ -40,22 +40,19 @@ public class Config {
     private static      Config      singleton = null;
     
     //Constants for Parsing (Public mode)
-    public  static      String      themeConstantsPath;
-    public  static      String      dimConstantsPath;
-    public  static      String      displayConstantsPath;
-    public  static      String      gameConstantsPath;
-    public  static      String      timerConstantsPath;
+    public  static      String      themeConfigPath;
+    public  static      String      dimConfigPath;
+    public  static      String      gameConfigPath;
     public  static      String      rootsPath;
     
     
     //List with all constants used for application
-    private static      HashMap<String, Dimension>  l_dimConst_dim;
-    private static      HashMap<String, Integer>    l_dimConst_int;
-    private static      HashMap<String, String>     l_displayConst_str;
-    private static      HashMap<String, Integer>    l_gameConst_int;
-    private static      HashMap<String, String>     l_themeConst_str;
-    private static      HashMap<String, Integer>    l_timerConst;
-    private static      HashMap<String, Integer>    l_rootsConst;
+    private static      HashMap<String, Dimension>  l_dimConfig_dim;
+    private static      HashMap<String, Integer>    l_dimConfig_int;
+    private static      HashMap<String, Integer>    l_gameConfig_int;
+    private static      HashMap<String, String>     l_gameConfig_str;
+    private static      HashMap<String, String>     l_themeConfig_str;
+    private static      HashMap<String, Integer>    l_roots;
     
     
     //List with loaded image name / ext
@@ -84,11 +81,9 @@ public class Config {
     private Config(){
         String constantsPath        = "src/com/battleship/constants/";
         this.rootsPath              = constantsPath+"roots.xml";
-        this.themeConstantsPath     = constantsPath+"themeConstants.xml";
-        this.dimConstantsPath       = constantsPath+"dimConstants.xml";
-        this.displayConstantsPath   = constantsPath+"displayConstants.xml";
-        this.gameConstantsPath      = constantsPath+"gameConstants.xml";
-        this.timerConstantsPath     = constantsPath+"timerConstants.xml";
+        this.dimConfigPath          = constantsPath+"dimConfig.xml";
+        this.themeConfigPath        = constantsPath+"themeConfig.xml";
+        this.gameConfigPath         = constantsPath+"gameConfig.xml";
     }
     
     
@@ -102,25 +97,22 @@ public class Config {
         Session                     .createSession();   //Create user session
         
         //Root constants 
-        Config.l_rootsConst         = DOMParser.getIntegerConstants(rootsPath);
+        Config.l_roots              = DOMParser.getIntegerConstants(rootsPath);
         
         
         //Load app constants
-        Config.l_dimConst_dim       = DOMParser.getDimensionConstants(dimConstantsPath);
-        Config.l_dimConst_int       = DOMParser.getIntegerConstants(dimConstantsPath);
-        Config.l_displayConst_str   = DOMParser.getStringConstants(displayConstantsPath);
-        Config.l_gameConst_int      = DOMParser.getIntegerConstants(gameConstantsPath);
+        Config.l_dimConfig_dim      = DOMParser.getDimensionConstants(dimConfigPath);
+        Config.l_dimConfig_int      = DOMParser.getIntegerConstants(dimConfigPath);
+        Config.l_gameConfig_int     = DOMParser.getIntegerConstants(gameConfigPath);
+        Config.l_gameConfig_str     = DOMParser.getStringConstants(gameConfigPath);
         
         //Theme constants
-        Config.l_themeConst_str     = DOMParser.getStringConstants(themeConstantsPath);
-        Config.themeFolderPath      = Config.getThemeConst_str("default-theme-folder-path");
+        Config.l_themeConfig_str    = DOMParser.getStringConstants(themeConfigPath);
+        Config.themeFolderPath      = Config.getThemeValues_str("default-theme-folder-path");
         
         //Theme image value
-        Config.l_staticImgNames     = DOMParser.getThemeImgName(themeConstantsPath, "static");
-        Config.l_dynamicImageNames  = DOMParser.getThemeImgName(themeConstantsPath, "dynamic");
-        
-        //Timer constants
-        Config.l_timerConst         = DOMParser.getIntegerConstants(timerConstantsPath);
+        Config.l_staticImgNames     = DOMParser.getThemeImgName(themeConfigPath, "static");
+        Config.l_dynamicImageNames  = DOMParser.getThemeImgName(themeConfigPath, "dynamic");
         
         //Create theme manager, must be called at the end!!
         ThemeManager.createThemeManager();
@@ -148,8 +140,8 @@ public class Config {
     //**************************************************************************
     // Getters - Setters for Constants
     //**************************************************************************
-    public static int getRootsConst(String pName){
-        Integer root = Config.l_rootsConst.get(pName);
+    public static int getRootsValues(String pName){
+        Integer root = Config.l_roots.get(pName);
         DebugTrack.isValidConstantsName(root, pName);
         return root;
     }
@@ -159,8 +151,8 @@ public class Config {
      * @param pName
      * @return 
      */
-    public static Dimension getDimConst_dim(String pName){
-        Dimension dim = Config.l_dimConst_dim.get(pName);
+    public static Dimension getDimValues_dim(String pName){
+        Dimension dim = Config.l_dimConfig_dim.get(pName);
         DebugTrack.isValidConstantsName(dim, pName);
         return dim;
     }
@@ -170,21 +162,10 @@ public class Config {
      * @param pName
      * @return 
      */
-    public static int getDimConst_int(String pName){
-        Integer dim = Config.l_dimConst_int.get(pName);
+    public static int getDimValues_int(String pName){
+        Integer dim = Config.l_dimConfig_int.get(pName);
         DebugTrack.isValidConstantsName(dim, pName);
         return dim;
-    }
-    
-    /**
-     * Return display constants with string format
-     * @param pName
-     * @return 
-     */
-    public static String getDisplayConst_str(String pName){
-        String str = Config.l_displayConst_str.get(pName);
-        DebugTrack.isValidConstantsName(str, pName);
-        return str;
     }
     
     /**
@@ -192,19 +173,19 @@ public class Config {
      * @param pName
      * @return 
      */
-    public static int getGameConst_int(String pName){
-        Integer val = Config.l_gameConst_int.get(pName);
+    public static int getGameValues_int(String pName){
+        Integer val = Config.l_gameConfig_int.get(pName);
         DebugTrack.isValidConstantsName(val, pName);
         return val;
     }
     
     /**
-     * Return a timer constants
-     * @param pName timer constants name
+     * Return game constants with string value
+     * @param pName
      * @return 
      */
-    public static int getTimerConst(String pName){
-        Integer val = Config.l_timerConst.get(pName);
+    public static String getGameValues_str(String pName){
+        String val = Config.l_gameConfig_str.get(pName);
         DebugTrack.isValidConstantsName(val, pName);
         return val;
     }
@@ -214,8 +195,8 @@ public class Config {
      * @param pName
      * @return 
      */
-    public static String getThemeConst_str(String pName){
-        String str = Config.l_themeConst_str.get(pName);
+    public static String getThemeValues_str(String pName){
+        String str = Config.l_themeConfig_str.get(pName);
         DebugTrack.isValidConstantsName(str, pName);
         return str;
     }

@@ -57,11 +57,11 @@ public class BoxMapHexagon extends BoxMap{
         int x = this.posX;
         int y = this.posY;
         
-        if(pDirection==Config.getGameConst_int("vertical-boat")){
+        if(pDirection==Config.getGameValues_int("vertical-boat")){
             y += 1;
-        } else if (pDirection == Config.getGameConst_int("standing-right")){
+        } else if (pDirection == Config.getGameValues_int("standing-right")){
             x += 1;
-        } else if (pDirection == Config.getGameConst_int("standing-left")){
+        } else if (pDirection == Config.getGameValues_int("standing-left")){
             x -= 1;
         } else {
             return null;

@@ -55,9 +55,9 @@ public class BoxMapSquare extends BoxMap{
         int x = this.posX;
         int y = this.posY;
         
-        if(pDirection==Config.getGameConst_int("vertical-boat")){
+        if(pDirection==Config.getGameValues_int("vertical-boat")){
             y += 1;
-        } else if(pDirection == Config.getGameConst_int("horizontal-boat")){
+        } else if(pDirection == Config.getGameValues_int("horizontal-boat")){
             x += 1;
         } else {
             return null;

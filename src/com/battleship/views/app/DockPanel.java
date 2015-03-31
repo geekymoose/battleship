@@ -101,7 +101,7 @@ public class DockPanel extends ContentPanel{
          * Create a new DockBoats
          */
         protected DockBoats(){
-            this.setPreferredSize(Config.getDimConst_dim("dim-dock-boat"));
+            this.setPreferredSize(Config.getDimValues_dim("dim-dock-boat"));
             this.addMouseListener(this);
         }
         

@@ -63,7 +63,7 @@ public class ThemeManager{
      */
     public static void createThemeManager() throws ExecError{
         ThemeManager.singleton = new ThemeManager();
-        ThemeManager.singleton.loadTheme(Config.getThemeConst_str("default-theme-name"));
+        ThemeManager.singleton.loadTheme(Config.getThemeValues_str("default-theme-name"));
     }
     
     

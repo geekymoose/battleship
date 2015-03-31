@@ -20,10 +20,14 @@
         </integer>
         
         <dimension>
+            <frame>
+                <val id="dim-general-frame" width="1370" height="800"/>
+            </frame>
+            
             <panel>
-                <val id="dim-place-boat" width="600" height="250"/>
-                <val id="dim-dock" width="250" height="0"/>
-                <val id="dim-dock-boat" width="250" height="50"/>
+                <val id="dim-place-boat"    width="600" height="250"/>
+                <val id="dim-dock"          width="250" height="0"/>
+                <val id="dim-dock-boat"     width="250" height="50"/>
             </panel>
         </dimension>
         

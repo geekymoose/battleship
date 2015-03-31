@@ -45,7 +45,7 @@ public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEven
      */
     public ClickedAnimButton(UiButton pButton){
         super(pButton);
-        int delay       = Config.getTimerConst("default-button-timer");
+        int delay       = Config.getGameValues_int("default-button-timer");
         int idClicked   = this.uibutton.getIdClicked();
         this.event      = new ImageIconEvent(delay, idClicked, this);
         
