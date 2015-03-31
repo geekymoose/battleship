@@ -30,12 +30,12 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     // Variables and Constants
     //**************************************************************************
     //Constants -> load roots
-    private     final int   CHOOSE_GAME     = Config.getRootsConst("choose-game");
-    private     final int   CONFIG          = Config.getRootsConst("config");
-    private     final int   PLACE_BOATS     = Config.getRootsConst("place-boats");
-    private     final int   GAME            = Config.getRootsConst("game");
-    private     final int   FRAME_SIZE_W    = Config.getDimConst_int("frame-size-width");
-    private     final int   FRAME_SIZE_H    = Config.getDimConst_int("frame-size-height");
+    private     final int   CHOOSE_GAME     = Config.getRootsValues("choose-game");
+    private     final int   CONFIG          = Config.getRootsValues("config");
+    private     final int   PLACE_BOATS     = Config.getRootsValues("place-boats");
+    private     final int   GAME            = Config.getRootsValues("game");
+    private     final int   FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
+    private     final int   FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
     
     
     
@@ -59,12 +59,12 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
      * @throws ExecError
      */
     public ApplicationFrame() throws ExecError {
-        this.setTitle(Config.getDisplayConst_str("frame-title"));
+        this.setTitle(Config.getGameValues_str("frame-title"));
         this.setSize(FRAME_SIZE_W, FRAME_SIZE_H);
         this.setAlwaysOnTop(false);
         //this.setResizable(false);
         this.setResizable(true); //DEBUG
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
     }
     
