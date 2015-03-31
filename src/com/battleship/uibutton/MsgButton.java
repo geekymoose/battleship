@@ -5,7 +5,6 @@
 package com.battleship.uibutton;
 
 import com.battleship.views.tools.ThemeManager;
-import java.awt.event.MouseEvent;
 import javax.swing.AbstractButton;
 
 
@@ -13,14 +12,12 @@ import javax.swing.AbstractButton;
 
 
 /**
- * <h1>UiMessageButton</h1>
+ * <h1>MsgButton</h1>
  * <p>
- * public class UiMessageButton<br/>
+ * public class MsgButton<br/>
  * extends UiButton
  * </p>
- * <p>
- * A button with text and a background
- * </p>
+ * <p>A button with text and a background</p>
  * 
  *
  * @date    Mar 29, 2015
@@ -30,49 +27,80 @@ import javax.swing.AbstractButton;
  * 
  * @see UiButtonDecorator
  */
-public class UiMessageButton extends UiButton{
+public class MsgButton extends UiButton{
+    //**************************************************************************
+    // Variables - Constants
+    //**************************************************************************
+    private   String      msg;
+    
+    
+    
+    
+    
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
+     * Create an MsgButton with a unique image
+     * @param pDef image to display
+     */
+    public MsgButton(String pMsg, int pDef){
+        super(pDef);
+        this.msg            = pMsg;
+        this.reloadUI();
+    }
+    
+    
+    /**
+     * Create a new UiMessageButton
+     * @param pMsg      Message to set
+     * @param pDef      Default image
+     * @param pPress    Pressed image
+     * @param pHover    Mouse hover image
+     */
+    public MsgButton(String pMsg, int pDef, int pPress, int pHover){
+        super(pDef, pPress, pHover);
+        this.msg            = pMsg;
+        this.reloadUI();
+    }
+    
+    
+    /**
      * Create a new Simple button with basic images for default, clicked, pressed 
      * released, entered and exited
      * @param pMsg      Message to display on this button
-     * @param idDef     default image
-     * @param idClick   clicked image
-     * @param idPress   pressed image
-     * @param idRelea   released image
-     * @param idEnt     entered image
-     * @param idEx      exited image
+     * @param pDef      default image
+     * @param pClick    clicked image
+     * @param pPress    pressed image
+     * @param pRe       released image
+     * @param pEnt      entered image
+     * @param pEx       exited image
      */
-    public UiMessageButton(String pMsg, int idDef, int idClick, int idPress, int idRelea, int idEnt, int idEx){
-        super();
-        this.msg            = pMsg;
-        this.id_default     = idDef;
-        this.id_clicked     = idClick;
-        this.id_pressed     = idPress;
-        this.id_released    = idRelea;
-        this.id_entered     = idEnt;
-        this.id_exited      = idEx;
-        
-        this.reloadUI(); //Load for the first time
-        this.addMouseListener(this);
+    public MsgButton(String pMsg, int pDef, int pClick, int pPress, int pRe, int pEnt, int pEx){
+        super(pDef, pClick, pPress, pRe, pEnt, pEx);
+        this.msg = pMsg;
+        this.reloadUI();
     }
     
     /**
      * Create a simple button with only a text
      * @param pMsg 
      */
-    public UiMessageButton(String pMsg){
-        this(pMsg, 0,0,0,0,0,0);
+    public MsgButton(String pMsg){
+        super();
+        this.msg = pMsg;
+        this.reloadUI();
     }
     
     
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
     @Override
     public void reloadUI(){
         if(this.id_default != 0){
             this.img_default    = ThemeManager.getTheme().getImgIcon(this.id_default);
-            this.setIcon(img_default);
         }
         if(this.id_clicked != 0){
             this.img_clicked    = ThemeManager.getTheme().getImgIcon(this.id_clicked);
@@ -90,6 +118,7 @@ public class UiMessageButton extends UiButton{
             this.img_exited     = ThemeManager.getTheme().getImgIcon(this.id_exited);
         }
         
+        this.setIcon(img_default); //If id_def = 0, img_default = null -> do nothing
         this.setText(this.msg);
         this.setHorizontalTextPosition(AbstractButton.CENTER);
         this.setVerticalTextPosition(AbstractButton.CENTER);
@@ -99,37 +128,5 @@ public class UiMessageButton extends UiButton{
     @Override
     public void resetButton(){
         this.setIcon(this.img_default);
-    }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Functions
-    //**************************************************************************
-    @Override
-    public void mouseClicked(MouseEvent e){
-        this.setIcon(this.img_default);
-    }
-    
-    @Override
-    public void mousePressed(MouseEvent e){
-        this.setIcon(this.img_pressed);
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e){
-        this.setIcon(this.img_released);
-    }
-    
-    @Override
-    public void mouseEntered(MouseEvent e){
-        this.setIcon(this.img_entered);
-    }
-    
-    @Override
-    public void mouseExited(MouseEvent e){
-        this.setIcon(this.img_exited);
     }
 }

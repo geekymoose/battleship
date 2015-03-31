@@ -13,12 +13,10 @@ import com.battleship.views.tools.Config;
 
 
 
-
-
 /**
- * <h1>UiClickedAnimButton</h1>
+ * <h1>ClickedAnimButton</h1>
  * <p>
- public class UiClickedAnimButton<br/>
+ * public class ClickedAnimButton<br/>
  * UiButtonDecorator<br/>
  * implements UiStaticEvent
  * </p>
@@ -29,7 +27,7 @@ import com.battleship.views.tools.Config;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class UiClickedAnimButton extends UiButtonDecorator implements UiStaticEvent{
+public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEvent{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -45,7 +43,7 @@ public class UiClickedAnimButton extends UiButtonDecorator implements UiStaticEv
      * Create a new event decoration for an UiButton
      * @param pButton button to decorate
      */
-    public UiClickedAnimButton(UiButton pButton){
+    public ClickedAnimButton(UiButton pButton){
         super(pButton);
         int delay       = Config.getTimerConst("default-button-timer");
         int idClicked   = this.uibutton.getIdClicked();
@@ -57,16 +55,6 @@ public class UiClickedAnimButton extends UiButtonDecorator implements UiStaticEv
                 event.startTimer();
             }
         });
-    }
-    
-    /**
-     * @deprecated not working yet
-     * @param pIdFirstClicked First animation image
-     * @param pButton 
-     */
-    public UiClickedAnimButton(int pIdFirstClicked, UiButton pButton){
-        this(pButton);
-        //this.uibutton.setImgClicked(pIdFirstClicked); -> to add in UiButton
     }
 
     

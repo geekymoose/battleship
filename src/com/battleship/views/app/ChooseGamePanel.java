@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.Session;
+import com.battleship.uibutton.*;
 import com.battleship.views.tools.*;
 
 import java.awt.BorderLayout;
@@ -15,6 +16,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -35,10 +37,10 @@ public class ChooseGamePanel extends PagePanel{
     private     GridBagConstraints      gc;
     
     //Buttons
-    private     JButton                 b_ia;
-    private     JButton                 b_2players;
-    private     JButton                 b_lan;
-    private     JButton                 b_internet;
+    private     AbstractButton          b_ia;
+    private     AbstractButton          b_2players;
+    private     AbstractButton          b_lan;
+    private     AbstractButton          b_internet;
         
     
     
@@ -64,10 +66,10 @@ public class ChooseGamePanel extends PagePanel{
         this.p_container.setLayout(new GridBagLayout());
         
         //Create buttons 
-        b_ia            = new JButton("Playe against AI");
-        b_2players      = new JButton("2 Players mode");
-        b_lan           = new JButton("Lan");
-        b_internet      = new JButton("Internet");
+        b_ia            = new MsgButton("Playe against AI");
+        b_2players      = new MsgButton("2 Players mode",105001, 105002, 105003);
+        b_lan           = new ClickedAnimButton( new MsgButton("Lan", 105001));
+        b_internet      = new MsgButton("Internet");
 
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.insets = new Insets(10, 10, 0, 10);

@@ -7,7 +7,7 @@ package com.battleship.uibutton;
 
 import com.battleship.views.tools.UiElement;
 import java.awt.BorderLayout;
-import javax.swing.JComponent;
+import javax.swing.AbstractButton;
 
 
 
@@ -30,7 +30,7 @@ import javax.swing.JComponent;
  * 
  * @see UiButton
  */
-public abstract class UiButtonDecorator extends JComponent implements UiElement{
+public abstract class UiButtonDecorator extends AbstractButton implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -40,7 +40,11 @@ public abstract class UiButtonDecorator extends JComponent implements UiElement{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public UiButtonDecorator(UiButton pButton){
+    /**
+     * Create a new decorator
+     * @param pButton 
+     */
+    protected UiButtonDecorator(UiButton pButton){
         this.uibutton = pButton;
         this.setLayout(new BorderLayout());
         this.add(pButton);
