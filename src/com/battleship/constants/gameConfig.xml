@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <constants>
+        
+        <string>
+            <title>
+                <val id="frame-title">Battleship</val>
+            </title>
+        </string>
+        
+        <integer>
+            <game>
+                <val id="nb-min-players">1</val>
+                <val id="nb-max-players">2</val>
+            </game>
+            
+            
+            <timer>
+                <val id="default-button-timer">50</val>
+            </timer>
+        </integer>
+        
+    </constants>
+</root>

@@ -63,7 +63,7 @@ public abstract class Player{
         this.fleetGrid          = null;
         
         //Add default weapon and set current weapon to this weapon
-        this.listWeapons.add(new Missile(this, Config.getGameConst_int("infinite")));
+        this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
         this.currentWeaponIndex = 0;
     }
     
@@ -76,7 +76,7 @@ public abstract class Player{
      * @param pGridType     Grid Type (Could be square or hexagon)
      */
     public void initFleetGrid(int pGridWidth, int pGridHeight, int pGridType) {
-        if(pGridType == Config.getGameConst_int("grid-square")){
+        if(pGridType == Config.getGameValues_int("grid-square")){
                 this.fleetGrid  = new FleetGridSquare(pGridWidth, pGridHeight, this);
         } else {
                 this.fleetGrid  = new FleetGridHexagon(pGridWidth, pGridHeight, this);

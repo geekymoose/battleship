@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
 import com.battleship.views.tools.Config;
 
@@ -15,7 +16,8 @@ import com.battleship.views.tools.Config;
  * <h1>GameConfigModel</h1>
  * <p>
  * public class GameConfigModel<br/>
- * extends Model
+ * extends Model<br/>
+ * implements GameConstants
  * </p>
  * 
  * <p>
@@ -39,7 +41,7 @@ import com.battleship.views.tools.Config;
  * 
  * @see GameModel
  */
-public class GameConfigModel extends Model{
+public class GameConfigModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -53,13 +55,12 @@ public class GameConfigModel extends Model{
     private     final int   gridMaxWidth;
     private     final int   gridMaxHeight;
     
-    private     final int   gridSquareType;
-    private     final int   gridHexagonType;
-    
-    
     private     int         gridWidth;
     private     int         gridHeight;
     private     int         gridType;
+    
+    
+    
     
     
     //**************************************************************************
@@ -70,16 +71,14 @@ public class GameConfigModel extends Model{
      */
     public GameConfigModel(){
         DebugTrack.showInitMsg("Create GameConfigModel Model");
-        this.gridDefaultWidth   = Config.getDimConst_int("grid-default-width");
-        this.gridDefaultHeight  = Config.getDimConst_int("grid-default-height");
-        this.gridMinWidth       = Config.getDimConst_int("grid-min-width");
-        this.gridMaxWidth       = Config.getDimConst_int("grid-max-width");
-        this.gridMinHeight      = Config.getDimConst_int("grid-min-height");
-        this.gridMaxHeight      = Config.getDimConst_int("grid-max-height");
+        this.gridDefaultWidth   = Config.getDimValues_int("grid-default-width");
+        this.gridDefaultHeight  = Config.getDimValues_int("grid-default-height");
+        this.gridMinWidth       = Config.getDimValues_int("grid-min-width");
+        this.gridMaxWidth       = Config.getDimValues_int("grid-max-width");
+        this.gridMinHeight      = Config.getDimValues_int("grid-min-height");
+        this.gridMaxHeight      = Config.getDimValues_int("grid-max-height");
         
-        this.gridDefaultType    = Config.getGameConst_int("square-grid");
-        this.gridSquareType     = Config.getGameConst_int("square-grid");
-        this.gridHexagonType    = Config.getGameConst_int("hexagon-grid");
+        this.gridDefaultType    = GRID_TYPE_SQUARE;
         
         this.defaultConfig();
     }
@@ -191,7 +190,7 @@ public class GameConfigModel extends Model{
      * @param pValue new width
      */
     public void setGridType(int pValue) {
-        if(pValue==this.gridSquareType || pValue<=this.gridHexagonType){
+        if(pValue == GRID_TYPE_SQUARE || pValue == GRID_TYPE_HEXAGON){
             this.gridType = pValue;
         }
         this.notifyObservers(null);
