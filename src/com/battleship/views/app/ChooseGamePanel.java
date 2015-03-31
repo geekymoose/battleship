@@ -64,8 +64,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
      */
     public ChooseGamePanel(WindowFrame pFrame) throws ExecError {
         super(pFrame);
-        Dimension size = Config.getDimValues_dim("dim-general-frame");
-        this.setPreferredSize(size);
+        this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
     }
     

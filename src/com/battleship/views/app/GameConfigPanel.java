@@ -13,6 +13,7 @@ import com.battleship.models.game.Session;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.uibutton.ImgButton;
+import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
@@ -100,9 +101,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         p_center        .setLayout(new GridLayout(1,2));
         
         l_indication    = new JLabel("Choose your kind of grid");
-        b_validate      = new ImgButton(406100, 406200, 406300);
-        b_reset         = new ImgButton(405100, 405200, 405300);
-        b_back          = new ImgButton(404100, 404200, 404300);
+        b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
+        b_reset         = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
+        b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
         b_square        = new JButton("Square");
         b_hexa          = new JButton("Hexagonal");
         

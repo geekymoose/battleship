@@ -60,4 +60,9 @@ public abstract class UiButtonDecorator extends AbstractButton implements UiElem
     public void addActionListener(ActionListener listener){
         this.uibutton.addActionListener(listener);
     }
+    
+    @Override
+    public void setEnabled(boolean value){
+        this.uibutton.setEnabled(value);
+    }
 }

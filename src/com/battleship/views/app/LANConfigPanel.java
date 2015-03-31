@@ -5,7 +5,6 @@
 
 package com.battleship.views.app;
 
-import com.battleship.constants.GameConstants;
 import com.battleship.controllers.LANConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
