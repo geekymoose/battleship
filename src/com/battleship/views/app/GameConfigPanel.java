@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GameConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -27,23 +28,19 @@ import javax.swing.JPanel;
 
 
 /**
- * <h1></h1>
+ * <h1>GameConfigPanel</h1>
+ * <p>
+ * public class GameConfigPanel<br/>
+ * extends PagePanel<br/>
+ * implements ObserverModel
+ * </p>
  * 
  * @date    Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GameConfigPanel extends PagePanel implements ObserverModel{
-    private     final int               MODE_AI;
-    private     final int               MODE_V2;
-    private     final int               MODE_LAN;
-    private     final int               MODE_INTERNET;
-    
-    private     final int               GRID_TYPE_SQUARE;
-    private     final int               GRID_TYPE_HEXAGON;
-    
-    
+public class GameConfigPanel extends PagePanel implements ObserverModel, GameConstants{
     private     GameConfigController    controller;
     private     JPanel                  p_buttons;
     private     JPanel                  p_validate;
@@ -84,12 +81,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
             throw new ExecError();
         }
         this.controller         = pController;
-        this.MODE_AI            = Config.getGameConst_int("mode-ai");
-        this.MODE_V2            = Config.getGameConst_int("mode-v2");
-        this.MODE_LAN           = Config.getGameConst_int("mode-lan");
-        this.MODE_INTERNET      = Config.getGameConst_int("mode-internet");
-        this.GRID_TYPE_HEXAGON  = Config.getGameConst_int("hexagon-grid");
-        this.GRID_TYPE_SQUARE   = Config.getGameConst_int("square-grid");
         this.initComponents();
     }
     
@@ -219,19 +210,17 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
     protected void goNextPage(){
         int mode = Session.getGameMode();
         if(this.controller.isValidConfig()){
-            if(mode == this.MODE_AI){
-                frame.rooting(Config.getRootsConst("place-boats"), null);
-            } else if(mode == this.MODE_V2){
-                //To do
-            } else if(mode == this.MODE_LAN){
-
-            } else if (mode == this.MODE_INTERNET){
-
+            switch(mode){
+                case MODE_AI:
+                    frame.rooting(Config.getRootsValues("place-boats"), null);
+                    break;
+                case MODE_V2:
+                    break;
+                case MODE_LAN:
+                    break;
+                case MODE_INTERNET:
+                    break;
             }
-        }
-        else{
-            DebugTrack.showErrMsg("Config not valid yet");
-            //Display message 'not valid'
         }
     }
     
@@ -245,20 +234,23 @@ public class GameConfigPanel extends PagePanel implements ObserverModel{
                               JOptionPane.YES_NO_CANCEL_OPTION, 
                               JOptionPane.QUESTION_MESSAGE);
         
+        
         if(choice==JOptionPane.OK_OPTION){
-        int mode = Session.getGameMode();
+            int mode = Session.getGameMode();
             if(this.controller.isValidConfig()){
-                if(mode == this.MODE_AI){
-                    frame.rooting(Config.getRootsConst("choose-game"), null);
-                } else if(mode == this.MODE_V2){
-                    //To do
-                } else if(mode == this.MODE_LAN){
-                    
-                } else if (mode == this.MODE_INTERNET){
-                    
+                switch(mode){
+                    case MODE_AI:
+                        frame.rooting(Config.getRootsValues("choose-game"), null);
+                        break;
+                    case MODE_V2:
+                        break;
+                    case MODE_LAN:
+                        break;
+                    case MODE_INTERNET:
+                        break;
                 }
             }
         }
-    }
+    } //End previous
     
 }

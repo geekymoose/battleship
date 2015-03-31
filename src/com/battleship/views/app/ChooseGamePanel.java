@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.Session;
@@ -17,7 +18,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
@@ -25,14 +25,19 @@ import javax.swing.JPanel;
 
 
 /**
- * <h1></h1>
+ * <h1>ChooseGamePanel</h1>
+ * <p>
+ * public class ChooseGamePanel<br/>
+ * extends PagePanel<br/>
+ * implements GameConstants
+ * </p>
  *
  * @date    Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooseGamePanel extends PagePanel{
+public class ChooseGamePanel extends PagePanel implements GameConstants{
     private     JPanel                  p_container;
     private     GridBagConstraints      gc;
     
@@ -107,8 +112,8 @@ public class ChooseGamePanel extends PagePanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : AI");
-                    Session.setGameMode(Config.getGameConst_int("mode-ai"));
-                    frame.rooting(Config.getRootsConst("config"), null);
+                    Session.setGameMode(MODE_AI);
+                    frame.rooting(Config.getRootsValues("config"), null);
                 }
             }
         );

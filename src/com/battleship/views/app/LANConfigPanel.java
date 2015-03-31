@@ -5,6 +5,7 @@
 
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.controllers.LANConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -32,7 +33,9 @@ import javax.swing.JTextArea;
 /**
  * <h1>LANConfigPanel</h1>
  * <p>
- public class LANConfigPanel<br/>
+ * public class LANConfigPanel<br/>
+ * extends PagePane<br/>
+ * implements ObserverModel
  * </p>
  * 
  * <p>Description</p>
@@ -42,7 +45,7 @@ import javax.swing.JTextArea;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class LANConfigPanel extends PagePanel implements ObserverModel {
+public class LANConfigPanel extends PagePanel implements ObserverModel{
     
     private     LANConfigController     controller;
     
@@ -141,7 +144,7 @@ public class LANConfigPanel extends PagePanel implements ObserverModel {
                               JOptionPane.QUESTION_MESSAGE);
         
         if(choice2==JOptionPane.OK_OPTION){
-            frame.rooting(Config.getRootsConst("choose-game"), null);
+            frame.rooting(Config.getRootsValues("choose-game"), null);
         }
     }
 

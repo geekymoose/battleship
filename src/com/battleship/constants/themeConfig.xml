@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+    Image name format : xxxxxxx
+    x is a numeric value
+    the first 4 x are used for unique image name
+    the 2 last x are used for animation position
+    
+    Example : image 123400 is the 1234 image and is at position 00 in animation
+    
+    Add a new image in project 
+        Create and place image in theme folder
+        Add image in this xml with line <img type="" ext="">format name</img>
+        type is static if unique img and dynamic if animation
+        ext is image extension
+        format name is the name (without extension) as 123400
+-->
     
 <theme>
 	<constants>
