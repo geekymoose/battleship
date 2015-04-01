@@ -5,6 +5,7 @@
 package com.battleship.views.app;
 
 
+import com.battleship.views.tools.Error404View;
 import com.battleship.views.tools.*;
 import com.battleship.controllers.SwingFactory;
 import com.battleship.exceptions.ExecError;
@@ -17,7 +18,12 @@ import javax.swing.JPanel;
 
 
 /**
- * <h1></h1>
+ * <h1>ApplicationFrame</h1>
+ * <p>
+ * public class ApplicationFrame<br/>
+ * extends JFrame<br/>
+ * implements WindowFrame
+ * </p>
  * 
  * 
  * @date    Feb 11. 2015

@@ -27,7 +27,7 @@ public abstract class ContentPanel extends JPanel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   PagePanel       parentPage;
+    protected   JPanel       parentPage;
     
     
     
@@ -41,7 +41,7 @@ public abstract class ContentPanel extends JPanel{
      * @param pParentPage PagePanel which contains this ContentPanel
      * @throws ExecError 
      */
-    public ContentPanel(PagePanel pParentPage) throws ExecError{
+    public ContentPanel(JPanel pParentPage) throws ExecError{
         if(pParentPage == null){
             throw new ExecError();
         }
@@ -59,7 +59,7 @@ public abstract class ContentPanel extends JPanel{
      * Get current parentPage
      * @return PagePanel parent
      */
-    public PagePanel getParentPage(){
+    public JPanel getParentPage(){
         return this.parentPage;
     }
 }

@@ -36,7 +36,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private     JPanel                  p_centerPane;
     
     private     InformationPanel        p_info;
-    private     FleetPanel              p_fleet;
+    private     PlayerFleetPanel        p_fleet;
     private     RadarPanel              p_radar;
     private     ChatPanel               p_chat;
     private     HeadBar                 p_headbar;
@@ -75,7 +75,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
-    private void initComponents(){
+    private void initComponents() throws ExecError{
         this.setLayout(new BorderLayout());
         p_centerPane = new JPanel();
         p_centerPane.setLayout(new GridBagLayout()); 
@@ -84,10 +84,10 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_info = new InformationPanel();
         p_info.setBackground(Color.ORANGE);
         
-        p_fleet = new FleetPanel();
+        p_fleet = new PlayerFleetPanel(this);
         p_fleet.setBackground(Color.CYAN);
         
-        p_radar = new RadarPanel();
+        p_radar = new RadarPanel(this);
         p_radar.setBackground(Color.DARK_GRAY);
         
         p_chat = new ChatPanel();

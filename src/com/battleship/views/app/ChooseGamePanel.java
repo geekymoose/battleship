@@ -12,7 +12,6 @@ import com.battleship.uibutton.*;
 import com.battleship.views.tools.*;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

@@ -54,7 +54,7 @@ public abstract class SwingFactory {
     
     
     //**************************************************************************
-    // Functions
+    // Loading Functions for program used Models / Views / Controllers
     //**************************************************************************
     /**
      * Create Model / View / Controller for ConfigGamePanel
@@ -78,6 +78,8 @@ public abstract class SwingFactory {
         return v;
     }
     
+    
+    
     /**
      * Create Model / View / Controller for PlaceBoatsPanel
      * @param pFrame frame containing ConfigGamePanel
@@ -100,6 +102,7 @@ public abstract class SwingFactory {
         return v;
     }
     
+    
     /**
      * Create Model / View / Controller for Game 
      * @param pFrame frame containing ConfigGamePanel
@@ -111,6 +114,11 @@ public abstract class SwingFactory {
             DebugTrack.showExecMsg("Game already loaded");
             return SwingFactory.view_game;
         }
+        if(SwingFactory.model_gameConfig == null){
+            DebugTrack.showErrMsg("Error in loadGame - add error msg");
+            throw new ExecError();
+        }
+        
         GameModel               m = new GameModel(SwingFactory.model_gameConfig);
         GameController          c = new GameController(m);
         GamePanel               v = new GamePanel(pFrame, c);
@@ -121,4 +129,6 @@ public abstract class SwingFactory {
         SwingFactory.view_game          = v;
         return v;
     }
+    
+    
 }
