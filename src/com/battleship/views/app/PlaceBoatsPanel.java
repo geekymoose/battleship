@@ -9,6 +9,8 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.uibutton.ImgButton;
+import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
@@ -16,6 +18,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -35,9 +38,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     private     DockPanel                       dock;
     
     private     JPanel                          p_buttonPanel;
-    private     JButton                         b_valide;
-    private     JButton                         b_reset;
-    private     JButton                         b_back;
+    private     AbstractButton                  b_valide;
+    private     AbstractButton                  b_reset;
+    private     AbstractButton                  b_back;
     
     
     
@@ -64,17 +67,17 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     private void initComponents() throws ExecError{
         this.dock           = new DockPanel(this);
         this.p_buttonPanel  = new JPanel();
-        this.b_valide       = new JButton("Valide");
-        this.b_reset        = new JButton("Reset");
-        this.b_back         = new JButton("Back");
+        this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
+        this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
+        this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
         
         
         this.setLayout(new BorderLayout());
         this.p_buttonPanel.setLayout(new FlowLayout());
         
-        this.p_buttonPanel.add(b_valide);
-        this.p_buttonPanel.add(b_reset);
         this.p_buttonPanel.add(b_back);
+        this.p_buttonPanel.add(b_reset);
+        this.p_buttonPanel.add(b_valide);
         
         this.add(p_buttonPanel, BorderLayout.SOUTH);
         this.add(dock, BorderLayout.EAST);
