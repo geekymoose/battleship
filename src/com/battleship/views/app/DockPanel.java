@@ -49,7 +49,7 @@ public class DockPanel extends ContentPanel{
      * @param pParentPage its parent
      * @throws ExecError thrown if PageParent doesn't exists or is null
      */
-    public DockPanel(PagePanel pParentPage) throws ExecError{
+    public DockPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
         this.initComponents();
     }

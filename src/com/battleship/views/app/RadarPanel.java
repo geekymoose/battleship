@@ -37,7 +37,7 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public RadarPanel(PagePanel pParentPage) throws ExecError{
+    public RadarPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
         Dimension BoxMapDim = Config.getDimValues_dim("dim-radar-boxmap");
         this.radarGrid = new GridHexaView(this, 10, 10, BoxMapDim, GRID_TYPE_HEXAGON);
