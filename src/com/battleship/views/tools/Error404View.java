@@ -2,12 +2,10 @@
  * Creation : 11 févr. 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views.app;
+package com.battleship.views.tools;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.views.tools.PagePanel;
-import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 
@@ -17,7 +15,10 @@ import javax.swing.JLabel;
 
 /**
  * <h1>Error404View</h1>
- * <p>public class Error404View</p>
+ * <p>
+ * public class Error404View<br/>
+ * extends PagePanel
+ * </p>
  * <p>Page displayed if error</p>
  *
  * @date    Mar 13, 2015

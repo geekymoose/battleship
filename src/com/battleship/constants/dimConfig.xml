@@ -17,22 +17,31 @@
                 <val id="frame-size-width">600</val>
                 <val id="frame-size-height">500</val>
             </frame>
+            
+            <boxmap>
+                <val id="boxmap-border-size">2</val>
+            </boxmap>
         </integer>
+        
         
         <dimension>
             <frame>
                 <val id="default-dim-appframe"  width="1370" height="800"/>
-                <val id="min-dim-appframe"      width="1370" height="800"/>
-                <val id="max-dim-appframe"      width="1370" height="800"/>
             </frame>
             
             <panel>
                 <val id="dim-placeboat"         width="600" height="250"/>
                 <val id="dim-dock"              width="250" height="0"/>
                 <val id="dim-dockboat"          width="250" height="50"/>
+                <val id="dim-radar"             width="460" height="550"/>
+                <val id="dim-fleetgrid"         width="460" height="550"/>
             </panel>
+            
+            <boxmap>
+                <val id="dim-radar-boxmap"          width="50" height="50"/>
+                <val id="dim-playerfleet-boxmap"    width="50" height="50"/>
+            </boxmap>
         </dimension>
         
     </constants>
 </root>
-    
