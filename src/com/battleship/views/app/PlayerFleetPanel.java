@@ -10,6 +10,7 @@ import com.battleship.views.tools.Config;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
 import java.awt.Dimension;
+import javax.swing.JPanel;
 
 
 
@@ -32,7 +33,7 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public PlayerFleetPanel(PagePanel pParentPage) throws ExecError{
+    public PlayerFleetPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
         Dimension BoxMapDim = Config.getDimValues_dim("dim-playerfleet-boxmap");
         this.add(new GridHexaView(this, 10, 10, BoxMapDim, GRID_TYPE_HEXAGON));

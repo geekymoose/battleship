@@ -57,7 +57,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
      */
     public GamePanel(WindowFrame pFrame, GameController pController) throws ExecError{
         super(pFrame);
-        if(pController==null){ throw new ExecError(); }
+        if(pController == null){
+            throw new ExecError();
+        }
         this.controller = pController;
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
@@ -76,32 +78,34 @@ public class GamePanel extends PagePanel implements ObserverModel{
     // METHODS
     //**************************************************************************
     private void initComponents() throws ExecError{
-        this.setLayout(new BorderLayout());
-        p_centerPane = new JPanel();
-        p_centerPane.setLayout(new GridBagLayout()); 
-        p_centerPane.setBackground(Color.red);
+        p_centerPane    = new JPanel();
+        p_info          = new InformationPanel();
+        p_fleet         = new PlayerFleetPanel(this);
+        p_radar         = new RadarPanel(this);
+        p_chat          = new ChatPanel();
         
-        p_info = new InformationPanel();
-        p_info.setBackground(Color.ORANGE);
+        this            .setLayout(new BorderLayout());
+        p_centerPane    .setLayout(new GridBagLayout()); 
         
-        p_fleet = new PlayerFleetPanel(this);
-        p_fleet.setBackground(Color.CYAN);
-        
-        p_radar = new RadarPanel(this);
-        p_radar.setBackground(Color.DARK_GRAY);
-        
-        p_chat = new ChatPanel();
-        p_chat.setBackground(Color.PINK);
+        p_centerPane    .setBackground(Color.red);
+        p_info          .setBackground(Color.ORANGE);
+        p_fleet         .setBackground(Color.CYAN);
+        p_radar         .setBackground(Color.DARK_GRAY);
+        p_chat          .setBackground(Color.PINK);
         
         //Put the 2 panels into the boerderlayout's center
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.insets = new Insets(10, 10, 0, 10);
-        gc.gridx = 0;
-        gc.gridy = 0;
-        p_centerPane.add(p_radar, gc);
-        gc.gridx = 1;
-        gc.gridy = 0;
-        p_centerPane.add(p_fleet, gc);
+        gc.fill         = GridBagConstraints.HORIZONTAL;
+        gc.insets       = new Insets(10, 10, 0, 10);
+        
+        //Place radat
+        gc.gridx        = 0;
+        gc.gridy        = 0;
+        p_centerPane    .add(p_radar, gc);
+        
+        //Place player fleet grid
+        gc.gridx        = 1;
+        gc.gridy        = 0;
+        p_centerPane    .add(p_fleet, gc);
         
         this.add(p_headbar, BorderLayout.NORTH);
         this.add(p_centerPane, BorderLayout.CENTER);

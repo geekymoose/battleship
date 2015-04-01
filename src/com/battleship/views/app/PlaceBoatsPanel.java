@@ -19,7 +19,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
@@ -58,11 +57,14 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) 
     throws ExecError{
         super(pFrame);
-        if(pController==null){ throw new ExecError(); }
+        if(pController==null){
+            throw new ExecError();
+        }
         this.controller = pController;
         this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("dim-placeboat"));
     }
+    
     
     private void initComponents() throws ExecError{
         this.dock           = new DockPanel(this);
