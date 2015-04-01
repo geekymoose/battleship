@@ -16,8 +16,11 @@ import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.ThemeManager;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -45,16 +48,22 @@ import javax.swing.JPanel;
  */
 public class GameConfigPanel extends PagePanel implements ObserverModel, GameConstants{
     private     GameConfigController    controller;
+    
     private     JPanel                  p_buttons;
-    private     JPanel                  p_validate;
     private     JPanel                  p_center;
+    private     JPanel                  p_container;
+    private     JPanel                  p_left;
+    private     JPanel                  p_right;
+    private     JPanel                  p_bigCont;
     
-    private     JLabel                  l_indication;
-    private     JLabel                  l_imgSquare;
-    private     JLabel                  l_imgHexa;
+    private     JPanel                  p_card1;
+    private     JPanel                  p_card2;
     
-    private     JButton                 b_square;
-    private     JButton                 b_hexa;
+    private     JLabel                  l_grid1;
+    private     JLabel                  l_grid2;
+    
+    private     AbstractButton          b_right;
+    private     AbstractButton          b_left;
     private     AbstractButton          b_validate;
     private     AbstractButton          b_reset;
     private     AbstractButton          b_back;
@@ -91,34 +100,51 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
      * Init components
      */
     private void initComponents(){
-        this.p_buttons  = new JPanel();
-        this.p_validate = new JPanel();
-        this.p_center   = new JPanel();
+        p_buttons   = new JPanel();
+        p_center    = new JPanel();
+        p_container = new JPanel();
+        p_left      = new JPanel();
+        p_right     = new JPanel();
+        p_bigCont   = new JPanel();
+        p_card1     = new JPanel();
+        p_card2     = new JPanel();
+        
+        l_grid1     = new JLabel(ThemeManager.getTheme().getImgIcon(414100));
+        l_grid2     = new JLabel(ThemeManager.getTheme().getImgIcon(414200));
         
         this            .setLayout(new BorderLayout());
-        p_buttons       .setLayout(new BorderLayout());
-        p_validate      .setLayout(new FlowLayout());
-        p_center        .setLayout(new GridLayout(1,2));
+        p_buttons       .setLayout(new FlowLayout());
+        p_center        .setLayout(new CardLayout());
+        p_container     .setLayout(new BorderLayout());
+        p_left          .setLayout(new BorderLayout());
+        p_right         .setLayout(new BorderLayout());
         
-        l_indication    = new JLabel("Choose your kind of grid");
+        
         b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
         b_reset         = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
         b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
-        b_square        = new JButton("Square");
-        b_hexa          = new JButton("Hexagonal");
+        b_right         = new ZozoDecorator(new ImgButton(413100, 413200, 413300));
+        b_left          = new ZozoDecorator(new ImgButton(412100, 412200, 412300));
         
+        p_buttons      .add(b_back);
+        p_buttons      .add(b_reset);
+        p_buttons      .add(b_validate);
         
-        p_center        .add(b_square);
-        p_center        .add(b_hexa);
-        p_buttons       .add(l_indication, BorderLayout.NORTH);
-        p_buttons       .add(p_center, BorderLayout.CENTER);
+        p_left         .add(b_left, BorderLayout.CENTER);
+        p_right        .add(b_right, BorderLayout.CENTER);
         
-        p_validate      .add(b_back);
-        p_validate      .add(b_reset);
-        p_validate      .add(b_validate);
+        p_center       .add(l_grid1);
+        p_center       .add(l_grid2);
         
-        this.add(p_buttons, BorderLayout.NORTH);
-        this.add(p_validate, BorderLayout.SOUTH);
+        p_container     .add(p_buttons, BorderLayout.SOUTH);
+        p_container     .add(p_right, BorderLayout.EAST);
+        p_container     .add(p_left, BorderLayout.WEST);
+        p_container     .add(p_center, BorderLayout.CENTER);
+        
+        //Magouille pour sizer le borderlayout
+        p_bigCont.add(p_container);
+        p_bigCont.setPreferredSize(new Dimension(490,370));
+        this.add(p_bigCont, BorderLayout.CENTER);
         
         this.setBtnActions();
     }
@@ -159,7 +185,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 }
             }
         );
-        b_square.addActionListener(
+        
+        b_right.addActionListener(
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -168,7 +195,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 }
             }
         );
-        b_hexa.addActionListener(
+        b_left.addActionListener(
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -177,6 +204,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 }
             }
         );
+        
     }//End setBtnActions
     
     
@@ -193,13 +221,13 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         this.gridType   = ((GameConfigModel)o).getGridType();
         
         //Set buttons state for grid type and reset button
-        if(this.gridType == this.GRID_TYPE_SQUARE){
-            this.b_square   .setEnabled(false);
-            this.b_hexa     .setEnabled(true);
+        /* if(this.gridType == this.GRID_TYPE_SQUARE){
+        this.b_square   .setEnabled(false);
+        this.b_hexa     .setEnabled(true);
         } else if(this.gridType == this.GRID_TYPE_HEXAGON){
-            this.b_square       .setEnabled(true);
-            this.b_hexa     .setEnabled(false);
-        }
+        this.b_square   .setEnabled(true);
+        this.b_hexa     .setEnabled(false);
+        }*/
         
         //Button reset state
         if(((GameConfigModel)o).isDefaultConfig()){

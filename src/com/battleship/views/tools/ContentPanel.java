@@ -41,7 +41,7 @@ public abstract class ContentPanel extends JPanel{
      * @param pParentPage PagePanel which contains this ContentPanel
      * @throws ExecError 
      */
-    public ContentPanel(JPanel pParentPage) throws ExecError{
+    public ContentPanel(PagePanel pParentPage) throws ExecError{
         if(pParentPage == null){
             throw new ExecError();
         }

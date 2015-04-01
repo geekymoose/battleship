@@ -88,8 +88,21 @@
                 <img type="static" ext="png">410100</img>
                 <img type="static" ext="png">410200</img>
                 <img type="static" ext="png">410300</img>
+                
+                <img type="static" ext="png">412100</img>
+                <img type="static" ext="png">412200</img>
+                <img type="static" ext="png">412300</img>
+                
+                <img type="static" ext="png">413100</img>
+                <img type="static" ext="png">413200</img>
+                <img type="static" ext="png">413300</img>
             </buttons>
             
+            <grid>
+                <img type="static" ext="png">414100</img>
+                <img type="static" ext="png">414200</img>
+                
+            </grid>
             
             
             <explosion>
