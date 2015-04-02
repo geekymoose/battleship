@@ -160,6 +160,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
         //Not used
     }
     
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image img = ThemeManager.getTheme().getImg(411100);

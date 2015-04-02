@@ -6,7 +6,6 @@ package com.battleship.views.app;
 
 import com.battleship.observers.ObservableModel;
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
