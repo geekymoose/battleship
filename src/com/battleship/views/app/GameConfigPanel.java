@@ -22,9 +22,11 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -48,7 +50,7 @@ import javax.swing.JPanel;
  */
 public class GameConfigPanel extends PagePanel implements ObserverModel, GameConstants{
     private     GameConfigController    controller;
-    
+    private     CardLayout              cl = new CardLayout();
     private     JPanel                  p_buttons;
     private     JPanel                  p_center;
     private     JPanel                  p_container;
@@ -100,6 +102,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
      * Init components
      */
     private void initComponents(){
+        
         p_buttons   = new JPanel();
         p_center    = new JPanel();
         p_container = new JPanel();
@@ -114,10 +117,11 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         
         this            .setLayout(new BorderLayout());
         p_buttons       .setLayout(new FlowLayout());
-        p_center        .setLayout(new CardLayout());
+        p_center        .setLayout(cl);
         p_container     .setLayout(new BorderLayout());
         p_left          .setLayout(new BorderLayout());
         p_right         .setLayout(new BorderLayout());
+        p_bigCont       .setLayout(new GridBagLayout());
         
         
         b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
@@ -133,8 +137,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         p_left         .add(b_left, BorderLayout.CENTER);
         p_right        .add(b_right, BorderLayout.CENTER);
         
-        p_center       .add(l_grid1);
-        p_center       .add(l_grid2);
+        p_center       .add(l_grid1, "GRID1");
+        p_center       .add(l_grid2, "GRID2");
         
         p_container     .add(p_buttons, BorderLayout.SOUTH);
         p_container     .add(p_right, BorderLayout.EAST);
@@ -153,6 +157,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
     public void initPage(){
         this.controller.resetDefaultConfig();
     }
+  
     
     /*
      * Create actionListener for the buttons
@@ -182,6 +187,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Return back");
                     goPreviousPage();
+                    
                 }
             }
         );
@@ -192,6 +198,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Square grid selected");
                     controller.changeGridType(GRID_TYPE_SQUARE);
+                   cl.next(p_center);
+                                        
                 }
             }
         );
@@ -201,6 +209,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Hexa grid selected");
                     controller.changeGridType(GRID_TYPE_HEXAGON);
+                    cl.previous(p_center);
+                    
                 }
             }
         );
