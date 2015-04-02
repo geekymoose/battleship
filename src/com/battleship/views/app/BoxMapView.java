@@ -68,15 +68,21 @@ public abstract class BoxMapView implements ObserverModel{
     //**************************************************************************
     /**
      * Draw the BoxMap
-     * @param g 
+     * @param g2 
      */
-    public abstract void draw(Graphics2D g);
+    public abstract void draw(Graphics2D g2);
     
     /*
      * Draw the box with hidden status
-     * @param g 
+     * @param g2
      */
-    protected abstract void drawHidden(Graphics2D g);
+    protected abstract void drawHidden(Graphics2D g2);
+    
+    /**
+     * Draw box with decoration used when targeted
+     * @param g2 
+     */
+    protected abstract void drawTargeted(Graphics2D g2);
     
     
     

@@ -8,7 +8,6 @@ import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.ContentPanel;
-import com.battleship.views.tools.PagePanel;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
@@ -37,10 +36,17 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public RadarPanel(JPanel pParentPage) throws ExecError{
+    public RadarPanel(JPanel pParentPage, int pGridType) throws ExecError{
         super(pParentPage);
         Dimension BoxMapDim = Config.getDimValues_dim("dim-radar-boxmap");
-        this.radarGrid = new GridHexaView(this, 10, 10, BoxMapDim, GRID_TYPE_HEXAGON);
+        switch(pGridType){
+            case GRID_TYPE_SQUARE:
+                this.radarGrid = new GridSquareView(this, 10, 10, BoxMapDim, pGridType);
+                break;
+            case GRID_TYPE_HEXAGON:
+                this.radarGrid = new GridSquareView(this, 10, 10, BoxMapDim, pGridType);
+                break;
+        }
         this.add(this.radarGrid);
         this.radarGrid.hideAllBoxMap();
     }
