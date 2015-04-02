@@ -26,6 +26,11 @@ package com.battleship.views.tools;
 public interface UiElement {
     
     /**
+     * Load all UI element (Image from theme etc)
+     */
+    public void loadUI();
+    
+    /**
      * Reload UiElement
      */
     public void reloadUI();

@@ -5,9 +5,10 @@
 package com.battleship.views.app;
 
 
+import com.battleship.asset.Config;
 import com.battleship.views.tools.Error404View;
 import com.battleship.views.tools.*;
-import com.battleship.controllers.SwingFactory;
+import com.battleship.asset.SwingFactory;
 import com.battleship.exceptions.ExecError;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,7 +43,6 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     private     final int   GAME            = Config.getRootsValues("game");
     private     final int   FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
     private     final int   FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
-    
     
     
     //Variables 
@@ -97,14 +97,18 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
         
         //Get the requier page
         try{
-            if(path==this.CHOOSE_GAME){
+            if(path == this.CHOOSE_GAME){
                 this.p_mainContent = new ChooseGamePanel(this);
-            } else if(path==this.CONFIG){
+                
+            } else if(path == this.CONFIG){
                 this.p_mainContent = SwingFactory.loadConfigGame(this);
+                
             } else if(path == this.PLACE_BOATS){
                 this.p_mainContent = SwingFactory.loadPlaceBoats(this);
+                
             } else if(path == this.GAME){
-                this.p_mainContent  = SwingFactory.loadGame(this);
+                this.p_mainContent = SwingFactory.loadGame(this);
+                
             } else {
                 throw new ExecError(404); //Page not found
             }

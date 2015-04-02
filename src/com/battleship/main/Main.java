@@ -6,7 +6,7 @@ package com.battleship.main;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.app.ApplicationFrame;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import com.battleship.views.tools.UiDialog;
 import java.awt.EventQueue;
 

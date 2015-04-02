@@ -5,7 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Sprite;
-import com.battleship.views.tools.Config;
+import static com.battleship.constants.GameConstants.VERTICAL;
 
 
 
@@ -55,16 +55,15 @@ public class BoxMapSquare extends BoxMap{
         int x = this.posX;
         int y = this.posY;
         
-        if(pDirection==Config.getGameValues_int("vertical-boat")){
-            y += 1;
-        } else if(pDirection == Config.getGameValues_int("horizontal-boat")){
-            x += 1;
-        } else {
-            return null;
+        switch(pDirection){
+            case VERTICAL:
+                y += 1;
+                break;
+            case HORIZONTAL:
+                x += 1;
+                break;
         }
         return this.grid.getBoxMapAt(x, y);
-        
-        
         
     }
 }

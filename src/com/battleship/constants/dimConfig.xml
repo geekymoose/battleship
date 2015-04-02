@@ -30,11 +30,8 @@
             </frame>
             
             <panel>
-                <val id="dim-placeboat"         width="600" height="250"/>
                 <val id="dim-dock"              width="250" height="0"/>
                 <val id="dim-dockboat"          width="250" height="50"/>
-                <val id="dim-radar"             width="460" height="550"/>
-                <val id="dim-fleetgrid"         width="460" height="550"/>
             </panel>
             
             <boxmap>

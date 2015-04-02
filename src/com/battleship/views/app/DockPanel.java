@@ -5,9 +5,9 @@
 package com.battleship.views.app;
 
 import com.battleship.exceptions.ExecError;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import com.battleship.views.tools.ContentPanel;
-import com.battleship.views.tools.ThemeManager;
+import com.battleship.asset.ThemeManager;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;

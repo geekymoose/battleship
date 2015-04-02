@@ -4,10 +4,12 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.asset.ThemeManager;
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.Session;
+import com.battleship.asset.Session;
 import com.battleship.uibutton.*;
 import com.battleship.views.tools.*;
 
@@ -39,7 +41,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChooseGamePanel extends PagePanel implements GameConstants{
+public class ChooseGamePanel extends PagePanel implements GameConstants, UiElement{
     private     JPanel                  p_container;
     private     GridBagConstraints      gc;
     
@@ -48,6 +50,8 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
     private     AbstractButton          b_2players;
     private     AbstractButton          b_lan;
     private     AbstractButton          b_internet;
+    
+    private     Image                   background;
         
     
     
@@ -65,6 +69,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
         super(pFrame);
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
+        this.loadUI();
     }
     
     private void initComponents() {
@@ -72,7 +77,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
         this.gc         = new GridBagConstraints();
         this            .setLayout(new BorderLayout());
         this.p_container.setLayout(new GridBagLayout());
-        this.p_container.setOpaque(false);
+        this.p_container.setOpaque(false); //For background
         
         //Create buttons 
         b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
@@ -126,6 +131,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : V2");
+                    Session.setGameMode(MODE_V2);
                     //To do later
                 }
             }
@@ -135,6 +141,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : LAN");
+                    Session.setGameMode(MODE_LAN);
                     //To do later
                 }
             }
@@ -144,11 +151,25 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : Internet");
+                    Session.setGameMode(MODE_INTERNET);
                     //To do later
                 }
             }
         );
     }//End setBtnActions
+        
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), this);
+    }
     
     @Override
     protected void goNextPage(){
@@ -159,11 +180,15 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
     protected void goPreviousPage(){
         //Not used
     }
+
+
+    @Override
+    public void loadUI(){
+        this.background = ThemeManager.getTheme().getImg(411100);
+    }
     
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(411100);
-        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+    public void reloadUI(){
+        this.loadUI();
     }
 }

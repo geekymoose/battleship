@@ -4,6 +4,8 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.observers.ObservableModel;
+
 
 
 
@@ -49,5 +51,10 @@ public class FleetGridSquare extends FleetGridModel{
     @Override
     public BoxMap getNextBoxMap(BoxMap pPos, int pDirection){
         return null;
+    }
+
+
+    @Override
+    public void update(ObservableModel o, Object arg){
     }
 }

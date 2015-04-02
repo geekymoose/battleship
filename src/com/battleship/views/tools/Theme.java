@@ -5,6 +5,7 @@
 
 package com.battleship.views.tools;
 
+import com.battleship.asset.Config;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import java.awt.Image;

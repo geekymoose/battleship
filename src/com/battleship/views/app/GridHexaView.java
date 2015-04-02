@@ -4,7 +4,9 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.observers.ObservableModel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -40,15 +42,17 @@ public class GridHexaView extends GridPanel{
     //**************************************************************************
     /**
      * Create a new Hexagon grid in view
-     * @param pParent   parent PagePanel where grid is placed
-     * @param pW        grid width
-     * @param pH        grid height
-     * @param pDim      dimension of one BoxMap
-     * @param pType     grid type
+     * @param pParent       parent PagePanel where grid is placed
+     * @param pController   grid controller
+     * @param pW            grid width
+     * @param pH            grid height
+     * @param pDim          dimension of one BoxMap
+     * @param pType         grid type
      * @throws ExecError thrown if error during creation
      */
-    public GridHexaView(JPanel pParent, int pW, int pH, Dimension pDim, int pType) throws ExecError{
-        super(pParent, pW, pH, pDim, pType);
+    public GridHexaView(JPanel pParent, GridController pController, 
+                        int pW, int pH, int pType, Dimension pDim) throws ExecError{
+        super(pParent, pController,pW, pH, pType, pDim);
         this.initValues(pW); //Create all value
     }
     
@@ -69,6 +73,12 @@ public class GridHexaView extends GridPanel{
         this.r  = h / 2;
         this.s  = (int) (h / 1.73205);
         this.t  = (int) (r / 1.73205);
+    }
+
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+     
     }
     
     

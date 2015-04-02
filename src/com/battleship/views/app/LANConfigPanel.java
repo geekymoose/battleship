@@ -10,7 +10,7 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;

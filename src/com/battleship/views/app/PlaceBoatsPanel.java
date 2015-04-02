@@ -4,21 +4,29 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
+import static com.battleship.constants.GameConstants.MODE_AI;
+import static com.battleship.constants.GameConstants.MODE_INTERNET;
+import static com.battleship.constants.GameConstants.MODE_LAN;
+import static com.battleship.constants.GameConstants.MODE_V2;
 import com.battleship.controllers.PlaceBoatsController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.asset.Session;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.ZozoDecorator;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -31,10 +39,11 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
+public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameConstants{
     private     final PlaceBoatsController      controller;
     
     private     DockPanel                       dock;
+    private     GridPanel                       grid;
     
     private     JPanel                          p_buttonPanel;
     private     AbstractButton                  b_valide;
@@ -54,33 +63,34 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
      * @param pController   Controller for this page
      * @throws ExecError error if unable to create this panel
      */
-    public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) 
-    throws ExecError{
+    public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) throws ExecError{
         super(pFrame);
         if(pController==null){
             throw new ExecError();
         }
         this.controller = pController;
+        this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
-        this.setPreferredSize(Config.getDimValues_dim("dim-placeboat"));
     }
     
-    
+    /*
+     * Create all components 
+     * @throws ExecError 
+     */
     private void initComponents() throws ExecError{
-        this.dock           = new DockPanel(this);
+        this.setLayout(new BorderLayout());
+        
         this.p_buttonPanel  = new JPanel();
         this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
         
-        
-        this.setLayout(new BorderLayout());
         this.p_buttonPanel.setLayout(new FlowLayout());
-        
         this.p_buttonPanel.add(b_back);
         this.p_buttonPanel.add(b_reset);
         this.p_buttonPanel.add(b_valide);
         
+        this.dock = new DockPanel(this);
         this.add(p_buttonPanel, BorderLayout.SOUTH);
         this.add(dock, BorderLayout.EAST);
         this.setBtnActions();
@@ -143,5 +153,45 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel{
     
     @Override
     protected void goPreviousPage(){
+        String msg      = "Are you sure you want to go back? Current configuration could be lost";
+        String title    = "Warning";
+        int choice = UiDialog.showConfirmWarning(title, msg);
+        if(choice == JOptionPane.OK_OPTION){
+            int mode = Session.getGameMode();
+            switch(mode){
+                case MODE_AI:
+                    frame.rooting(Config.getRootsValues("config"), null);
+                    break;
+                case MODE_V2:
+                    break;
+                case MODE_LAN:
+                    break;
+                case MODE_INTERNET:
+                    break;
+            }
+        }
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Add the grid into placeBoat panel
+     * @param pGrid grid to place in panel
+     */
+    public void setGrid(GridPanel pGrid){
+        if(this.grid!=null){
+            this.remove(this.grid);
+        }
+        this.grid = pGrid;
+        this.add(this.grid, BorderLayout.CENTER);
+        this.repaint();
+    }
+    
+    
+    
 }

@@ -6,7 +6,8 @@ package com.battleship.models.game;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
+import com.battleship.exceptions.ForbiddenAction;
 
 
 
@@ -45,19 +46,23 @@ public class GameConfigModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     final int   gridDefaultWidth;
-    private     final int   gridDefaultHeight;
-    private     final int   gridDefaultType;
+    private     final int       gridDefaultWidth;
+    private     final int       gridDefaultHeight;
+    private     final int       gridDefaultType;
     
-    private     final int   gridMinWidth;
-    private     final int   gridMinHeight;
+    private     final int       gridMinWidth;
+    private     final int       gridMinHeight;
     
-    private     final int   gridMaxWidth;
-    private     final int   gridMaxHeight;
+    private     final int       gridMaxWidth;
+    private     final int       gridMaxHeight;
     
-    private     int         gridWidth;
-    private     int         gridHeight;
-    private     int         gridType;
+    private     int             gridWidth;
+    private     int             gridHeight;
+    private     int             gridType;
+    
+    private     final int       nbMaxPlayer;
+    private     Player[]        listPlayers;
+    private     int             currentNbPlayers;
     
     
     
@@ -78,6 +83,13 @@ public class GameConfigModel extends Model implements GameConstants{
         this.gridMinHeight      = Config.getDimValues_int("grid-min-height");
         this.gridMaxHeight      = Config.getDimValues_int("grid-max-height");
         
+        this.nbMaxPlayer        = Config.getGameValues_int("nb-max-players");
+        this.currentNbPlayers   = 0;
+        
+        this.listPlayers        = new Player[this.nbMaxPlayer];
+        this.listPlayers[0]     = null; //If more than 2 players => Create in loop
+        this.listPlayers[1]     = null;
+        
         this.gridDefaultType    = GRID_TYPE_SQUARE;
         
         this.defaultConfig();
@@ -93,13 +105,6 @@ public class GameConfigModel extends Model implements GameConstants{
         this.notifyObservers(null);
     }
     
-    
-    
-    
-    
-    //**************************************************************************
-    // Functions
-    //**************************************************************************
     /**
      * Reset the current configuration. Every value will be set toward default 
      * value.
@@ -108,8 +113,40 @@ public class GameConfigModel extends Model implements GameConstants{
         this.defaultConfig();
     }
     
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
     /**
-     * Check if current config is default config
+     * Add this player in the game. If game is already full, this function throws 
+     * an exception (And player is not added). <br/>
+     * If player successfully added, the fleetGrid for this player is
+     * initialized (En will create a specific grid in function of gridType)
+     * @param pPlayer player to add
+     * @throws ForbiddenAction if no empty place remaining
+     */
+    public void addPlayer(Player pPlayer) throws ForbiddenAction{
+        if(this.isFull()){
+            throw new ForbiddenAction("Unable to join the party: it's full");
+        }
+        //Add player and then, create the player fleet Grid
+        this.listPlayers[this.currentNbPlayers] = pPlayer;
+        this.currentNbPlayers++;//Means 'Player added'
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Check Functions
+    //**************************************************************************
+    
+    /**
+     * Check if current configuration is default config
      * @return true if default config, otherwise,return false
      */
     public boolean isDefaultConfig(){
@@ -123,8 +160,19 @@ public class GameConfigModel extends Model implements GameConstants{
      * @return true if valid, otherwise, return false
      */
     public boolean isValid(){
-        //It should be always true atm, bu could be false with name player etc
+        //return this.currentNbPlayers == 2;
         return true;
+    }
+    
+    
+    /**
+     * Check if the game is full of players. Means it check if there is one more 
+     * empty place for a new player
+     * @return true if is full, otherwise, return false
+     */
+    public boolean isFull(){
+        //Should be never higher than listPlayers.length, but, one never knows
+        return this.currentNbPlayers >= this.listPlayers.length;
     }
     
     
@@ -156,6 +204,14 @@ public class GameConfigModel extends Model implements GameConstants{
      */
     public int getGridType() {
         return this.gridType;
+    }
+    
+    /**
+     * Return tab with all players
+     * @return Player[] tab with all players
+     */
+    public Player[] getPlayers(){
+        return this.listPlayers;
     }
     
     //**************************************************************************

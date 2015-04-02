@@ -5,7 +5,7 @@
 
 package com.battleship.uibutton;
 
-import com.battleship.views.tools.ThemeManager;
+import com.battleship.asset.ThemeManager;
 import com.battleship.views.tools.UiElement;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -129,6 +129,10 @@ public abstract class UiButton extends JButton implements MouseListener, UiEleme
      */
     public abstract void resetButton();
     
+    @Override
+    public void loadUI(){
+        this.reloadUI();
+    }
     
     @Override
     public void reloadUI(){

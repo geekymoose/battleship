@@ -6,7 +6,7 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.models.weapons.*;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import java.util.ArrayList;
 
 
@@ -63,24 +63,8 @@ public abstract class Player{
         this.fleetGrid          = null;
         
         //Add default weapon and set current weapon to this weapon
-        this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
+        //this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
         this.currentWeaponIndex = 0;
-    }
-    
-    /**
-     * Create the FleetGrid according to the parameter configuration (Could not be
-     * modified later)<br/>
-     * Parameter pGridType determine which kind of grid will be created
-     * @param pGridWidth    Grid Width
-     * @param pGridHeight   Grid Height
-     * @param pGridType     Grid Type (Could be square or hexagon)
-     */
-    public void initFleetGrid(int pGridWidth, int pGridHeight, int pGridType) {
-        if(pGridType == Config.getGameValues_int("grid-square")){
-                this.fleetGrid  = new FleetGridSquare(pGridWidth, pGridHeight, this);
-        } else {
-                this.fleetGrid  = new FleetGridHexagon(pGridWidth, pGridHeight, this);
-        }
     }
     
     
@@ -170,6 +154,14 @@ public abstract class Player{
     }
     
     /**
+     * Return player fleet grid
+     * @return 
+     */
+    public FleetGridModel getFleet(){
+        return this.fleetGrid;
+    }
+    
+    /**
      * Set player name
      * @param pValue new player name, if is not a String or empty, throw exception
      */
@@ -180,5 +172,14 @@ public abstract class Player{
          * Add exception and check if valid name (Not empty, valid lenght...)
          */
         this.name = pValue;
+    }
+    
+    /**
+     * Set player fleet grid (If already have one, the old will be lost). 
+     * If null given, old grid is deleted and replaced by null
+     * @param pGrid 
+     */
+    public void setFleetGrid(FleetGridModel pGrid){
+        this.fleetGrid = pGrid;
     }
 }

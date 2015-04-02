@@ -51,6 +51,15 @@ public abstract class UiButtonDecorator extends AbstractButton implements UiElem
         this.add(pButton);
     }
     
+    
+    //**************************************************************************
+    // Override methodes
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+        this.uibutton.loadUI();
+    }
+    
     @Override
     public void reloadUI(){
         this.uibutton.reloadUI();

@@ -5,7 +5,6 @@
 
 package com.battleship.views.app;
 
-import com.battleship.observers.ObservableModel;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -74,10 +73,6 @@ public class BoxMapViewSquare extends BoxMapView{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    @Override
-    public void update(ObservableModel o, Object arg){
-    
-    }
     
     
     
