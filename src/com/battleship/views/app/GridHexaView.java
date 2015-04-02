@@ -76,15 +76,8 @@ public class GridHexaView extends GridPanel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
-     * Convert absolute pixel position to coordinate position. In this case, 
-     * it convert pixel to hexa (pxtohex -> pixelToHexa)
-     *
-     * @param mx
-     * @param my
-     * @return
-     */
-    public Point pxtoHex(int mx, int my) {
+    @Override
+    protected Point pxToCoor(int mx, int my) {
         Point p = new Point(-1, -1);
 
         //correction for BORDERS and XYVertex
@@ -149,24 +142,16 @@ public class GridHexaView extends GridPanel{
     }
     
     
-    @Override
-    protected Point getBoxMapUnder(MouseEvent e){
-        int x = e.getX();
-        int y = e.getY();
-        //pixel to hexa
-        return new Point(pxtoHex(e.getX(), e.getY()));
-    }
-    
-    
     
     //**************************************************************************
     // Mouse Listener Event
     //**************************************************************************
     @Override
     public void mousePressed(MouseEvent e) {
-        Point p = this.getBoxMapUnder(e);
+        super.mousePressed(e);
+        Point p = new Point(pxToCoor(e.getX(), e.getY()));
 
-
+        
         if (p.x < 10 && p.y < 10 && p.x >= 0 && p.y >= 0) {
             if (p.x < 10 && p.y < 10) {
                 //tab[p.x][p.y] = 3;
@@ -178,7 +163,8 @@ public class GridHexaView extends GridPanel{
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Point p = this.getBoxMapUnder(e);
+        super.mouseMoved(e);
+        Point p = new Point(pxToCoor(e.getX(), e.getY()));
         if (p.x < 10 && p.y < 10 && p.x >= 0 && p.y >= 0) {
             /*
             if (hasChanged(p)) {
@@ -203,21 +189,5 @@ public class GridHexaView extends GridPanel{
             repaint();
         }
 
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e){
-    }
-    @Override
-    public void mouseReleased(MouseEvent e){
-    }
-    @Override
-    public void mouseEntered(MouseEvent e){
-    }
-    @Override
-    public void mouseExited(MouseEvent e){
-    }
-    @Override
-    public void mouseDragged(MouseEvent e){
     }
 }

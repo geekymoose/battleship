@@ -6,10 +6,10 @@
 package com.battleship.views.app;
 
 import com.battleship.exceptions.ExecError;
-import com.battleship.views.tools.PagePanel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
 
 
 
@@ -26,6 +26,7 @@ public class GridSquareView extends GridPanel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private Dimension dimBox;
     
     
     
@@ -44,8 +45,9 @@ public class GridSquareView extends GridPanel{
      * @param pType     grid type
      * @throws ExecError thrown if error during creation
      */
-    public GridSquareView(PagePanel pParent, int pW, int pH, Dimension pDim, int pType) throws ExecError{
+    public GridSquareView(JPanel pParent, int pW, int pH, Dimension pDim, int pType) throws ExecError{
         super(pParent, pW, pH, pDim, pType);
+        this.dimBox = pDim;
     }
 
     
@@ -54,40 +56,16 @@ public class GridSquareView extends GridPanel{
     // Functions
     //**************************************************************************
     @Override
-    protected Point getBoxMapUnder(MouseEvent e){
-        return null;
+    protected Point pxToCoor(int pX, int pY){
+        int x = pX/this.dimBox.width;
+        int y = pY/this.dimBox.height;
+        return new Point(x, y);
     }
     
     
-    
-    //**************************************************************************
-    // Functions Mouse listener
-    //**************************************************************************
     @Override
-    public void mouseClicked(MouseEvent e){
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e){
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e){
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e){
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e){
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e){
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e){
+    public void mouseMoved(MouseEvent e) {
+        super.mouseMoved(e);
+        Point p = pxToCoor(e.getX(), e.getY());
     }
 }

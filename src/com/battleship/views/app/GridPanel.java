@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.Dimension;
@@ -36,14 +37,16 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class GridPanel extends ContentPanel implements MouseListener, MouseMotionListener{
+public abstract class GridPanel extends ContentPanel implements MouseListener, 
+                                                                MouseMotionListener,
+                                                                GameConstants{
     //**************************************************************************
     // Variables - Constants
     //**************************************************************************
-    private     BoxMapView  tabBox[][];
-    private     final int   gridWidth;
-    private     final int   gridHeight;
-    private     final int   gridType;
+    protected       BoxMapView  tabBox[][];
+    protected       final int   gridWidth;
+    protected       final int   gridHeight;
+    protected       final int   gridType;
     
     
     
@@ -77,13 +80,25 @@ public abstract class GridPanel extends ContentPanel implements MouseListener, M
         this.gridType   = pType;
         
         
-        //TMP : DEBUG *********************************************************************************
-        this.tabBox     = new BoxMapViewHexagon[pGridH][pGridW];
-        for (int y = 0; y < pGridH; y++) {
-            for (int x = 0; x < pGridW; x++) {
-                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim);
-            }
+        switch(pType){
+            case GRID_TYPE_SQUARE :
+                this.tabBox = new BoxMapViewSquare[pGridH][pGridW];
+                for (int y = 0; y < pGridH; y++) {
+                    for (int x = 0; x < pGridW; x++) {
+                        this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim);
+                    }
+                }
+                break;
+            case GRID_TYPE_HEXAGON :
+                this.tabBox = new BoxMapViewHexagon[pGridH][pGridW];
+                for (int y = 0; y < pGridH; y++) {
+                    for (int x = 0; x < pGridW; x++) {
+                        this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim);
+                    }
+                }
+                break;
         }
+        
     }
     
     
@@ -108,11 +123,14 @@ public abstract class GridPanel extends ContentPanel implements MouseListener, M
     
     
     /**
-     * Return coordinate of the Box under current mouse cursor
-     * @param e MouseEvent given
-     * @return Point coordinate
+     * Convert absolute pixel position to coordinate position. 
+     * (pxToCoor -> pixelToCoordinate)
+     *
+     * @param pX    x value
+     * @param pY    y value 
+     * @return
      */
-    protected abstract Point getBoxMapUnder(MouseEvent e);
+    protected abstract Point pxToCoor(int pX, int pY);
     
     
     
@@ -130,5 +148,32 @@ public abstract class GridPanel extends ContentPanel implements MouseListener, M
                 this.tabBox[y][x].setVisible(false);
             }
         }
+    }
+    
+    
+    
+    //**************************************************************************
+    // Functions Mouse listener
+    //**************************************************************************
+    @Override
+    public void mouseClicked(MouseEvent e){
+    }
+    @Override
+    public void mousePressed(MouseEvent e){
+    }
+    @Override
+    public void mouseReleased(MouseEvent e){
+    }
+    @Override
+    public void mouseEntered(MouseEvent e){
+    }
+    @Override
+    public void mouseExited(MouseEvent e){
+    }
+    @Override
+    public void mouseDragged(MouseEvent e){
+    }
+    @Override
+    public void mouseMoved(MouseEvent e){
     }
 }
