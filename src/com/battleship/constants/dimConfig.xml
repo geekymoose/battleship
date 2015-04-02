@@ -37,6 +37,7 @@
             <boxmap>
                 <val id="dim-radar-boxmap"          width="50" height="50"/>
                 <val id="dim-playerfleet-boxmap"    width="50" height="50"/>
+                <val id="dim-placeboats-boxmap"    width="50" height="50"/>
             </boxmap>
         </dimension>
         

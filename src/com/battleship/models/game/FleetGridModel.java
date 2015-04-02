@@ -71,7 +71,7 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
         this.nbAliveBoats   = 0;
         this.owner          = pOwner;
         this.listBoats      = new ArrayList();
-        this.owner.setFleetGrid(this); //Add this grid for this player
+        //this.owner.setFleetGrid(this); //Add this grid for this player
     }
     
     
@@ -94,15 +94,6 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
         }
         return this.tabBoxMap[pY][pX];
     }
-    
-    /**
-     * @deprecated Not sure we going to use it
-     * Return the next box map according to the direction given.
-     * @param pCurrentBoxMap    Current position (Position is a BoxMap)
-     * @param pDirection        Direction
-     * @return next BoxMap, null if there is no next BoxMap (Border reached)
-     */
-    public abstract BoxMap getNextBoxMap(BoxMap pCurrentBoxMap, int pDirection);
     
     
     
