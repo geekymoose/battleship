@@ -33,6 +33,7 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends PagePanel implements ObserverModel{
     private     final GameController    controller;
+    private     final int               gridType;
     private     JPanel                  p_centerPane;
     
     private     InformationPanel        p_info;
@@ -51,11 +52,13 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     /**
      * Create a new Game panel
-     * @param pFrame Frame containing this panel
-     * @param pController Controller for this page
+     * @param pFrame        Frame containing this panel
+     * @param pController   Controller for this page
+     * @param pGridType     grid type
      * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(WindowFrame pFrame, GameController pController) throws ExecError{
+    public GamePanel(WindowFrame pFrame, GameController pController, int pGridType) 
+    throws ExecError{
         super(pFrame);
         if(pController == null){
             throw new ExecError();
@@ -63,6 +66,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.controller = pController;
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
+        this.gridType   = pGridType;
         this.initComponents();
     }
     
@@ -80,8 +84,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private void initComponents() throws ExecError{
         p_centerPane    = new JPanel();
         p_info          = new InformationPanel();
-        p_fleet         = new PlayerFleetPanel(this);
-        p_radar         = new RadarPanel(this);
+        p_fleet         = new PlayerFleetPanel(this, this.gridType);
+        p_radar         = new RadarPanel(this, this.gridType);
         p_chat          = new ChatPanel();
         
         this            .setLayout(new BorderLayout());

@@ -119,9 +119,10 @@ public abstract class SwingFactory {
             throw new ExecError();
         }
         
-        GameModel               m = new GameModel(SwingFactory.model_gameConfig);
-        GameController          c = new GameController(m);
-        GamePanel               v = new GamePanel(pFrame, c);
+        GameConfigModel         config  = SwingFactory.model_gameConfig;
+        GameModel               m       = new GameModel(config);
+        GameController          c       = new GameController(m);
+        GamePanel               v       = new GamePanel(pFrame, c, config.getGridType());
         m.addObserver(v);
         c.setView(v);
         v.initPage();

@@ -26,6 +26,8 @@ import java.awt.Polygon;
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
+ * 
+ * @see BoxMapView
  */
 public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
@@ -78,8 +80,8 @@ public class BoxMapViewHexagon extends BoxMapView{
      * Create new Hexagon. Created from BoxMap coordinate. Actual Box center 
      * is calculated and polygon is created for this box
      *
-     * @param x0
-     * @param y0
+     * @param coordinateX x coordinate in the grid
+     * @param coordinateY y coordinate in the grid
      * @return a Polygon with all the coordinates of the hexagon
      */
     private Polygon createHexagon(int coordinateX, int coordinateY) {
@@ -116,7 +118,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     
     @Override
     protected void drawHidden(Graphics2D g2){
-        this.drawfillHex(Color.GRAY, g2);
+        g2.fillPolygon(this.polygon);
         g2.drawPolygon(this.polygon);
     }
     
@@ -135,19 +137,16 @@ public class BoxMapViewHexagon extends BoxMapView{
         }
         
         if(this.isTargeted){
-            this.drawfillHex(Color.DARK_GRAY, g2);
+            this.drawTargeted(g2);
         }
     }
-    
 
-    /**
-     * Draw a filled hexagon
-     * @param c
-     * @param g2
-     */
-    public void drawfillHex(Color c, Graphics2D g2) {
-        g2.setColor(c);
+
+
+    @Override
+    protected void drawTargeted(Graphics2D g2){
         g2.fillPolygon(this.polygon);
+        g2.drawPolygon(this.polygon);
     }
     
     
