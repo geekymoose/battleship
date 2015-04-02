@@ -6,7 +6,8 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.FleetGridModel;
+import com.battleship.models.game.GameConfigModel;
+import com.battleship.models.game.PlaceBoatsModel;
 
 
 
@@ -25,7 +26,7 @@ import com.battleship.models.game.FleetGridModel;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class PlaceBoatsController extends Controller{
+public class PlaceBoatsController extends GridController{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -43,7 +44,7 @@ public class PlaceBoatsController extends Controller{
      * @param pModel Model managed by this controller
      * @throws ExecError throws if pView or pMode is null
      */
-    public PlaceBoatsController(FleetGridModel pModel) throws ExecError{
+    public PlaceBoatsController(PlaceBoatsModel pModel) throws ExecError{
         super(pModel);
         DebugTrack.showInitMsg("Create GameConfigController controller");
     }
@@ -56,4 +57,27 @@ public class PlaceBoatsController extends Controller{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Return type grid
+     * @return 
+     */
+    public int getGridType(){
+        return ((PlaceBoatsModel)this.model).getGridType();
+    }
+    
+    /**
+     * Return grid Width
+     * @return 
+     */
+    public int getWidth(){
+        return ((PlaceBoatsModel)this.model).getGridWidth();
+    }
+    
+    /**
+     * Return grid height
+     * @return 
+     */
+    public int getHeight(){
+        return ((PlaceBoatsModel)this.model).getGridHeight();
+    }
 }

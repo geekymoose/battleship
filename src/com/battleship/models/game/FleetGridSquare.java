@@ -45,15 +45,6 @@ public class FleetGridSquare extends FleetGridModel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
-     * @deprecated 
-     */
-    @Override
-    public BoxMap getNextBoxMap(BoxMap pPos, int pDirection){
-        return null;
-    }
-
-
     @Override
     public void update(ObservableModel o, Object arg){
     }

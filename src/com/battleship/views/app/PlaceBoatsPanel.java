@@ -22,6 +22,7 @@ import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,6 +72,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.controller = pController;
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
+        this.createGrid();
     }
     
     /*
@@ -94,6 +96,27 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.add(p_buttonPanel, BorderLayout.SOUTH);
         this.add(dock, BorderLayout.EAST);
         this.setBtnActions();
+    }
+    
+    /*
+     * Create the grid where to place boats
+     * @throws ExecError 
+     */
+    private void createGrid() throws ExecError{
+        Dimension   dim     = Config.getDimValues_dim("dim-placeboats-boxmap");
+        int         width   = this.controller.getWidth();
+        int         height  = this.controller.getHeight();
+        int         type    = this.controller.getGridType();
+        switch(this.controller.getGridType()){
+            case GRID_TYPE_SQUARE:
+                this.grid = new GridSquareView(this, controller, width, height, type, dim);
+                break;
+            case GRID_TYPE_HEXAGON:
+                this.grid = new GridHexaView(this, controller, width, height, type, dim);
+                break;
+        }
+        this.add(this.grid, BorderLayout.CENTER);
+        this.repaint(); //Needed? not sure
     }
     
     
@@ -148,7 +171,20 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     
     @Override
     protected void goNextPage(){
-        this.frame.rooting(Config.getRootsValues("game"), null);
+        int mode = Session.getGameMode();
+        switch(mode){
+            case MODE_AI:
+                this.frame.rooting(Config.getRootsValues("game"), null);
+                break;
+            case MODE_V2:
+                break;
+            case MODE_LAN:
+                break;
+            case MODE_INTERNET:
+                break;
+        }
+        
+        
     }
     
     @Override
@@ -163,6 +199,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                     frame.rooting(Config.getRootsValues("config"), null);
                     break;
                 case MODE_V2:
+                    frame.rooting(Config.getRootsValues("config"), null);
                     break;
                 case MODE_LAN:
                     break;
@@ -171,27 +208,4 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
             }
         }
     }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
-    /**
-     * Add the grid into placeBoat panel
-     * @param pGrid grid to place in panel
-     */
-    public void setGrid(GridPanel pGrid){
-        if(this.grid!=null){
-            this.remove(this.grid);
-        }
-        this.grid = pGrid;
-        this.add(this.grid, BorderLayout.CENTER);
-        this.repaint();
-    }
-    
-    
-    
 }

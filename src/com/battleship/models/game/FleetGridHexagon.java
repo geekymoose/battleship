@@ -46,17 +46,7 @@ public class FleetGridHexagon extends FleetGridModel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
-     * @deprecated 
-     */
-    @Override
-    public BoxMap getNextBoxMap(BoxMap pPos, int pDirection){
-        return null;
-    }
-
-
     @Override
     public void update(ObservableModel o, Object arg){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
