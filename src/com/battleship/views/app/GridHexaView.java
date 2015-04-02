@@ -160,44 +160,11 @@ public class GridHexaView extends GridPanel{
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
         Point p = new Point(pxToCoor(e.getX(), e.getY()));
-
-        
-        if (p.x < 10 && p.y < 10 && p.x >= 0 && p.y >= 0) {
-            if (p.x < 10 && p.y < 10) {
-                //tab[p.x][p.y] = 3;
-                //repaint();
-            }
-        }
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         super.mouseMoved(e);
         Point p = new Point(pxToCoor(e.getX(), e.getY()));
-        if (p.x < 10 && p.y < 10 && p.x >= 0 && p.y >= 0) {
-            /*
-            if (hasChanged(p)) {
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        selected[i][j] = false;
-                    }
-                }
-            }
-            */
-            //tempX = p.x;
-            //tempY = p.y;
-            //System.out.println("temp = " + temp + "x=" + p.x + " y=" + p.y);
-            //selected[p.x][p.y] = true;
-            //repaint();
-        } else {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    //selected[i][j] = false;
-                }
-            }
-            repaint();
-        }
-
     }
 }

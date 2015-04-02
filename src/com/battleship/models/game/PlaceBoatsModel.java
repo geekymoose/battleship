@@ -65,6 +65,9 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Create grid for current player
+     */
     private void createGrid(){
         int width       = this.config.getGridWidth();
         int height      = this.config.getGridHeight();
@@ -78,7 +81,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
                 this.grid = new FleetGridHexagon(width, height, owner);
                 break;
         }
-        //this.notifyObservers(null);
+        this.notifyObservers(null);
     }
     
     
