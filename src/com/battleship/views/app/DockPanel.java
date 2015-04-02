@@ -7,7 +7,6 @@ package com.battleship.views.app;
 import com.battleship.exceptions.ExecError;
 import com.battleship.views.tools.Config;
 import com.battleship.views.tools.ContentPanel;
-import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.ThemeManager;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -86,7 +85,7 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     // Inner class
     //**************************************************************************
-    /**
+    /*
      * Inner class to display boats on the dock
      * Enable user to select the boat he want to place
      */
