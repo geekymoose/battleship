@@ -2,15 +2,14 @@
  * Creation : 28 March 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.views.tools;
-
-import com.battleship.uibutton.*;
+package com.battleship.asset;
 
 
 
 
 
 /**
+ * @deprecated Not used at the moment
  * <h1>UiFactory</h1>
  * <p>public abstract class UiFactory</p>
  * <p>

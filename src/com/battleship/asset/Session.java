@@ -3,8 +3,10 @@
  * Project Computer Science L2 Semester 4 - BattleShip
  */
 
-package com.battleship.models.game;
+package com.battleship.asset;
 
+import com.battleship.models.game.Player;
+import com.battleship.models.game.PlayerHuman;
 import com.battleship.models.weapons.Weapon;
 import java.util.ArrayList;
 
@@ -59,7 +61,7 @@ public class Session {
      * user is not logged yet
      */
     private Session(){
-        this.isConnected = false;
+        this.initAccount();
     }
     
     /**
@@ -67,16 +69,16 @@ public class Session {
      */
     public static void createSession(){
         Session.singleton = new Session();
-        Session.singleton.initAccount();
     }
     
     /**
      * Initialize session status
      */
     private void initAccount(){
+        this.isConnected    = false;
         this.name           = "Unknown";
         this.isConnected    = false;
-        this.player         = null;
+        this.player         = new PlayerHuman();
     }
     
     
@@ -109,6 +111,8 @@ public class Session {
     public static Player getPlayer(){
         return Session.singleton.player;
     }
+    
+    
     
     /**
      * Set a new game mode for this Session

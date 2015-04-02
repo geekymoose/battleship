@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.models.sprites.Boat;
+import com.battleship.observers.ObserverModel;
 import java.util.ArrayList;
 
 
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 /**
  * <h1>FleetGridModel</h1>
  * <p>
- * public abstract class FleetGridModel
+ * public abstract class FleetGridModel<br/>
+ * implements ObserverModel
  * </p>
  * 
  * <p>
@@ -39,7 +41,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class FleetGridModel{
+public abstract class FleetGridModel extends Model implements ObserverModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -69,7 +71,7 @@ public abstract class FleetGridModel{
         this.nbAliveBoats   = 0;
         this.owner          = pOwner;
         this.listBoats      = new ArrayList();
-        //BoxMap is created in specific Grid (As FleetGridHexagon or FleetGridSquare)
+        this.owner.setFleetGrid(this); //Add this grid for this player
     }
     
     

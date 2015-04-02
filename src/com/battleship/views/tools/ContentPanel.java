@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  * @author Constantin MASSON
  * @date Mar 13, 2015
  */
-public abstract class ContentPanel extends JPanel{
+public abstract class ContentPanel extends JPanel implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -46,6 +46,23 @@ public abstract class ContentPanel extends JPanel{
             throw new ExecError();
         }
         this.parentPage = pParentPage;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    //  Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+
+    @Override
+    public void reloadUI(){
+        
     }
     
     

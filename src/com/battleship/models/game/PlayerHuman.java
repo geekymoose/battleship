@@ -10,7 +10,10 @@ package com.battleship.models.game;
 
 /**
  * <h1>PlayerHuman</h1>
- * <p>public class PlayerHuman</p>
+ * <p>
+ * public class PlayerHuman<br/>
+ * extends Player
+ * </p>
  *
  * @date    Mar 24, 2015
  * @author  Constantin MASSON

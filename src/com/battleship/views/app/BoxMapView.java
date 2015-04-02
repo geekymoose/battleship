@@ -4,8 +4,7 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.observers.ObserverModel;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -16,17 +15,14 @@ import java.awt.Point;
 
 /**
  * <h1>BoxMapView</h1>
- * <p>
- * public class BoxMapView<br/>
- * implements ObserverModel
- * </p>
+ * <p>public class BoxMapView</p>
  *
  * @date    Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class BoxMapView implements ObserverModel{
+public abstract class BoxMapView{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************

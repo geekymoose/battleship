@@ -6,8 +6,7 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.GameModel;
-import com.battleship.models.game.PlaceBoatsModel;
+import com.battleship.models.game.FleetGridModel;
 
 
 
@@ -15,9 +14,11 @@ import com.battleship.models.game.PlaceBoatsModel;
 
 /**
  * <h1>PlaceBoatsController</h1>
- * <p>public class PlaceBoatsController</p>
- * 
- * <p>Controller</p>
+ * <p>
+ public class PlaceBoatsController<br/>
+ * extends controller
+ * </p>
+ * <p>Controller for a fleet grid</p>
  *
  * @date    Feb 25, 2015
  * @author  Constantin MASSON
@@ -42,7 +43,7 @@ public class PlaceBoatsController extends Controller{
      * @param pModel Model managed by this controller
      * @throws ExecError throws if pView or pMode is null
      */
-    public PlaceBoatsController(PlaceBoatsModel pModel) throws ExecError{
+    public PlaceBoatsController(FleetGridModel pModel) throws ExecError{
         super(pModel);
         DebugTrack.showInitMsg("Create GameConfigController controller");
     }
@@ -54,14 +55,5 @@ public class PlaceBoatsController extends Controller{
 
     //**************************************************************************
     // Functions
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
     //**************************************************************************
 }

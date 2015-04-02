@@ -1,0 +1,2 @@
+ * In gameConfig 
+ 	Add choice for grid size

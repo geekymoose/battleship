@@ -4,7 +4,7 @@
  */
 package com.battleship.uibutton;
 
-import com.battleship.views.tools.ThemeManager;
+import com.battleship.asset.ThemeManager;
 import javax.swing.AbstractButton;
 
 
@@ -42,12 +42,13 @@ public class MsgButton extends UiButton{
     //**************************************************************************
     /**
      * Create an MsgButton with a unique image
+     * @param pMsg Message to display on this button
      * @param pDef image to display
      */
     public MsgButton(String pMsg, int pDef){
         super(pDef);
-        this.msg            = pMsg;
-        this.reloadUI();
+        this.msg = pMsg;
+        this.loadUI();
     }
     
     
@@ -60,8 +61,8 @@ public class MsgButton extends UiButton{
      */
     public MsgButton(String pMsg, int pDef, int pPress, int pHover){
         super(pDef, pPress, pHover);
-        this.msg            = pMsg;
-        this.reloadUI();
+        this.msg = pMsg;
+        this.loadUI();
     }
     
     
@@ -79,7 +80,7 @@ public class MsgButton extends UiButton{
     public MsgButton(String pMsg, int pDef, int pClick, int pPress, int pRe, int pEnt, int pEx){
         super(pDef, pClick, pPress, pRe, pEnt, pEx);
         this.msg = pMsg;
-        this.reloadUI();
+        this.loadUI();
     }
     
     /**
@@ -89,7 +90,7 @@ public class MsgButton extends UiButton{
     public MsgButton(String pMsg){
         super();
         this.msg = pMsg;
-        this.reloadUI();
+        this.loadUI();
     }
     
     

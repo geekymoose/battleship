@@ -9,7 +9,7 @@ import com.battleship.dynamic.ImageIconEvent;
 import java.awt.event.MouseEvent;
 import com.battleship.dynamic.UiStaticEvent;
 import java.awt.event.MouseAdapter;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 
 
 
@@ -76,5 +76,5 @@ public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEven
     @Override
     public void stopUiImageEvent(){
         this.uibutton.resetButton();
-    } 
+    }
 }

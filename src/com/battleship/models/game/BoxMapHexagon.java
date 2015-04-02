@@ -5,7 +5,6 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Sprite;
-import com.battleship.views.tools.Config;
 
 
 
@@ -57,14 +56,16 @@ public class BoxMapHexagon extends BoxMap{
         int x = this.posX;
         int y = this.posY;
         
-        if(pDirection==Config.getGameValues_int("vertical-boat")){
-            y += 1;
-        } else if (pDirection == Config.getGameValues_int("standing-right")){
-            x += 1;
-        } else if (pDirection == Config.getGameValues_int("standing-left")){
-            x -= 1;
-        } else {
-            return null;
+        switch(pDirection){
+            case VERTICAL:
+                y += 1;
+                break;
+            case STANDING_RIGHT:
+                x += 1;
+                break;
+            case STANDING_LEFT:
+                x -= 1;
+                break;
         }
         return this.grid.getBoxMapAt(x, y);
     }

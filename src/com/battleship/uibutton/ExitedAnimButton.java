@@ -9,7 +9,7 @@ package com.battleship.uibutton;
 
 import com.battleship.dynamic.ImageIconEvent;
 import com.battleship.dynamic.UiStaticEvent;
-import com.battleship.views.tools.Config;
+import com.battleship.asset.Config;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

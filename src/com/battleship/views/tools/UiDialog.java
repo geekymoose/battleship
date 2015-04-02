@@ -23,7 +23,27 @@ import javax.swing.JOptionPane;
  */
 public abstract class UiDialog {
     //**************************************************************************
-    // Functions
+    // Functions warngin with return param
+    //**************************************************************************
+    /**
+     * Display a warning dialog message and as for confirmation
+     * @param pTitle    dialog title (Displayed at the window top)
+     * @param pMsg      Message to display
+     * @return          choice
+     */
+    public static int showConfirmWarning(String pTitle, String pMsg){
+        JOptionPane opt = new JOptionPane();
+        int choice = opt.showConfirmDialog(null, pMsg, pTitle,
+                                            JOptionPane.YES_NO_CANCEL_OPTION, 
+                                            JOptionPane.QUESTION_MESSAGE);
+        return choice;
+    }
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions warngin without return param
     //**************************************************************************
     /**
      * Display a JDialog with warning message

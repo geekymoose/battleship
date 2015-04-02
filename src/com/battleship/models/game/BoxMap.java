@@ -6,6 +6,7 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.behaviors.Sprite;
+import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Water;
 
 
@@ -34,7 +35,7 @@ import com.battleship.models.sprites.Water;
  * @author  Anthony CHAFFOT
  * @see     GridFleetModel
  */
-public abstract class BoxMap implements Target{
+public abstract class BoxMap implements Target, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************

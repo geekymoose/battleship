@@ -1,29 +1,27 @@
 /*
- * Class :      PlaceBoatsModel
- * Creation:    Mar 24, 2015
+ * Class :      GridController
+ * Creation:    Apr 2, 2015
  * Author :     Constantin MASSON
  * 
  */
 
-package com.battleship.models.game;
+package com.battleship.controllers;
+
+import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
 
 
 
 
 
 /**
- * <h1>PlaceBoatsModel</h1>
- * <p>
- public class PlaceBoatsModel<br/>
- * extends Model
- * </p>
+ * <h1>GridController</h1>
+ * <p>public class GridController</p>
  *
- * @date Mar 24, 2015
- * @author  Constantin MASSON
- * @author  Jessica FAVIN
- * @author  Anthony CHAFFOT
+ * @author Constantin MASSON
+ * @date Apr 2, 2015
  */
-public class PlaceBoatsModel extends Model{
+public class GridController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -32,29 +30,19 @@ public class PlaceBoatsModel extends Model{
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public PlaceBoatsModel(){
-    
+    public GridController(Object pModel) throws ExecError{
+        super(pModel);
+        DebugTrack.showInitMsg("Create GridController controller");
     }
     
     
     
     
     
-
     //**************************************************************************
     // Functions
-    //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
     //**************************************************************************
 }

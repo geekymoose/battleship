@@ -4,7 +4,7 @@
  */
 package com.battleship.dynamic;
 
-import com.battleship.views.tools.ThemeManager;
+import com.battleship.asset.ThemeManager;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -47,6 +47,11 @@ public class ImageIconEvent extends StaticImageEvent{
      */
     public ImageIconEvent(int pDelay, int pIdFirstImg, UiStaticEvent pContener){
         super(pDelay,pIdFirstImg, pContener);
+        this.loadUI();
+    }
+
+    @Override
+    public void loadUI(){
         this.reloadUI();
     }
     

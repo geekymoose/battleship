@@ -31,7 +31,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class PagePanel extends JPanel{
+public abstract class PagePanel extends JPanel implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -41,7 +41,6 @@ public abstract class PagePanel extends JPanel{
     
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
@@ -81,6 +80,17 @@ public abstract class PagePanel extends JPanel{
      * Go at the previous page, if no previous page, do nothing
      */
     protected abstract void goPreviousPage();
+
+
+    @Override
+    public void loadUI(){
+    
+    }
+
+    @Override
+    public void reloadUI(){
+        
+    }
     
     
     

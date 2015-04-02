@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.asset.Config;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.observers.ObservableModel;
@@ -33,7 +34,6 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends PagePanel implements ObserverModel{
     private     final GameController    controller;
-    private     final int               gridType;
     private     JPanel                  p_centerPane;
     
     private     InformationPanel        p_info;
@@ -52,12 +52,13 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     /**
      * Create a new Game panel
-     * @param pFrame        Frame containing this panel
-     * @param pController   Controller for this page
-     * @param pGridType     grid type
+     * @param pFrame        frame containing this panel
+     * @param pController   controller for this page
+     * @param pFleet        grid player
+     * @param pRadar        radar
      * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(WindowFrame pFrame, GameController pController, int pGridType) 
+    public GamePanel(WindowFrame pFrame, GameController pController, GridPanel pFleet, GridPanel pRadar) 
     throws ExecError{
         super(pFrame);
         if(pController == null){
@@ -66,8 +67,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.controller = pController;
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
-        this.gridType   = pGridType;
-        this.initComponents();
+        this.initComponents(pFleet, pRadar);
+        this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
     }
     
     @Override
@@ -81,11 +82,11 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
-    private void initComponents() throws ExecError{
+    private void initComponents(GridPanel pFleet, GridPanel pRadar) throws ExecError{
         p_centerPane    = new JPanel();
         p_info          = new InformationPanel();
-        p_fleet         = new PlayerFleetPanel(this, this.gridType);
-        p_radar         = new RadarPanel(this, this.gridType);
+        p_fleet         = new PlayerFleetPanel(this, pFleet);
+        p_radar         = new RadarPanel(this, pRadar);
         p_chat          = new ChatPanel();
         
         this            .setLayout(new BorderLayout());

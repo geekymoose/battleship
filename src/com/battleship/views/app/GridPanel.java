@@ -5,7 +5,9 @@
 package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
+import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -39,14 +41,16 @@ import javax.swing.JPanel;
  */
 public abstract class GridPanel extends ContentPanel implements MouseListener, 
                                                                 MouseMotionListener,
-                                                                GameConstants{
+                                                                GameConstants,
+                                                                ObserverModel{
     //**************************************************************************
     // Variables - Constants
     //**************************************************************************
-    protected       BoxMapView  tabBox[][];
-    protected       final int   gridWidth;
-    protected       final int   gridHeight;
-    protected       final int   gridType;
+    protected       GridController  controller;
+    protected       BoxMapView      tabBox[][];
+    protected       final int       gridWidth;
+    protected       final int       gridHeight;
+    protected       final int       gridType;
     
     
     
@@ -56,14 +60,16 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     //**************************************************************************
     /**
      * Create a new FleetPanel
-     * @param pParent   grid content parent (a PagePanel)
-     * @param pGridW    grid width
-     * @param pGridH    grid height
-     * @param pDim      dimension of one BoxMap
-     * @param pType     grid type
+     * @param pParent       grid content parent (a PagePanel)
+     * @param pController   controller for this grid    
+     * @param pGridW        grid width
+     * @param pGridH        grid height
+     * @param pType         grid type
+     * @param pDim          dimension of one BoxMap
      * @throws ExecError thrown if unable to create grid
      */
-    public GridPanel(JPanel pParent, int pGridW, int pGridH, Dimension pDim, int pType) 
+    public GridPanel(JPanel pParent, GridController pController,
+                        int pGridW, int pGridH, int pType, Dimension pDim) 
     throws ExecError{
         super(pParent);
         //this.setPreferredSize(Config.getDimValues_dim("dim-fleetgrid"));
