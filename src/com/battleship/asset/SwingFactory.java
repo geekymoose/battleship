@@ -75,11 +75,12 @@ public abstract class SwingFactory implements GameConstants{
     /**
      * Create Model / View / Controller for ConfigGamePanel
      * @param pFrame frame containing ConfigGamePanel
+     * @param reset  if reset is true, config is load again even if it already exists
      * @return PagePanel ConfigGamePanel created
      * @throws ExecError if unable to create the panel
      */
-    public static PagePanel loadConfigGame(WindowFrame pFrame) throws ExecError{
-        if(SwingFactory.view_gameConfigPanel != null){
+    public static PagePanel loadConfigGame(WindowFrame pFrame, boolean reset) throws ExecError{
+        if(SwingFactory.view_gameConfigPanel != null && reset == false){
             DebugTrack.showExecMsg("ConfigGamePanel already loaded");
             return SwingFactory.view_gameConfigPanel;
         }
@@ -98,11 +99,12 @@ public abstract class SwingFactory implements GameConstants{
     /**
      * Create Model / View / Controller for PlaceBoatsPanel
      * @param pFrame    frame containing ConfigGamePanel
+     * @param reset  if reset is true, config is load again even if it already exists
      * @return PagePanel PlaceBoatsPanel created
      * @throws ExecError if unable to create the panel
      */
-    public static PagePanel loadPlaceBoats(WindowFrame pFrame) throws ExecError{
-        if(SwingFactory.view_placeBoatsPanel != null){
+    public static PagePanel loadPlaceBoats(WindowFrame pFrame, boolean reset) throws ExecError{
+        if(SwingFactory.view_placeBoatsPanel != null && reset == false){
             DebugTrack.showExecMsg("PlaceBoatsPanel already loaded");
             return SwingFactory.view_placeBoatsPanel;
         }
@@ -124,11 +126,12 @@ public abstract class SwingFactory implements GameConstants{
     /**
      * Create Model / View / Controller for Game 
      * @param pFrame frame containing ConfigGamePanel
+     * @param reset  if reset is true, config is load again even if it already exists
      * @return PagePanel PlaceBoatsPanel created
      * @throws ExecError if unable to create the panel
      */
-    public static PagePanel loadGame(WindowFrame pFrame) throws ExecError{
-        if(SwingFactory.view_game != null){
+    public static PagePanel loadGame(WindowFrame pFrame, boolean reset) throws ExecError{
+        if(SwingFactory.view_game != null && reset == false){
             DebugTrack.showExecMsg("Game already loaded");
             return SwingFactory.view_game;
         }

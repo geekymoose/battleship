@@ -302,9 +302,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         if(this.controller.isValidConfig()){
             switch(mode){
                 case MODE_AI:
-                    frame.rooting(Config.getRootsValues("place-boats"), null);
+                    frame.rooting(Config.getRootsValues("place-boats"), true);
                     break;
                 case MODE_V2:
+                    frame.rooting(Config.getRootsValues("place-boats"), true);
                     break;
                 case MODE_LAN:
                     break;
@@ -327,6 +328,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                         frame.rooting(Config.getRootsValues("choose-game"), null);
                         break;
                     case MODE_V2:
+                        frame.rooting(Config.getRootsValues("choose-game"), null);
                         break;
                     case MODE_LAN:
                         break;

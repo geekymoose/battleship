@@ -94,20 +94,23 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     @Override
     public void rooting(int path, Object param){
         this.getContentPane().removeAll();
-        
+        boolean reset = false;
+        if (param instanceof Boolean && (Boolean)param == true){
+            reset = true;
+        }
         //Get the requier page
         try{
             if(path == this.CHOOSE_GAME){
                 this.p_mainContent = new ChooseGamePanel(this);
                 
             } else if(path == this.CONFIG){
-                this.p_mainContent = SwingFactory.loadConfigGame(this);
+                this.p_mainContent = SwingFactory.loadConfigGame(this, reset);
                 
             } else if(path == this.PLACE_BOATS){
-                this.p_mainContent = SwingFactory.loadPlaceBoats(this);
+                this.p_mainContent = SwingFactory.loadPlaceBoats(this, reset);
                 
             } else if(path == this.GAME){
-                this.p_mainContent = SwingFactory.loadGame(this);
+                this.p_mainContent = SwingFactory.loadGame(this, reset);
                 
             } else {
                 throw new ExecError(404); //Page not found
