@@ -7,10 +7,8 @@
 
 package com.battleship.controllers;
 
-import com.battleship.asset.SwingFactory;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.views.app.GridPanel;
 
 
 

@@ -46,27 +46,10 @@ public abstract class DebugTrack {
         }
     }
     
-    private static String getStackTraceChild(int nb){
-        if(debug_mode == false){return "";}
-        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        String  fctName     = stackTraceElements[nb].getClassName();
-        String  fileName    = stackTraceElements[nb].getFileName();
-        String  methodName  = stackTraceElements[nb].getMethodName();
-        int     nbLine      = stackTraceElements[nb].getLineNumber();
-
-        String msg = "Error data : \n"
-                     +"\tFile : "+fileName+"\n"
-                     +"\tMethod : "+methodName+"\n"
-                     +"\tAt line : "+nbLine+"\n";
-        DebugTrack.showErrMsg(msg);
-        //DebugTrack.showError("Error", msg);
-        return msg;
-    }
-    
     
     
     //**************************************************************************
-    // Data Information Message
+    // Data Information Message - Constants initialization
     //**************************************************************************
     /**
      * Display message about initialization as a class creation.
@@ -75,15 +58,6 @@ public abstract class DebugTrack {
     public static void showInitMsg(String str){
         if(debug_mode == false){return;}
         System.out.println(" * "+str);
-    }
-    
-    /**
-     * Display message about program execution as button processed etc
-     * @param str message to display
-     */
-    public static void showExecMsg(String str){
-        if(debug_mode == false){return;}
-        System.out.println(" -> "+str);
     }
     
     /**
@@ -146,45 +120,24 @@ public abstract class DebugTrack {
     
     
     
-    
-    
     //**************************************************************************
-    // Error message
+    // Debug data
     //**************************************************************************
     /**
-     * Display error message, then return line
+     * Display message about program execution as button processed etc
      * @param str message to display
      */
-    public static void showErrMsg(String str){
+    public static void showExecMsg(String str){
         if(debug_mode == false){return;}
-        System.err.println(str);
+        System.out.println(" -> In '"+DebugTrack.getfctName()+" : "+str);
+    }
+    
+    public static void showDebugMsg(String str){
+        if(debug_mode == false){return;}
+        System.out.println(" *** Debug in '"+DebugTrack.getfctName()+"' -> "+str);
     }
     
     
-    
-    
-    
-    //**************************************************************************
-    // Debug Dialog Message
-    //**************************************************************************
-    /**
-     * Display a JDialog with error message
-     * @param pTitle    dialog title (Displayed at the window top)
-     * @param pMsg      Message to display
-     */
-    public static void showError(String pTitle, String pMsg){
-        if(debug_mode == false){return;}
-        JOptionPane opt = new JOptionPane();
-        opt.showMessageDialog(null, pMsg, pTitle, JOptionPane.ERROR_MESSAGE);
-    }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Application debug for data
-    //**************************************************************************
     /**
      * Display data from an object : display toString() value
      * @param o object to display
@@ -202,7 +155,79 @@ public abstract class DebugTrack {
             DebugTrack.showErrMsg(str);
             System.exit(0);
         }else{
-            System.out.println(o.toString());
+            System.out.println(" *** Debug in '"+fctName+"' -> "+o.toString());
         }
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Error message
+    //**************************************************************************
+    /**
+     * Display error message, then return line
+     * @param str message to display
+     */
+    public static void showErrMsg(String str){
+        if(debug_mode == false){return;}
+        System.err.println(" Error in '"+DebugTrack.getfctName()+"' : "+str);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Debug Dialog Message
+    //**************************************************************************
+    /**
+     * Display a JDialog with error message
+     * @param pTitle    dialog title (Displayed at the window top)
+     * @param pMsg      Message to display
+     */
+    public static void showError(String pTitle, String pMsg){
+        if(debug_mode == false){return;}
+        System.err.println(" Error in '"+DebugTrack.getfctName()+"' : "+pMsg);
+        JOptionPane opt = new JOptionPane();
+        opt.showMessageDialog(null, pMsg, pTitle, JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Application debug for data
+    //**************************************************************************
+    /**
+     * Get a message with all data about a Stack function child
+     * @param nb function position in the stack
+     * @return String str
+     */
+    private static String getStackTraceChild(int nb){
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        String  fctName     = stackTraceElements[nb].getClassName();
+        String  fileName    = stackTraceElements[nb].getFileName();
+        String  methodName  = stackTraceElements[nb].getMethodName();
+        int     nbLine      = stackTraceElements[nb].getLineNumber();
+
+        String msg = "Error data : \n"
+                     +"\tFile : "+fileName+"\n"
+                     +"\tMethod : "+methodName+"\n"
+                     +"\tAt line : "+nbLine+"\n";
+        DebugTrack.showErrMsg(msg);
+        //DebugTrack.showError("Error", msg);
+        return msg;
+    }
+    
+    /**
+     * Return name of the function which has called the debug track
+     * @return string name
+     */
+    private static String getfctName(){
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        return stackTraceElements[2].getClassName();
     }
 }
