@@ -83,8 +83,7 @@ public class BoxMapViewSquare extends BoxMapView{
     //**************************************************************************
     @Override
     public void draw(Graphics2D g2){
-        g2.setStroke(new BasicStroke(this.borderSize));
-        
+        super.draw(g2);
         if(this.isVisible){
             g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
         }else{

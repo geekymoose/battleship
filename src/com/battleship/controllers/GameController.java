@@ -12,6 +12,7 @@ import com.battleship.asset.SwingFactory;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
+import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
@@ -75,4 +76,11 @@ public class GameController extends Controller{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Return the game configuration
+     * @return GameConfig
+     */
+    public GameConfigModel getGameConfig(){
+        return ((GameModel)this.model).getConfig();
+    }
 }

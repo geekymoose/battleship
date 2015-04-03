@@ -5,14 +5,19 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.Config;
+import com.battleship.asset.SwingFactory;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
+import com.battleship.models.game.FleetGridModel;
+import com.battleship.models.game.GameConfigModel;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -35,6 +40,9 @@ import javax.swing.JPanel;
 public class GamePanel extends PagePanel implements ObserverModel{
     private     final GameController    controller;
     private     JPanel                  p_centerPane;
+    
+    private     Dimension               dimBoxFleet;
+    private     Dimension               dimBoxRadar;
     
     private     InformationPanel        p_info;
     private     PlayerFleetPanel        p_fleet;
@@ -62,25 +70,19 @@ public class GamePanel extends PagePanel implements ObserverModel{
         if(pController == null){
             throw new ExecError();
         }
-        this.controller = pController;
-        this.p_headbar  = new HeadBar();
-        this.gc         = new GridBagConstraints();
+        this.controller     = pController;
+        this.p_headbar      = new HeadBar();
+        this.gc             = new GridBagConstraints();
+        this.dimBoxFleet    = Config.getDimValues_dim("dim-playerfleet-boxmap");
+        this.dimBoxRadar    = Config.getDimValues_dim("dim-radar-boxmap");
+        
         this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
     }
     
-    @Override
-    public void initPage(){
-        
-    }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // METHODS
-    //**************************************************************************
+    /*
+     * Initialize all components
+     */
     private void initComponents() throws ExecError{
         p_centerPane    = new JPanel();
         p_info          = new InformationPanel();
@@ -111,14 +113,45 @@ public class GamePanel extends PagePanel implements ObserverModel{
         gc.gridy        = 0;
         p_centerPane    .add(p_fleet, gc);
         
-        //Create fleet
-        this.p_fleet.setFleetGrid(this.controller.initGridPlayer(this.p_fleet, 0));
-        this.p_radar.setRadarGrid(this.controller.initGridPlayer(this.p_radar, 1));
         
         this.add(p_headbar, BorderLayout.NORTH);
         this.add(p_centerPane, BorderLayout.CENTER);
         this.add(p_chat, BorderLayout.EAST);
         this.add(p_info, BorderLayout.SOUTH);
+    }
+    
+    @Override
+    public void initPage() throws ExecError{
+        GameConfigModel conf = this.controller.getGameConfig();
+        FleetGridModel gridPlayer1 = conf.getPlayers()[0].getFleet();
+        FleetGridModel gridPlayer2 = conf.getPlayers()[1].getFleet();
+        
+        DebugTrack.showObjectToString(gridPlayer1);
+        DebugTrack.showObjectToString(gridPlayer2);
+        
+        GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.p_fleet, gridPlayer1, dimBoxFleet);
+        GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.p_fleet, gridPlayer2, dimBoxFleet);
+        
+        GridPanel radarPlayer1 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer1, dimBoxRadar);
+        GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
+        
+        this.p_fleet.setFleetGrids(fleetPlayer1, fleetPlayer2);
+        this.p_radar.setFleetGrids(radarPlayer2, radarPlayer1);
+        
+        this.p_fleet.switchGrid(0);
+        this.p_radar.switchGrid(1);
+    }
+    
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // METHODS
+    //**************************************************************************
+    public void switchTurn(){
+        
     }
     
     @Override
