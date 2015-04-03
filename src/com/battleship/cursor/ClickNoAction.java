@@ -44,8 +44,6 @@ public class ClickNoAction implements ClickType{
 
     @Override
     public void mouseCursorMoved(int pX, int pY, GridController pController){
-        System.out.println("DEBUG in ClickNoAction : "+pX+" - "+pY);
-        System.out.println("DEBUG in ClickNoAction : "+GridCalculator.pxToHexaCoor(pX, pY, 50));
     }
 
 

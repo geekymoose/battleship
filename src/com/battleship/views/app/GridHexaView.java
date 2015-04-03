@@ -4,12 +4,10 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.asset.GridCalculator;
 import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.observers.ObservableModel;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
@@ -58,21 +56,5 @@ public class GridHexaView extends GridPanel{
     @Override
     public void update(ObservableModel o, Object arg){
      
-    }
-    
-    
-    
-    //**************************************************************************
-    // Mouse Listener Event
-    //**************************************************************************
-    @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        super.mouseMoved(e);
-        this.cursor.mouseCursorMoved(e, controller);
     }
 }
