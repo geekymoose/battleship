@@ -25,18 +25,19 @@ package com.battleship.behaviors;
  * @see BoxMap
  */
 public interface Sprite {
-    public static int   NB_IMG              = 10;
-    public static int   IMG_0_DEFAULT       = 0;
-    public static int   IMG_1_HOVER         = 1;
-    public static int   IMG_2_DESTROYED     = 2;
-    public static int   IMG_3_NOT_VALID     = 3;
-    public static int   IMG_4_VALID         = 4;
+    public static int   NB_IMG                  = 10;
     
-    public static int   IMG_H_5_DEFAULT     = 5;
-    public static int   IMG_H_6_HOVER       = 6;
-    public static int   IMG_H_7_DESTROYED   = 7;
-    public static int   IMG_H_8_NOT_VALID   = 8;
-    public static int   IMG_H_9_VALID       = 9;
+    public static int   IMG_0V_DEFAULT          = 0;
+    public static int   IMG_1V_DESTROYE         = 1;
+    public static int   IMG_2V_HOVER_DEF        = 2;
+    public static int   IMG_4V_HOVER_INVALID    = 3;
+    public static int   IMG_3V_HOVER_VALID      = 4;
+    
+    public static int   IMG_5H_DEFAULT          = 5;
+    public static int   IMG_6H_DESTROYE         = 6;
+    public static int   IMG_7H_HOVER_DEF        = 7;
+    public static int   IMG_9H_HOVER_INVALID    = 8;
+    public static int   IMG_8H_HOVER_VALID      = 9;
     
     /**
      * Hit sprite by a shot.

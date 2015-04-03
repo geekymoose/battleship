@@ -53,7 +53,7 @@ public class LANConfigController extends Controller {
      * Reset configuration to default state
      */
     public void resetDefaultConfig(){
-        ((LANConfigModel)this.model).resetConfig();
+        ((LANConfigModel)this.m).resetConfig();
     }
     
     /**
@@ -61,6 +61,6 @@ public class LANConfigController extends Controller {
      * @return true if valid, otherwise, return false
      */
     public boolean isValidConfig(){
-        return ((LANConfigModel)this.model).isValid();
+        return ((LANConfigModel)this.m).isValid();
     }
 }

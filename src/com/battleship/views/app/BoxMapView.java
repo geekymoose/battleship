@@ -38,6 +38,7 @@ public abstract class BoxMapView implements UiElement{
     //**************************************************************************
     protected   Sprite      sprite;
     protected   Image[]     img;
+    protected   int         state;
     
     protected   int         borderSize;
     protected   Color       borderColor;
@@ -88,7 +89,18 @@ public abstract class BoxMapView implements UiElement{
     public void draw(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
         g2.setColor(this.borderColor);
+        
+        
+        
+        
+        
         //g2.drawImage(this.img, 0, 0, this.img.getWidth(), this.img.getHeight(), null);
+        if(this.isHidden){
+            //Image image = this.img[this.sprite.getImgId()];
+            //g2.drawImage(this.img, 0, 0, this.img.getWidth(), this.img.getHeight(), null);
+        }
+        
+        
     }
     
     /*
@@ -112,18 +124,11 @@ public abstract class BoxMapView implements UiElement{
 
     @Override
     public void reloadUI(){
-        this.img[0] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_0_DEFAULT));
-        this.img[1] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_1_HOVER));
-        this.img[2] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_2_DESTROYED));
-        this.img[3] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_3_NOT_VALID));
-        this.img[4] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_4_VALID));
-        
-        this.img[5] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_H_5_DEFAULT));
-        this.img[6] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_H_6_HOVER));
-        this.img[7] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_H_7_DESTROYED));
-        this.img[8] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_H_8_NOT_VALID));
-        this.img[9] = ThemeManager.getTheme().getImg(this.sprite.getImgId(Sprite.IMG_H_9_VALID));
+        for(int k=0; k<Sprite.NB_IMG; k++){
+            this.img[k] = ThemeManager.getTheme().getImg(this.sprite.getImgId(k));
+        }
     }
+    
     
     
     
@@ -140,5 +145,13 @@ public abstract class BoxMapView implements UiElement{
      */
     public void setHidden(boolean pValue){
         this.isHidden = pValue;
+    }
+    
+    /**
+     * Return current BoxMap dimension
+     * @return Dimension
+     */
+    public Dimension getDimension(){
+        return this.dimension;
     }
 }

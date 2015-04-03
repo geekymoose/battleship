@@ -54,6 +54,7 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
         this.removeAll();
         this.add(this.currentGrid);
         this.revalidate();
+        this.currentGrid.setOpaque(false);
         this.repaint();
     }
     

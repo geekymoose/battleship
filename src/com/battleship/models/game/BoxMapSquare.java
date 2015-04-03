@@ -64,6 +64,5 @@ public class BoxMapSquare extends BoxMap{
                 break;
         }
         return this.grid.getBoxMapAt(x, y);
-        
     }
 }

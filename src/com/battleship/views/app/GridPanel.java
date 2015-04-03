@@ -6,7 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
-import com.battleship.cursor.Cursor;
+import com.battleship.gridcursor.GridCursor;
 import com.battleship.exceptions.ExecError;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
@@ -47,7 +47,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     // Variables - Constants
     //**************************************************************************
     protected       GridController  controller;
-    protected       Cursor          cursor;
+    protected       GridCursor      cursor;
     protected       BoxMapView      tabBox[][];
     protected       final int       gridWidth;
     protected       final int       gridHeight;
@@ -61,32 +61,29 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     //**************************************************************************
     /**
      * Create a new FleetPanel
-     * @param pParent       grid content parent (a PagePanel)
-     * @param pController   controller for this grid    
-     * @param pGridW        grid width
-     * @param pGridH        grid height
-     * @param pType         grid type
-     * @param pDim          dimension of one BoxMap
+     * @param pPar  grid content parent (a PagePanel)
+     * @param pC    controller for this grid    
+     * @param pW    grid width
+     * @param pH    grid height
+     * @param pT    grid type
+     * @param pDim  dimension of one BoxMap
      * @throws ExecError thrown if unable to create grid
      */
-    public GridPanel(JPanel pParent, GridController pController,
-                        int pGridW, int pGridH, int pType, Dimension pDim) 
+    public GridPanel(JPanel pPar, GridController pC, int pW, int pH, int pT, Dimension pDim) 
     throws ExecError{
-        super(pParent);
+        super(pPar);
+        this.controller = pC;
         //this.setPreferredSize(Config.getDimValues_dim("dim-fleetgrid"));
         Dimension dim   = new Dimension();
-        dim.width       = pDim.width    * (pGridW);
-        dim.height      = pDim.height   * (pGridH + 1);
+        dim.width       = pDim.width    * (pW);
+        dim.height      = pDim.height   * (pH+1);
+        this.gridWidth  = pW;
+        this.gridHeight = pH;
+        this.gridType   = pT;
+        this.cursor     = new GridCursor(this, controller);
         this.setPreferredSize(dim);
-        
-        
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        this.gridWidth  = pGridW;
-        this.gridHeight = pGridH;
-        this.gridType   = pType;
-        this.cursor     = new Cursor();
-        this.cursor.setClickNoAction();
     }
     
     
@@ -120,11 +117,48 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
      * Hide all BoxMap for this grid
      */
     public void hideAllBoxMap(){
+        this.setHidenAllBoxMap(true);
+    }
+    
+    /**
+     * Set all BoxMap to visible (Not hidden)
+     */
+    public void visibleAllBoxMap(){
+        this.setHidenAllBoxMap(false);
+    }
+    
+    
+    /**
+     * Set hidden value for all box map
+     * @param pValue 
+     */
+    private void setHidenAllBoxMap(boolean pValue){
         for(int y=0; y<this.gridHeight; y++){
             for(int x=0; x<this.gridWidth; x++){
-                this.tabBox[y][x].setHidden(true);
+                this.tabBox[y][x].setHidden(pValue);
             }
         }
+    }
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return grid cursor
+     * @return 
+     */
+    public GridCursor getGridCursor(){
+        return this.cursor;
+    }
+    
+    /**
+     * Return box Dimension
+     * @return 
+     */
+    public Dimension getBoxDimension(){
+        return this.tabBox[0][0].getDimension();
     }
     
     
@@ -134,27 +168,30 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     //**************************************************************************
     @Override
     public void mouseClicked(MouseEvent e){
-        this.cursor.clickClicked(e, controller);
+        this.cursor.mouseClicked(e);
     }
     @Override
     public void mousePressed(MouseEvent e){
-        this.cursor.clickPressed(e, controller);
+        this.cursor.mousePressed(e);
     }
     @Override
     public void mouseReleased(MouseEvent e){
-        this.cursor.clickReleased(e, controller);
+        this.cursor.mouseReleased(e);
     }
     @Override
     public void mouseEntered(MouseEvent e){
+        this.cursor.mouseEntered(e);
     }
     @Override
     public void mouseExited(MouseEvent e){
+        this.cursor.mouseExited(e);
     }
     @Override
     public void mouseDragged(MouseEvent e){
+        this.cursor.mouseDragged(e);
     }
     @Override
     public void mouseMoved(MouseEvent e){
-        this.cursor.mouseCursorMoved(e, controller);
+        this.cursor.mouseMoved(e);
     }
 }

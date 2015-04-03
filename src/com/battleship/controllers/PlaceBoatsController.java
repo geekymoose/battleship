@@ -6,6 +6,7 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.PlaceBoatsModel;
 import com.battleship.models.game.Player;
 
@@ -26,10 +27,11 @@ import com.battleship.models.game.Player;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class PlaceBoatsController extends GridController{
+public class PlaceBoatsController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private PlaceBoatsModel model = (PlaceBoatsModel)this.m;
     
     
     
@@ -49,44 +51,39 @@ public class PlaceBoatsController extends GridController{
         DebugTrack.showInitMsg("Create GameConfigController controller");
     }
     
-    public void initGrid(){
-        ((PlaceBoatsModel)this.model).initGrid();
+    public void initPage(){
+        this.model.createPlayersGrid();
     }
     
     
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
     /**
+     * Check if current player grid is valid
+     * @return true if valid, otherwise, return false
+     */
+    public boolean isValidGrid(){
+        return this.model.getCurrentPlayer().getFleet().isValidFleetGrid();
+    }
+    
+    /**
+     * Switch player turn
+     * @return -1 invalid grid, 0 last player reached, 1 next player
+     */
+    public int switchPlayer(){
+        return this.model.switchPlayer();
+    }
+    
+    /**
      * Reset current player grid
      */
     public void resetFleetGrid(){
-        ((PlaceBoatsModel)this.model).resetPlayerGrid();
+        this.model.resetPlayerGrid();
     }
-    
-    /**
-     * Try to valid current player fleet. Check if fleet is valid. If ok, 
-     * add fleet to player and return true
-     * @return true if successfully added, otherwise, return false (Grid not yet valid)
-     */
-    public boolean acceptGrid(){
-        return ((PlaceBoatsModel)this.model).setPlayerFleetGrid(); 
-    }
-    
-    /**
-     * Check if all player are placed
-     * @return true if all placed, otherwise, return false
-     */
-    public boolean areAllPlayerPlaced(){
-        return ((PlaceBoatsModel)this.model).areAllPlayerPlaced();
-    }
-    
-    
-    
     
     
 
@@ -94,14 +91,14 @@ public class PlaceBoatsController extends GridController{
     // Getters - Setters
     //**************************************************************************
     public Player getCurrentPlayer(){
-        return ((PlaceBoatsModel)this.model).getCurrentPlayer();
+        return this.model.getCurrentPlayer();
     }
     /**
      * Return type grid
      * @return 
      */
     public int getGridType(){
-        return ((PlaceBoatsModel)this.model).getGridType();
+        return this.model.getGridType();
     }
     
     /**
@@ -109,7 +106,7 @@ public class PlaceBoatsController extends GridController{
      * @return 
      */
     public int getWidth(){
-        return ((PlaceBoatsModel)this.model).getGridWidth();
+        return this.model.getGridWidth();
     }
     
     /**
@@ -117,6 +114,14 @@ public class PlaceBoatsController extends GridController{
      * @return 
      */
     public int getHeight(){
-        return ((PlaceBoatsModel)this.model).getGridHeight();
+        return this.model.getGridHeight();
+    }
+    
+    /**
+     * Return the game configuration
+     * @return GameConfig
+     */
+    public GameConfigModel getGameConfig(){
+        return this.model.getConfig();
     }
 }
