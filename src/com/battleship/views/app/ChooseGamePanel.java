@@ -162,7 +162,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants{
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(411100);
+        Image img = ThemeManager.getTheme().getImg(415000);
         g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
     }
 }

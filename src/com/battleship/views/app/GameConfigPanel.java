@@ -22,8 +22,12 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -50,7 +54,9 @@ import javax.swing.JPanel;
  */
 public class GameConfigPanel extends PagePanel implements ObserverModel, GameConstants{
     private     GameConfigController    controller;
-    private     CardLayout              cl = new CardLayout();
+    
+    private     CardLayout              cl;
+    private     GridBagConstraints      gbc;
     private     JPanel                  p_buttons;
     private     JPanel                  p_center;
     private     JPanel                  p_container;
@@ -91,6 +97,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
     public GameConfigPanel(WindowFrame pFrame, GameConfigController pController) 
     throws ExecError{
         super(pFrame);
+        this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         if(pController==null){
             throw new ExecError();
         }
@@ -105,12 +112,24 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         
         p_buttons   = new JPanel();
         p_center    = new JPanel();
-        p_container = new JPanel();
+        p_container = new ContainerPanel();
         p_left      = new JPanel();
         p_right     = new JPanel();
         p_bigCont   = new JPanel();
         p_card1     = new JPanel();
         p_card2     = new JPanel();
+        
+        cl          = new CardLayout();
+        gbc         = new GridBagConstraints();
+        gbc.ipadx = 50;
+        gbc.ipady = 50;
+        
+        p_bigCont   .setOpaque(false);
+        p_container .setOpaque(false);
+        p_center    .setOpaque(false);
+        p_left      .setOpaque(false);
+        p_right     .setOpaque(false);
+        p_buttons   .setOpaque(false);
         
         l_grid1     = new JLabel(ThemeManager.getTheme().getImgIcon(414100));
         l_grid2     = new JLabel(ThemeManager.getTheme().getImgIcon(414200));
@@ -146,9 +165,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         p_container     .add(p_center, BorderLayout.CENTER);
         
         //Magouille pour sizer le borderlayout
-        p_bigCont.add(p_container);
-        p_bigCont.setPreferredSize(new Dimension(490,370));
-        this.add(p_bigCont, BorderLayout.CENTER);
+        p_bigCont.add(p_container, gbc);
+        //p_bigCont.setPreferredSize(new Dimension(490,370));
+        this.add(p_bigCont);
         
         this.setBtnActions();
     }
@@ -178,6 +197,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Reset config");
                     controller.resetDefaultConfig();
+                    cl.first(p_center);
                 }
             }
         );
@@ -198,7 +218,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Square grid selected");
                     controller.changeGridType(GRID_TYPE_SQUARE);
-                   cl.next(p_center);
+                    cl.next(p_center);
                                         
                 }
             }
@@ -294,4 +314,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel, GameCon
         }
     } //End previous
     
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image img = ThemeManager.getTheme().getImg(415000);
+        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+    }
 }
