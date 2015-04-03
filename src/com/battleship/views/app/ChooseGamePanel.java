@@ -184,7 +184,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
 
     @Override
     public void loadUI(){
-        this.background = ThemeManager.getTheme().getImg(411100);
+        this.background = ThemeManager.getTheme().getImg(415000);
     }
     
     @Override
