@@ -6,9 +6,9 @@ package com.battleship.views.app;
 
 import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.models.sprites.Water;
 import com.battleship.observers.ObservableModel;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 
@@ -53,7 +53,7 @@ public class GridHexaView extends GridPanel{
         this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim);
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim, new Water());
             }
         }
     }

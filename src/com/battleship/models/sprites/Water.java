@@ -45,6 +45,9 @@ public class Water implements Sprite{
     private     final int   NOT_HIT     = 2;
     private     int         state;
     
+    //Image data (Identification)
+    protected   int[]       id_img;
+    
     
     
     
@@ -57,7 +60,11 @@ public class Water implements Sprite{
      * on shot reach this water, it is now hit 
      */
     public Water(){
-        this.state  = NOT_HIT;
+        this.state          = NOT_HIT;
+        this.id_img         = new int[NB_IMG];
+        //TO DO LATER
+        this.setImg(0, 0, 0, 0, 0);
+        this.setHiddenImg(0, 0, 0, 0, 0);
     }
     
     
@@ -75,6 +82,30 @@ public class Water implements Sprite{
     
     @Override
     public boolean canBeHit(){
-        return this.state==NOT_HIT;
+        return this.state == NOT_HIT;
+    }
+
+    @Override
+    public int getImgId(int idImg){
+        return (idImg<IMG_0_DEFAULT || idImg>IMG_H_9_VALID)? id_img[0] : id_img[idImg];
+    }
+
+    @Override
+    public void setImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid){
+        this.id_img[0] = pDef;
+        this.id_img[1] = pDestroyed;
+        this.id_img[2] = pHover;
+        this.id_img[3] = pNovalid;
+        this.id_img[4] = pValid;
+    }
+
+
+    @Override
+    public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid){
+        this.id_img[5] = pDef;
+        this.id_img[6] = pDestroyed;
+        this.id_img[7] = pHover;
+        this.id_img[8] = pNovalid;
+        this.id_img[9] = pValid;
     }
 }

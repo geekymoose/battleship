@@ -187,8 +187,11 @@ public abstract class Boat{
      * @see Sprite
      */
     protected class Compartment implements Sprite {
-        protected boolean   isDestroyed;
-        protected BoxMap    boxPosition;
+        protected   boolean     isDestroyed;
+        protected   BoxMap      boxPosition;
+        
+        //Image data (Identification)
+        protected   int[]       id_img;
 
 
         /**
@@ -198,8 +201,9 @@ public abstract class Boat{
          * @param pPosition BoxMap where to place this compartment
          */
         protected Compartment(BoxMap pPosition){
-            this.isDestroyed = false;
-            this.boxPosition = pPosition;
+            this.isDestroyed    = false;
+            this.boxPosition    = pPosition;
+            this.id_img         = new int[NB_IMG];
         }
 
 
@@ -212,6 +216,10 @@ public abstract class Boat{
             return isDestroyed;
         }
         
+
+        //**********************************************************************
+        // Getters - Setters
+        //**********************************************************************
         /**
          * Return the current position. Position is a BoxMap
          * @return BoxMap which is the position
@@ -236,6 +244,30 @@ public abstract class Boat{
         @Override
         public boolean canBeHit(){
             return isDestroyed;
+        }
+
+        @Override
+        public int getImgId(int idImg){
+            return (idImg<IMG_0_DEFAULT || idImg>IMG_H_9_VALID)? id_img[0] : id_img[idImg];
+        }
+
+        @Override
+        public void setImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid){
+            this.id_img[0] = pDef;
+            this.id_img[1] = pDestroyed;
+            this.id_img[2] = pHover;
+            this.id_img[3] = pNovalid;
+            this.id_img[4] = pValid;
+        }
+
+
+        @Override
+        public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid){
+            this.id_img[5] = pDef;
+            this.id_img[6] = pDestroyed;
+            this.id_img[7] = pHover;
+            this.id_img[8] = pNovalid;
+            this.id_img[9] = pValid;
         }
     } //----------------------------------END INNER CLASS-----------------------
 }

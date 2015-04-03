@@ -122,7 +122,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     public void hideAllBoxMap(){
         for(int y=0; y<this.gridHeight; y++){
             for(int x=0; x<this.gridWidth; x++){
-                this.tabBox[y][x].setVisible(false);
+                this.tabBox[y][x].setHidden(true);
             }
         }
     }
