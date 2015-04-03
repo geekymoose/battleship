@@ -22,9 +22,11 @@ import com.battleship.views.tools.UiElement;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
@@ -51,14 +53,14 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                                                           GameConstants,
                                                           UiElement{
     private     GameConfigController    controller;
+    private     CardLayout              cl;
+    private     GridBagConstraints      gbc;
     private     JPanel                  p_buttons;
     private     JPanel                  p_center;
     private     JPanel                  p_container;
     private     JPanel                  p_left;
     private     JPanel                  p_right;
     private     JPanel                  p_bigCont;
-    
-    private     CardLayout              cl = new CardLayout();
     private     JPanel                  p_card1;
     private     JPanel                  p_card2;
     
@@ -96,6 +98,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             throw new ExecError();
         }
         this.controller = pController;
+        this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
     }
     
@@ -103,17 +106,29 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
      * Init components
      */
     private void initComponents(){
-        p_buttons       = new JPanel();
-        p_center        = new JPanel();
-        p_container     = new JPanel();
-        p_left          = new JPanel();
-        p_right         = new JPanel();
-        p_bigCont       = new JPanel();
-        p_card1         = new JPanel();
-        p_card2         = new JPanel();
+        p_buttons   = new JPanel();
+        p_center    = new JPanel();
+        p_container = new ContainerPanel();
+        p_left      = new JPanel();
+        p_right     = new JPanel();
+        p_bigCont   = new JPanel();
+        p_card1     = new JPanel();
+        p_card2     = new JPanel();
         
-        l_grid1         = new JLabel(ThemeManager.getTheme().getImgIcon(414100));
-        l_grid2         = new JLabel(ThemeManager.getTheme().getImgIcon(414200));
+        cl          = new CardLayout();
+        gbc         = new GridBagConstraints();
+        gbc.ipadx = 50;
+        gbc.ipady = 50;
+        
+        p_bigCont   .setOpaque(false);
+        p_container .setOpaque(false);
+        p_center    .setOpaque(false);
+        p_left      .setOpaque(false);
+        p_right     .setOpaque(false);
+        p_buttons   .setOpaque(false);
+        
+        l_grid1     = new JLabel(ThemeManager.getTheme().getImgIcon(414100));
+        l_grid2     = new JLabel(ThemeManager.getTheme().getImgIcon(414200));
         
         this            .setLayout(new BorderLayout());
         p_buttons       .setLayout(new FlowLayout());
@@ -146,9 +161,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_container     .add(p_center, BorderLayout.CENTER);
         
         //Magouille pour sizer le borderlayout
-        p_bigCont.add(p_container);
-        p_bigCont.setPreferredSize(new Dimension(490,370));
-        this.add(p_bigCont, BorderLayout.CENTER);
+        p_bigCont.add(p_container, gbc);
+        //p_bigCont.setPreferredSize(new Dimension(490,370));
+        this.add(p_bigCont);
         
         this.setBtnActions();
     }
@@ -185,6 +200,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Reset config");
                     controller.resetDefaultConfig();
+                    cl.first(p_center);
                 }
             }
         );
@@ -322,4 +338,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     } //End previous
 
     
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image img = ThemeManager.getTheme().getImg(415000);
+        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+    }
 }
