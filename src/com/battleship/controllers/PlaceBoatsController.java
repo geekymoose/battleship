@@ -7,6 +7,7 @@ package com.battleship.controllers;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.PlaceBoatsModel;
+import com.battleship.models.game.Player;
 
 
 
@@ -48,6 +49,10 @@ public class PlaceBoatsController extends GridController{
         DebugTrack.showInitMsg("Create GameConfigController controller");
     }
     
+    public void initGrid(){
+        ((PlaceBoatsModel)this.model).initGrid();
+    }
+    
     
     
     
@@ -56,6 +61,32 @@ public class PlaceBoatsController extends GridController{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Reset current player grid
+     */
+    public void resetFleetGrid(){
+        ((PlaceBoatsModel)this.model).resetPlayerGrid();
+    }
+    /**
+     * Try to valid current player fleet. Check if fleet is valid. If ok, 
+     * add fleet to player and return true
+     * @return true if successfully added, otherwise, return false (Grid not yet valid)
+     */
+    public boolean acceptGrid(){
+        return ((PlaceBoatsModel)this.model).setPlayerFleetGrid(); 
+    }
+    
+    
+    
+    
+    
+
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    public Player getCurrentPlayer(){
+        return ((PlaceBoatsModel)this.model).getCurrentPlayer();
+    }
     /**
      * Return type grid
      * @return 

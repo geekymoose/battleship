@@ -165,4 +165,31 @@ public abstract class DebugTrack {
         JOptionPane opt = new JOptionPane();
         opt.showMessageDialog(null, pMsg, pTitle, JOptionPane.ERROR_MESSAGE);
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Application debug for data
+    //**************************************************************************
+    /**
+     * Display data from an object : display toString() value
+     * @param o object to display
+     */
+    public static void showObjectToString(Object o){
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        String  fctName     = stackTraceElements[2].getClassName();
+        System.out.print("Debug in "+fctName+" - msg : ");
+        if(o == null){
+            String str = "Object given is null\n\n  *** Stack state ***\n\n";
+            str += DebugTrack.getStackTraceChild(0);
+            str += DebugTrack.getStackTraceChild(1);
+            str += DebugTrack.getStackTraceChild(2);
+            DebugTrack.showErrMsg(str);
+            System.exit(0);
+        }else{
+            System.out.println(o.toString());
+        }
+    }
 }

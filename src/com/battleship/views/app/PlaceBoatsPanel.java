@@ -5,10 +5,6 @@
 package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
-import static com.battleship.constants.GameConstants.MODE_AI;
-import static com.battleship.constants.GameConstants.MODE_INTERNET;
-import static com.battleship.constants.GameConstants.MODE_LAN;
-import static com.battleship.constants.GameConstants.MODE_V2;
 import com.battleship.controllers.PlaceBoatsController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -18,10 +14,13 @@ import com.battleship.observers.ObserverModel;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.asset.Config;
+import com.battleship.models.game.PlaceBoatsModel;
+import com.battleship.models.game.Player;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -51,6 +50,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     AbstractButton                  b_reset;
     private     AbstractButton                  b_back;
     
+    private     Player                          currentPlayer;
+    private     boolean                         isLastPlayer;
+    
     
     
     
@@ -69,7 +71,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         if(pController==null){
             throw new ExecError();
         }
-        this.controller = pController;
+        this.controller     = pController;
+        this.currentPlayer  = this.controller.getCurrentPlayer();
+        this.isLastPlayer   = false;
+        this.grid           = null;
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.createGrid();
@@ -116,7 +121,39 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 break;
         }
         this.add(this.grid, BorderLayout.CENTER);
-        this.repaint(); //Needed? not sure
+        this.revalidate();
+        this.repaint();
+    }
+    
+    /*
+     * Reset the grid
+     */
+    private void resetGrid(){
+        this.controller.resetFleetGrid();
+    }
+    
+    /*
+     * Display a break panel between to player placement
+     */
+    private void displayBreakPanel(){
+        if(this.grid != null){
+            this.remove(this.grid); //Remove old grid
+        }
+        JPanel breakPanel = new JPanel();
+        breakPanel.setBackground(Color.BLACK);
+        breakPanel.setPreferredSize(this.grid.getPreferredSize());
+        System.out.println("A"+breakPanel.toString());
+        this.add(breakPanel, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+        int choice = UiDialog.showConfirmDialog("Next Player", 
+                                   "Beware! Next player has to"
+                                    + "place his boats!!");
+        this.remove(breakPanel);
+        //this.resetGrid();
+        this.add(this.grid, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
     
     
@@ -138,7 +175,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Reset Place Boats");
-                    //To Do
+                    resetGrid();
                 }
             }
         );
@@ -162,11 +199,14 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     //**************************************************************************
     @Override
     public void initPage(){
+        this.controller.initGrid();
     }
 
     @Override
     public void update(ObservableModel o, Object arg){
-    
+        PlaceBoatsModel m   = (PlaceBoatsModel)o;
+        this.currentPlayer  = m.getCurrentPlayer();
+        this.isLastPlayer   = m.isLastPlayer();
     }
     
     @Override
@@ -174,7 +214,18 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         int mode = Session.getGameMode();
         switch(mode){
             case MODE_AI:
-                this.frame.rooting(Config.getRootsValues("game"), null);
+                boolean isAccpetedGrid = controller.acceptGrid();
+                if(isAccpetedGrid == true && this.isLastPlayer){
+                    this.frame.rooting(Config.getRootsValues("game"), null);
+                } 
+                else if (isAccpetedGrid){
+                    this.displayBreakPanel();
+                }
+                else {
+                    UiDialog.showWarning("beware!", "Some boats are missing on the grid!!\n"
+                            + "Do you want to figth with less boats than your enemy? "
+                            + "Woow! We've got a warrior here!");
+                }
                 break;
             case MODE_V2:
                 break;
@@ -191,7 +242,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     protected void goPreviousPage(){
         String msg      = "Are you sure you want to go back? Current configuration could be lost";
         String title    = "Warning";
-        int choice = UiDialog.showConfirmWarning(title, msg);
+        int choice = UiDialog.showYesNoWarning(title, msg);
         if(choice == JOptionPane.OK_OPTION){
             int mode = Session.getGameMode();
             switch(mode){

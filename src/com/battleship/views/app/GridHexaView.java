@@ -50,6 +50,12 @@ public class GridHexaView extends GridPanel{
     public GridHexaView(JPanel pParent, GridController pController, 
                         int pW, int pH, int pType, Dimension pDim) throws ExecError{
         super(pParent, pController,pW, pH, pType, pDim);
+        this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
+        for (int y = 0; y < this.gridHeight; y++) {
+            for (int x = 0; x < this.gridWidth; x++) {
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim);
+            }
+        }
     }
 
 

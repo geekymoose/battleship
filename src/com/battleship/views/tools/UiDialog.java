@@ -31,7 +31,7 @@ public abstract class UiDialog {
      * @param pMsg      Message to display
      * @return          choice
      */
-    public static int showConfirmWarning(String pTitle, String pMsg){
+    public static int showYesNoWarning(String pTitle, String pMsg){
         JOptionPane opt = new JOptionPane();
         int choice = opt.showConfirmDialog(null, pMsg, pTitle,
                                             JOptionPane.YES_NO_CANCEL_OPTION, 
@@ -39,6 +39,19 @@ public abstract class UiDialog {
         return choice;
     }
     
+    /**
+     * Display a confirm dialog and return value
+     * @param pTitle
+     * @param pMsg
+     * @return 
+     */
+    public static int showConfirmDialog(String pTitle, String pMsg){
+        JOptionPane opt = new JOptionPane();
+        int choice = opt.showConfirmDialog(null, pMsg, pTitle,
+                                            JOptionPane.OK_OPTION, 
+                                            JOptionPane.QUESTION_MESSAGE);
+        return choice;
+    }
     
     
     

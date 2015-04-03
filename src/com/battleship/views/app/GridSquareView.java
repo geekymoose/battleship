@@ -51,6 +51,12 @@ public class GridSquareView extends GridPanel{
                         int pW, int pH, int pType, Dimension pDim) throws ExecError{
         super(pParent, pController,pW, pH, pType, pDim);
         this.dimBox = pDim;
+        this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
+        for (int y = 0; y < this.gridHeight; y++) {
+            for (int x = 0; x < this.gridWidth; x++) {
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim);
+            }
+        }
     }
 
 
