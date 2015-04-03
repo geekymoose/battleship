@@ -66,7 +66,6 @@ public class PlaceBoatsModel extends Model implements GameConstants{
      * Reset current player fleet grid
      */
     public void resetPlayerGrid(){
-        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn]);
         this.config.getPlayers()[this.playerTurn].getFleet().resetFleetGrid();
     }
     
