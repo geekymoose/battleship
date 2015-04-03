@@ -6,13 +6,13 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
+import com.battleship.cursor.Cursor;
 import com.battleship.exceptions.ExecError;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,6 +47,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     // Variables - Constants
     //**************************************************************************
     protected       GridController  controller;
+    protected       Cursor          cursor;
     protected       BoxMapView      tabBox[][];
     protected       final int       gridWidth;
     protected       final int       gridHeight;
@@ -84,6 +85,8 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         this.gridWidth  = pGridW;
         this.gridHeight = pGridH;
         this.gridType   = pType;
+        this.cursor     = new Cursor();
+        this.cursor.setClickNoAction();
         
         
         switch(pType){
@@ -126,17 +129,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
             }
         }
     }
-    
-    
-    /**
-     * Convert absolute pixel position to coordinate position. 
-     * (pxToCoor -> pixelToCoordinate)
-     *
-     * @param pX    x value
-     * @param pY    y value 
-     * @return
-     */
-    protected abstract Point pxToCoor(int pX, int pY);
     
     
     
