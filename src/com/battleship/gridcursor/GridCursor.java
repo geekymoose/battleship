@@ -2,9 +2,11 @@
  * Creation:    Apr 1, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-package com.battleship.cursor;
+package com.battleship.gridcursor;
 
 import com.battleship.controllers.GridController;
+import com.battleship.main.DebugTrack;
+import com.battleship.views.app.GridPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import javax.swing.SwingUtilities;
@@ -14,10 +16,10 @@ import javax.swing.SwingUtilities;
 
 
 /**
- * <h1>Cursor</h1>
+ * <h1>GridCursor</h1>
  * <p>
- * public class Cursor
- * </p>
+ public class GridCursor
+ </p>
  * <p>
  * This class is used to manage cursor action for vectorial drawing software
  * When user click on the draw panel, the action performed could be different
@@ -29,14 +31,17 @@ import javax.swing.SwingUtilities;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class Cursor{
+public class GridCursor{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     final ClickType     clickHexaPlaceBoat;
-    private     final ClickType     clickSquarePlaceBoat;
-    private     final ClickType     clickNoAction;
-    private     ClickType           clickType;
+    private     final GridController    controller;
+    private     GridPanel               view;
+    
+    private     final ClickType         clickHexaPlaceBoat;
+    private     final ClickType         clickSquarePlaceBoat;
+    private     final ClickType         clickNoAction;
+    private     ClickType               clickType;
     
     
     
@@ -46,16 +51,19 @@ public class Cursor{
     // Constructor
     //**************************************************************************
     /**
-     * Create a new cursor
-     * The default behavior is to draw a point
+     * Create a new cursor.
+     * @param pGrid         View cursor is linked with
+     * @param pController   controller for this Cursor
      */
-    public Cursor(){
+    public GridCursor(GridPanel pGrid, GridController pController){
         this.clickHexaPlaceBoat     = new ClickHexaPlaceBoat();
         this.clickSquarePlaceBoat   = new ClickSquarePlaceBoat();
         this.clickNoAction          = new ClickNoAction();
         
         //Default value
-        this.clickType              = null;
+        this.clickType              = this.clickNoAction;
+        this.controller             = pController;
+        this.view                   = pGrid;
     }
     
     
@@ -68,11 +76,10 @@ public class Cursor{
     /**
      * Perform a left click: clicked
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void clickClicked (MouseEvent e, GridController pController){
+    public void mouseClicked (MouseEvent e){
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.leftClickClicked(e.getX(), e.getY(), pController);
+            this.clickType.mouseClicked_Left(e.getX(), e.getY(), controller);
         }
         else if(SwingUtilities.isRightMouseButton(e)){
         }
@@ -83,11 +90,10 @@ public class Cursor{
      * This function is called if left click is performed and manage the action
      * to do (Depend of clickType value)
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void clickReleased(MouseEvent e, GridController pController){
+    public void mousePressed(MouseEvent e){
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.leftClickReleased(e.getX(), e.getY(), pController);
+            this.clickType.mousePressed_left(e.getX(), e.getY(), controller);
         }
     }
     
@@ -95,12 +101,19 @@ public class Cursor{
     /**
      * Perform a left click: pressed
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void clickPressed(MouseEvent e, GridController pController){
+    public void mouseReleased(MouseEvent e){
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.leftClickPressed(e.getX(), e.getY(), pController);
+            this.clickType.mouseReleased_left(e.getX(), e.getY(), controller);
         }
+    }
+    
+    public void mouseEntered(MouseEvent e){
+        
+    }
+    
+    public void mouseExited(MouseEvent e){
+        
     }
     
     
@@ -108,11 +121,10 @@ public class Cursor{
      * Perform a dragged mouse mode. Get the coordinate of the current mouse
      * position
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void mouseDragged(MouseEvent e, GridController pController){
+    public void mouseDragged(MouseEvent e){
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.leftMouseDragged(e.getX(), e.getY(), pController);
+            this.clickType.mouseDragged_left(e.getX(), e.getY(), controller);
         }
     }
     
@@ -120,25 +132,32 @@ public class Cursor{
     /**
      * Perform a move mouse mode.
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void mouseCursorMoved(MouseEvent e, GridController pController){
-        this.clickType.mouseCursorMoved(e.getX(), e.getY(), pController);
+    public void mouseMoved(MouseEvent e){
+        this.clickType.mouseMoved(e.getX(), e.getY(), controller);
     }
     
     
     /**
      * Perform a wheel move: process the move type (Down or up)
      * @param e Event performed
-     * @param pController controller where to do action
      */
-    public void mouseWheelMoved(MouseWheelEvent e, GridController pController){
-        if(e.isAltDown()){
-            this.clickType.wheelMovedDown(e.getX(), e.getY(), pController);
-        }
-        else{
-            this.clickType.wheelMovedUp(e.getX(), e.getY(), pController);
-        }
+    public void mouseWheelMoved(MouseWheelEvent e){
+        this.clickType.wheelMovedDown(e.getX(), e.getY(), controller);
+    }
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Link cursor with a specific view grid
+     * @param pGrid 
+     */
+    public void setGridView(GridPanel pGrid){
+        this.view = pGrid;
     }
     
     
@@ -147,13 +166,7 @@ public class Cursor{
     //**************************************************************************
     // Setters for ClickType
     //**************************************************************************
-    public void setClickHexaPlaceBoat(){
-        this.clickType = this.clickHexaPlaceBoat;
-    }
-    public void setClickSquarePlaceBoat(){
-        this.clickType = this.clickSquarePlaceBoat;
-    }
-    public void setClickNoAction(){
-        this.clickType = this.clickNoAction;
-    }
+    public void setClickHexaPlaceBoat()     { clickType = clickHexaPlaceBoat; }
+    public void setClickSquarePlaceBoat()   { clickType = clickSquarePlaceBoat; }
+    public void setClickNoAction()          { clickType = clickNoAction; }
 }

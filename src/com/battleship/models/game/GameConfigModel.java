@@ -195,7 +195,7 @@ public class GameConfigModel extends Model implements GameConstants{
      * Check if player are ready
      * @return return true if ready, otherwise, return false
      */
-    public boolean areFleetSValid(){
+    public boolean areAllFleetValid(){
         for(Player p : this.listPlayers){
             if(p.getFleet()==null || p.getFleet().isValidFleetGrid() == false){
                 DebugTrack.showObjectToString(p);

@@ -33,17 +33,20 @@ import com.battleship.models.sprites.Water;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see     GridFleetModel
  */
 public abstract class BoxMap implements Target, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   Sprite                  content;
     protected   final int               posX;
     protected   final int               posY;
     protected   final FleetGridModel    grid;
-    public      boolean                 isTargeted; //Used for Target interface
+    
+    protected   Sprite                  content;
+    protected   boolean                 isTargeted;
+    
     
     
     
@@ -161,5 +164,11 @@ public abstract class BoxMap implements Target, GameConstants{
      */
     public int getPosY(){
         return this.posY;
+    }
+    
+    public void setContent(Sprite pContent){
+        if(pContent != null){
+            this.content = pContent;
+        }
     }
 }

@@ -71,10 +71,4 @@ public class GridSquareView extends GridPanel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    
-    
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        super.mouseMoved(e);
-    }
 }

@@ -87,7 +87,7 @@ public class Water implements Sprite{
 
     @Override
     public int getImgId(int idImg){
-        return (idImg<IMG_0_DEFAULT || idImg>IMG_H_9_VALID)? id_img[0] : id_img[idImg];
+            return (idImg<0 || idImg>NB_IMG)? id_img[0] : id_img[idImg];
     }
 
     @Override

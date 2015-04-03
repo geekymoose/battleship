@@ -27,8 +27,8 @@ public abstract class Controller <V,M>{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   V       view;
-    protected   M       model;
+    protected   V       v;
+    protected   M       m;
     
     
     
@@ -41,7 +41,7 @@ public abstract class Controller <V,M>{
         if(pModel==null){
             throw new ExecError(430, "controller");
         }
-        this.model          = pModel;
+        this.m = pModel;
     }
     
     /**
@@ -54,8 +54,8 @@ public abstract class Controller <V,M>{
         if(pView==null || pModel==null){
             throw new ExecError();
         }
-        this.view           = pView;
-        this.model          = pModel;
+        this.v = pView;
+        this.m = pModel;
     }
     
     
@@ -74,6 +74,6 @@ public abstract class Controller <V,M>{
         if(pView==null){
             throw new ExecError();
         }
-        this.view           = pView;
+        this.v = pView;
     }
 }

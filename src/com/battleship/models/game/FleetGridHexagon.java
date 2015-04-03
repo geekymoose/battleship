@@ -5,8 +5,6 @@
 package com.battleship.models.game;
 
 import com.battleship.models.sprites.Water;
-import com.battleship.observers.ObservableModel;
-
 
 
 
@@ -44,17 +42,5 @@ public class FleetGridHexagon extends FleetGridModel{
                 this.tabBoxMap[y][x] = new BoxMapHexagon(x, y, new Water(), this);
             }
         }
-    }
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Functions
-    //**************************************************************************
-    @Override
-    public void update(ObservableModel o, Object arg){
     }
 }

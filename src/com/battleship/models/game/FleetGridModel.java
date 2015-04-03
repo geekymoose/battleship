@@ -5,10 +5,8 @@
 package com.battleship.models.game;
 
 import com.battleship.models.sprites.Boat;
-import com.battleship.observers.ObserverModel;
+import java.awt.Point;
 import java.util.ArrayList;
-
-
 
 
 
@@ -16,7 +14,7 @@ import java.util.ArrayList;
  * <h1>FleetGridModel</h1>
  * <p>
  * public abstract class FleetGridModel<br/>
- * implements ObserverModel
+ * extends Model
  * </p>
  * 
  * <p>
@@ -41,7 +39,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class FleetGridModel extends Model implements ObserverModel{
+public abstract class FleetGridModel extends Model{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -83,6 +81,7 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
                 this.getBoxMapAt(x, y).restContent();
             }
         }
+        this.notifyObservers(null);
     }
     
     
@@ -92,16 +91,6 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
-     * Check if this grid is valid, means all boats are placed in
-     * @return 
-     */
-    public boolean isValidFleetGrid(){
-        //return this.listBoats.size() == 5;
-        return true; //DEBUG 
-    }
-    
-    
     /**
      * Return the BoxMap at position x:y 
      * If this position is not in the grid, return null
@@ -114,6 +103,52 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
             return null;
         }
         return this.tabBoxMap[pY][pX];
+    }
+    
+    /**
+     * Target one box map at position point p
+     * @param p coordinate where target is located in the grid
+     */
+    public void targetBoxMap(Point p){
+        this.stopAiming();
+        BoxMap box = this.getBoxMapAt(p.x, p.y);
+        if(box!=null){
+            box.aim();
+        }
+    }
+    
+    /**
+     * Target several BoxMap
+     * @param tab 
+     */
+    public void targetSeveralBoxMap(Point[] tab){
+        for(Point p : tab){
+            BoxMap box = this.getBoxMapAt(p.x, p.y);
+            if(box!=null){
+                box.aim();
+            }
+        }
+        this.notifyObservers(null);
+    }
+    
+    /**
+     * stop aiming all tab
+     */
+    private void stopAiming(){
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.tabBoxMap[y][x].stopAim();
+            }
+        }
+    }
+    
+    /**
+     * Check if this grid is valid, means all boats are placed in
+     * @return 
+     */
+    public boolean isValidFleetGrid(){
+        //return this.listBoats.size() == 5;
+        return true; //DEBUG 
     }
     
     

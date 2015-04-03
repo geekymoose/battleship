@@ -30,6 +30,15 @@ import com.battleship.models.game.GameConfigModel;
  */
 public class GameConfigController extends Controller{
     //**************************************************************************
+    // Constants - Variables
+    //**************************************************************************
+    private GameConfigModel model = (GameConfigModel)this.m;
+    
+    
+    
+    
+    
+    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
@@ -53,7 +62,7 @@ public class GameConfigController extends Controller{
      * Reset configuration to default state
      */
     public void resetDefaultConfig(){
-        ((GameConfigModel)this.model).resetConfig();
+        this.model.resetConfig();
     }
     
     /**
@@ -61,7 +70,7 @@ public class GameConfigController extends Controller{
      * @return true if valid, otherwise, return false
      */
     public boolean isValidConfig(){
-        return ((GameConfigModel)this.model).isValid();
+        return this.model.isValid();
     }
     
     /**
@@ -70,7 +79,7 @@ public class GameConfigController extends Controller{
      * @param pValue new value
      */
     public void changeGridWidth(int pValue){
-        ((GameConfigModel)this.model).setGridWidth(pValue);
+        this.model.setGridWidth(pValue);
     }
     
     /**
@@ -79,7 +88,7 @@ public class GameConfigController extends Controller{
      * @param pValue new value
      */
     public void changeGridHeight(int pValue){
-        ((GameConfigModel)this.model).setGridHeight(pValue);
+        this.model.setGridHeight(pValue);
     }
     
     /**
@@ -88,6 +97,6 @@ public class GameConfigController extends Controller{
      * @param pValue new value
      */
     public void changeGridType(int pValue){
-        ((GameConfigModel)this.model).setGridType(pValue);
+        this.model.setGridType(pValue);
     }
 }

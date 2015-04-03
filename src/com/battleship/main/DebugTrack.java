@@ -5,6 +5,7 @@
 package com.battleship.main;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -132,11 +133,34 @@ public abstract class DebugTrack {
         System.out.println(" -> In '"+DebugTrack.getfctName()+" : "+str);
     }
     
+    /**
+     * Display a message for tmp debug. Display which function called the track 
+     * and show data
+     * @param str 
+     */
     public static void showDebugMsg(String str){
         if(debug_mode == false){return;}
         System.out.println(" *** Debug in '"+DebugTrack.getfctName()+"' -> "+str);
     }
     
+    /**
+     * Display data about a point
+     * @param p 
+     */
+    public static void showPointData(Point p){
+        if(debug_mode == false){return;}
+        System.out.println(" * Debug in '"+DebugTrack.getfctName()+"' -> x="+p.x+" y="+p.y);
+    }
+    
+    /**
+     * Display data about a point (From 2 coordinates)
+     * @param x
+     * @param y 
+     */
+    public static void showPointData(int x, int y){
+        if(debug_mode == false){return;}
+        System.out.println(" * Debug in '"+DebugTrack.getfctName()+"' -> x="+x+" y="+y);
+    }
     
     /**
      * Display data from an object : display toString() value
@@ -146,7 +170,7 @@ public abstract class DebugTrack {
         if(debug_mode == false){return;}
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         String  fctName     = stackTraceElements[2].getClassName();
-        System.out.print("Debug in "+fctName+" - msg : ");
+        System.out.print("*** Debug in "+fctName+" -> ");
         if(o == null){
             String str = "Object given is null\n\n  *** Stack state ***\n\n";
             str += DebugTrack.getStackTraceChild(0);
@@ -155,7 +179,7 @@ public abstract class DebugTrack {
             DebugTrack.showErrMsg(str);
             System.exit(0);
         }else{
-            System.out.println(" *** Debug in '"+fctName+"' -> "+o.toString());
+            System.out.println(o.toString());
         }
     }
     

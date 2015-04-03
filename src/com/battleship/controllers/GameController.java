@@ -36,6 +36,7 @@ public class GameController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private GameModel model = (GameModel)this.m;
     
     
     
@@ -55,7 +56,9 @@ public class GameController extends Controller{
         DebugTrack.showInitMsg("Create GameController controller");
     }
     
+    
     /**
+     * @deprecated not used
      * Create and return the GridPanel view linked with player fleet
      * @param pPan
      * @param pNumPlayer
@@ -71,7 +74,6 @@ public class GameController extends Controller{
     
     
     
-    
 
     //**************************************************************************
     // Functions
@@ -81,6 +83,6 @@ public class GameController extends Controller{
      * @return GameConfig
      */
     public GameConfigModel getGameConfig(){
-        return ((GameModel)this.model).getConfig();
+        return this.model.getConfig();
     }
 }

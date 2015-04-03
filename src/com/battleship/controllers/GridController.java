@@ -9,6 +9,10 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.FleetGridModel;
+import com.battleship.views.app.GridPanel;
+import java.awt.Dimension;
+import java.awt.Point;
 
 
 
@@ -27,6 +31,7 @@ public class GridController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private FleetGridModel model = (FleetGridModel)this.m; //It's Ugly.. I know :p
     
     
     
@@ -47,8 +52,26 @@ public class GridController extends Controller{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    public void targetBoxMap(Point p){
+        this.model.targetBoxMap(p);
+    }
+    
+    public void resetFleetGrid(){
+        this.model.resetFleetGrid();
+    }
     
     
     
     
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return box Dimension
+     * @return Dimension
+     */
+    public Dimension getBoxDimension(){
+        return ((GridPanel)this.v).getBoxDimension();
+    }
 }

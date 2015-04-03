@@ -29,7 +29,6 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     private     GameConfigModel     config;
-    private     FleetGridModel      grid;
     private     int                 playerTurn;
     
     
@@ -53,20 +52,35 @@ public class PlaceBoatsModel extends Model implements GameConstants{
         }
         this.config         = pConfig;
         this.playerTurn     = 0;
+        DebugTrack.showObjectToString(pConfig);
     }
     
     /**
-     * Initialize grid at the start but must be called after object creation
+     * Create grid for all player
      */
-    public void initGrid(){
-        this.createGrid();
+    public void createPlayersGrid(){
+        for(Player p : this.config.getPlayers()){
+            this.createPlayerGrid(p);
+        }
     }
     
     /**
-     * Reset current player fleet grid
+     * Create grid for one player
+     * @param pPlayer 
      */
-    public void resetPlayerGrid(){
-        this.config.getPlayers()[this.playerTurn].getFleet().resetFleetGrid();
+    private void createPlayerGrid(Player pPlayer){
+        int width       = this.config.getGridWidth();
+        int height      = this.config.getGridHeight();
+        switch(this.config.getGridType()){
+            case GRID_TYPE_SQUARE:
+                pPlayer.setFleetGrid(new FleetGridSquare(width, height, null));
+                break;
+            case GRID_TYPE_HEXAGON:
+                pPlayer.setFleetGrid(new FleetGridHexagon(width, height, null));
+                break;
+        }
+        DebugTrack.showObjectToString(pPlayer.getFleet());
+        DebugTrack.showObjectToString(pPlayer);
     }
     
     
@@ -78,58 +92,10 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     // Functions
     //**************************************************************************
     /**
-     * Create grid model without data, owner will be added later, when grid is 
-     * valid.
+     * Reset current player fleet grid
      */
-    private void createGrid(){
-        int width       = this.config.getGridWidth();
-        int height      = this.config.getGridHeight();
-        
-        switch(this.config.getGridType()){
-            case GRID_TYPE_SQUARE:
-                this.grid = new FleetGridSquare(width, height, null);
-                break;
-            case GRID_TYPE_HEXAGON:
-                this.grid = new FleetGridHexagon(width, height, null);
-                break;
-        }
-        this.config.getPlayers()[this.playerTurn].setFleetGrid(this.grid);
-        this.notifyObservers(null);
-        DebugTrack.showObjectToString(this.grid);
-        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn].getFleet());
-        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn]);
-    }
-    
-    
-    /**
-     * Try to set grid to current player. Player has to place boats in grid displayer, 
-     * then, he try to accept this grid and place it in his owned grid. If grid 
-     * is not yet valid (Some boats are not placed), return false and do nothing, 
-     * otherwise, add grid to player and switch player turn 
-     * @return 
-     */
-    public boolean setPlayerFleetGrid(){
-        if (this.grid.isValidFleetGrid()){
-            //this.config.getPlayers()[playerTurn].setFleetGrid(grid);
-            this.grid = null;
-            
-            //If there is one more player to place his grid
-            if(this.isLastPlayer() == false){
-                this.playerTurn++;
-                this.createGrid();
-            }
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    /**
-     * Check if each player are ready (All boats placed)
-     * @return true if ready, otherwise, return false
-     */
-    public boolean areAllPlayerPlaced(){
-        return this.config.areFleetSValid();
+    public void resetPlayerGrid(){
+        this.config.getPlayers()[this.playerTurn].getFleet().resetFleetGrid();
     }
     
     /**
@@ -140,13 +106,33 @@ public class PlaceBoatsModel extends Model implements GameConstants{
         return this.playerTurn >= (this.config.getNbPlayers()-1);
     }
     
+    /**
+     * Switch current player turn. Return an Integer which determine current 
+     * PlaceBoat status
+     * <ul>
+     *  <li>-1 Current player grid is not valid (Some boats are remaining)</li>
+     *  <li>0 All player are placed, the current one was the last one</li>
+     *  <li>1 Fleet placed and it's turn for next player</li>
+     * </ul>
+     * @return -1 invalid grid, 0 last player reached, 1 next player
+     */
+    public int switchPlayer(){
+        if(this.getCurrentPlayer().getFleet().isValidFleetGrid() == false){
+            return -1;
+        }
+        else if(this.isLastPlayer()){
+            return 0;
+        } 
+        else{
+            this.playerTurn++;
+            return 1;
+        }
+    }
     
     
     
     
     
-    
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -180,5 +166,13 @@ public class PlaceBoatsModel extends Model implements GameConstants{
      */
     public Player getCurrentPlayer(){
         return this.config.getPlayers()[this.playerTurn];
+    }
+    
+    /**
+     * Return game configuration
+     * @return GameConfigModel
+     */
+    public GameConfigModel getConfig(){
+        return this.config;
     }
 }
