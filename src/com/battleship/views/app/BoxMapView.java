@@ -5,6 +5,8 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.Config;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -26,11 +28,14 @@ public abstract class BoxMapView{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    protected   int         borderSize;
+    protected   Color       borderColor;
+    protected   Dimension   dimension;
     protected   Point       coordinate;
+    
     protected   boolean     isVisible;
     protected   boolean     isTargeted;
-    protected   Dimension   dimension;
-    protected   int         borderSize;
+    
     
     
     
@@ -52,6 +57,7 @@ public abstract class BoxMapView{
         this.isVisible  = true;
         this.isTargeted = false;
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
+        this.borderColor= Color.BLACK;
     }
     
     
@@ -66,7 +72,10 @@ public abstract class BoxMapView{
      * Draw the BoxMap
      * @param g2 
      */
-    public abstract void draw(Graphics2D g2);
+    public void draw(Graphics2D g2){
+        g2.setStroke(new BasicStroke(this.borderSize));
+        g2.setColor(this.borderColor);
+    }
     
     /*
      * Draw the box with hidden status

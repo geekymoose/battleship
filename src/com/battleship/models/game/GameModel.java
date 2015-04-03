@@ -5,6 +5,8 @@
 package com.battleship.models.game;
 
 import com.battleship.main.DebugTrack;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverModel;
 
 
 
@@ -27,7 +29,7 @@ import com.battleship.main.DebugTrack;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class GameModel extends Model{
+public class GameModel extends Model implements ObserverModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -61,7 +63,7 @@ public class GameModel extends Model{
         this.gridType           = pConfig.getGridType();
         this.listPlayers        = pConfig.getPlayers();
         
-        this.counterTurn        = 0;
+        this.counterTurn        = 1;
         this.currentPlayerTurn  = 0;
     }
     
@@ -79,6 +81,11 @@ public class GameModel extends Model{
     private void switchTurnBehaviors() {
         
     }
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+    
+    }
     
     
     
@@ -94,4 +101,13 @@ public class GameModel extends Model{
     public GameConfigModel getConfig(){
         return this.config;
     }
+    
+    /**
+     * Return nb turn player
+     * @return 
+     */
+    public int getNbTurn(){
+        return this.counterTurn;
+    }
+    
 }

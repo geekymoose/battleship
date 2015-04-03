@@ -110,6 +110,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     
     @Override
     public void draw(Graphics2D g2){
+        super.draw(g2);
         this.drawHex(g2);
     }
     
@@ -126,8 +127,6 @@ public class BoxMapViewHexagon extends BoxMapView{
      * @param g2    Graphics2D element
      */
     private void drawHex(Graphics2D g2) {
-        g2.setStroke(new BasicStroke(this.borderSize));
-        
         if(this.isVisible){
             g2.drawPolygon(this.polygon);
         }else{

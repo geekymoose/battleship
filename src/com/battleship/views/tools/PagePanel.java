@@ -68,8 +68,9 @@ public abstract class PagePanel extends JPanel implements UiElement{
      * be synchronized with its model. But it is impossible during the 
      * model / view / controller creation. This function init hast to be called 
      * juste after this process 
+     * @throws ExecError if unable to init page
      */
-    public abstract void initPage();
+    public abstract void initPage() throws ExecError;
     
     /**
      * Go at next Page. if no next page, do nothing
