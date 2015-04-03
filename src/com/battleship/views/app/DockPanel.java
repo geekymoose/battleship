@@ -8,10 +8,14 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.asset.Config;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -35,8 +39,12 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    
-    
+    private GridBagConstraints gbc          = new GridBagConstraints();
+    private JLabel             l_cruiser    = new JLabel("Cruiser");
+    private JLabel             l_submarine  = new JLabel("Submarine");
+    private JLabel             l_aircraft   = new JLabel("Aircraft carrier");
+    private JLabel             l_destroyer  = new JLabel("Destroyer");
+    private JLabel             l_battleship = new JLabel("Battleship");
     
     
     
@@ -54,12 +62,54 @@ public class DockPanel extends ContentPanel{
     }
     
     private void initComponents(){
-        this.setLayout(new GridLayout(5,1));
-        this.add(new AircraftCarrier());
-        this.add(new Battleship());
-        this.add(new Submarine());
-        this.add(new Cruiser());
-        this.add(new Destroyer());
+        this.setOpaque(false);
+        this.setLayout(new GridBagLayout());
+        //gbc.insets = new Insets(0,0,0,0);
+        l_cruiser   .setForeground(Color.WHITE);
+        l_submarine .setForeground(Color.WHITE);
+        l_destroyer .setForeground(Color.WHITE);
+        l_aircraft  .setForeground(Color.WHITE);
+        l_battleship.setForeground(Color.WHITE);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        this.add(new AircraftCarrier(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        this.add(l_aircraft, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.add(new Battleship(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        this.add(l_battleship, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        this.add(new Submarine(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        this.add(l_submarine, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        this.add(new Cruiser(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        this.add(l_cruiser, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        this.add(new Destroyer(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        this.add(l_destroyer, gbc);
     }
     
     
@@ -102,6 +152,7 @@ public class DockPanel extends ContentPanel{
         protected DockBoats(){
             this.setPreferredSize(Config.getDimValues_dim("dim-dockboat"));
             this.addMouseListener(this);
+            this.setOpaque(false);
         }
         
         @Override
