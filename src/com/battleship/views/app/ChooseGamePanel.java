@@ -122,7 +122,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : AI");
                     Session.setGameMode(MODE_AI);
-                    frame.rooting(Config.getRootsValues("config"), null);
+                    frame.rooting(Config.getRootsValues("config"), true);
                 }
             }
         );
@@ -132,7 +132,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : V2");
                     Session.setGameMode(MODE_V2);
-                    //To do later
+                    frame.rooting(Config.getRootsValues("config"), true);
                 }
             }
         );

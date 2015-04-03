@@ -209,10 +209,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         int mode = Session.getGameMode();
         switch(mode){
             case MODE_AI:
+                break;
+            case MODE_V2:
                 boolean gameReady       = controller.areAllPlayerPlaced();
                 boolean isAccpetedGrid  = controller.acceptGrid();
                 if(isAccpetedGrid == true && gameReady == true){
-                    this.frame.rooting(Config.getRootsValues("game"), null);
+                    this.frame.rooting(Config.getRootsValues("game"), true);
                 } 
                 else if (isAccpetedGrid == true){
                     this.displayBreakPanel();
@@ -222,8 +224,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                             + "Do you want to figth with less boats than your enemy? "
                             + "Woow! We've got a warrior here!");
                 }
-                break;
-            case MODE_V2:
                 break;
             case MODE_LAN:
                 break;
