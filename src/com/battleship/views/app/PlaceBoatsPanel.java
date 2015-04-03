@@ -87,7 +87,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.createGrid();
         this.initComponents();
-        
     }
     
     /*
@@ -114,16 +113,16 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         
         p_container         .setLayout(new BorderLayout());
         
-        p_buttonPanel   .setOpaque(false);
-        p_container     .setOpaque(false);
-        p_bigContainer  .setOpaque(false);
-        p_grid          .setOpaque(false);
-        p_dock          .setOpaque(false);
+        p_buttonPanel       .setOpaque(false);
+        p_container         .setOpaque(false);
+        p_bigContainer      .setOpaque(false);
+        p_grid              .setOpaque(false);
+        p_dock              .setOpaque(false);
         
-        p_container.add(p_grid, BorderLayout.CENTER);
-        p_container.add(p_dock, BorderLayout.EAST);
-        p_container.add(p_buttonPanel, BorderLayout.SOUTH);
-        p_bigContainer.add(p_container, gbc);
+        p_container         .add(p_grid, BorderLayout.CENTER);
+        p_container         .add(p_dock, BorderLayout.EAST);
+        p_container         .add(p_buttonPanel, BorderLayout.SOUTH);
+        p_bigContainer      .add(p_container, gbc);
         
         this.add(p_bigContainer, BorderLayout.CENTER);
         this.setBtnActions();

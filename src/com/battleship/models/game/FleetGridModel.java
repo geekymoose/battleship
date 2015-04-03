@@ -4,7 +4,6 @@
  */
 package com.battleship.models.game;
 
-import com.battleship.main.DebugTrack;
 import com.battleship.models.sprites.Boat;
 import com.battleship.observers.ObserverModel;
 import java.util.ArrayList;

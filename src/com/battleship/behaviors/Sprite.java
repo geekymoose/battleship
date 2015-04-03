@@ -21,9 +21,22 @@ package com.battleship.behaviors;
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see BoxMap
  */
 public interface Sprite {
+    public static int   NB_IMG              = 10;
+    public static int   IMG_0_DEFAULT       = 0;
+    public static int   IMG_1_HOVER         = 1;
+    public static int   IMG_2_DESTROYED     = 2;
+    public static int   IMG_3_NOT_VALID     = 3;
+    public static int   IMG_4_VALID         = 4;
+    
+    public static int   IMG_H_5_DEFAULT     = 5;
+    public static int   IMG_H_6_HOVER       = 6;
+    public static int   IMG_H_7_DESTROYED   = 7;
+    public static int   IMG_H_8_NOT_VALID   = 8;
+    public static int   IMG_H_9_VALID       = 9;
     
     /**
      * Hit sprite by a shot.
@@ -31,11 +44,39 @@ public interface Sprite {
      */
     public boolean hit();
     
-    
     /**
      * Check if this sprite could be hit (For example, this sprite could have
      * already been hit.
      * @return true if can be hit, otherwise, return false
      */
     public boolean canBeHit();
+    
+    /**
+     * Return the Sprite image identification. Image should be Loaded in an array. 
+     * Sprite constants are linked with image position in this array. idImg should 
+     * be a Sprite constants and automatically return image needed
+     * @param idImg image to return (Use Sprite constants)
+     * @return id image 
+     */
+    public int getImgId(int idImg);
+    
+    /**
+     * Set all image id. If unknown value is given, return default image
+     * @param pDef          default image
+     * @param pDestroyed    destroyed image
+     * @param pHover        hover image
+     * @param pValid        valid image
+     * @param pNovalid      not valid
+     */
+    public void setImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
+    
+    /**
+     * Set all image id for hidden mode. If unknown value is given, return default image
+     * @param pDef          default image
+     * @param pDestroyed    destroyed image
+     * @param pHover        hover image
+     * @param pValid        valid image
+     * @param pNovalid      not valid
+     */
+    public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
 }

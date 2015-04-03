@@ -5,6 +5,7 @@
 
 package com.battleship.views.app;
 
+import com.battleship.behaviors.Sprite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -48,9 +49,10 @@ public class BoxMapViewSquare extends BoxMapView{
      * @param coordinateX   coordinate in the grid
      * @param coordinateY   coordinate in the grid
      * @param pDim          BoxDefault dimension
+     * @param pSprite       Default sprite
      */
-    public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim){
-        super(coordinateX, coordinateY, pDim);
+    public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite){
+        super(coordinateX, coordinateY, pDim, pSprite);
         this.rect = this.createRectangle(this.coordinate);
     }
     
@@ -83,7 +85,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     public void draw(Graphics2D g2){
         super.draw(g2);
-        if(this.isVisible){
+        if(this.isHidden == false){
             g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
         }else{
             this.drawHidden(g2);

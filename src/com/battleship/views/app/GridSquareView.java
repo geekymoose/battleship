@@ -7,6 +7,7 @@ package com.battleship.views.app;
 
 import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.models.sprites.Water;
 import com.battleship.observers.ObservableModel;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
@@ -54,7 +55,7 @@ public class GridSquareView extends GridPanel{
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim);
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim, new Water());
             }
         }
     }

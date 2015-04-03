@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.behaviors.Sprite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -46,9 +47,10 @@ public class BoxMapViewHexagon extends BoxMapView{
      * @param coordinateX   coordinate in the grid
      * @param coordinateY   coordinate in the grid
      * @param pDim          BoxDefault dimension
+     * @param pSprite       Default sprite
      */
-    public BoxMapViewHexagon(int coordinateX, int coordinateY, Dimension pDim){
-        super(coordinateX, coordinateY, pDim);
+    public BoxMapViewHexagon(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite){
+        super(coordinateX, coordinateY, pDim, pSprite);
         this.initValues(this.dimension.width);
         this.polygon = this.createHexagon(coordinateX, coordinateY);
     }
@@ -126,7 +128,7 @@ public class BoxMapViewHexagon extends BoxMapView{
      * @param g2    Graphics2D element
      */
     private void drawHex(Graphics2D g2) {
-        if(this.isVisible){
+        if(this.isHidden == false){
             g2.drawPolygon(this.polygon);
         }else{
             this.drawHidden(g2);
@@ -151,4 +153,5 @@ public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     // Functions
     //**************************************************************************
+
 }
