@@ -54,6 +54,7 @@ public class DockPanel extends ContentPanel{
     }
     
     private void initComponents(){
+        this.setOpaque(false);
         this.setLayout(new GridLayout(5,1));
         this.add(new AircraftCarrier());
         this.add(new Battleship());
@@ -102,6 +103,7 @@ public class DockPanel extends ContentPanel{
         protected DockBoats(){
             this.setPreferredSize(Config.getDimValues_dim("dim-dockboat"));
             this.addMouseListener(this);
+            this.setOpaque(false);
         }
         
         @Override
