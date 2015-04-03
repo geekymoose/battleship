@@ -67,6 +67,7 @@ public class PlaceBoatsController extends GridController{
     public void resetFleetGrid(){
         ((PlaceBoatsModel)this.model).resetPlayerGrid();
     }
+    
     /**
      * Try to valid current player fleet. Check if fleet is valid. If ok, 
      * add fleet to player and return true
@@ -74,6 +75,14 @@ public class PlaceBoatsController extends GridController{
      */
     public boolean acceptGrid(){
         return ((PlaceBoatsModel)this.model).setPlayerFleetGrid(); 
+    }
+    
+    /**
+     * Check if all player are placed
+     * @return true if all placed, otherwise, return false
+     */
+    public boolean areAllPlayerPlaced(){
+        return ((PlaceBoatsModel)this.model).areAllPlayerPlaced();
     }
     
     

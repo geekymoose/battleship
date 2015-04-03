@@ -172,7 +172,6 @@ public class GameConfigModel extends Model implements GameConstants{
     //**************************************************************************
     // Check Functions
     //**************************************************************************
-    
     /**
      * Check if current configuration is default config
      * @return true if default config, otherwise,return false
@@ -189,6 +188,20 @@ public class GameConfigModel extends Model implements GameConstants{
      */
     public boolean isValid(){
         //return this.currentNbPlayers == 2;
+        return true;
+    }
+    
+    /**
+     * Check if player are ready
+     * @return return true if ready, otherwise, return false
+     */
+    public boolean areFleetSValid(){
+        for(Player p : this.listPlayers){
+            if(p.getFleet()==null || p.getFleet().isValidFleetGrid() == false){
+                DebugTrack.showObjectToString(p);
+                return false;
+            }
+        }
         return true;
     }
     
