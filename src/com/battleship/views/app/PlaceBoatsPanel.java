@@ -108,16 +108,13 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         p_bigContainer      = new JPanel();
         
         gbc                 = new GridBagConstraints();
-        gbc.ipadx = 50;
-        gbc.ipady = 100;
+        p_bigContainer      .setLayout(new GridBagLayout());
+        this.p_buttonPanel  .setLayout(new FlowLayout());
+        this.p_buttonPanel  .add(b_back);
+        this.p_buttonPanel  .add(b_reset);
+        this.p_buttonPanel  .add(b_valide);
         
-        p_bigContainer.setLayout(new GridBagLayout());
-        this.p_buttonPanel.setLayout(new FlowLayout());
-        this.p_buttonPanel.add(b_back);
-        this.p_buttonPanel.add(b_reset);
-        this.p_buttonPanel.add(b_valide);
-        
-        p_container.setLayout(new BorderLayout());
+        p_container         .setLayout(new BorderLayout());
         
         p_buttonPanel   .setOpaque(false);
         p_container     .setOpaque(false);
@@ -181,7 +178,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                                     + "place his boats!!");
         this.remove(breakPanel);
         //this.resetGrid();
-        this.add(this.p_grid, BorderLayout.CENTER);
+        p_container.add(this.p_grid, BorderLayout.CENTER);
         
         this.revalidate();
         this.repaint();
