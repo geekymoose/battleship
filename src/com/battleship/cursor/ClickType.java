@@ -15,15 +15,13 @@ import com.battleship.controllers.GridController;
  * <p>
  * The ClickType interface provides function to use during click performed. 
  * All coordinate values are pixel coordinate. In order to be used with a grid 
- * coordinate, use tools as GridCalculator
+ * coordinate, use tools from controller as GridController
  * </p>
  * 
  * @date    Apr 2, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
- * 
- * @see GridCalculator
  */
 public interface ClickType {
     

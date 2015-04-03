@@ -9,7 +9,6 @@ import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.observers.ObservableModel;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
@@ -65,17 +64,10 @@ public class GridSquareView extends GridPanel{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    @Override
-    protected Point pxToCoor(int pX, int pY){
-        int x = pX/this.dimBox.width;
-        int y = pY/this.dimBox.height;
-        return new Point(x, y);
-    }
     
     
     @Override
     public void mouseMoved(MouseEvent e) {
         super.mouseMoved(e);
-        Point p = pxToCoor(e.getX(), e.getY());
     }
 }

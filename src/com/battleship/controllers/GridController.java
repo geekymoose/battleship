@@ -18,8 +18,10 @@ import com.battleship.main.DebugTrack;
  * <h1>GridController</h1>
  * <p>public class GridController</p>
  *
- * @author Constantin MASSON
- * @date Apr 2, 2015
+ * @date    Apr 2, 2015
+ * @author  Constantin MASSON
+ * @author  Jessica FAVIN
+ * @author  Anthony CHAFFOT
  */
 public class GridController extends Controller{
     //**************************************************************************
@@ -45,4 +47,8 @@ public class GridController extends Controller{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    
+    
+    
+    
 }

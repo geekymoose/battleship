@@ -35,6 +35,7 @@ public class Cursor{
     //**************************************************************************
     private     final ClickType     clickHexaPlaceBoat;
     private     final ClickType     clickSquarePlaceBoat;
+    private     final ClickType     clickNoAction;
     private     ClickType           clickType;
     
     
@@ -51,6 +52,7 @@ public class Cursor{
     public Cursor(){
         this.clickHexaPlaceBoat     = new ClickHexaPlaceBoat();
         this.clickSquarePlaceBoat   = new ClickSquarePlaceBoat();
+        this.clickNoAction          = new ClickNoAction();
         
         //Default value
         this.clickType              = null;
@@ -150,5 +152,8 @@ public class Cursor{
     }
     public void setClickSquarePlaceBoat(){
         this.clickType = this.clickSquarePlaceBoat;
+    }
+    public void setClickNoAction(){
+        this.clickType = this.clickNoAction;
     }
 }

@@ -6,7 +6,6 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.PlaceBoatsModel;
 
 
