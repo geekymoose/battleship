@@ -64,7 +64,6 @@ public class Config {
     // Variables
     //**************************************************************************
     private static String   themeFolderPath;
-    public  static final  boolean  debug = true;
     
     
     

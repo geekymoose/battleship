@@ -4,7 +4,6 @@
  */
 package com.battleship.models.game;
 
-import com.battleship.asset.Config;
 import com.battleship.main.DebugTrack;
 
 

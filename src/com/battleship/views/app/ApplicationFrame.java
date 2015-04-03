@@ -123,6 +123,8 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
         //Actualize components
         this.getContentPane().add((JPanel)this.p_mainContent);
         this.getContentPane().revalidate();
+        this.p_mainContent.repaint();
+        this.p_mainContent.reloadUI();
         this.pack();
         this.setLocationRelativeTo(null);
     }

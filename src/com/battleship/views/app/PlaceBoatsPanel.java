@@ -52,6 +52,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     
     private     Player                          currentPlayer;
     private     boolean                         isLastPlayer;
+    private     Dimension                       dimBox;
     
     
     
@@ -75,6 +76,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.currentPlayer  = this.controller.getCurrentPlayer();
         this.isLastPlayer   = false;
         this.grid           = null;
+        this.dimBox         =  Config.getDimValues_dim("dim-placeboats-boxmap");
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.createGrid();
@@ -108,16 +110,15 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
      * @throws ExecError 
      */
     private void createGrid() throws ExecError{
-        Dimension   dim     = Config.getDimValues_dim("dim-placeboats-boxmap");
         int         width   = this.controller.getWidth();
         int         height  = this.controller.getHeight();
         int         type    = this.controller.getGridType();
         switch(this.controller.getGridType()){
             case GRID_TYPE_SQUARE:
-                this.grid = new GridSquareView(this, controller, width, height, type, dim);
+                this.grid = new GridSquareView(this, controller, width, height, type, dimBox);
                 break;
             case GRID_TYPE_HEXAGON:
-                this.grid = new GridHexaView(this, controller, width, height, type, dim);
+                this.grid = new GridHexaView(this, controller, width, height, type, dimBox);
                 break;
         }
         this.add(this.grid, BorderLayout.CENTER);
