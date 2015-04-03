@@ -66,7 +66,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
      * Reset current player fleet grid
      */
     public void resetPlayerGrid(){
-        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn].getFleet());
+        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn]);
         this.config.getPlayers()[this.playerTurn].getFleet().resetFleetGrid();
     }
     
@@ -97,6 +97,8 @@ public class PlaceBoatsModel extends Model implements GameConstants{
         this.config.getPlayers()[this.playerTurn].setFleetGrid(this.grid);
         this.notifyObservers(null);
         DebugTrack.showObjectToString(this.grid);
+        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn].getFleet());
+        DebugTrack.showObjectToString(this.config.getPlayers()[this.playerTurn]);
     }
     
     
@@ -110,11 +112,11 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     public boolean setPlayerFleetGrid(){
         if (this.grid.isValidFleetGrid()){
             //this.config.getPlayers()[playerTurn].setFleetGrid(grid);
-            this.playerTurn++;
             this.grid = null;
             
             //If there is one more player to place his grid
             if(this.isLastPlayer() == false){
+                this.playerTurn++;
                 this.createGrid();
             }
             return true;
@@ -124,12 +126,22 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     }
     
     /**
+     * Check if each player are ready (All boats placed)
+     * @return true if ready, otherwise, return false
+     */
+    public boolean areAllPlayerPlaced(){
+        return this.config.areFleetSValid();
+    }
+    
+    /**
      * Check if current player who place boats is the last
      * @return 
      */
-    public boolean isLastPlayer(){
+    private boolean isLastPlayer(){
         return this.playerTurn >= (this.config.getNbPlayers()-1);
     }
+    
+    
     
     
     

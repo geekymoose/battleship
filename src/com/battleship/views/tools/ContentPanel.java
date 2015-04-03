@@ -37,15 +37,16 @@ public abstract class ContentPanel extends JPanel implements UiElement{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new Content panel include in a PagePanel. 
+     * Create a new Content panel include in a PagePanel. (Or in nothing if 
+     * null given)
      * @param pParentPage PagePanel which contains this ContentPanel
-     * @throws ExecError 
      */
-    public ContentPanel(JPanel pParentPage) throws ExecError{
-        if(pParentPage == null){
-            throw new ExecError();
-        }
+    public ContentPanel(JPanel pParentPage){
         this.parentPage = pParentPage;
+    }
+    
+    public ContentPanel(){
+        this.parentPage = null;
     }
     
     
@@ -78,5 +79,13 @@ public abstract class ContentPanel extends JPanel implements UiElement{
      */
     public JPanel getParentPage(){
         return this.parentPage;
+    }
+    
+    /**
+     * Set content parent
+     * @param pParent 
+     */
+    public void setParent(JPanel pParent){
+        this.parentPage = pParent;
     }
 }

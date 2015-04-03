@@ -51,7 +51,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     AbstractButton                  b_back;
     
     private     Player                          currentPlayer;
-    private     boolean                         isLastPlayer;
     private     Dimension                       dimBox;
     
     
@@ -74,7 +73,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         }
         this.controller     = pController;
         this.currentPlayer  = this.controller.getCurrentPlayer();
-        this.isLastPlayer   = false;
         this.grid           = null;
         this.dimBox         =  Config.getDimValues_dim("dim-placeboats-boxmap");
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
@@ -143,15 +141,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         JPanel breakPanel = new JPanel();
         breakPanel.setBackground(Color.BLACK);
         breakPanel.setPreferredSize(this.grid.getPreferredSize());
-        System.out.println("A"+breakPanel.toString());
         this.add(breakPanel, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
-        int choice = UiDialog.showConfirmDialog("Next Player", 
-                                   "Beware! Next player has to"
-                                    + "place his boats!!");
+        UiDialog.showWarning("Next Player", "Beware! Next player has to place his boats!!");
         this.remove(breakPanel);
-        //this.resetGrid();
+        this.resetGrid();
         this.add(this.grid, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
@@ -207,7 +202,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     public void update(ObservableModel o, Object arg){
         PlaceBoatsModel m   = (PlaceBoatsModel)o;
         this.currentPlayer  = m.getCurrentPlayer();
-        this.isLastPlayer   = m.isLastPlayer();
     }
     
     @Override
@@ -215,11 +209,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         int mode = Session.getGameMode();
         switch(mode){
             case MODE_AI:
-                boolean isAccpetedGrid = controller.acceptGrid();
-                if(isAccpetedGrid == true && this.isLastPlayer){
+                boolean gameReady       = controller.areAllPlayerPlaced();
+                boolean isAccpetedGrid  = controller.acceptGrid();
+                if(isAccpetedGrid == true && gameReady == true){
                     this.frame.rooting(Config.getRootsValues("game"), null);
                 } 
-                else if (isAccpetedGrid){
+                else if (isAccpetedGrid == true){
                     this.displayBreakPanel();
                 }
                 else {
