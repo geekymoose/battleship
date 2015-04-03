@@ -23,10 +23,12 @@ import javax.swing.JOptionPane;
  * @author  Jessica FAVIN
  */
 public abstract class DebugTrack {
+    public static final boolean  debug_mode = true;
     //**************************************************************************
     // Data process
     //**************************************************************************
     public static void isValidConstantsName(Object o, String name){
+        if(debug_mode == false){return;}
         if(o==null){
             StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
             String  fctName     = stackTraceElements[3].getClassName();
@@ -44,7 +46,8 @@ public abstract class DebugTrack {
         }
     }
     
-    public static String getStackTraceChild(int nb){
+    private static String getStackTraceChild(int nb){
+        if(debug_mode == false){return "";}
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         String  fctName     = stackTraceElements[nb].getClassName();
         String  fileName    = stackTraceElements[nb].getFileName();
@@ -70,6 +73,7 @@ public abstract class DebugTrack {
      * @param str message to display
      */
     public static void showInitMsg(String str){
+        if(debug_mode == false){return;}
         System.out.println(" * "+str);
     }
     
@@ -78,6 +82,7 @@ public abstract class DebugTrack {
      * @param str message to display
      */
     public static void showExecMsg(String str){
+        if(debug_mode == false){return;}
         System.out.println(" -> "+str);
     }
     
@@ -87,6 +92,7 @@ public abstract class DebugTrack {
      * @param value     constant actual value
      */
     public static void showInitConstant(String name, String value){
+        if(debug_mode == false){return;}
         while(name.length()<15){ name += " "; }
         System.out.println(" *** Constants -> name : "+name+"\t-\tvalue : "+value);
     }
@@ -97,6 +103,7 @@ public abstract class DebugTrack {
      * @param value value created
      */
     public static void showInitConstant(String type, int value){
+        if(debug_mode == false){return;}
         while(type.length()<15){ type += " "; }
         System.out.println(" *** Constants -> name : "+type+"\t-\tvalue : "+value);
     }
@@ -107,6 +114,7 @@ public abstract class DebugTrack {
      * @param value value created
      */
     public static void showInitConstant(String type, Dimension value){
+        if(debug_mode == false){return;}
         while(type.length()<15){ type += " "; }
         System.out.println(" *** Constants -> name : "+type+"\t-\tvalue : "+value.toString());
     }
@@ -118,6 +126,7 @@ public abstract class DebugTrack {
      * @param value value created
      */
     public static void showInitData(String type, String value){
+        if(debug_mode == false){return;}
         while(type.length()<15){ type += " "; }
         System.out.println(" *** Loaded -> type : "+type+"\t-\tvalue : "+value);
     }
@@ -129,6 +138,7 @@ public abstract class DebugTrack {
      * @param data  ArrayList of data
      */
     public static void showInitData(String type, ArrayList<String> data){
+        if(debug_mode == false){return;}
         for(String str:data){
             DebugTrack.showInitData("Theme path", str);
         }
@@ -146,6 +156,7 @@ public abstract class DebugTrack {
      * @param str message to display
      */
     public static void showErrMsg(String str){
+        if(debug_mode == false){return;}
         System.err.println(str);
     }
     
@@ -162,6 +173,7 @@ public abstract class DebugTrack {
      * @param pMsg      Message to display
      */
     public static void showError(String pTitle, String pMsg){
+        if(debug_mode == false){return;}
         JOptionPane opt = new JOptionPane();
         opt.showMessageDialog(null, pMsg, pTitle, JOptionPane.ERROR_MESSAGE);
     }
@@ -178,6 +190,7 @@ public abstract class DebugTrack {
      * @param o object to display
      */
     public static void showObjectToString(Object o){
+        if(debug_mode == false){return;}
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         String  fctName     = stackTraceElements[2].getClassName();
         System.out.print("Debug in "+fctName+" - msg : ");

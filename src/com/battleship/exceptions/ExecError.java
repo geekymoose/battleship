@@ -159,10 +159,6 @@ public class ExecError extends Exception {
                 break;
         }
         
-        if(Config.debug == true){
-            str += " || \n\n"+DebugTrack.getStackTraceChild(2);
-            str += " || \n\n"+DebugTrack.getStackTraceChild(3);
-        }
         DebugTrack.showErrMsg(str);
         return str;
     }
