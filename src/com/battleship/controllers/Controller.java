@@ -39,7 +39,7 @@ public abstract class Controller <V,M>{
     //**************************************************************************
     protected Controller(M pModel) throws ExecError{
         if(pModel==null){
-            throw new ExecError();
+            throw new ExecError(430, "controller");
         }
         this.model          = pModel;
     }

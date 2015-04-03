@@ -44,6 +44,22 @@ public abstract class DebugTrack {
         }
     }
     
+    public static String getStackTraceChild(int nb){
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        String  fctName     = stackTraceElements[nb].getClassName();
+        String  fileName    = stackTraceElements[nb].getFileName();
+        String  methodName  = stackTraceElements[nb].getMethodName();
+        int     nbLine      = stackTraceElements[nb].getLineNumber();
+
+        String msg = "Error data : \n"
+                     +"\tFile : "+fileName+"\n"
+                     +"\tMethod : "+methodName+"\n"
+                     +"\tAt line : "+nbLine+"\n";
+        DebugTrack.showErrMsg(msg);
+        //DebugTrack.showError("Error", msg);
+        return msg;
+    }
+    
     
     
     //**************************************************************************

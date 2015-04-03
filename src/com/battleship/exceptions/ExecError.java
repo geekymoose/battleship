@@ -4,6 +4,7 @@
  */
 package com.battleship.exceptions;
 
+import com.battleship.asset.Config;
 import com.battleship.main.DebugTrack;
 import java.util.ArrayList;
 
@@ -119,28 +120,38 @@ public class ExecError extends Exception {
             case 404:
                 str = "Page not found :/";
                 break;
+            case 430:
+                str = "Null controller in creation class "+this.extraData;
+                break;
             
                 
             //Theme error
             case 501:
                 str = "Unable to display themes list";
                 break;
-                
             case 502:
                 str = "Unable to load the theme! "
                        +"Theme "+this.extraData
                        +" doesn't exists in theme folder";
                 break;
-            
             case 503:
                 str = "Unable to load theme, some file are missing! "
                        +"Files "+this.extraData+"are missing!";
                 break;
             
+                
             //XML DOM Parser error
             case 604:
                 str = "Error with xml files";
                 break;
+                
+                
+            //SwingFactory error
+            case 700:
+                str = "Error in swingFactory";
+                break;
+                
+                
                 
             //Default error
             default:
@@ -148,6 +159,10 @@ public class ExecError extends Exception {
                 break;
         }
         
+        if(Config.debug == true){
+            str += " || \n\n"+DebugTrack.getStackTraceChild(2);
+            str += " || \n\n"+DebugTrack.getStackTraceChild(3);
+        }
         DebugTrack.showErrMsg(str);
         return str;
     }

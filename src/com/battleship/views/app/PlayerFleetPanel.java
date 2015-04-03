@@ -6,10 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
-import com.battleship.asset.Config;
-import com.battleship.asset.Session;
 import com.battleship.views.tools.ContentPanel;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 
 
@@ -33,17 +30,21 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // VARIABLES 
     //**************************************************************************
-    private final GridPanel fleetGrid;
+    private GridPanel fleetGrid;
     
     
     
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public PlayerFleetPanel(JPanel pParentPage, GridPanel pFleet) throws ExecError{
+    public PlayerFleetPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
+    }
+    
+    public void setFleetGrid(GridPanel pFleet){
         this.fleetGrid = pFleet;
         this.add(this.fleetGrid);
         this.fleetGrid.hideAllBoxMap();
     }
+    
 }

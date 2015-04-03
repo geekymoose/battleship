@@ -155,12 +155,15 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     //**************************************************************************
     @Override
     public void mouseClicked(MouseEvent e){
+        this.cursor.clickClicked(e, controller);
     }
     @Override
     public void mousePressed(MouseEvent e){
+        this.cursor.clickPressed(e, controller);
     }
     @Override
     public void mouseReleased(MouseEvent e){
+        this.cursor.clickReleased(e, controller);
     }
     @Override
     public void mouseEntered(MouseEvent e){
@@ -173,5 +176,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     }
     @Override
     public void mouseMoved(MouseEvent e){
+        this.cursor.mouseCursorMoved(e, controller);
     }
 }

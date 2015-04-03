@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.Config;
 import com.battleship.main.DebugTrack;
 
 
@@ -31,6 +32,7 @@ public class GameModel extends Model{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private     GameConfigModel         config;
     private     final int               gridType;
     private     final int               gridWidth;
     private     final int               gridHeight;
@@ -54,13 +56,18 @@ public class GameModel extends Model{
      */
     public GameModel(GameConfigModel pConfig) {
         DebugTrack.showInitMsg("Create GameModel");
-        this.gridWidth              = pConfig.getGridWidth();
-        this.gridHeight             = pConfig.getGridHeight();
-        this.gridType               = pConfig.getGridType();
-        this.listPlayers            = pConfig.getPlayers();
+        this.config             = pConfig;
+        this.gridWidth          = pConfig.getGridWidth();
+        this.gridHeight         = pConfig.getGridHeight();
+        this.gridType           = pConfig.getGridType();
+        this.listPlayers        = pConfig.getPlayers();
         
-        this.counterTurn            = 0;
-        this.currentPlayerTurn      = 0;
+        this.counterTurn        = 0;
+        this.currentPlayerTurn  = 0;
+    }
+    
+    public void initMap(){
+        
     }
     
     
@@ -81,4 +88,11 @@ public class GameModel extends Model{
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
+    /**
+     * Return game config used by this game
+     * @return 
+     */
+    public GameConfigModel getConfig(){
+        return this.config;
+    }
 }

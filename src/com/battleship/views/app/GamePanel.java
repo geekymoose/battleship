@@ -54,11 +54,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * Create a new Game panel
      * @param pFrame        frame containing this panel
      * @param pController   controller for this page
-     * @param pFleet        grid player
-     * @param pRadar        radar
      * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(WindowFrame pFrame, GameController pController, GridPanel pFleet, GridPanel pRadar) 
+    public GamePanel(WindowFrame pFrame, GameController pController) 
     throws ExecError{
         super(pFrame);
         if(pController == null){
@@ -67,12 +65,13 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.controller = pController;
         this.p_headbar  = new HeadBar();
         this.gc         = new GridBagConstraints();
-        this.initComponents(pFleet, pRadar);
+        this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
     }
     
     @Override
     public void initPage(){
+        
     }
     
     
@@ -82,11 +81,11 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
-    private void initComponents(GridPanel pFleet, GridPanel pRadar) throws ExecError{
+    private void initComponents() throws ExecError{
         p_centerPane    = new JPanel();
         p_info          = new InformationPanel();
-        p_fleet         = new PlayerFleetPanel(this, pFleet);
-        p_radar         = new RadarPanel(this, pRadar);
+        p_fleet         = new PlayerFleetPanel(this);
+        p_radar         = new RadarPanel(this);
         p_chat          = new ChatPanel();
         
         this            .setLayout(new BorderLayout());
@@ -111,6 +110,10 @@ public class GamePanel extends PagePanel implements ObserverModel{
         gc.gridx        = 1;
         gc.gridy        = 0;
         p_centerPane    .add(p_fleet, gc);
+        
+        //Create fleet
+        this.p_fleet.setFleetGrid(this.controller.initGridPlayer(this.p_fleet, 0));
+        this.p_radar.setRadarGrid(this.controller.initGridPlayer(this.p_radar, 1));
         
         this.add(p_headbar, BorderLayout.NORTH);
         this.add(p_centerPane, BorderLayout.CENTER);

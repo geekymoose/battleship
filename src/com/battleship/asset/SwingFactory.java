@@ -7,9 +7,12 @@ package com.battleship.asset;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GameConfigController;
+import com.battleship.controllers.GameController;
+import com.battleship.controllers.GridController;
 import com.battleship.controllers.PlaceBoatsController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.FleetGridModel;
 
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
@@ -17,9 +20,14 @@ import com.battleship.models.game.PlaceBoatsModel;
 
 import com.battleship.views.app.GameConfigPanel;
 import com.battleship.views.app.GamePanel;
+import com.battleship.views.app.GridHexaView;
+import com.battleship.views.app.GridPanel;
+import com.battleship.views.app.GridSquareView;
 import com.battleship.views.app.PlaceBoatsPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
+import java.awt.Dimension;
+import javax.swing.JPanel;
 
 
 
@@ -99,8 +107,7 @@ public abstract class SwingFactory implements GameConstants{
             return SwingFactory.view_placeBoatsPanel;
         }
         if(SwingFactory.model_gameConfig == null){
-            DebugTrack.showErrMsg("Error in loadPlaceBoats - add error msg");
-            throw new ExecError();
+            throw new ExecError(700, "gameConfig");
         }
         PlaceBoatsModel         m = new PlaceBoatsModel(SwingFactory.model_gameConfig);
         PlaceBoatsController    c = new PlaceBoatsController(m);
@@ -126,24 +133,52 @@ public abstract class SwingFactory implements GameConstants{
             return SwingFactory.view_game;
         }
         if(SwingFactory.model_gameConfig == null){
-            DebugTrack.showErrMsg("Error in class SwingFactory : loadGame");
-            throw new ExecError();
+            throw new ExecError(700, "gameConfig");
         }
         
         GameConfigModel     config      = SwingFactory.model_gameConfig;
-        //GridPanel           playerGrid  = SwingFactory.view_fleetGridSessPlayer;
-        //GridPanel           enemyGrid   = SwingFactory.view_fleetGridSessPlayer;
-        /*
         GameModel           m           = new GameModel(config);
         GameController      c           = new GameController(m);
-        GamePanel           v           = new GamePanel(pFrame, c,);
+        GamePanel           v           = new GamePanel(pFrame, c);
         m.addObserver(v);
         c.setView(v);
         v.initPage();
         SwingFactory.model_gameModel    = m;
         SwingFactory.view_game          = v;
         return v;
-        */
-        return null;
+    }
+    
+    
+    /**
+     * Generate the view grid for game
+     * @param parent
+     * @param pModel
+     * @param pDim
+     * @return
+     * @throws ExecError 
+     */
+    public static GridPanel loadGridPanel(JPanel parent, FleetGridModel pModel, Dimension pDim) 
+    throws ExecError{
+        if(SwingFactory.model_gameConfig == null){
+            throw new ExecError(700, "gameConfig");
+        }
+        GameConfigModel config  = SwingFactory.model_gameConfig;
+        int             width   = config.getGridWidth();
+        int             height  = config.getGridHeight();
+        int             type    = config.getGridType();
+        
+        GridController      c       = new GridController(pModel);
+        GridPanel           v       = null;
+        switch(type){
+            case GameConstants.GRID_TYPE_SQUARE:
+                v = new GridSquareView(parent, c, width, height, type, pDim);
+                break;
+            case GameConstants.GRID_TYPE_HEXAGON:
+                v  = new GridHexaView(parent, c, width, height, type, pDim);
+                break;
+        }
+        pModel.addObserver(v);
+        c.setView(v);
+        return v;
     }
 }

@@ -6,9 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
-import com.battleship.asset.Config;
 import com.battleship.views.tools.ContentPanel;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 
 
@@ -30,14 +28,17 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // VARIABLES 
     //**************************************************************************
-    private final GridPanel radarGrid;
+    private GridPanel radarGrid;
     
     
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public RadarPanel(JPanel pParentPage, GridPanel pRadar) throws ExecError{
+    public RadarPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
+    }
+    
+    public void setRadarGrid(GridPanel pRadar){
         this.radarGrid = pRadar;
         this.add(this.radarGrid);
         this.radarGrid.hideAllBoxMap();
