@@ -286,7 +286,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         if(this.controller.isValidConfig()){
             switch(mode){
                 case MODE_AI:
-                    System.out.println("DEBUG in GameConfig: "+gridType);
                     frame.rooting(Config.getRootsValues("place-boats"), null);
                     break;
                 case MODE_V2:
@@ -303,7 +302,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     protected void goPreviousPage(){
         String msg      = "Are you sure you want to go back? Current configuration could be lost";
         String title    = "Warning";
-        int choice = UiDialog.showConfirmWarning(title, msg);
+        int choice = UiDialog.showYesNoWarning(title, msg);
         if(choice == JOptionPane.OK_OPTION){
             int mode = Session.getGameMode();
             if(this.controller.isValidConfig()){

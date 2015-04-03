@@ -4,6 +4,8 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.main.DebugTrack;
+import com.battleship.models.sprites.Water;
 import com.battleship.observers.ObservableModel;
 
 
@@ -36,6 +38,12 @@ public class FleetGridSquare extends FleetGridModel{
     public FleetGridSquare(int pWidth, int pHeight, Player pOwner){
         super(pWidth, pHeight, pOwner);
         this.tabBoxMap      = new BoxMapSquare[pHeight][pWidth];
+        //Create all box map
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.tabBoxMap[y][x] = new BoxMapSquare(x, y, new Water(), this);
+            }
+        }
     }
     
     

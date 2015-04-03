@@ -63,7 +63,7 @@ public class GameController extends Controller{
      */
     public GridPanel initGridPlayer(JPanel pPan, int pNumPlayer) throws ExecError{
         Dimension       dim = Config.getDimValues_dim("dim-playerfleet-boxmap");
-        FleetGridModel  m   = ((GameModel)this.model).getConfig().getPlayers()[pNumPlayer].getFleet();
+        FleetGridModel  m   = ((GameModel)this.model).getConfig().getPlayers()[0].getFleet();
         return SwingFactory.loadGridPanel(pPan, m, dim);
     }
     

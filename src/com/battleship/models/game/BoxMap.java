@@ -92,6 +92,13 @@ public abstract class BoxMap implements Target, GameConstants{
         return (this.content instanceof Water);
     }
     
+    /**
+     * Reset boxMap content to water value
+     */
+    public void restContent(){
+        this.content = new Water();
+    }
+    
     
     
     

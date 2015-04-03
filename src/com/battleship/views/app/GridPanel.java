@@ -87,27 +87,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         this.gridType   = pType;
         this.cursor     = new Cursor();
         this.cursor.setClickNoAction();
-        
-        
-        switch(pType){
-            case GRID_TYPE_SQUARE :
-                this.tabBox = new BoxMapViewSquare[pGridH][pGridW];
-                for (int y = 0; y < pGridH; y++) {
-                    for (int x = 0; x < pGridW; x++) {
-                        this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim);
-                    }
-                }
-                break;
-            case GRID_TYPE_HEXAGON :
-                this.tabBox = new BoxMapViewHexagon[pGridH][pGridW];
-                for (int y = 0; y < pGridH; y++) {
-                    for (int x = 0; x < pGridW; x++) {
-                        this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim);
-                    }
-                }
-                break;
-        }
-        
     }
     
     

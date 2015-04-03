@@ -242,6 +242,14 @@ public class GameConfigModel extends Model implements GameConstants{
         return this.listPlayers;
     }
     
+    /**
+     * Return current number players in this game config 
+     * @return 
+     */
+    public int getNbPlayers(){
+        return this.listPlayers.length;
+    }
+    
     //**************************************************************************
     /**
      * Set a new grid width, will replace the old one. Must be between 

@@ -6,7 +6,6 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
 import com.battleship.models.weapons.*;
-import com.battleship.asset.Config;
 import java.util.ArrayList;
 
 
@@ -181,5 +180,6 @@ public abstract class Player{
      */
     public void setFleetGrid(FleetGridModel pGrid){
         this.fleetGrid = pGrid;
+        this.fleetGrid.setOwner(this); //Change owner
     }
 }

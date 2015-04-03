@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.models.sprites.Water;
 import com.battleship.observers.ObservableModel;
 
 
@@ -36,6 +37,13 @@ public class FleetGridHexagon extends FleetGridModel{
     public FleetGridHexagon(int pWidth, int pHeight, Player pOwner){
         super(pWidth, pHeight, pOwner);
         this.tabBoxMap      = new BoxMapHexagon[pHeight][pWidth];
+        
+        //Creata all boxMap
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.tabBoxMap[y][x] = new BoxMapHexagon(x, y, new Water(), this);
+            }
+        }
     }
     
     

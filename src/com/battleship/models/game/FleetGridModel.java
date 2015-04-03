@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.main.DebugTrack;
 import com.battleship.models.sprites.Boat;
 import com.battleship.observers.ObserverModel;
 import java.util.ArrayList;
@@ -74,6 +75,17 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
         //this.owner.setFleetGrid(this); //Add this grid for this player
     }
     
+    /**
+     * Reset all boxMap at water value
+     */
+    public void resetFleetGrid(){
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.getBoxMapAt(x, y).restContent();
+            }
+        }
+    }
+    
     
     
     
@@ -81,6 +93,16 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Check if this grid is valid, means all boats are placed in
+     * @return 
+     */
+    public boolean isValidFleetGrid(){
+        //return this.listBoats.size() == 5;
+        return true; //DEBUG 
+    }
+    
+    
     /**
      * Return the BoxMap at position x:y 
      * If this position is not in the grid, return null
@@ -108,5 +130,15 @@ public abstract class FleetGridModel extends Model implements ObserverModel{
      */
     public BoxMap[][] getTabBoxMap(){
         return this.tabBoxMap;
+    }
+    
+    /**
+     * Set owner of this fleet. Beware, if owner already exists, will be replaced 
+     * by this new owner. If null given, fleet will be owned by no one. (Owner is 
+     * null)
+     * @param pOwner
+     */
+    public void setOwner(Player pOwner){
+        this.owner = pOwner;
     }
 }
