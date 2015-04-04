@@ -6,6 +6,7 @@
 package com.battleship.views.app;
 
 import com.battleship.behaviors.Sprite;
+import com.battleship.main.DebugTrack;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -89,9 +90,16 @@ public class BoxMapViewSquare extends BoxMapView{
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
         if(this.isHidden){
-            this.drawHidden(g2);
+            //this.drawHidden(g2);
         }
         if(this.isTargeted){
+            //this.drawTargeted(g2);
+        }
+        
+        //TMP DEBUG
+        if(this.sprite.getId() == 0){
+            this.drawHidden(g2);
+        }else{
             this.drawTargeted(g2);
         }
     }

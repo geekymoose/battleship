@@ -80,4 +80,6 @@ public interface Sprite {
      * @param pNovalid      not valid
      */
     public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
+    
+    public int getId();
 }

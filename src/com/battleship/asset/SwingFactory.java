@@ -27,6 +27,7 @@ import com.battleship.views.app.PlaceBoatsPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 

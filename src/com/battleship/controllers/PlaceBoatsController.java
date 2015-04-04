@@ -85,6 +85,13 @@ public class PlaceBoatsController extends Controller{
         this.model.resetPlayerGrid();
     }
     
+    /*
+     * Select a boat
+     */
+    public void selectBoat(int pBoatIt){
+        this.model.getCurrentPlayer().selectBoat(pBoatIt);
+    }
+    
     
 
     //**************************************************************************

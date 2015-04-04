@@ -64,4 +64,18 @@ public interface GameConstants {
     // Weapon constants
     //**************************************************************************
     public static int       INFINITE_AMO                = -42;
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Boats Selection constants
+    //**************************************************************************
+    public static int       NO_BOAT_SELECTED    = -1;
+    public static int       AIRCRAFT_CARRIER    = 0;
+    public static int       BATTLESHIP          = 1;
+    public static int       CRUISER             = 2;
+    public static int       DESTROYER           = 3;
+    public static int       SUBMARINE           = 4;
 }

@@ -141,6 +141,16 @@ public abstract class BoxMapView implements UiElement{
     }
     
     /**
+     * Set a new sprite for this box map. Do nothing if is null
+     * @param pSprite new sprite
+     */
+    public void setSprite(Sprite pSprite){
+        if(pSprite != null){
+            this.sprite = pSprite;
+        }
+    }
+    
+    /**
      * Return current BoxMap dimension
      * @return Dimension
      */

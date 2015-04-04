@@ -7,6 +7,7 @@
 
 package com.battleship.controllers;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
@@ -31,7 +32,7 @@ public class GridController extends Controller{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private FleetGridModel model = (FleetGridModel)this.m; //It's Ugly.. I know :p
+    private FleetGridModel  model           = (FleetGridModel)this.m; //It's Ugly.. I know :p
     
     
     
@@ -56,16 +57,16 @@ public class GridController extends Controller{
         this.model.targetBoxMap(p);
     }
     
-    public boolean isValidPosition(){
-        return false;
-    }
-    
-    public void placeBoatAt(Point p){
-        
+    public boolean placeBoatAt(Point p){
+        return this.model.getOwner().placeBoatAt(p, this.model.getCurrentOrientation());
     }
     
     public void resetFleetGrid(){
         this.model.resetFleetGrid();
+    }
+    
+    public void switchNextOrientation() {
+        this.model.switchNextOrientation();
     }
     
     

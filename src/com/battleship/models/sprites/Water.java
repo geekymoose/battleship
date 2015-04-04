@@ -107,4 +107,9 @@ public class Water implements Sprite{
         this.id_img[8] = pNovalid;
         this.id_img[9] = pValid;
     }
+    
+    @Override
+    public int getId(){
+        return 0;
+    }
 }

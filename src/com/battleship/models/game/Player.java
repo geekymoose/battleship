@@ -5,8 +5,10 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
+import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.*;
 import com.battleship.models.weapons.*;
+import java.awt.Point;
 import java.util.ArrayList;
 
 
@@ -34,7 +36,7 @@ import java.util.ArrayList;
  * @see PlayerAI
  * @see PlayerHuman
  */
-public abstract class Player{
+public abstract class Player implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -44,6 +46,7 @@ public abstract class Player{
     private     ArrayList<Boat>         listBoatsOwned;
     private     int                     score;
     private     int                     currentWeaponIndex;
+    private     Boat                    currentSelectedBoat; //selectedBoat
     
     
     
@@ -58,15 +61,16 @@ public abstract class Player{
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
     public Player() {
-        this.name               = "Unknown";
-        this.score              = 0;
-        this.listWeapons        = new ArrayList();
-        this.fleetGrid          = null;
+        this.name                   = "NoName";
+        this.score                  = 0;
+        this.listWeapons            = new ArrayList();
+        this.fleetGrid              = null;
         
         //Add default weapon and set current weapon to this weapon
         //this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
-        this.currentWeaponIndex = 0;
-        this.listBoatsOwned     = new ArrayList();
+        this.currentWeaponIndex     = 0;
+        this.currentSelectedBoat    = null;
+        this.listBoatsOwned         = new ArrayList();
         this.recoverOwnedShip();
     }
     
@@ -86,7 +90,7 @@ public abstract class Player{
     
     
     //**************************************************************************
-    // Functions
+    // Game Functions
     //**************************************************************************
     /**
      * Switch player weapon. Get the next player weapon.
@@ -104,7 +108,7 @@ public abstract class Player{
     public void switchWeaponPrevious(){
         this.currentWeaponIndex--;
         if(this.currentWeaponIndex<0){
-            this.currentWeaponIndex = this.listWeapons.size();
+            this.currentWeaponIndex = (this.listWeapons.size()-1);
         }
     }
     
@@ -147,6 +151,43 @@ public abstract class Player{
     public boolean aimAt(int pX, int pY, Target[][] pWhere){
         Target target =  pWhere[pY][pX];
         //To do in weapon, then, add here 
+        return false;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Boats - Fleet Functions
+    //**************************************************************************
+    /**
+     * Select a boat . If no boat at id value in player boat, select is null 
+     * (Means no boat selected)
+     * @param pBoatSelectedId id of boat to select
+     */
+    public void selectBoat(int pBoatSelectedId){
+        for(Boat b : this.listBoatsOwned){
+            if(b.getBoatId() == pBoatSelectedId){
+                this.currentSelectedBoat = b;
+                return;
+            }
+        }
+        this.currentSelectedBoat = null; //If no boat at pBoatSelectedId 
+    }
+    
+    /**
+     * Try to place the current selected boat at a specific position. 
+     * return true if placed, otherwise, return false
+     * @param p box map coordinate where to place
+     * @param pOrientation boat orientation
+     * @return true if placed, otherwise, return false
+     */
+    public boolean placeBoatAt(Point p, int pOrientation){
+        BoxMap box = this.fleetGrid.getBoxMapAt(p.x, p.y);
+        if(this.currentSelectedBoat != null && box != null){
+            return this.currentSelectedBoat.placeAt(box, pOrientation);
+        }
         return false;
     }
     

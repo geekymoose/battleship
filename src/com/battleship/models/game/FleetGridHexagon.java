@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Water;
 
 
@@ -42,5 +43,11 @@ public class FleetGridHexagon extends FleetGridModel{
                 this.tabBoxMap[y][x] = new BoxMapHexagon(x, y, new Water(), this);
             }
         }
+        
+        //Set available orientations
+        this.listOrientations.add(GameConstants.VERTICAL);
+        this.listOrientations.add(GameConstants.STANDING_LEFT);
+        this.listOrientations.add(GameConstants.STANDING_RIGHT);
+        
     }
 }

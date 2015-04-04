@@ -71,11 +71,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     //**************************************************************************
     /**
      * 
-     * @param pFrame        Frame containing this panel
-     * @param pController   Controller for this page
+     * @param pFrame            Frame containing this panel
+     * @param pController       Controller for this page
      * @throws ExecError error if unable to create this panel
      */
-    public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) throws ExecError{
+    public PlaceBoatsPanel(WindowFrame pFrame, PlaceBoatsController pController) 
+    throws ExecError{
         super(pFrame);
         if(pController==null){
             throw new ExecError();
@@ -101,7 +102,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         p_bigContainer      = new JPanel();
         
         this.gridPanel      = new PlayerFleetPanel(this); 
-        this.p_dock         = new DockPanel(this);
+        this.p_dock         = new DockPanel(this, this.controller);
         
         gbc                 = new GridBagConstraints();
         p_bigContainer      .setLayout(new GridBagLayout());
