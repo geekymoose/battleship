@@ -126,7 +126,7 @@ public abstract class Boat implements GameConstants{
     private boolean isValidPosition(BoxMap pBox, int pOrientation){
         BoxMap  next    = pBox;
         for(int k=0; k<this.tabCompartments.length;k++){
-            if(next==null || !next.isEmpty()){
+            if(next==null || (!next.isEmpty() && next.getContent()!= tabCompartments[k])){
                 return false;
             }
             next = next.getNextBoxMap(pOrientation);
