@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.asset.CheatCode;
 import com.battleship.asset.Config;
 import com.battleship.asset.SwingFactory;
 import com.battleship.controllers.GameController;
@@ -121,6 +122,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.add(p_centerPane, BorderLayout.CENTER);
         this.add(p_chat, BorderLayout.EAST);
         this.add(p_info, BorderLayout.SOUTH);
+        
+        CheatCode.setData(p_radar);
     }
     
     @Override

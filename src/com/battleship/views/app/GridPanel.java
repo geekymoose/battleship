@@ -157,6 +157,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
                 this.tabBox[y][x].setHidden(pValue);
             }
         }
+        this.repaint();
     }
     
     
