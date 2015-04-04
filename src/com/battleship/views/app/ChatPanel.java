@@ -5,6 +5,7 @@
 
 package com.battleship.views.app;
 
+import com.battleship.views.tools.ContentPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -26,23 +27,32 @@ import javax.swing.JTextField;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChatPanel extends JPanel {
-    private JPanel p_sentence;
-    private JPanel p_north;
-    private JTextField tf_sentence;
-    private JTextArea ta_chat;
-    private JScrollPane sp_scroll;
-
+public class ChatPanel extends ContentPanel {
+    private     JPanel          p_sentence;
+    private     JPanel          p_north;
+    private     JTextField      tf_sentence;
+    private     JTextArea       ta_chat;
+    private     JScrollPane     sp_scroll;
+    
+    
+    
+    
+    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-    public ChatPanel() {
-        initComponents();
-        setSizes();
-        addEachComponents();
-        setActions();
+    public ChatPanel(JPanel pParent) {
+        super(pParent);
+        this.initComponents();
+        this.setSizes();
+        this.addEachComponents();
+        this.setActions();
     }
-
+    
+    
+    
+    
+    
     //**************************************************************************
     // METHODS
     //**************************************************************************
@@ -89,6 +99,8 @@ public class ChatPanel extends JPanel {
                     int key = e.getKeyCode();
                     if (key == KeyEvent.VK_ENTER) {
                         String sentence = tf_sentence.getText();
+                        naughtyTroll(sentence);
+                        
                         ta_chat.append(sentence+"\n");
                         ta_chat.setCaretPosition(ta_chat.getText().length());
                         
@@ -104,5 +116,15 @@ public class ChatPanel extends JPanel {
                 }
             }
         );
+    }
+    
+    
+    public void naughtyTroll(String str){
+        System.out.println(str);
+        switch(str){
+            case "showmemyfriends":
+                ((RadarPanel)this.parentPage).displayCurrentGrid();
+                break;
+        }
     }
 }

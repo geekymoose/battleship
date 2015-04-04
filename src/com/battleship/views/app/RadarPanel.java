@@ -69,4 +69,12 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         this.fleetGridPlayers[0].hideAllBoxMap();
         this.fleetGridPlayers[1].hideAllBoxMap();
     }
+    
+    public void displayCurrentGrid(){
+        this.currentGrid.visibleAllBoxMap();
+    }
+    
+    public void hideCurrentGrid(){
+        this.currentGrid.visibleAllBoxMap();
+    }
 }

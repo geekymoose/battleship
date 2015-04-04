@@ -91,7 +91,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_info          = new InformationPanel();
         p_fleet         = new PlayerFleetPanel(this);
         p_radar         = new RadarPanel(this);
-        p_chat          = new ChatPanel();
+        p_chat          = new ChatPanel(p_radar);
         
         this            .setLayout(new BorderLayout());
         p_centerPane    .setLayout(new GridBagLayout()); 

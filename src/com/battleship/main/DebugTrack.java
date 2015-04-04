@@ -4,6 +4,8 @@
  */
 package com.battleship.main;
 
+import com.battleship.asset.Config;
+import com.battleship.views.tools.WindowFrame;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -24,8 +26,29 @@ import javax.swing.JOptionPane;
  * @author  Jessica FAVIN
  */
 public abstract class DebugTrack {
-    public static final boolean  debug_mode         = true;
-    public static final boolean  debug_Event_mode   = true;
+    private static final boolean  quick_debug_mode   = true;
+    public  static final boolean  debug_mode         = true;
+    public  static final boolean  debug_Event_mode   = true;
+    
+    
+    
+    //**************************************************************************
+    // Debug mode
+    //**************************************************************************
+    /**
+     * Quick mode enable to pass through some require process as placed all boats 
+     * on the grid before displaying the game. This mode enable to go faster. 
+     * String given is the page (root) where to go. Beware, although all root 
+     * can be apply, some root need class created before. (Which could ne be 
+     * set in this case)
+     * @param pFrame    main app frame where to display
+     * @param str       root value
+     */
+    public static void quickModeRoot(WindowFrame pFrame, String str){
+        if(DebugTrack.quick_debug_mode == true){
+            pFrame.rooting(Config.getRootsValues(str), true);
+        }
+    }
     
     
     

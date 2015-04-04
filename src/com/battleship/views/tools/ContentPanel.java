@@ -5,7 +5,6 @@
 
 package com.battleship.views.tools;
 
-import com.battleship.exceptions.ExecError;
 import javax.swing.JPanel;
 
 

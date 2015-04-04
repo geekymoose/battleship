@@ -218,6 +218,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 //-1 invalid grid, 0 last player reached, 1 next player
                 switch(this.controller.switchPlayer()){
                     case -1:
+                        DebugTrack.quickModeRoot(this.frame, "game");
                         UiDialog.showWarning("beware!", "Some boats are missing on the grid!!\n"
                                 + "Do you want to figth with less boats than your enemy? "
                                 + "Woow! We've got a warrior here!");
