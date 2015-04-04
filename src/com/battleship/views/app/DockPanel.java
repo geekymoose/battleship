@@ -8,6 +8,8 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.asset.Config;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
+import com.battleship.constants.GameConstants;
+import com.battleship.controllers.PlaceBoatsController;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -34,16 +36,18 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class DockPanel extends ContentPanel{
+public class DockPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private GridBagConstraints gbc          = new GridBagConstraints();
-    private JLabel             l_cruiser    = new JLabel("Cruiser");
-    private JLabel             l_submarine  = new JLabel("Submarine");
-    private JLabel             l_aircraft   = new JLabel("Aircraft carrier");
-    private JLabel             l_destroyer  = new JLabel("Destroyer");
-    private JLabel             l_battleship = new JLabel("Battleship");
+    private PlaceBoatsController    controller;
+    
+    private GridBagConstraints      gbc             = new GridBagConstraints();
+    private JLabel                  l_cruiser       = new JLabel("Cruiser");
+    private JLabel                  l_submarine     = new JLabel("Submarine");
+    private JLabel                  l_aircraft      = new JLabel("Aircraft carrier");
+    private JLabel                  l_destroyer     = new JLabel("Destroyer");
+    private JLabel                  l_battleship    = new JLabel("Battleship");
     
     
     
@@ -51,12 +55,14 @@ public class DockPanel extends ContentPanel{
     // CONSTRUCTOR
     //**************************************************************************
     /**
-     * Create a new Dock Panel 
-     * @param pParentPage its parent
+     * Create a new Dock Panel.
+     * @param pParentPage       its parent
+     * @param pController       controller for DockPanel
      * @throws ExecError thrown if PageParent doesn't exists or is null
      */
-    public DockPanel(JPanel pParentPage) throws ExecError{
+    public DockPanel(JPanel pParentPage, PlaceBoatsController pController) throws ExecError{
         super(pParentPage);
+        this.controller         = pController;
         this.initComponents();
     }
     
@@ -134,21 +140,29 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     // Inner class
     //**************************************************************************
-    /*
+    /**<h1>DockBoats</h1>
+     * <p>
+     * private abstract class DockBoats<br/>
+     * extends JPanel<br/>
+     * implements MouseListener, MouseWheelEvent
+     * </p>
+     * <p>
      * Inner class to display boats on the dock
      * Enable user to select the boat he want to place
+     * </p>
      */
-    private abstract class DockBoats extends JPanel implements MouseListener {
+    private abstract class DockBoats extends JPanel implements MouseListener{
         protected   int     currentImg;
         protected   int     defaultImg;
         protected   int     selectedImg;
-        
+        protected   int     idBoat;
         
         
         /**
          * Create a new DockBoats
          */
-        protected DockBoats(){
+        protected DockBoats(int pBoatId){
+            this.idBoat = pBoatId;
             this.setPreferredSize(Config.getDimValues_dim("dim-dockboat"));
             this.addMouseListener(this);
             this.setOpaque(false);
@@ -160,8 +174,11 @@ public class DockPanel extends ContentPanel{
             g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, this);
         }
         
+        
         @Override
         public void mouseClicked(MouseEvent e){
+            controller.selectBoat(idBoat);
+            this.repaint();
         }
 
         @Override
@@ -183,12 +200,13 @@ public class DockPanel extends ContentPanel{
             this.currentImg = this.defaultImg;
             this.repaint();
         }
-    }
+    } //------------------------END DockBoats INNER CLASS-----------------------
     
     
     //**************************************************************************
     private class AircraftCarrier extends DockBoats {
         public AircraftCarrier(){
+            super(GameConstants.AIRCRAFT_CARRIER);
             this.defaultImg     = 5000;
             this.selectedImg    = 5001;
             this.currentImg     = this.defaultImg;
@@ -199,6 +217,7 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     private class Battleship extends DockBoats {
         public Battleship(){
+            super(GameConstants.BATTLESHIP);
             this.defaultImg     = 4000;
             this.selectedImg    = 4001;
             this.currentImg     = this.defaultImg;
@@ -209,6 +228,7 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     private class Submarine extends DockBoats {
         public Submarine(){
+            super(GameConstants.SUBMARINE);
             this.defaultImg     = 3002;
             this.selectedImg    = 3003;
             this.currentImg     = this.defaultImg;
@@ -219,6 +239,7 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     private class Cruiser extends DockBoats {
         public Cruiser(){
+            super(GameConstants.CRUISER);
             this.defaultImg     = 3000;
             this.selectedImg    = 3001;
             this.currentImg     = this.defaultImg;
@@ -229,11 +250,12 @@ public class DockPanel extends ContentPanel{
     //**************************************************************************
     private class Destroyer extends DockBoats {
         public Destroyer(){
+            super(GameConstants.DESTROYER);
             this.defaultImg     = 2000;
             this.selectedImg    = 2001;
             this.currentImg     = this.defaultImg;
         }
-    } 
+    } //------------------------END BOATS INNER CLASS-----------------------
     
     
 }

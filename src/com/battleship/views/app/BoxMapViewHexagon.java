@@ -116,9 +116,16 @@ public class BoxMapViewHexagon extends BoxMapView{
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
         if(this.isHidden){
-            this.drawHidden(g2);
+            //this.drawHidden(g2);
         }
         if(this.isTargeted){
+            //this.drawTargeted(g2);
+        }
+        
+        //TMP DEBUG
+        if(this.sprite.getId() == 0){
+            this.drawHidden(g2);
+        }else{
             this.drawTargeted(g2);
         }
     }

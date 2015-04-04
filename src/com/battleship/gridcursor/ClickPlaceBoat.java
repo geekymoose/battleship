@@ -23,6 +23,7 @@ import java.awt.Point;
 public class ClickPlaceBoat implements ClickType{
     @Override
     public void mouseClicked_Left(Point p, GridController c){
+        c.placeBoatAt(p);
     }
     
     @Override
@@ -56,5 +57,6 @@ public class ClickPlaceBoat implements ClickType{
 
     @Override
     public void wheelMovedDown(Point p, GridController c){
+        c.switchNextOrientation();
     }
 }

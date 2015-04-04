@@ -19,6 +19,8 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import javax.swing.JPanel;
 
 
@@ -43,6 +45,7 @@ import javax.swing.JPanel;
  */
 public abstract class GridPanel extends ContentPanel implements MouseListener, 
                                                                 MouseMotionListener,
+                                                                MouseWheelListener,
                                                                 GameConstants,
                                                                 ObserverModel{
     //**************************************************************************
@@ -86,6 +89,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         this.setPreferredSize(dim);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+        this.addMouseWheelListener(this);
     }
     
     
@@ -115,6 +119,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x].setTargeted(m.getBoxMapAt(x, y).isTargeted());
+                this.tabBox[y][x].setSprite(m.getBoxMapAt(x, y).getContent());
             }
         }
         this.repaint();
@@ -215,5 +220,9 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     @Override
     public void mouseMoved(MouseEvent e){
         this.cursor.mouseMoved(e);
+    }
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e){
+        this.cursor.mouseWheelMoved(e);
     }
 }

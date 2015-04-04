@@ -5,6 +5,8 @@
 
 package com.battleship.models.sprites;
 
+import com.battleship.constants.GameConstants;
+
 
 
 
@@ -33,6 +35,6 @@ public class Cruiser extends Boat {
      * Create a new Cruiser
      */
     public Cruiser(){
-        super("Cruiser", 3, 3);
+        super(GameConstants.CRUISER, "Cruiser", 3, 3);
     }
 }

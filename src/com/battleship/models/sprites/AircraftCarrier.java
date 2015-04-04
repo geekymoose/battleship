@@ -5,6 +5,8 @@
 
 package com.battleship.models.sprites;
 
+import com.battleship.constants.GameConstants;
+
 
 
 
@@ -33,6 +35,6 @@ public class AircraftCarrier extends Boat{
      * Create a new AircraftCarrier
      */
     public AircraftCarrier(){
-        super("AircraftCarrier", 5, 5);
+        super(GameConstants.AIRCRAFT_CARRIER, "AircraftCarrier", 5, 5);
     }
 }

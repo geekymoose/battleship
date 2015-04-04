@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Boat;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class FleetGridModel extends Model{
+public abstract class FleetGridModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -49,6 +50,8 @@ public abstract class FleetGridModel extends Model{
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
     protected ArrayList<Boat>       listBoats; //Boats placed on the grid
+    protected ArrayList<Integer>    listOrientations; //Available orientation
+    protected int                   currentOrientation;
     
     
     
@@ -68,11 +71,13 @@ public abstract class FleetGridModel extends Model{
      * @see Player      Further information about Linking grid with a player
      */
     protected FleetGridModel(int pWidth, int pHeight, Player pOwner){
-        this.gridWidth      = pWidth;
-        this.gridHeight     = pHeight;
-        this.nbAliveBoats   = 0;
-        this.owner          = pOwner;
-        this.listBoats      = new ArrayList();
+        this.gridWidth          = pWidth;
+        this.gridHeight         = pHeight;
+        this.nbAliveBoats       = 0;
+        this.owner              = pOwner;
+        this.listBoats          = new ArrayList();
+        this.listOrientations   = new ArrayList();
+        this.currentOrientation = 0;
     }
     
     /**
@@ -160,6 +165,34 @@ public abstract class FleetGridModel extends Model{
     
     
     
+
+    //**************************************************************************
+    // Functions for orientation
+    //**************************************************************************   
+    /**
+     * Switch player weapon. Get the next player weapon.
+     */
+    public void switchNextOrientation() {
+        currentOrientation++;
+        if(currentOrientation>=listOrientations.size()){
+            currentOrientation = 0;
+        }
+    }
+
+    /**
+     * Switch player weapon. Get the next player weapon.
+     */
+    public void switchPreviousOrientation() {
+        currentOrientation--;
+        if(currentOrientation<0){
+            currentOrientation = (listOrientations.size()-1);
+        }
+    }
+    
+    
+    
+    
+    
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -172,11 +205,34 @@ public abstract class FleetGridModel extends Model{
     }
     
     /**
+     * Return grid owner, null if no owner
+     * @return Player
+     */
+    public Player getOwner(){
+        return this.owner;
+    }
+    
+    /**
      * Return list boats linked with this grid
-     * @return 
+     * @return ArrayList (Type Boat) list of boats
      */
     public ArrayList<Boat> getListBoats(){
         return this.listBoats;
+    }
+    
+    /**
+     * Return the list of available orientation for this grid
+     * @return ArrayList of Integer
+     */
+    public ArrayList<Integer> getListOrientations(){
+        return this.listOrientations;
+    }
+    
+    /**
+     * Return current orientation value
+     */
+    public int getCurrentOrientation(){
+        return this.listOrientations.get(currentOrientation);
     }
     
     /**

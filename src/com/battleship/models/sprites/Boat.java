@@ -7,6 +7,7 @@ package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
+import com.battleship.main.DebugTrack;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 
@@ -39,7 +40,8 @@ public abstract class Boat implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected String            kindOfBoat;
+    protected   final int       idBoat;
+    protected String            boatname;
     protected int               nbLives;
     protected int               orientation;
     protected Compartment[]     tabCompartments;
@@ -58,18 +60,20 @@ public abstract class Boat implements GameConstants{
      * other words, it is the grid where he is).
      * Default orientation is horizontal.
      *
-     * @param pName        Boat name (kind of boat, as Cruiser / Submarine ...)
-     * @param pNbLives     Total number lives
-     * @param pSize        Number of compartments occupy by the boat
+     * @param pBoatId   Boat identification number
+     * @param pName     Boat name
+     * @param pNbLives  Total number lives
+     * @param pSize     Number of compartments occupy by the boat
      */
-    protected Boat(String pName, int pNbLives, int pSize){
-        this.kindOfBoat         = pName;
+    protected Boat(int pBoatId, String pName, int pNbLives, int pSize){
+        this.idBoat             = pBoatId;
+        this.boatname           = pName;
         this.nbLives            = pNbLives;
-        this.orientation        = GameConstants.HORIZONTAL;
-        this.grid               = null; //Bot is not placed at the moment
+        this.orientation        = 0; //Orientation is set when palced
+        this.grid               = null; //Not used atm
         this.tabCompartments    = new Compartment[pSize];
         for(int i = 0; i < pSize; i++) {
-            tabCompartments[i] = new Compartment(null);
+            tabCompartments[i]  = new Compartment(null);
         }
     }
     
@@ -115,16 +119,6 @@ public abstract class Boat implements GameConstants{
     //**************************************************************************
     /**
      * Check if position started at pBox map position is a valid position. 
-     * (Using current orientation value)
-     * @param pBox First box position
-     * @return true if valid, otherwise, return false
-     */
-    private boolean isValidPosition(BoxMap pBox){
-        return this.isValidPosition(pBox, this.orientation);
-    }
-    
-    /**
-     * Check if position started at pBox map position is a valid position. 
      * @param pBox          First box position
      * @param pOrientation  Boat orientation
      * @return true if valid, otherwise, return false
@@ -135,7 +129,7 @@ public abstract class Boat implements GameConstants{
             if(next==null || !next.isEmpty()){
                 return false;
             }
-            next = pBox.getNextBoxMap(orientation);
+            next = next.getNextBoxMap(pOrientation);
         }
         return true;
     }
@@ -144,16 +138,19 @@ public abstract class Boat implements GameConstants{
      * Place boat in a grid. At a BoxMap position. If position is not valid, nothing 
      * is done and false is returned. Orientation used is the current one. 
      * If boat was already placed on the grid, water replace old position
-     * @param pBox first box position for this boat (Front box position)
+     * @param pBox          first box position for this boat (Front box position)
+     * @param pOrientation  Boat orientation
      * @return true if placed successfully, otherwise, return false
      */
-    public boolean placeAt(BoxMap pBox){
-        if(!isValidPosition(pBox)){
+    public boolean placeAt(BoxMap pBox, int pOrientation){
+        if(!isValidPosition(pBox, pOrientation)){
             return false;
         }
-        this.tabCompartments[0].setBoxPosition(pBox); //Place first position
-        for(int k=1; k<this.tabCompartments.length;k++){
-            this.tabCompartments[k].setBoxPosition(pBox.getNextBoxMap(orientation));
+        BoxMap box = pBox;
+        this.tabCompartments[0].setBoxPosition(box); //Place first position
+        for(int k=1; k<this.tabCompartments.length; k++){
+            box = box.getNextBoxMap(pOrientation);
+            this.tabCompartments[k].setBoxPosition(box);
         }
         return true;
     }
@@ -165,6 +162,14 @@ public abstract class Boat implements GameConstants{
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
+    /**
+     * Return boat identification number
+     * @return int id number
+     */
+    public int getBoatId(){
+        return this.idBoat;
+    }
+    
     /**
      * Return BoxMap position of the front compartment
      * @return coordinates of the upper left boat compartment
@@ -187,27 +192,6 @@ public abstract class Boat implements GameConstants{
      */
     public int getOrientation(){
         return orientation;
-    }
-
-    /**
-     * Change current orientation. Boat position will be recalculated
-     * @param pValue new orientation
-     * @return 
-     */
-    public boolean setOrientation(int pValue){
-        //If boat is not already on a grid, we can directly change orientation
-        if(this.getFrontPosition() == null){
-            this.orientation = pValue;
-            return true;
-        }
-        else{
-            if(this.isValidPosition(this.getFrontPosition(), pValue)){
-                this.orientation = pValue;
-                this.placeAt(this.getFrontPosition()); //replace with new orientation
-                return true;
-            }
-        }
-        return false;
     }
     
     
@@ -330,6 +314,13 @@ public abstract class Boat implements GameConstants{
             this.id_img[7] = pHover;
             this.id_img[8] = pNovalid;
             this.id_img[9] = pValid;
+        }
+
+
+
+        @Override
+        public int getId(){
+            return 1;
         }
     } //----------------------------------END INNER CLASS-----------------------
 }
