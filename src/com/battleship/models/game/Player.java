@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Target;
+import com.battleship.models.sprites.*;
 import com.battleship.models.weapons.*;
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public abstract class Player{
     private     String                  name;
     private     FleetGridModel          fleetGrid;
     private     ArrayList<Weapon>       listWeapons;
+    private     ArrayList<Boat>         listBoatsOwned;
     private     int                     score;
     private     int                     currentWeaponIndex;
     
@@ -64,6 +66,19 @@ public abstract class Player{
         //Add default weapon and set current weapon to this weapon
         //this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
         this.currentWeaponIndex = 0;
+        this.listBoatsOwned     = new ArrayList();
+        this.recoverOwnedShip();
+    }
+    
+    /**
+     * Load and add in player boats list all boat owned by this player
+     */
+    private void recoverOwnedShip(){
+        this.listBoatsOwned.add(new AircraftCarrier());
+        this.listBoatsOwned.add(new Battleship());
+        this.listBoatsOwned.add(new Cruiser());
+        this.listBoatsOwned.add(new Destroyer());
+        this.listBoatsOwned.add(new Submarine());
     }
     
     
@@ -116,8 +131,7 @@ public abstract class Player{
     public boolean shootAt(int pX, int pY, Target[][] pWhere) {
         Target target =  pWhere[pY][pX];
         if(target.isValidTarget()){
-            this.listWeapons.get(this.currentWeaponIndex)
-                            .fireAt(pX, pY, pWhere, this.fleetGrid);
+            this.listWeapons.get(this.currentWeaponIndex) .fireAt(pX, pY, pWhere, this.fleetGrid);
             return true;
         }
         return false;

@@ -5,8 +5,6 @@
 
 package com.battleship.models.sprites;
 
-import com.battleship.models.game.FleetGridModel;
-
 
 
 
@@ -31,13 +29,10 @@ import com.battleship.models.game.FleetGridModel;
  */
 public class Destroyer extends Boat {
     
-    
     /**
      * Create a new Destroyer
-     * @param pOrientation
-     * @param pGrid 
      */
-    public Destroyer(int pOrientation, FleetGridModel pGrid){
-        super("Destroyer", 2, 2, pOrientation, pGrid);
+    public Destroyer(){
+        super("Destroyer", 2, 2);
     }
 }

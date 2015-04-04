@@ -5,8 +5,6 @@
 
 package com.battleship.models.sprites;
 
-import com.battleship.models.game.FleetGridModel;
-
 
 
 
@@ -31,13 +29,10 @@ import com.battleship.models.game.FleetGridModel;
  */
 public class Submarine extends Boat {
     
-    
     /**
      * Create a new Submarine
-     * @param pOrientation
-     * @param pGrid 
      */
-    public Submarine(int pOrientation, FleetGridModel pGrid){
-        super("Submarine", 3, 3, pOrientation, pGrid);
+    public Submarine(){
+        super("Submarine", 3, 3);
     }
 }

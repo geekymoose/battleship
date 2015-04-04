@@ -56,6 +56,14 @@ public class GridController extends Controller{
         this.model.targetBoxMap(p);
     }
     
+    public boolean isValidPosition(){
+        return false;
+    }
+    
+    public void placeBoatAt(Point p){
+        
+    }
+    
     public void resetFleetGrid(){
         this.model.resetFleetGrid();
     }

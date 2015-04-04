@@ -48,7 +48,7 @@ public abstract class FleetGridModel extends Model{
     protected int                   nbAliveBoats;
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
-    protected ArrayList<Boat>       listBoats;
+    protected ArrayList<Boat>       listBoats; //Boats placed on the grid
     
     
     
@@ -58,10 +58,14 @@ public abstract class FleetGridModel extends Model{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Initialize commons data for a new FleetGridMode
+     * Initialize commons data for a new FleetGridMode. 
+     * Debug note : Owner is not used anymore, in order to link a grid with a 
+     * player, you have to do that from player class, with setFleetGrid
      * @param pWidth    Grid width
      * @param pHeight   Grid Height
      * @param pOwner    Fleet owner (It is a Player)
+     * 
+     * @see Player      Further information about Linking grid with a player
      */
     protected FleetGridModel(int pWidth, int pHeight, Player pOwner){
         this.gridWidth      = pWidth;
@@ -69,7 +73,6 @@ public abstract class FleetGridModel extends Model{
         this.nbAliveBoats   = 0;
         this.owner          = pOwner;
         this.listBoats      = new ArrayList();
-        //this.owner.setFleetGrid(this); //Add this grid for this player
     }
     
     /**
@@ -81,6 +84,7 @@ public abstract class FleetGridModel extends Model{
                 this.getBoxMapAt(x, y).restContent();
             }
         }
+        //Add reset boat position in compartment
         this.notifyObservers(null);
     }
     
@@ -165,6 +169,14 @@ public abstract class FleetGridModel extends Model{
      */
     public BoxMap[][] getTabBoxMap(){
         return this.tabBoxMap;
+    }
+    
+    /**
+     * Return list boats linked with this grid
+     * @return 
+     */
+    public ArrayList<Boat> getListBoats(){
+        return this.listBoats;
     }
     
     /**

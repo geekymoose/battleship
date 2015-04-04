@@ -6,6 +6,7 @@
 package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 
@@ -34,7 +35,7 @@ import com.battleship.models.game.FleetGridModel;
  * @author  Jessica FAVIN
  * @author  Contsantin MASSON
  */
-public abstract class Boat{
+public abstract class Boat implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -54,25 +55,21 @@ public abstract class Boat{
     /**
      * Create a new Boat. Boat has a default orientation, even if it is not
      * already placed on the grid. The FleetGridModel is the boat location (In
-     * other words, it is the grid where he is)
+     * other words, it is the grid where he is).
+     * Default orientation is horizontal.
      *
-     * @param pName        Boat name (Commons name, it is rather the kind of 
-     *                     boat as Cruiser)
+     * @param pName        Boat name (kind of boat, as Cruiser / Submarine ...)
      * @param pNbLives     Total number lives
-     * @param pSize        Means nb compartments occupy by the boat
-     * @param pOrientation current orientation
-     * @param pGrid        where the boat is located (Could be null if not
-     *                     placed)
+     * @param pSize        Number of compartments occupy by the boat
      */
-    protected Boat(String pName, int pNbLives, int pSize, int pOrientation, FleetGridModel pGrid){
+    protected Boat(String pName, int pNbLives, int pSize){
         this.kindOfBoat         = pName;
         this.nbLives            = pNbLives;
-        this.orientation        = pOrientation;
-        this.grid               = pGrid;
+        this.orientation        = GameConstants.HORIZONTAL;
+        this.grid               = null; //Bot is not placed at the moment
         this.tabCompartments    = new Compartment[pSize];
         for(int i = 0; i < pSize; i++) {
-            //initialisation des compartment??
-            //tabCompartment[i]=new Compartment();
+            tabCompartments[i] = new Compartment(null);
         }
     }
     
@@ -81,7 +78,7 @@ public abstract class Boat{
     
     
     //**************************************************************************
-    // Functions
+    // Check Functions - Usefull functions
     //**************************************************************************
     /**
      * Check if boat is dead
@@ -90,7 +87,14 @@ public abstract class Boat{
     public boolean isDead(){
         return (nbLives <= 0);
     }
-
+    
+    /**
+     * Check if boat is placed on a grid
+     * @return 
+     */
+    public boolean isPlaced(){
+        return this.tabCompartments[0] != null;
+    }
 
     /**
      * Takes one life from the boat, then, check if is dead
@@ -101,23 +105,57 @@ public abstract class Boat{
         this.nbLives--;
         return this.isDead();
     }
-
-
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions for placement
+    //**************************************************************************
     /**
-     * Calculate the boat position from the front position
-     *
-     * @return true if position is valid, otherwise, return false
+     * Check if position started at pBox map position is a valid position. 
+     * (Using current orientation value)
+     * @param pBox First box position
+     * @return true if valid, otherwise, return false
      */
-    public boolean calculBoatPositions(){
-        boolean isValid = true;
-        for(int k=1; k<this.tabCompartments.length;k++){
-            BoxMap next = this.tabCompartments[k-1].boxPosition.getNextBoxMap(orientation);
+    private boolean isValidPosition(BoxMap pBox){
+        return this.isValidPosition(pBox, this.orientation);
+    }
+    
+    /**
+     * Check if position started at pBox map position is a valid position. 
+     * @param pBox          First box position
+     * @param pOrientation  Boat orientation
+     * @return true if valid, otherwise, return false
+     */
+    private boolean isValidPosition(BoxMap pBox, int pOrientation){
+        BoxMap  next    = pBox;
+        for(int k=0; k<this.tabCompartments.length;k++){
             if(next==null || !next.isEmpty()){
-                isValid = false;
+                return false;
             }
-            this.tabCompartments[k].boxPosition = next;
+            next = pBox.getNextBoxMap(orientation);
         }
-        return isValid;
+        return true;
+    }
+    
+    /**
+     * Place boat in a grid. At a BoxMap position. If position is not valid, nothing 
+     * is done and false is returned. Orientation used is the current one. 
+     * If boat was already placed on the grid, water replace old position
+     * @param pBox first box position for this boat (Front box position)
+     * @return true if placed successfully, otherwise, return false
+     */
+    public boolean placeAt(BoxMap pBox){
+        if(!isValidPosition(pBox)){
+            return false;
+        }
+        this.tabCompartments[0].setBoxPosition(pBox); //Place first position
+        for(int k=1; k<this.tabCompartments.length;k++){
+            this.tabCompartments[k].setBoxPosition(pBox.getNextBoxMap(orientation));
+        }
+        return true;
     }
     
     
@@ -154,10 +192,22 @@ public abstract class Boat{
     /**
      * Change current orientation. Boat position will be recalculated
      * @param pValue new orientation
+     * @return 
      */
-    public void setOrientation(int pValue){
-        this.orientation = pValue;
-        this.calculBoatPositions();
+    public boolean setOrientation(int pValue){
+        //If boat is not already on a grid, we can directly change orientation
+        if(this.getFrontPosition() == null){
+            this.orientation = pValue;
+            return true;
+        }
+        else{
+            if(this.isValidPosition(this.getFrontPosition(), pValue)){
+                this.orientation = pValue;
+                this.placeAt(this.getFrontPosition()); //replace with new orientation
+                return true;
+            }
+        }
+        return false;
     }
     
     
@@ -186,14 +236,11 @@ public abstract class Boat{
      * @see Boat
      * @see Sprite
      */
-    protected class Compartment implements Sprite {
-        protected   boolean     isDestroyed;
-        protected   BoxMap      boxPosition;
+    private class Compartment implements Sprite {
+        private     boolean     isDestroyed;
+        private     BoxMap      boxPosition;
+        private     int[]       id_img;  //Image data (Identification)
         
-        //Image data (Identification)
-        protected   int[]       id_img;
-
-
         /**
          * Create a new compartment on BoxMap pPosition. Box map could be null, 
          * it means the boat is not placed at the moment
@@ -226,6 +273,21 @@ public abstract class Boat{
          */
         protected BoxMap getBoxPosition(){
             return this.boxPosition;
+        }
+        
+        /**
+         * Set compartment position. If boat was already located on a grid, 
+         * old position will be lost (And water replace this old position).
+         * New position should be valid (Exists etc). 
+         * If null given, this compartment is no longer in a grid
+         * @param pPosition boxMap where compartment has to be placed
+         */
+        protected void setBoxPosition(BoxMap pPosition){
+            if(this.boxPosition!=null){
+                this.boxPosition.setContent(new Water());
+            }
+            this.boxPosition = pPosition;
+            pPosition.setContent(this);
         }
         
 
