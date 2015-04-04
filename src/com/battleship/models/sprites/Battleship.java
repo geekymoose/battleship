@@ -5,8 +5,6 @@
 
 package com.battleship.models.sprites;
 
-import com.battleship.models.game.FleetGridModel;
-
 
 
 
@@ -34,10 +32,8 @@ public class Battleship extends Boat{
     
     /**
      * Create a new Battleship
-     * @param pOrientation
-     * @param pGrid 
      */
-    public Battleship(int pOrientation, FleetGridModel pGrid){
-        super("Battleship", 4, 4, pOrientation, pGrid);
+    public Battleship(){
+        super("Battleship", 4, 4);
     }
 }
