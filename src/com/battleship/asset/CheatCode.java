@@ -7,6 +7,9 @@
 
 package com.battleship.asset;
 
+import com.battleship.models.game.GameModel;
+import com.battleship.views.app.RadarPanel;
+
 
 
 
@@ -18,10 +21,15 @@ package com.battleship.asset;
  * @author Constantin MASSON
  * @date Apr 4, 2015
  */
-public class CheatCode {
+public abstract class CheatCode {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private     static boolean         cheatAuthorized     = true;
+    
+    private     static GameModel       game;
+    private     static RadarPanel      radar;
+    
     
     
     
@@ -31,9 +39,6 @@ public class CheatCode {
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
-    public CheatCode(){
-    
-    }
     
     
     
@@ -43,6 +48,16 @@ public class CheatCode {
     //**************************************************************************
     // Functions
     //**************************************************************************
+    public static void processStrCode(String str){
+        if(!cheatAuthorized){
+            return;
+        }
+        switch(str){
+            case "whoisthebest":
+                CheatCode.radar.displayCurrentGrid();
+                break;
+        }
+    }
     
     
     
@@ -52,4 +67,12 @@ public class CheatCode {
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
+    public static void setData(GameModel model){
+        CheatCode.game = model;
+    }
+    
+    public static void setData(RadarPanel model){
+        CheatCode.radar = model;
+    }
+    
 }

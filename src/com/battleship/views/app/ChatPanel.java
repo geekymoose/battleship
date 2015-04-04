@@ -5,6 +5,7 @@
 
 package com.battleship.views.app;
 
+import com.battleship.asset.CheatCode;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -99,7 +100,7 @@ public class ChatPanel extends ContentPanel {
                     int key = e.getKeyCode();
                     if (key == KeyEvent.VK_ENTER) {
                         String sentence = tf_sentence.getText();
-                        naughtyTroll(sentence);
+                        CheatCode.processStrCode(sentence);
                         
                         ta_chat.append(sentence+"\n");
                         ta_chat.setCaretPosition(ta_chat.getText().length());
@@ -116,15 +117,5 @@ public class ChatPanel extends ContentPanel {
                 }
             }
         );
-    }
-    
-    
-    public void naughtyTroll(String str){
-        System.out.println(str);
-        switch(str){
-            case "showmemyfriends":
-                ((RadarPanel)this.parentPage).displayCurrentGrid();
-                break;
-        }
     }
 }
