@@ -5,6 +5,8 @@
 package com.battleship.views.app;
 
 import com.battleship.behaviors.Sprite;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -108,41 +110,30 @@ public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     // Draw fucntions
     //**************************************************************************
-    
     @Override
     public void draw(Graphics2D g2){
-        super.draw(g2);
-        this.drawHex(g2);
+        g2.setStroke(new BasicStroke(this.borderSize));
+        g2.setColor(this.borderColor);
+        g2.drawPolygon(this.polygon);
+        if(this.isHidden){
+            this.drawHidden(g2);
+        }
+        if(this.isTargeted){
+            this.drawTargeted(g2);
+        }
     }
     
     
     @Override
     protected void drawHidden(Graphics2D g2){
+        g2.setColor(Color.GRAY);
         g2.fillPolygon(this.polygon);
         g2.drawPolygon(this.polygon);
     }
-    
-    
-    /**
-     * Draw an hexagon 
-     * @param g2    Graphics2D element
-     */
-    private void drawHex(Graphics2D g2) {
-        if(this.isHidden == false){
-            g2.drawPolygon(this.polygon);
-        }else{
-            this.drawHidden(g2);
-        }
-        
-        if(this.isTargeted){
-            this.drawTargeted(g2);
-        }
-    }
-
-
 
     @Override
     protected void drawTargeted(Graphics2D g2){
+        g2.setColor(Color.CYAN);
         g2.fillPolygon(this.polygon);
         g2.drawPolygon(this.polygon);
     }

@@ -57,10 +57,4 @@ public class GridHexaView extends GridPanel{
             }
         }
     }
-
-
-    @Override
-    public void update(ObservableModel o, Object arg){
-     
-    }
 }

@@ -57,7 +57,8 @@ public abstract class GridCalculator {
      * Set size for elements
      * @param height
      */
-    private static void initHexaValues(int height) {
+    private static void initHexaValues(Dimension pDim) {
+        int height = pDim.height;
         /*
          * h = basic dimension: height (distance between two adj centresr aka size)
          * r = radius of inscribed circle
@@ -113,11 +114,11 @@ public abstract class GridCalculator {
      *
      * @param mx        x value
      * @param my        y value 
-     * @param pHeight   Box Height
+     * @param pDim      Box Dimension
      * @return
      */
-    public static Point pxToHexaCoor(int mx, int my, int pHeight) {
-        initHexaValues(pHeight);
+    public static Point pxToHexaCoor(int mx, int my, Dimension pDim) {
+        initHexaValues(pDim);
         return pxToHexaCoor(mx, my);
     }
     

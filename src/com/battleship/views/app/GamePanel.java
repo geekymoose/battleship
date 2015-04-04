@@ -8,6 +8,7 @@ import com.battleship.asset.Config;
 import com.battleship.asset.SwingFactory;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.gridcursor.GridCursor;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
@@ -50,6 +51,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private     ChatPanel               p_chat;
     private     HeadBar                 p_headbar;
     private     GridBagConstraints      gc;
+    
+    private     GridCursor              cursor;
     
     
     
@@ -136,7 +139,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
         
         this.p_fleet.setFleetGrids(fleetPlayer1, fleetPlayer2);
-        this.p_radar.setFleetGrids(radarPlayer2, radarPlayer1);
+        this.p_radar.setFleetGrids(radarPlayer1, radarPlayer2);
         
         this.p_fleet.switchGrid(0);
         this.p_radar.switchGrid(1);

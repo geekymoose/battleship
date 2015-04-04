@@ -1,6 +1,6 @@
 /*
- * Class :      ClickNoAction
- * Creation:    Apr 3, 2015
+ * Class :      ClickNoArm
+ * Creation:    Apr 4, 2015
  * Author :     Constantin MASSON
  * 
  */
@@ -15,13 +15,16 @@ import java.awt.Point;
 
 
 /**
- * <h1>ClickNoAction</h1>
- * <p>public class ClickNoAction</p>
+ * <h1>ClickNoArm</h1>
+ * <p>
+ * public class ClickNoArm<br/>
+ * implements ClickType
+ * </p>
  *
  * @author Constantin MASSON
- * @date Apr 3, 2015
+ * @date Apr 4, 2015
  */
-public class ClickNoAction implements ClickType{
+public class ClickNoArm implements ClickType{
     @Override
     public void mouseClicked_Left(Point p, GridController c){
     }

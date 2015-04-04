@@ -8,7 +8,6 @@ import com.battleship.asset.Config;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.views.tools.UiElement;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -36,9 +35,7 @@ public abstract class BoxMapView implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   Sprite      sprite;
     protected   Image[]     img;
-    protected   int         state;
     
     protected   int         borderSize;
     protected   Color       borderColor;
@@ -47,6 +44,7 @@ public abstract class BoxMapView implements UiElement{
     
     protected   boolean     isHidden;
     protected   boolean     isTargeted;
+    protected   Sprite      sprite;
     
     
     
@@ -72,6 +70,8 @@ public abstract class BoxMapView implements UiElement{
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= Color.BLACK;
         this.sprite     = pSprite;
+        this.img        = new Image[Sprite.NB_IMG];
+        this.loadUI();
     }
     
     
@@ -86,22 +86,7 @@ public abstract class BoxMapView implements UiElement{
      * Draw the BoxMap
      * @param g2 
      */
-    public void draw(Graphics2D g2){
-        g2.setStroke(new BasicStroke(this.borderSize));
-        g2.setColor(this.borderColor);
-        
-        
-        
-        
-        
-        //g2.drawImage(this.img, 0, 0, this.img.getWidth(), this.img.getHeight(), null);
-        if(this.isHidden){
-            //Image image = this.img[this.sprite.getImgId()];
-            //g2.drawImage(this.img, 0, 0, this.img.getWidth(), this.img.getHeight(), null);
-        }
-        
-        
-    }
+    public abstract void draw(Graphics2D g2);
     
     /*
      * Draw the box with hidden status
@@ -145,6 +130,14 @@ public abstract class BoxMapView implements UiElement{
      */
     public void setHidden(boolean pValue){
         this.isHidden = pValue;
+    }
+    
+    /**
+     * Set targeted value
+     * @param pValue 
+     */
+    public void setTargeted(boolean pValue){
+        this.isTargeted = pValue;
     }
     
     /**

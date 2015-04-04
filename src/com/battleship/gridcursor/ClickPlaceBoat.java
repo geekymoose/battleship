@@ -1,27 +1,26 @@
-/*
- * Class :      ClickNoAction
- * Creation:    Apr 3, 2015
- * Author :     Constantin MASSON
- * 
+/* 
+ * Creation:    Apr 1, 2015
+ * Project Computer Science L2 Semester 4 - BattleShip
  */
-
 package com.battleship.gridcursor;
 
 import com.battleship.controllers.GridController;
 import java.awt.Point;
 
 
-
-
-
 /**
- * <h1>ClickNoAction</h1>
- * <p>public class ClickNoAction</p>
- *
- * @author Constantin MASSON
- * @date Apr 3, 2015
+ * <h1>ClickPlaceBoat</h1>
+ * <p>
+ public class ClickPlaceBoat<br/>
+ * implements ClickType
+ * </p>
+ * 
+ * @date    Apr 2, 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
-public class ClickNoAction implements ClickType{
+public class ClickPlaceBoat implements ClickType{
     @Override
     public void mouseClicked_Left(Point p, GridController c){
     }
