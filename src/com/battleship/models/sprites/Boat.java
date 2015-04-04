@@ -40,12 +40,12 @@ public abstract class Boat implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   final int       idBoat;
-    protected String            boatname;
-    protected int               nbLives;
-    protected int               orientation;
-    protected Compartment[]     tabCompartments;
-    protected FleetGridModel    grid;
+    protected   final int           idBoat;
+    protected String                boatname;
+    protected int                   nbLives;
+    protected int                   orientation;
+    protected final Compartment[]   tabCompartments;
+    protected FleetGridModel        grid;
     
     
     
@@ -91,14 +91,6 @@ public abstract class Boat implements GameConstants{
     public boolean isDead(){
         return (nbLives <= 0);
     }
-    
-    /**
-     * Check if boat is placed on a grid
-     * @return 
-     */
-    public boolean isPlaced(){
-        return this.tabCompartments[0] != null;
-    }
 
     /**
      * Takes one life from the boat, then, check if is dead
@@ -118,6 +110,14 @@ public abstract class Boat implements GameConstants{
     // Functions for placement
     //**************************************************************************
     /**
+     * Check if boat is placed on a grid
+     * @return 
+     */
+    public boolean isPlaced(){
+        return this.tabCompartments[0] != null;
+    }
+    
+    /**
      * Check if position started at pBox map position is a valid position. 
      * @param pBox          First box position
      * @param pOrientation  Boat orientation
@@ -126,7 +126,11 @@ public abstract class Boat implements GameConstants{
     private boolean isValidPosition(BoxMap pBox, int pOrientation){
         BoxMap  next    = pBox;
         for(int k=0; k<this.tabCompartments.length;k++){
-            if(next==null || (!next.isEmpty() && next.getContent()!= tabCompartments[k])){
+            //if(next==null || (!next.isEmpty() && next.getContent()!= tabCompartments[k])){
+            if(next==null){
+                return false;
+            }
+            else if((!next.isEmpty()) && next.getContent().getId() != this.idBoat){
                 return false;
             }
             next = next.getNextBoxMap(pOrientation);
@@ -153,6 +157,15 @@ public abstract class Boat implements GameConstants{
             this.tabCompartments[k].setBoxPosition(box);
         }
         return true;
+    }
+    
+    /**
+     * Reset the boat position, it will be no more placed on a grid.
+     */
+    public void resetPosition(){
+        for(int k=0; k<this.tabCompartments.length; k++){
+            this.tabCompartments[k].setBoxPosition(null);
+        }
     }
     
     
@@ -184,14 +197,6 @@ public abstract class Boat implements GameConstants{
      */
     public int getNbLives(){
         return nbLives;
-    }
-
-    /**
-     * Return current orientation
-     * @return current orientation
-     */
-    public int getOrientation(){
-        return orientation;
     }
     
     
@@ -271,7 +276,9 @@ public abstract class Boat implements GameConstants{
                 this.boxPosition.setContent(new Water());
             }
             this.boxPosition = pPosition;
-            pPosition.setContent(this);
+            if(pPosition != null){
+                pPosition.setContent(this);
+            }
         }
         
 
@@ -306,7 +313,6 @@ public abstract class Boat implements GameConstants{
             this.id_img[4] = pValid;
         }
 
-
         @Override
         public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid){
             this.id_img[5] = pDef;
@@ -316,11 +322,9 @@ public abstract class Boat implements GameConstants{
             this.id_img[9] = pValid;
         }
 
-
-
         @Override
         public int getId(){
-            return 1;
+            return idBoat;
         }
     } //----------------------------------END INNER CLASS-----------------------
 }

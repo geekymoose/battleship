@@ -78,4 +78,5 @@ public interface GameConstants {
     public static int       CRUISER             = 2;
     public static int       DESTROYER           = 3;
     public static int       SUBMARINE           = 4;
+    public static int       WATER               = 42;
 }

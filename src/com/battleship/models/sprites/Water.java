@@ -6,6 +6,7 @@
 package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
+import com.battleship.constants.GameConstants;
 
 
 
@@ -110,6 +111,6 @@ public class Water implements Sprite{
     
     @Override
     public int getId(){
-        return 0;
+        return GameConstants.WATER;
     }
 }

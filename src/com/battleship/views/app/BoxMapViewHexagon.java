@@ -5,6 +5,7 @@
 package com.battleship.views.app;
 
 import com.battleship.behaviors.Sprite;
+import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -111,23 +112,38 @@ public class BoxMapViewHexagon extends BoxMapView{
     // Draw fucntions
     //**************************************************************************
     @Override
-    public void draw(Graphics2D g2){
+    protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
-        g2.setColor(this.borderColor);
-        g2.drawPolygon(this.polygon);
-        if(this.isHidden){
-            //this.drawHidden(g2);
-        }
-        if(this.isTargeted){
-            //this.drawTargeted(g2);
+        
+        switch(this.sprite.getId()){
+            case GameConstants.WATER:
+                g2.setColor(Color.CYAN);
+                g2.fillPolygon(this.polygon);
+                break;
+            case GameConstants.AIRCRAFT_CARRIER:
+                g2.setColor(Color.YELLOW);
+                g2.fillPolygon(this.polygon);
+                break;
+            case GameConstants.BATTLESHIP:
+                g2.setColor(Color.GRAY);
+                g2.fillPolygon(this.polygon);
+                break;
+            case GameConstants.CRUISER:
+                g2.setColor(Color.BLACK);
+                g2.fillPolygon(this.polygon);
+                break;
+            case GameConstants.SUBMARINE:
+                g2.setColor(Color.BLUE);
+                g2.fillPolygon(this.polygon);
+                break;
+            case GameConstants.DESTROYER:
+                g2.setColor(Color.MAGENTA);
+                g2.fillPolygon(this.polygon);
+                break;
         }
         
-        //TMP DEBUG
-        if(this.sprite.getId() == 0){
-            this.drawHidden(g2);
-        }else{
-            this.drawTargeted(g2);
-        }
+        g2.setColor(this.borderColor);
+        g2.drawPolygon(this.polygon);
     }
     
     
@@ -135,14 +151,14 @@ public class BoxMapViewHexagon extends BoxMapView{
     protected void drawHidden(Graphics2D g2){
         g2.setColor(Color.GRAY);
         g2.fillPolygon(this.polygon);
+        g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
     }
 
     @Override
     protected void drawTargeted(Graphics2D g2){
-        g2.setColor(Color.CYAN);
+        g2.setColor(Color.DARK_GRAY);
         g2.fillPolygon(this.polygon);
-        g2.drawPolygon(this.polygon);
     }
     
     
@@ -151,5 +167,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     // Functions
     //**************************************************************************
+
+
 
 }

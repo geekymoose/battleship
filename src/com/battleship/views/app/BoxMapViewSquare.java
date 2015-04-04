@@ -6,6 +6,7 @@
 package com.battleship.views.app;
 
 import com.battleship.behaviors.Sprite;
+import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -85,34 +86,51 @@ public class BoxMapViewSquare extends BoxMapView{
     // Draw fucntions
     //**************************************************************************
     @Override
-    public void draw(Graphics2D g2){
+    protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
-        g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
-        if(this.isHidden){
-            //this.drawHidden(g2);
-        }
-        if(this.isTargeted){
-            //this.drawTargeted(g2);
+        
+        switch(this.sprite.getId()){
+            case GameConstants.WATER:
+                g2.setColor(Color.CYAN);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
+            case GameConstants.AIRCRAFT_CARRIER:
+                g2.setColor(Color.YELLOW);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
+            case GameConstants.BATTLESHIP:
+                g2.setColor(Color.GRAY);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
+            case GameConstants.CRUISER:
+                g2.setColor(Color.BLACK);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
+            case GameConstants.SUBMARINE:
+                g2.setColor(Color.BLUE);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
+            case GameConstants.DESTROYER:
+                g2.setColor(Color.MAGENTA);
+                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                break;
         }
         
-        //TMP DEBUG
-        if(this.sprite.getId() == 0){
-            this.drawHidden(g2);
-        }else{
-            this.drawTargeted(g2);
-        }
+        g2.setColor(this.borderColor);
+        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
     
     @Override
     protected void drawHidden(Graphics2D g2){
         g2.setColor(Color.GRAY);
         g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        g2.setColor(this.borderColor);
+        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
 
     @Override
     protected void drawTargeted(Graphics2D g2){
-        g2.setColor(Color.CYAN);
+        g2.setColor(Color.DARK_GRAY);
         g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
 }

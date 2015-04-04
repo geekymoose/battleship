@@ -8,6 +8,7 @@ import com.battleship.asset.Config;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.views.tools.UiElement;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -86,7 +87,22 @@ public abstract class BoxMapView implements UiElement{
      * Draw the BoxMap
      * @param g2 
      */
-    public abstract void draw(Graphics2D g2);
+    public void draw(Graphics2D g2){
+        if(this.isHidden){
+            this.drawHidden(g2);
+        } else {
+            this.drawDefault(g2);
+        }
+        if(this.isTargeted){
+            this.drawTargeted(g2);
+        }
+    }
+    
+    /**
+     * Draw default box
+     * @param g2 
+     */
+    protected abstract void drawDefault(Graphics2D g2);
     
     /*
      * Draw the box with hidden status

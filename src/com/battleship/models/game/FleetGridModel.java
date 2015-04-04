@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Boat;
 import java.awt.Point;
@@ -50,6 +51,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
     protected ArrayList<Boat>       listBoats; //Boats placed on the grid
+    protected int                   nbBoatToPlace;
     protected ArrayList<Integer>    listOrientations; //Available orientation
     protected int                   currentOrientation;
     
@@ -78,10 +80,12 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         this.listBoats          = new ArrayList();
         this.listOrientations   = new ArrayList();
         this.currentOrientation = 0;
+        this.nbBoatToPlace      = Config.getGameValues_int("nb-boats");
     }
     
     /**
-     * Reset all boxMap at water value
+     * Reset all boxMap at water value. 
+     * Reset position of all boat (Take off from grid) and reset listBoat.
      */
     public void resetFleetGrid(){
         for(int y=0; y<this.gridHeight; y++){
@@ -90,6 +94,10 @@ public abstract class FleetGridModel extends Model implements GameConstants{
             }
         }
         //Add reset boat position in compartment
+        for(Boat b : this.listBoats){
+            b.resetPosition();
+        }
+        this.listBoats = new ArrayList();
         this.notifyObservers(null);
     }
     
@@ -157,8 +165,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      * @return 
      */
     public boolean isValidFleetGrid(){
-        //return this.listBoats.size() == 5;
-        return true; //DEBUG 
+        return this.listBoats.size() == this.nbBoatToPlace;
     }
     
     
@@ -167,8 +174,22 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     
 
     //**************************************************************************
-    // Functions for orientation
-    //**************************************************************************   
+    // Functions for orientation - Placement
+    //**************************************************************************
+    /**
+     * Add pBoat in the list of boat placed in the FleetGrid. 
+     * <strong>
+     * Note this function doesn't add the boat in the grid! It is 
+     * used only for adding in the list a boat placed on the grid. Placement 
+     * in the grid is done by over function from Player
+     * </strong>
+     * @param pBoat 
+     */
+    public void addBoat(Boat pBoat){
+        if(this.listBoats.contains(pBoat) != true){
+            this.listBoats.add(pBoat);
+        }
+    }
     /**
      * Switch player weapon. Get the next player weapon.
      */
