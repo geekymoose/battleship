@@ -7,6 +7,7 @@ package com.battleship.gridcursor;
 import com.battleship.asset.GridCalculator;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
+import com.battleship.main.DebugTrack;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -165,6 +166,7 @@ public class GridCursor implements GameConstants{
      */
     public void mouseMoved(MouseEvent e){
         Point p = processCoordinate(e, controller.getBoxDimension());
+        DebugTrack.showObjectToString(p);
         this.clickType.mouseMoved(p, controller);
     }
     

@@ -60,11 +60,13 @@ public class BoxMapHexagon extends BoxMap{
             case VERTICAL:
                 y += 1;
                 break;
-            case STANDING_RIGHT:
-                x += 1;
+            case STANDING_UP:
+                if(x%2==0){ y--; }
+                x++;
                 break;
-            case STANDING_LEFT:
-                x -= 1;
+            case STANDING_DOWN:
+                if(x%2!=0){ y++; }
+                x++;
                 break;
         }
         return this.grid.getBoxMapAt(x, y);

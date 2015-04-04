@@ -7,7 +7,6 @@ package com.battleship.models.game;
 import com.battleship.behaviors.Target;
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
-import com.battleship.main.DebugTrack;
 import com.battleship.models.sprites.Water;
 
 

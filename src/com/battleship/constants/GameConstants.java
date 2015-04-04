@@ -38,8 +38,8 @@ public interface GameConstants {
     //Position constants
     public static int       VERTICAL                    = 1;
     public static int       HORIZONTAL                  = 2;
-    public static int       STANDING_RIGHT              = 3;
-    public static int       STANDING_LEFT               = 4;
+    public static int       STANDING_UP                 = 3;
+    public static int       STANDING_DOWN               = 4;
     
     
     
