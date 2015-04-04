@@ -65,6 +65,7 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         this.fleetGridPlayers       = new GridPanel[2];
         this.fleetGridPlayers[0]    = pFleet1;
         this.fleetGridPlayers[1]    = pFleet2;
+        
         this.fleetGridPlayers[0].hideAllBoxMap();
         this.fleetGridPlayers[1].hideAllBoxMap();
     }

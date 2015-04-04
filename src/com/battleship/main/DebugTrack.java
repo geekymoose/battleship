@@ -24,7 +24,11 @@ import javax.swing.JOptionPane;
  * @author  Jessica FAVIN
  */
 public abstract class DebugTrack {
-    public static final boolean  debug_mode = true;
+    public static final boolean  debug_mode         = true;
+    public static final boolean  debug_Event_mode   = false;
+    
+    
+    
     //**************************************************************************
     // Data process
     //**************************************************************************
@@ -149,6 +153,7 @@ public abstract class DebugTrack {
      */
     public static void showPointData(Point p){
         if(debug_mode == false){return;}
+        if(debug_Event_mode == false){return;}
         System.out.println(" * Debug in '"+DebugTrack.getfctName()+"' -> x="+p.x+" y="+p.y);
     }
     
@@ -159,6 +164,7 @@ public abstract class DebugTrack {
      */
     public static void showPointData(int x, int y){
         if(debug_mode == false){return;}
+        if(debug_Event_mode == false){return;}
         System.out.println(" * Debug in '"+DebugTrack.getfctName()+"' -> x="+x+" y="+y);
     }
     

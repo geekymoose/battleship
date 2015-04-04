@@ -8,6 +8,8 @@ import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
 import com.battleship.gridcursor.GridCursor;
 import com.battleship.exceptions.ExecError;
+import com.battleship.models.game.FleetGridModel;
+import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.Dimension;
@@ -105,6 +107,18 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
             }
         }
     }
+
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+        FleetGridModel m = (FleetGridModel)o;
+        for (int y = 0; y < this.gridHeight; y++) {
+            for (int x = 0; x < this.gridWidth; x++) {
+                this.tabBox[y][x].setTargeted(m.getBoxMapAt(x, y).isTargeted());
+            }
+        }
+        this.repaint();
+    }
     
     
     
@@ -159,6 +173,14 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
      */
     public Dimension getBoxDimension(){
         return this.tabBox[0][0].getDimension();
+    }
+    
+    /**
+     * Return type grid
+     * @return 
+     */
+    public int getTypeGrid(){
+        return this.gridType;
     }
     
     

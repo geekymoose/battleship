@@ -58,6 +58,10 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
         this.repaint();
     }
     
+    public void switchCursorBehavior(int playerTurn){
+        
+    }
+    
     
     /**
      * Set fleet grid to display.

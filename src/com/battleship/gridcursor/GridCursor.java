@@ -4,9 +4,12 @@
  */
 package com.battleship.gridcursor;
 
+import com.battleship.asset.GridCalculator;
+import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
-import com.battleship.main.DebugTrack;
 import com.battleship.views.app.GridPanel;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import javax.swing.SwingUtilities;
@@ -31,16 +34,19 @@ import javax.swing.SwingUtilities;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GridCursor{
+public class GridCursor implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
     private     final GridController    controller;
     private     GridPanel               view;
     
-    private     final ClickType         clickHexaPlaceBoat;
-    private     final ClickType         clickSquarePlaceBoat;
+    private     int                     typeGrid;
+    
+    private     final ClickType         clickPlaceBoat;
     private     final ClickType         clickNoAction;
+    private     final ClickType         clickNoArm;
+    private     final ClickType         clickShoot;
     private     ClickType               clickType;
     
     
@@ -56,14 +62,34 @@ public class GridCursor{
      * @param pController   controller for this Cursor
      */
     public GridCursor(GridPanel pGrid, GridController pController){
-        this.clickHexaPlaceBoat     = new ClickHexaPlaceBoat();
-        this.clickSquarePlaceBoat   = new ClickSquarePlaceBoat();
+        this.clickPlaceBoat         = new ClickPlaceBoat();
         this.clickNoAction          = new ClickNoAction();
+        this.clickNoArm             = new ClickNoArm();
+        this.clickShoot             = new ClickShoot();
         
         //Default value
         this.clickType              = this.clickNoAction;
         this.controller             = pController;
         this.view                   = pGrid;
+        
+        this.typeGrid               = this.view.getTypeGrid();
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
+    public Point processCoordinate(MouseEvent e, Dimension dim){
+        switch(typeGrid){
+            case GameConstants.GRID_TYPE_SQUARE:
+                return GridCalculator.pxToSquareCoor(e.getX(), e.getY(), dim);
+            case GameConstants.GRID_TYPE_HEXAGON:
+                return GridCalculator.pxToHexaCoor(e.getX(), e.getY(), dim);
+        }
+        return null; //Should never happend
     }
     
     
@@ -78,8 +104,9 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mouseClicked (MouseEvent e){
+        Point p = processCoordinate(e, controller.getBoxDimension());
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.mouseClicked_Left(e.getX(), e.getY(), controller);
+            this.clickType.mouseClicked_Left(p, controller);
         }
         else if(SwingUtilities.isRightMouseButton(e)){
         }
@@ -92,8 +119,9 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mousePressed(MouseEvent e){
+        Point p = processCoordinate(e, controller.getBoxDimension());
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.mousePressed_left(e.getX(), e.getY(), controller);
+            this.clickType.mousePressed_left(p, controller);
         }
     }
     
@@ -103,17 +131,18 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mouseReleased(MouseEvent e){
+        Point p = processCoordinate(e, controller.getBoxDimension());
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.mouseReleased_left(e.getX(), e.getY(), controller);
+            this.clickType.mouseReleased_left(p, controller);
         }
     }
     
     public void mouseEntered(MouseEvent e){
-        
+        Point p = processCoordinate(e, controller.getBoxDimension());
     }
     
     public void mouseExited(MouseEvent e){
-        
+        Point p = processCoordinate(e, controller.getBoxDimension());
     }
     
     
@@ -123,8 +152,9 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mouseDragged(MouseEvent e){
+        Point p = processCoordinate(e, controller.getBoxDimension());
         if(SwingUtilities.isLeftMouseButton(e)){
-            this.clickType.mouseDragged_left(e.getX(), e.getY(), controller);
+            this.clickType.mouseDragged_left(p, controller);
         }
     }
     
@@ -134,7 +164,8 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mouseMoved(MouseEvent e){
-        this.clickType.mouseMoved(e.getX(), e.getY(), controller);
+        Point p = processCoordinate(e, controller.getBoxDimension());
+        this.clickType.mouseMoved(p, controller);
     }
     
     
@@ -143,7 +174,8 @@ public class GridCursor{
      * @param e Event performed
      */
     public void mouseWheelMoved(MouseWheelEvent e){
-        this.clickType.wheelMovedDown(e.getX(), e.getY(), controller);
+        Point p = processCoordinate(e, controller.getBoxDimension());
+        this.clickType.wheelMovedDown(p, controller);
     }
     
     
@@ -166,7 +198,8 @@ public class GridCursor{
     //**************************************************************************
     // Setters for ClickType
     //**************************************************************************
-    public void setClickHexaPlaceBoat()     { clickType = clickHexaPlaceBoat; }
-    public void setClickSquarePlaceBoat()   { clickType = clickSquarePlaceBoat; }
-    public void setClickNoAction()          { clickType = clickNoAction; }
+    public void setClickNoAction()  { clickType = clickNoAction; }
+    public void setClickPlaceBoat() { clickType = clickPlaceBoat; }
+    public void setClickNoArm()     { clickType = clickNoArm; }
+    public void setClickShoot()     { clickType = clickShoot; }
 }

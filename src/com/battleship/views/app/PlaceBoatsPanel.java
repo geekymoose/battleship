@@ -180,16 +180,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer1, dimBox);
         GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer2, dimBox);
         
-        switch(this.controller.getGameConfig().getGridType()){
-            case GameConstants.GRID_TYPE_SQUARE:
-                fleetPlayer1.getGridCursor().setClickSquarePlaceBoat();
-                fleetPlayer2.getGridCursor().setClickSquarePlaceBoat();
-                break;
-            case GameConstants.GRID_TYPE_HEXAGON:
-                fleetPlayer1.getGridCursor().setClickHexaPlaceBoat();
-                fleetPlayer2.getGridCursor().setClickHexaPlaceBoat();
-                break;
-        }
+        fleetPlayer1.getGridCursor().setClickPlaceBoat();
+        fleetPlayer2.getGridCursor().setClickPlaceBoat();
+        
         this.gridPanel.setFleetGrids(fleetPlayer1, fleetPlayer2);
         this.gridPanel.switchGrid(0);
     }

@@ -115,6 +115,7 @@ public abstract class FleetGridModel extends Model{
         if(box!=null){
             box.aim();
         }
+        this.notifyObservers(null);
     }
     
     /**

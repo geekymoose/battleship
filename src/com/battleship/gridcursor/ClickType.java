@@ -5,6 +5,7 @@
 package com.battleship.gridcursor;
 
 import com.battleship.controllers.GridController;
+import java.awt.Point;
 
 
 
@@ -13,9 +14,11 @@ import com.battleship.controllers.GridController;
  * <p>public interface ClickType </p>
  * 
  * <p>
- * The ClickType interface provides function to use during click performed. 
+ * Deprecated - The ClickType interface provides function to use during click performed. 
  * All coordinate values are pixel coordinate. In order to be used with a grid 
  * coordinate, use tools from controller as GridController
+ * 
+ * UPDATE : coordinate from Point p are actual grid coordinate!!!
  * </p>
  * 
  * @date    Apr 2, 2015
@@ -27,76 +30,67 @@ public interface ClickType {
     
     /**
      * Left click performed: clicked
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseClicked_Left (int x, int y, GridController c);
+    public void mouseClicked_Left (Point p, GridController c);
     
     /**
      * Left click performed: released
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mousePressed_left (int x, int y, GridController c);
+    public void mousePressed_left (Point p, GridController c);
     
     /**
      * Left click performed: pressed
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseReleased_left (int x, int y, GridController c);
+    public void mouseReleased_left (Point p, GridController c);
     
     /**
      * Mouse entered
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseEntered (int x, int y, GridController c);
+    public void mouseEntered (Point p, GridController c);
     
     /**
      * Mouse exited
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseExited (int x, int y, GridController c);
+    public void mouseExited (Point p, GridController c);
     
     /**
      * Left click is hold down and dragged
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseDragged_left (int x, int y, GridController c);
+    public void mouseDragged_left (Point p, GridController c);
     
     
     /**
      * Cursor is moved
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void mouseMoved (int x, int y, GridController c);
+    public void mouseMoved (Point p, GridController c);
     
     
     /**
      * Wheel is moved up
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void wheelMovedUp (int x, int y, GridController c);
+    public void wheelMovedUp (Point p, GridController c);
     
     
     /**
      * Wheel is moved down
-     * @param x x pixel coordinate
-     * @param y y pixel coordinate
+     * @param p coordinate in the grid
      * @param c controller for this action
      */
-    public void wheelMovedDown (int x, int y, GridController c);
+    public void wheelMovedDown (Point p, GridController c);
 }

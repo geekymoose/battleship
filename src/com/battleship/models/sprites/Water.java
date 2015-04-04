@@ -62,9 +62,8 @@ public class Water implements Sprite{
     public Water(){
         this.state          = NOT_HIT;
         this.id_img         = new int[NB_IMG];
-        //TO DO LATER
-        this.setImg(0, 0, 0, 0, 0);
-        this.setHiddenImg(0, 0, 0, 0, 0);
+        this.setImg(201600, 201400, 201700, 201700, 201700);
+        this.setHiddenImg(201400, 201400, 201600, 201600, 201600);
     }
     
     
