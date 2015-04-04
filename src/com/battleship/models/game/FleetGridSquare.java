@@ -9,8 +9,6 @@ import com.battleship.models.sprites.Water;
 
 
 
-
-
 /**
  * <h1>FleetGridSquare</h1>
  * <p>

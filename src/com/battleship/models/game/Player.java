@@ -186,7 +186,11 @@ public abstract class Player implements GameConstants{
     public boolean placeBoatAt(Point p, int pOrientation){
         BoxMap box = this.fleetGrid.getBoxMapAt(p.x, p.y);
         if(this.currentSelectedBoat != null && box != null){
-            return this.currentSelectedBoat.placeAt(box, pOrientation);
+            boolean isPlaced = this.currentSelectedBoat.placeAt(box, pOrientation);
+            if(isPlaced){
+                this.fleetGrid.addBoat(currentSelectedBoat);
+            }
+            return isPlaced;
         }
         return false;
     }
@@ -235,6 +239,8 @@ public abstract class Player implements GameConstants{
      */
     public void setFleetGrid(FleetGridModel pGrid){
         this.fleetGrid = pGrid;
-        this.fleetGrid.setOwner(this); //Change owner
+        if(this.fleetGrid != null){
+            this.fleetGrid.setOwner(this); //Change owner
+        }
     }
 }

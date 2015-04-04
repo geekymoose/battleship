@@ -81,5 +81,9 @@ public interface Sprite {
      */
     public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
     
+    /**
+     * Return if sprite
+     * @return int
+     */
     public int getId();
 }

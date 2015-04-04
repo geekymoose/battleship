@@ -9,7 +9,6 @@ import com.battleship.models.sprites.Water;
 
 
 
-
 /**
  * <h1>FleetGridHexagon</h1>
  * <p>

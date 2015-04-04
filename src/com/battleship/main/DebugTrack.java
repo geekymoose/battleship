@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class DebugTrack {
     public static final boolean  debug_mode         = true;
-    public static final boolean  debug_Event_mode   = false;
+    public static final boolean  debug_Event_mode   = true;
     
     
     

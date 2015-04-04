@@ -251,11 +251,14 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                     frame.rooting(Config.getRootsValues("config"), null);
                     break;
                 case MODE_V2:
+                    controller.resetFleetGrid();
                     frame.rooting(Config.getRootsValues("config"), null);
                     break;
                 case MODE_LAN:
+                    controller.resetFleetGrid();
                     break;
                 case MODE_INTERNET:
+                    controller.resetFleetGrid();
                     break;
             }
         }
