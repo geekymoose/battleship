@@ -6,7 +6,13 @@ package com.battleship.views.app;
 
 import com.battleship.asset.ThemeManager;
 import com.battleship.exceptions.ExecError;
+import com.battleship.uibutton.ImgButton;
+import com.battleship.uibutton.ZozoDecorator;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,19 +29,28 @@ import javax.swing.JPanel;
  * @author  Jessica FAVIN
  */
 public class HeadBar extends JPanel{
-    JLabel l_title      = new JLabel("BATTLESHIP");
+    JLabel l_title;
     JLabel l_music      = new JLabel("MUSIC");
+    private ImageIcon title =  ThemeManager.getTheme().getImgIcon(426100);
+    // A Améliorer
+    AbstractButton b_music = new ZozoDecorator(new ImgButton(425100, 425100, 425200));
     JPanel p_logo       = new JPanel();
     JPanel p_theme      = new JPanel();
     JComboBox themes    = new JComboBox();
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
+    /**
+     * Constructor of the HeadBar
+     * @throws ExecError 
+     */
     public HeadBar() throws ExecError{
+        l_title = new JLabel(title);
         this    .setLayout(new BorderLayout());
+        b_music.setPreferredSize(new Dimension(30,30));
         this    .add(l_title, BorderLayout.WEST);
         p_theme .add(themes);
-        p_theme .add(l_music);
+        p_theme .add(b_music);
         this    .add(p_theme, BorderLayout.EAST);
         
         

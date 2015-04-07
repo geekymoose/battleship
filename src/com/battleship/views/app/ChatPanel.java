@@ -42,6 +42,10 @@ public class ChatPanel extends ContentPanel {
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
+    /**
+     * Constructor of the ChatPanel
+     * @param pParent 
+     */
     public ChatPanel(JPanel pParent) {
         super(pParent);
         this.initComponents();
@@ -57,9 +61,16 @@ public class ChatPanel extends ContentPanel {
     //**************************************************************************
     // METHODS
     //**************************************************************************
+    /**
+     * Set the size of the chat
+     */
     private void setSizes(){
         tf_sentence.setPreferredSize(new Dimension(200, 25));
     }
+    
+    /**
+     * Init all components
+     */
     private void initComponents() {
         p_sentence = new JPanel();
         p_north = new JPanel();
@@ -71,6 +82,9 @@ public class ChatPanel extends ContentPanel {
         setupChat();
     }
 
+    /**
+     * Set the chat with the the scroll pane
+     */
     private void setupChat() {
         ta_chat = new JTextArea();
         sp_scroll = new JScrollPane(ta_chat);
@@ -80,6 +94,9 @@ public class ChatPanel extends ContentPanel {
         
     }
 
+    /**
+     * add each components to the panel
+     */
     private void addEachComponents() {
         p_north.add(sp_scroll, BorderLayout.CENTER);
         p_sentence.add(tf_sentence);

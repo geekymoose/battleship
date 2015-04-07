@@ -120,8 +120,13 @@
                 <img type="static" ext="png">422100</img>
                 <img type="static" ext="png">422200</img>
                 <img type="static" ext="png">422300</img>
+                
+                <img type="static" ext="png">425100</img>
+                <img type="static" ext="png">425200</img>
             </buttons>
-            
+            <title>
+                <img type="static" ext="png">426100</img>
+            </title>
             <grid>
                 <img type="static" ext="png">414100</img>
                 <img type="static" ext="png">414200</img>
