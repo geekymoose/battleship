@@ -8,6 +8,7 @@ package com.battleship.views.app;
 import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.sprites.Water;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
@@ -53,6 +54,29 @@ public class GridSquareView extends GridPanel{
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water());
+            }
+        }
+    }
+    
+    /**
+     * Create a new square grid in view
+     * @param pParent       parent PagePanel where grid is placed
+     * @param pController   grid controller
+     * @param pW            grid width
+     * @param pH            grid height
+     * @param pDim          dimension of one BoxMap
+     * @param pType         grid type
+     * @param c             Color of the borders
+     * @throws ExecError thrown if error during creation
+     */
+    public GridSquareView(JPanel pParent, GridController pController, 
+                        int pW, int pH, int pType, Dimension pDim, Color c) throws ExecError{
+        super(pParent, pController,pW, pH, pType, pDim);
+        this.dimBox = pDim;
+        this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
+        for (int y = 0; y < this.gridHeight; y++) {
+            for (int x = 0; x < this.gridWidth; x++) {
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim, new Water(), c);
             }
         }
     }
