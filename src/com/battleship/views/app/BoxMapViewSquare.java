@@ -57,6 +57,19 @@ public class BoxMapViewSquare extends BoxMapView{
         this.rect = this.createRectangle(this.coordinate);
     }
     
+    /**
+     * 
+     * @param coordinateX   coordinate in the grid
+     * @param coordinateY   coordinate in the grid
+     * @param pDim          BoxDefault dimension
+     * @param pSprite       Default sprite
+     * @param c             Color of the borders
+     */
+    public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite, Color c){
+        super(coordinateX, coordinateY, pDim, pSprite, c);
+        this.rect = this.createRectangle(this.coordinate);
+    }
+    
     /*
      * @param pCoordinate box coordinate in the grid
      */
