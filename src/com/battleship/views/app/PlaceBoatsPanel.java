@@ -53,6 +53,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     DockPanel                       p_dock;
     private     JPanel                          p_bigContainer;
     
+    private     HeadBar                         p_hb;
     private     JPanel                          p_buttonPanel;
     private     AbstractButton                  b_valide;
     private     AbstractButton                  b_reset;
@@ -98,6 +99,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
+        p_hb                = new HeadBar();
         
         p_container         = new ContainerPanel();
         p_bigContainer      = new JPanel();
@@ -125,6 +127,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         p_container         .add(p_buttonPanel, BorderLayout.SOUTH);
         p_bigContainer      .add(p_container, gbc);
         
+        this                .add(p_hb, BorderLayout.NORTH);
         this                .add(p_bigContainer, BorderLayout.CENTER);
         this                .setBtnActions();
     }

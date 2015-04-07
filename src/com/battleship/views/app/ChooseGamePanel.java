@@ -52,6 +52,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
     private     AbstractButton          b_internet;
     
     private     Image                   background;
+    private     HeadBar                 p_hb;
         
     
     
@@ -72,13 +73,14 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
         this.loadUI();
     }
     
-    private void initComponents() {
+    private void initComponents() throws ExecError {
         this.p_container= new JPanel();
         this.gc         = new GridBagConstraints();
         this            .setLayout(new BorderLayout());
         this.p_container.setLayout(new GridBagLayout());
         this.p_container.setOpaque(false); //For background
         
+        p_hb = new HeadBar();
         //Create buttons 
         b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
         b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300));
@@ -104,6 +106,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
         p_container.add(b_internet, gc);
         
         this.setBtnActions();
+        this.add(p_hb, BorderLayout.NORTH);
         this.add(p_container, BorderLayout.CENTER);
     }
     

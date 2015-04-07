@@ -40,6 +40,7 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         super(pParentPage);
         this.currentGrid        = null;
         this.fleetGridPlayers   = null;
+        
     }
     
     

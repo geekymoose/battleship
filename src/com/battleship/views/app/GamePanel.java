@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.asset.CheatCode;
 import com.battleship.asset.Config;
 import com.battleship.asset.SwingFactory;
+import com.battleship.asset.ThemeManager;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.gridcursor.GridCursor;
@@ -20,8 +21,10 @@ import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import javax.swing.JPanel;
 
@@ -42,6 +45,7 @@ import javax.swing.JPanel;
 public class GamePanel extends PagePanel implements ObserverModel{
     private     final GameController    controller;
     private     JPanel                  p_centerPane;
+    private     JPanel                  p_bigCont;
     
     private     Dimension               dimBoxFleet;
     private     Dimension               dimBoxRadar;
@@ -88,20 +92,22 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * Initialize all components
      */
     private void initComponents() throws ExecError{
-        p_centerPane    = new JPanel();
+        p_centerPane    = new ContainerPanel();
         p_info          = new InformationPanel();
         p_fleet         = new PlayerFleetPanel(this);
         p_radar         = new RadarPanel(this);
         p_chat          = new ChatPanel(p_radar);
+        p_bigCont       = new JPanel();
+        
+        p_centerPane    .setOpaque(false);
+        p_fleet         .setOpaque(false);
+        p_radar         .setOpaque(false);
+        p_bigCont       .setOpaque(false);
+        
         
         this            .setLayout(new BorderLayout());
         p_centerPane    .setLayout(new GridBagLayout()); 
-        
-        p_centerPane    .setBackground(Color.red);
-        p_info          .setBackground(Color.ORANGE);
-        p_fleet         .setBackground(Color.CYAN);
-        p_radar         .setBackground(Color.DARK_GRAY);
-        p_chat          .setBackground(Color.PINK);
+        p_bigCont       .setLayout(new GridBagLayout());
         
         //Put the 2 panels into the boerderlayout's center
         gc.fill         = GridBagConstraints.HORIZONTAL;
@@ -118,10 +124,12 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_centerPane    .add(p_fleet, gc);
         
         
+        p_bigCont.add(p_centerPane);
         this.add(p_headbar, BorderLayout.NORTH);
-        this.add(p_centerPane, BorderLayout.CENTER);
+        
         this.add(p_chat, BorderLayout.EAST);
         this.add(p_info, BorderLayout.SOUTH);
+        this.add(p_bigCont, BorderLayout.CENTER);
         
         CheatCode.setData(p_radar);
     }
@@ -156,6 +164,14 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image img = ThemeManager.getTheme().getImg(417000);
+        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+    }
+    
     public void switchTurn(){
         
     }
