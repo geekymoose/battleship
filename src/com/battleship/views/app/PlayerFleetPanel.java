@@ -44,12 +44,22 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
         this.fleetGridPlayers   = null;
     }
     
+    
+    /**
+     * Switch turn behaviors
+     * @param playerTurn player turn
+     */
+    public void switchTurne(int playerTurn){
+        this.switchCursorBehavior(playerTurn);
+        this.switchGrid(playerTurn);
+    }
+    
     /**
      * Switch radar displayed. display the radar for player whom number 
      * is given in parameter (First player is number 0)
      * @param playerTurn player number id (start at 0)
      */
-    public void switchGrid(int playerTurn){
+    private void switchGrid(int playerTurn){
         this.currentGrid = this.fleetGridPlayers[playerTurn];
         this.removeAll();
         this.add(this.currentGrid);
@@ -58,8 +68,7 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants{
         this.repaint();
     }
     
-    public void switchCursorBehavior(int playerTurn){
-        
+    private void switchCursorBehavior(int playerTurn){
     }
     
     

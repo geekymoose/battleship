@@ -7,7 +7,6 @@
 
 package com.battleship.controllers;
 
-import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;

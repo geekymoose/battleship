@@ -186,7 +186,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         fleetPlayer2.getGridCursor().setClickPlaceBoat();
         
         this.gridPanel.setFleetGrids(fleetPlayer1, fleetPlayer2);
-        this.gridPanel.switchGrid(0);
+        this.gridPanel.switchTurne(0);
     }
     
     @Override
@@ -228,7 +228,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                         this.frame.rooting(Config.getRootsValues("game"), true);
                         break;
                     case 1:
-                        this.gridPanel.switchGrid(1);
+                        this.gridPanel.switchTurne(1);
                         UiDialog.showWarning("Next Player", 
                                              "Beware! Next player has to place his boats!!");
                         break;

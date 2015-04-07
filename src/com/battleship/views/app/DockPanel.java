@@ -177,8 +177,6 @@ public class DockPanel extends ContentPanel implements GameConstants{
         
         @Override
         public void mouseClicked(MouseEvent e){
-            controller.selectBoat(idBoat);
-            this.repaint();
         }
 
         @Override
@@ -187,6 +185,8 @@ public class DockPanel extends ContentPanel implements GameConstants{
 
         @Override
         public void mouseReleased(MouseEvent e){
+            controller.selectBoat(idBoat);
+            this.repaint();
         }
 
         @Override

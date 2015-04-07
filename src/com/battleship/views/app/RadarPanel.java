@@ -42,6 +42,16 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         this.fleetGridPlayers   = null;
     }
     
+    
+    /**
+     * Switch turn behaviors
+     * @param playerTurn player turn
+     */
+    public void switchTurne(int playerTurn){
+        this.switchCursorBehavior(playerTurn);
+        this.switchGrid(playerTurn);
+    }
+    
     /**
      * Switch radar displayed. display the radar for player whom number 
      * is given in parameter (First player is number 0)
@@ -53,6 +63,9 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();
+    }
+    
+    private void switchCursorBehavior(int playerTurn){
     }
     
     

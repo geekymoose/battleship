@@ -144,8 +144,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.p_fleet.setFleetGrids(fleetPlayer1, fleetPlayer2);
         this.p_radar.setFleetGrids(radarPlayer1, radarPlayer2);
         
-        this.p_fleet.switchGrid(0);
-        this.p_radar.switchGrid(1);
+        this.p_fleet.switchTurne(0);
+        this.p_radar.switchTurne(1);
     }
     
     
