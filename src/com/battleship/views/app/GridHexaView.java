@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.controllers.GridController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.sprites.Water;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
@@ -53,6 +54,28 @@ public class GridHexaView extends GridPanel{
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water());
+            }
+        }
+    }
+    
+    /**
+     * Create a new Hexagon grid in view with the choice of the color
+     * @param pParent
+     * @param pController
+     * @param pW
+     * @param pH
+     * @param pType
+     * @param pDim
+     * @param c Color for the borders of the grid
+     * @throws ExecError 
+     */
+    public GridHexaView(JPanel pParent, GridController pController, 
+                        int pW, int pH, int pType, Dimension pDim, Color c) throws ExecError{
+        super(pParent, pController,pW, pH, pType, pDim);
+        this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
+        for (int y = 0; y < this.gridHeight; y++) {
+            for (int x = 0; x < this.gridWidth; x++) {
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim, new Water(), c);
             }
         }
     }

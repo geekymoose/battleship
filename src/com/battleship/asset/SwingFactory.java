@@ -26,6 +26,7 @@ import com.battleship.views.app.GridSquareView;
 import com.battleship.views.app.PlaceBoatsPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
@@ -178,6 +179,40 @@ public abstract class SwingFactory implements GameConstants{
                 break;
             case GameConstants.GRID_TYPE_HEXAGON:
                 v  = new GridHexaView(parent, c, width, height, type, pDim);
+                break;
+        }
+        pModel.addObserver(v);
+        c.setView(v);
+        return v;
+    }
+    
+    /**
+     * Generate the view grid for game
+     * @param parent
+     * @param pModel
+     * @param pDim
+     * @param color
+     * @return 
+     * @throws ExecError 
+     */
+    public static GridPanel loadGridPanel(JPanel parent, FleetGridModel pModel, Dimension pDim, Color color) 
+    throws ExecError{
+        if(SwingFactory.model_gameConfig == null){
+            throw new ExecError(700, "gameConfig");
+        }
+        GameConfigModel config  = SwingFactory.model_gameConfig;
+        int             width   = config.getGridWidth();
+        int             height  = config.getGridHeight();
+        int             type    = config.getGridType();
+        
+        GridController      c       = new GridController(pModel);
+        GridPanel           v       = null;
+        switch(type){
+            case GameConstants.GRID_TYPE_SQUARE:
+                v = new GridSquareView(parent, c, width, height, type, pDim, color);
+                break;
+            case GameConstants.GRID_TYPE_HEXAGON:
+                v  = new GridHexaView(parent, c, width, height, type, pDim, color);
                 break;
         }
         pModel.addObserver(v);
