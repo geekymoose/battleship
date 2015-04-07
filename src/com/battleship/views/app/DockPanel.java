@@ -10,14 +10,12 @@ import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.PlaceBoatsController;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -144,15 +142,26 @@ public class DockPanel extends ContentPanel implements GameConstants{
         @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, 
-                    ThemeManager.getTheme().getImg(this.currentImg).getWidth(this),
-                    ThemeManager.getTheme().getImg(this.currentImg).getHeight(this),
-                    this);
+            if(controller.getCurrentPlayer().getSelectedBoat() != null &&
+               controller.getCurrentPlayer().getSelectedBoat().getBoatId() == this.idBoat){
+                g.drawImage(ThemeManager.getTheme().getImg(this.selectedImg), 0, 0, 
+                        ThemeManager.getTheme().getImg(this.selectedImg).getWidth(this),
+                        ThemeManager.getTheme().getImg(this.selectedImg).getHeight(this),
+                        this);
+                
+            } else{ 
+                g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, 
+                        ThemeManager.getTheme().getImg(this.currentImg).getWidth(this),
+                        ThemeManager.getTheme().getImg(this.currentImg).getHeight(this),
+                        this);
+            }
+           
         }
         
         
         @Override
         public void mouseClicked(MouseEvent e){
+            DockPanel.this.repaint();
         }
 
         @Override
@@ -175,6 +184,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
         public void mouseExited(MouseEvent e){
             this.currentImg = this.defaultImg;
             this.repaint();
+            DockPanel.this.repaint();
         }
     } //------------------------END DockBoats INNER CLASS-----------------------
     
