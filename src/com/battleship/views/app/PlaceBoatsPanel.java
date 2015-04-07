@@ -191,7 +191,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(415000);
+        Image img = ThemeManager.getTheme().getImg(417000);
         g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
     }
     
