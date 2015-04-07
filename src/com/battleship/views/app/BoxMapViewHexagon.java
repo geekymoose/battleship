@@ -57,6 +57,20 @@ public class BoxMapViewHexagon extends BoxMapView{
         this.polygon = this.createHexagon(coordinateX, coordinateY);
     }
     
+    /**
+     * Create a BoxMapHexagon
+     * @param coordinateX   coordinate in the grid
+     * @param coordinateY   coordinate in the grid
+     * @param pDim          BoxDefault dimension
+     * @param pSprite       Default sprite
+     * @param c             Color of the borders
+     */
+    public BoxMapViewHexagon(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite, Color c){
+        super(coordinateX, coordinateY, pDim, pSprite, c);
+        this.initValues(this.dimension.width);
+        this.polygon = this.createHexagon(coordinateX, coordinateY);
+    }
+    
     
     /*
      * Set all the sizes

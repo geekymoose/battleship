@@ -23,6 +23,7 @@ import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -177,8 +178,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         DebugTrack.showObjectToString(gridPlayer1);
         DebugTrack.showObjectToString(gridPlayer2);
         
-        GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer1, dimBox);
-        GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer2, dimBox);
+        GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer1, dimBox, Color.WHITE);
+        GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer2, dimBox, Color.WHITE);
         
         fleetPlayer1.getGridCursor().setClickPlaceBoat();
         fleetPlayer2.getGridCursor().setClickPlaceBoat();

@@ -74,6 +74,25 @@ public abstract class BoxMapView implements UiElement{
         this.loadUI();
     }
     
+    /**
+     * Create a new BoxMapView at position given (Grid coordinates)
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param pDimension BoxMap default dimension
+     * @param pSprite Default sprite
+     * @param c Color for the borders 
+     */
+    protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite, Color c){
+        this.coordinate = new Point(x, y);
+        this.dimension  = pDimension;
+        this.isHidden   = false;
+        this.isTargeted = false;
+        this.borderSize = Config.getDimValues_int("boxmap-border-size");
+        this.borderColor= c;
+        this.sprite     = pSprite;
+        this.img        = new Image[Sprite.NB_IMG];
+        this.loadUI();
+    }
     
     
     
