@@ -5,12 +5,12 @@ public class displayBoats implements ObservableModel, UiElements {
    }
    
    public void placeBoat(Boat pBoat){
-      int orientation = pBoat.getOrientation();
-      BufferedImg img = ThemeManager.getTheme().getImg(int??);
-      Point center = pBoat.getCenterImg();
-      int h = img.getHeight();
-      int w = img.getWidth();
-      Point placeAt = new Point(center-(w/2), center-(h/2));
+      int 			orientation = pBoat.getOrientation();
+      BufferedImg 	img 		= ThemeManager.getTheme().getImg(int??);
+      Point 		center 		= pBoat.getCenterImg();
+      int 			h 			= img.getHeight();
+      int 			w 			= img.getWidth();
+      Point 		placeAt 	= new Point(center-(w/2), center-(h/2));
       //PaintComponent?
       this.loadUI();
    }

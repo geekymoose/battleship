@@ -8,7 +8,6 @@ import com.battleship.asset.Config;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.views.tools.UiElement;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;

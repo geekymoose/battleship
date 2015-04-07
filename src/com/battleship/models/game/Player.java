@@ -220,6 +220,14 @@ public abstract class Player implements GameConstants{
     }
     
     /**
+     * Return current selected boat
+     * @return Boat
+     */
+    public Boat getSelectedBoat(){
+        return this.currentSelectedBoat;
+    }
+    
+    /**
      * Set player name
      * @param pValue new player name, if is not a String or empty, throw exception
      */
