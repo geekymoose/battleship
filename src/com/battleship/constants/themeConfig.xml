@@ -99,6 +99,27 @@
                 <img type="static" ext="png">413100</img>
                 <img type="static" ext="png">413200</img>
                 <img type="static" ext="png">413300</img>
+                
+                <!--  Image DockPanel  --> 
+                <img type="static" ext="png">418100</img>
+                <img type="static" ext="png">418200</img>
+                <img type="static" ext="png">418300</img>
+                
+                <img type="static" ext="png">419100</img>
+                <img type="static" ext="png">419200</img>
+                <img type="static" ext="png">419300</img>
+                
+                <img type="static" ext="png">420100</img>
+                <img type="static" ext="png">420200</img>
+                <img type="static" ext="png">420300</img>
+                
+                <img type="static" ext="png">421100</img>
+                <img type="static" ext="png">421200</img>
+                <img type="static" ext="png">421300</img>
+                
+                <img type="static" ext="png">422100</img>
+                <img type="static" ext="png">422200</img>
+                <img type="static" ext="png">422300</img>
             </buttons>
             
             <grid>
