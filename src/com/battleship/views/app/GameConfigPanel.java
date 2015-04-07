@@ -61,8 +61,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_left;
     private     JPanel                  p_right;
     private     JPanel                  p_bigCont;
+    private     JPanel                  p_bigbigCont;
     private     JPanel                  p_card1;
     private     JPanel                  p_card2;
+    private     HeadBar                 p_hb;
     
     private     JLabel                  l_grid1;
     private     JLabel                  l_grid2;
@@ -105,7 +107,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     /*
      * Init components
      */
-    private void initComponents(){
+    private void initComponents() throws ExecError{
         p_buttons   = new JPanel();
         p_center    = new JPanel();
         p_container = new ContainerPanel();
@@ -114,12 +116,16 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_bigCont   = new JPanel();
         p_card1     = new JPanel();
         p_card2     = new JPanel();
+        p_bigbigCont= new JPanel();
+        p_hb        = new HeadBar();
         
         cl          = new CardLayout();
         gbc         = new GridBagConstraints();
+        p_bigbigCont.setLayout(new BorderLayout());
         gbc.ipadx = 50;
         gbc.ipady = 50;
         
+        p_bigbigCont.setOpaque(false);
         p_bigCont   .setOpaque(false);
         p_container .setOpaque(false);
         p_center    .setOpaque(false);
@@ -163,8 +169,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         //Magouille pour sizer le borderlayout
         p_bigCont.add(p_container, gbc);
         //p_bigCont.setPreferredSize(new Dimension(490,370));
-        this.add(p_bigCont);
+        p_bigbigCont.add(p_bigCont);
         
+        this.add(p_bigbigCont, BorderLayout.CENTER);
+        this.add(p_hb, BorderLayout.NORTH);
         this.setBtnActions();
     }
     

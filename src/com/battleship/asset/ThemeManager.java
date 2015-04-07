@@ -104,9 +104,33 @@ public class ThemeManager{
         if(!themeFolder.isDirectory()){
             throw new ExecError(501);
         }
+        File[] children = themeFolder.listFiles();
+        if (children != null) {
+            for (File child : children) {
+                if(child.isDirectory()){
+                    listThemeNames.add(child.getName());
+                }
+            }
+        }
         return listThemeNames;
     }
     
+    /*
+     * Add folder from the current directory to theme listPath
+     * @param file current file position
+     * @param all 
+     */
+    private void addTree(File file, ArrayList<String> list) {
+        File[] children = file.listFiles();
+        if (children != null) {
+            for (File child : children) {
+                if(child.isDirectory()){
+                    list.add(child.getPath()+"/");
+                    addTree(child, list);
+                }
+            }
+        }
+    }
     
     
     
