@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -43,11 +44,6 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private PlaceBoatsController    controller;
     
     private GridBagConstraints      gbc             = new GridBagConstraints();
-    private JLabel                  l_cruiser       = new JLabel("Cruiser");
-    private JLabel                  l_submarine     = new JLabel("Submarine");
-    private JLabel                  l_aircraft      = new JLabel("Aircraft carrier");
-    private JLabel                  l_destroyer     = new JLabel("Destroyer");
-    private JLabel                  l_battleship    = new JLabel("Battleship");
     
     
     
@@ -69,52 +65,27 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private void initComponents(){
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
-        //gbc.insets = new Insets(0,0,0,0);
-        l_cruiser   .setForeground(Color.WHITE);
-        l_submarine .setForeground(Color.WHITE);
-        l_destroyer .setForeground(Color.WHITE);
-        l_aircraft  .setForeground(Color.WHITE);
-        l_battleship.setForeground(Color.WHITE);
         
+        gbc.insets = new Insets(10,10,10,10);
         gbc.gridx = 0;
         gbc.gridy = 0;
         this.add(new AircraftCarrier(), gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 1;
-        this.add(l_aircraft, gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 2;
         this.add(new Battleship(), gbc);
         
         gbc.gridx = 0;
-        gbc.gridy = 3;
-        this.add(l_battleship, gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 2;
         this.add(new Submarine(), gbc);
         
         gbc.gridx = 0;
-        gbc.gridy = 5;
-        this.add(l_submarine, gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 3;
         this.add(new Cruiser(), gbc);
         
         gbc.gridx = 0;
-        gbc.gridy = 7;
-        this.add(l_cruiser, gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 4;
         this.add(new Destroyer(), gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        this.add(l_destroyer, gbc);
     }
     
     
@@ -155,6 +126,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
         protected   int     currentImg;
         protected   int     defaultImg;
         protected   int     selectedImg;
+        protected   int     hoverImg;
         protected   int     idBoat;
         
         
@@ -164,6 +136,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
         protected DockBoats(int pBoatId){
             this.idBoat = pBoatId;
             this.setPreferredSize(Config.getDimValues_dim("dim-dockboat"));
+            //this.setPreferredSize(null);
             this.addMouseListener(this);
             this.setOpaque(false);
         }
@@ -171,7 +144,10 @@ public class DockPanel extends ContentPanel implements GameConstants{
         @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, this);
+            g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, 
+                    ThemeManager.getTheme().getImg(this.currentImg).getWidth(this),
+                    ThemeManager.getTheme().getImg(this.currentImg).getHeight(this),
+                    this);
         }
         
         
@@ -191,7 +167,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
 
         @Override
         public void mouseEntered(MouseEvent e){
-            this.currentImg = this.selectedImg;
+            this.currentImg = this.hoverImg;
             this.repaint();
         }
 
@@ -207,8 +183,9 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private class AircraftCarrier extends DockBoats {
         public AircraftCarrier(){
             super(GameConstants.AIRCRAFT_CARRIER);
-            this.defaultImg     = 5000;
-            this.selectedImg    = 5001;
+            this.defaultImg     = 418100;
+            this.hoverImg       = 418200;
+            this.selectedImg    = 418300;
             this.currentImg     = this.defaultImg;
         }
     } 
@@ -218,8 +195,9 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private class Battleship extends DockBoats {
         public Battleship(){
             super(GameConstants.BATTLESHIP);
-            this.defaultImg     = 4000;
-            this.selectedImg    = 4001;
+            this.defaultImg     = 419100;
+            this.hoverImg       = 419200;
+            this.selectedImg    = 419300;
             this.currentImg     = this.defaultImg;
         }
     } 
@@ -229,8 +207,9 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private class Submarine extends DockBoats {
         public Submarine(){
             super(GameConstants.SUBMARINE);
-            this.defaultImg     = 3002;
-            this.selectedImg    = 3003;
+            this.defaultImg     = 421100;
+            this.hoverImg       = 421200;
+            this.selectedImg    = 421300;
             this.currentImg     = this.defaultImg;
         }
     } 
@@ -240,8 +219,9 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private class Cruiser extends DockBoats {
         public Cruiser(){
             super(GameConstants.CRUISER);
-            this.defaultImg     = 3000;
-            this.selectedImg    = 3001;
+            this.defaultImg     = 420100;
+            this.hoverImg       = 420200;
+            this.selectedImg    = 420300;
             this.currentImg     = this.defaultImg;
         }
     } 
@@ -251,8 +231,9 @@ public class DockPanel extends ContentPanel implements GameConstants{
     private class Destroyer extends DockBoats {
         public Destroyer(){
             super(GameConstants.DESTROYER);
-            this.defaultImg     = 2000;
-            this.selectedImg    = 2001;
+            this.defaultImg     = 422100;
+            this.hoverImg       = 422200;
+            this.selectedImg    = 422300;
             this.currentImg     = this.defaultImg;
         }
     } //------------------------END BOATS INNER CLASS-----------------------
