@@ -5,11 +5,9 @@
 
 package com.battleship.views.app;
 
-import com.battleship.asset.Config;
 import com.battleship.asset.ImgCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
-import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -89,68 +87,91 @@ public class BoxMapViewSquare extends BoxMapView{
     
     
     
-
-    //**************************************************************************
-    // Functions
-    //**************************************************************************
-    
-    
-    
-    
-    
     //**************************************************************************
     // Draw fucntions
     //**************************************************************************
     @Override
     protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
-        
-        switch(this.sprite.getId()){
-            case GameConstants.WATER:
-                Point p = ImgCalculator.squareBoxMapUpperLeftCorner(this, this.dimension);
-                Image i = ThemeManager.getTheme().getImg(301600);
-                g2.drawImage(i, p.x, p.y, null);
-                
-                //g2.setColor(Color.CYAN);
-                //g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        Image   i   = null;
+        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        switch(this.sprite.getState()){
+            case Sprite.ALIVE_BOAT:
+                i = this.imgBoatAlive;
                 break;
-            case GameConstants.AIRCRAFT_CARRIER:
-                g2.setColor(Color.YELLOW);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+            case Sprite.ALIVE_WATER:
+                i = this.imgWaterAlive;
                 break;
-            case GameConstants.BATTLESHIP:
-                g2.setColor(Color.GRAY);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+            case Sprite.DEAD_BOAT:
+                i = this.imgBoatDead;
                 break;
-            case GameConstants.CRUISER:
-                g2.setColor(Color.BLACK);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
-                break;
-            case GameConstants.SUBMARINE:
-                g2.setColor(Color.BLUE);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
-                break;
-            case GameConstants.DESTROYER:
-                g2.setColor(Color.MAGENTA);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+            case Sprite.DEAD_WATER:
+                i = this.imgWaterDead;
                 break;
         }
-        
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
     
+    
     @Override
     protected void drawHidden(Graphics2D g2){
-        g2.setColor(Color.GRAY);
-        g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        Image   i   = null;
+        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        switch(this.sprite.getState()){
+            case Sprite.ALIVE_BOAT:
+                i = this.imgHiddenWaterAlive;
+                break;
+            case Sprite.ALIVE_WATER:
+                i = this.imgHiddenWaterAlive;
+                break;
+            case Sprite.DEAD_BOAT:
+                i = this.imgHiddenBoatDead;
+                break;
+            case Sprite.DEAD_WATER:
+                i = this.imgHiddenWaterDead;
+                break;
+        }
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
 
+    
     @Override
     protected void drawTargeted(Graphics2D g2){
         g2.setColor(Color.DARK_GRAY);
         g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void reloadUI(){
+        //Visible images
+        this.imgBoatAlive           = ThemeManager.getTheme().getImg(301400);
+        this.imgBoatDead            = ThemeManager.getTheme().getImg(301800);
+        this.imgWaterAlive          = ThemeManager.getTheme().getImg(301600);
+        this.imgWaterDead           = ThemeManager.getTheme().getImg(301700);
+        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(301400);
+        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(301400);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(301400);
+        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(301400);
+
+        //Hidden image
+        this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(301800);
+        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(301400);
+        this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(301500);
+        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(301400);
+        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(301400);
+
+        //Targeted image
+        this.imgTargeted            = ThemeManager.getTheme().getImg(301700);
     }
 }

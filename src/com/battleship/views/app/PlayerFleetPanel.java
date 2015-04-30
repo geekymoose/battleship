@@ -44,7 +44,7 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
     
     
     //**************************************************************************
-    // CONSTRUCTOR
+    // Contructors - Initialization
     //**************************************************************************
     /**
      * Create a new PlayerFleetPanel which display the player fleet on the game board
@@ -101,5 +101,22 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+    
+    @Override
+    public void reloadUI(){
+    
     }
 }

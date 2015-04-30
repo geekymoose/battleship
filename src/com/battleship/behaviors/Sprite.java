@@ -25,20 +25,20 @@ package com.battleship.behaviors;
  * @see BoxMap
  */
 public interface Sprite {
-    public static int   NB_IMG                  = 10;
+    //**************************************************************************
+    // Constants
+    //**************************************************************************
+    public final int NB_STATES                  = 4;
+    public final int ALIVE_BOAT                 = 1;
+    public final int ALIVE_WATER                = 2;
+    public final int DEAD_BOAT                  = 3;
+    public final int DEAD_WATER                 = 4;
     
-    public static int   IMG_0V_DEFAULT          = 0;
-    public static int   IMG_1V_DESTROYE         = 1;
-    public static int   IMG_2V_HOVER_DEF        = 2;
-    public static int   IMG_4V_HOVER_INVALID    = 3;
-    public static int   IMG_3V_HOVER_VALID      = 4;
     
-    public static int   IMG_5H_DEFAULT          = 5;
-    public static int   IMG_6H_DESTROYE         = 6;
-    public static int   IMG_7H_HOVER_DEF        = 7;
-    public static int   IMG_9H_HOVER_INVALID    = 8;
-    public static int   IMG_8H_HOVER_VALID      = 9;
     
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
     /**
      * Hit sprite by a shot.
      * @return true if sprite hit successfully, otherwise, return false
@@ -53,37 +53,14 @@ public interface Sprite {
     public boolean canBeHit();
     
     /**
-     * Return the Sprite image identification. Image should be Loaded in an array. 
-     * Sprite constants are linked with image position in this array. idImg should 
-     * be a Sprite constants and automatically return image needed
-     * @param idImg image to return (Use Sprite constants)
-     * @return id image 
-     */
-    public int getImgId(int idImg);
-    
-    /**
-     * Set all image id. If unknown value is given, return default image
-     * @param pDef          default image
-     * @param pDestroyed    destroyed image
-     * @param pHover        hover image
-     * @param pValid        valid image
-     * @param pNovalid      not valid
-     */
-    public void setImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
-    
-    /**
-     * Set all image id for hidden mode. If unknown value is given, return default image
-     * @param pDef          default image
-     * @param pDestroyed    destroyed image
-     * @param pHover        hover image
-     * @param pValid        valid image
-     * @param pNovalid      not valid
-     */
-    public void setHiddenImg(int pDef, int pDestroyed, int pHover, int pNovalid, int pValid);
-    
-    /**
      * Return if sprite
      * @return int
      */
     public int getId();
+    
+    /**
+     * Return current sprite state. For example, sprite can be a boat, water, hit
+     * @return 
+     */
+    public int getState();
 }

@@ -5,7 +5,6 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.Config;
-import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.views.tools.UiElement;
 import java.awt.Color;
@@ -35,8 +34,6 @@ public abstract class BoxMapView implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   Image[]     img;
-    
     protected   int         borderSize;
     protected   Color       borderColor;
     protected   Dimension   dimension;
@@ -45,6 +42,29 @@ public abstract class BoxMapView implements UiElement{
     protected   boolean     isHidden;
     protected   boolean     isTargeted;
     protected   Sprite      sprite;
+    
+    //Visible images
+    protected   Image       imgBoatAlive;
+    protected   Image       imgBoatDead;
+    protected   Image       imgWaterAlive;
+    protected   Image       imgWaterDead;
+    protected   Image       imgHoverBoatAlive;
+    protected   Image       imgHoverBoatDead;
+    protected   Image       imgHoverWaterAlive;
+    protected   Image       imgHoverWaterDead;
+    
+    
+    //Hidden image
+    protected   Image       imgHiddenBoatDead;
+    protected   Image       imgHiddenWaterAlive;
+    protected   Image       imgHiddenWaterDead;
+    protected   Image       imgHoverHiddenValid;
+    protected   Image       imgHoverHiddenNotValid;
+    
+    //Targeted image
+    protected   Image       imgTargeted;
+    
+    
     
     
     
@@ -70,7 +90,6 @@ public abstract class BoxMapView implements UiElement{
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= Color.BLACK;
         this.sprite     = pSprite;
-        this.img        = new Image[Sprite.NB_IMG];
         this.loadUI();
     }
     
@@ -90,7 +109,6 @@ public abstract class BoxMapView implements UiElement{
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= c;
         this.sprite     = pSprite;
-        this.img        = new Image[Sprite.NB_IMG];
         this.loadUI();
     }
     
@@ -99,7 +117,7 @@ public abstract class BoxMapView implements UiElement{
     
 
     //**************************************************************************
-    // Functions
+    // Draw Functions
     //**************************************************************************
     /**
      * Draw the BoxMap
@@ -133,27 +151,24 @@ public abstract class BoxMapView implements UiElement{
      * @param g2 
      */
     protected abstract void drawTargeted(Graphics2D g2);
-
     
+    
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
     @Override
     public void loadUI(){
         this.reloadUI();
     }
-
-
-    @Override
-    public void reloadUI(){
-        for(int k=0; k<Sprite.NB_IMG; k++){
-            this.img[k] = ThemeManager.getTheme().getImg(this.sprite.getImgId(k));
-        }
-    }
     
     
     
     
     
     
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************

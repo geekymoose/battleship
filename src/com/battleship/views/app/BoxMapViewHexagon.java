@@ -11,12 +11,10 @@ import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.image.BufferedImage;
 
 
 
@@ -134,35 +132,23 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
-        
-        switch(this.sprite.getId()){
-            case GameConstants.WATER:
-                Point p = ImgCalculator.hexaBoxMapUpperLeftCorner(this, this.dimension);
-                Image i = ThemeManager.getTheme().getImg(201600);
-                g2.drawImage(i, p.x, p.y, null);
+        Image   i   = null;
+        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        switch(this.sprite.getState()){
+            case Sprite.ALIVE_BOAT:
+                i = this.imgBoatAlive;
                 break;
-            case GameConstants.AIRCRAFT_CARRIER:
-                g2.setColor(Color.YELLOW);
-                g2.fillPolygon(this.polygon);
+            case Sprite.ALIVE_WATER:
+                i = this.imgWaterAlive;
                 break;
-            case GameConstants.BATTLESHIP:
-                g2.setColor(Color.GRAY);
-                g2.fillPolygon(this.polygon);
+            case Sprite.DEAD_BOAT:
+                i = this.imgBoatDead;
                 break;
-            case GameConstants.CRUISER:
-                g2.setColor(Color.BLACK);
-                g2.fillPolygon(this.polygon);
-                break;
-            case GameConstants.SUBMARINE:
-                g2.setColor(Color.BLUE);
-                g2.fillPolygon(this.polygon);
-                break;
-            case GameConstants.DESTROYER:
-                g2.setColor(Color.MAGENTA);
-                g2.fillPolygon(this.polygon);
+            case Sprite.DEAD_WATER:
+                i = this.imgWaterDead;
                 break;
         }
-        
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
     }
@@ -170,9 +156,23 @@ public class BoxMapViewHexagon extends BoxMapView{
     
     @Override
     protected void drawHidden(Graphics2D g2){
-        Point p = ImgCalculator.hexaBoxMapUpperLeftCorner(this, this.dimension);
-        Image i = ThemeManager.getTheme().getImg(201400);
-        g2.drawImage(i, p.x, p.y, null);
+        Image   i   = null;
+        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        switch(this.sprite.getState()){
+            case Sprite.ALIVE_BOAT:
+                i = this.imgHiddenWaterAlive;
+                break;
+            case Sprite.ALIVE_WATER:
+                i = this.imgHiddenWaterAlive;
+                break;
+            case Sprite.DEAD_BOAT:
+                i = this.imgHiddenBoatDead;
+                break;
+            case Sprite.DEAD_WATER:
+                i = this.imgHiddenWaterDead;
+                break;
+        }
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
     }
@@ -187,9 +187,28 @@ public class BoxMapViewHexagon extends BoxMapView{
     
     
     //**************************************************************************
-    // Functions
+    // UI Functions
     //**************************************************************************
+    @Override
+    public void reloadUI(){
+        //Visible images
+        this.imgBoatAlive           = ThemeManager.getTheme().getImg(201400);
+        this.imgBoatDead            = ThemeManager.getTheme().getImg(201800);
+        this.imgWaterAlive          = ThemeManager.getTheme().getImg(201600);
+        this.imgWaterDead           = ThemeManager.getTheme().getImg(201700);
+        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(201400);
+        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(201400);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(201400);
+        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(201400);
 
+        //Hidden image
+        this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(201800);
+        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(201400);
+        this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(201500);
+        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(201400);
+        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(201400);
 
-
+        //Targeted image
+        this.imgTargeted            = ThemeManager.getTheme().getImg(201700);
+    }
 }

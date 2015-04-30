@@ -56,14 +56,10 @@ public abstract class ContentPanel extends JPanel implements UiElement{
     //  Functions
     //**************************************************************************
     @Override
-    public void loadUI(){
-    
-    }
+    public abstract void loadUI();
 
     @Override
-    public void reloadUI(){
-        
-    }
+    public abstract void reloadUI();
     
     
     

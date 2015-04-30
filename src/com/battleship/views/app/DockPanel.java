@@ -109,6 +109,23 @@ public class DockPanel extends ContentPanel implements GameConstants{
     
     
     //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+    
+    @Override
+    public void reloadUI(){
+    
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
     // Inner class
     //**************************************************************************
     /**<h1>DockBoats</h1>
@@ -247,6 +264,5 @@ public class DockPanel extends ContentPanel implements GameConstants{
             this.currentImg     = this.defaultImg;
         }
     } //------------------------END BOATS INNER CLASS-----------------------
-    
     
 }
