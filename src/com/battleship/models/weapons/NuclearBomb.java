@@ -22,7 +22,7 @@ import com.battleship.models.game.Player;
  * Type of weapon that has a shotTypeNuclearBomb shotType meaning it can only 
  * shoot like a nuclear bomb.
  * The center compartment (the compartment that was clicked on) and all 
- * the neighbouring compartment are hit, up to two compartments away
+ * the neighbor compartment are hit, up to two compartments away
  * (twenty-five compartments hit with a square grid and nineteen with an hexagon grid).
  * </p>
  *

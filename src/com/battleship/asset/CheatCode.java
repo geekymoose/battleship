@@ -7,7 +7,10 @@
 
 package com.battleship.asset;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.GameModel;
+import com.battleship.models.game.Player;
+import com.battleship.models.weapons.*;
 import com.battleship.views.app.RadarPanel;
 
 
@@ -16,12 +19,15 @@ import com.battleship.views.app.RadarPanel;
 
 /**
  * <h1>CheatCode</h1>
- * <p>public class CheatCode</p>
+ * <p>
+ * public abstract class CheatCode
+ * implements GameConstants
+ * </p>
  *
  * @author Constantin MASSON
  * @date Apr 4, 2015
  */
-public abstract class CheatCode {
+public abstract class CheatCode implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -52,9 +58,24 @@ public abstract class CheatCode {
         if(!cheatAuthorized){
             return;
         }
+        int     idPlayer    = CheatCode.game.getIdPlayerTurn();
+        Player  player      = CheatCode.game.getConfig().getPlayers()[idPlayer];
+        
         switch(str){
             case "whoisthebest":
                 CheatCode.radar.displayCurrentGrid();
+                break;
+            case "givemeanuke":
+                player.addWeapon(new NuclearBomb(player, 1));
+                player.switchWeaponNext();
+                break;
+            case "givemeatorpedo":
+                player.addWeapon(new Torpedo(player, 1));
+                player.switchWeaponNext();
+                break;
+            case "givemeabomb":
+                player.addWeapon(new Bomb(player, 1));
+                player.switchWeaponNext();
                 break;
         }
     }

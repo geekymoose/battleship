@@ -130,7 +130,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     
     
     //**************************************************************************
-    // Functions
+    // Functions for BoxMapView management
     //**************************************************************************
     /**
      * Hide all BoxMap for this grid
@@ -145,7 +145,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     public void visibleAllBoxMap(){
         this.setHidenAllBoxMap(false);
     }
-    
     
     /**
      * Set hidden value for all box map

@@ -26,10 +26,16 @@ import java.awt.Point;
  * @date Apr 4, 2015
  */
 public class ClickShoot implements ClickType{
-    private final Player owner;
+    private Player owner;
     
     public ClickShoot(Player pOwner){
         this.owner = pOwner;
+    }
+    
+    public void setOwner(Player pOwner){
+        if(pOwner != null){
+            this.owner = pOwner;
+        }
     }
     
     

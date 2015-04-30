@@ -40,7 +40,7 @@ public class GridCursor implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     private     final GridController    controller;
-    private     final Player            owner;
+    private     Player                  owner;
     private     GridPanel               view;
     
     private     final int               typeGrid;
@@ -193,10 +193,23 @@ public class GridCursor implements GameConstants{
     //**************************************************************************
     /**
      * Link cursor with a specific view grid
-     * @param pGrid 
+     * @param pGrid new view grid, do nothing if null
      */
     public void setGridView(GridPanel pGrid){
-        this.view = pGrid;
+        if(pGrid != null){
+            this.view = pGrid;
+        }
+    }
+    
+    /**
+     * Change owner of this cursor
+     * @param pOwner new owner, do nothing if null
+     */
+    public void setOwner(Player pOwner){
+        if(pOwner != null){
+            this.owner = pOwner;
+            ((ClickShoot)this.clickShoot).setOwner(pOwner);
+        }
     }
     
     

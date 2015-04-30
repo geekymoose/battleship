@@ -10,12 +10,19 @@ import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.PlaceBoatsController;
+import com.battleship.models.sprites.Boat;
+import com.battleship.uibutton.ImgButton;
+import com.battleship.uibutton.ZozoDecorator;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 
 
@@ -40,8 +47,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     private PlaceBoatsController    controller;
-    
-    private GridBagConstraints      gbc             = new GridBagConstraints();
+    private GridBagConstraints      gbc;
     
     
     
@@ -57,6 +63,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
     public DockPanel(JPanel pParentPage, PlaceBoatsController pController) throws ExecError{
         super(pParentPage);
         this.controller         = pController;
+        this.gbc                = new GridBagConstraints();
         this.initComponents();
     }
     
@@ -84,23 +91,18 @@ public class DockPanel extends ContentPanel implements GameConstants{
         gbc.gridx = 0;
         gbc.gridy = 4;
         this.add(new Destroyer(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        AbstractButton but = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
+        but.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("DEBUG IN DOCKPANEL: change p");
+                    }
+        });
+        this.add(but, gbc);
     }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // METHODS
-    //**************************************************************************
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // SETTERS / GETTERS
-    //**************************************************************************
     
     
     
@@ -134,7 +136,6 @@ public class DockPanel extends ContentPanel implements GameConstants{
         protected DockBoats(int pBoatId){
             this.idBoat = pBoatId;
             this.setPreferredSize(Config.getDimValues_dim("dim-dockboat"));
-            //this.setPreferredSize(null);
             this.addMouseListener(this);
             this.setOpaque(false);
         }
@@ -142,23 +143,21 @@ public class DockPanel extends ContentPanel implements GameConstants{
         @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
-            if(controller.getCurrentPlayer().getSelectedBoat() != null &&
-               controller.getCurrentPlayer().getSelectedBoat().getBoatId() == this.idBoat){
-                g.drawImage(ThemeManager.getTheme().getImg(this.selectedImg), 0, 0, 
-                        ThemeManager.getTheme().getImg(this.selectedImg).getWidth(this),
-                        ThemeManager.getTheme().getImg(this.selectedImg).getHeight(this),
-                        this);
-                
+            Boat    selectedBoat    = controller.getCurrentPlayer().getSelectedBoat();
+            Image   img1            = ThemeManager.getTheme().getImg(this.selectedImg);
+            Image   img2            = ThemeManager.getTheme().getImg(this.currentImg);
+            
+            if(selectedBoat != null && selectedBoat.getBoatId() == this.idBoat) {
+                g.drawImage(img1, 0, 0, img1.getWidth(this), img1.getHeight(this),this);
             } else{ 
-                g.drawImage(ThemeManager.getTheme().getImg(this.currentImg), 0, 0, 
-                        ThemeManager.getTheme().getImg(this.currentImg).getWidth(this),
-                        ThemeManager.getTheme().getImg(this.currentImg).getHeight(this),
-                        this);
+                g.drawImage(img2, 0, 0, img2.getWidth(this), img2.getHeight(this), this);
             }
-           
         }
         
         
+        //**********************************************************************
+        // Funtion for mouse Listener
+        //**********************************************************************
         @Override
         public void mouseClicked(MouseEvent e){
             DockPanel.this.repaint();
@@ -187,6 +186,7 @@ public class DockPanel extends ContentPanel implements GameConstants{
             DockPanel.this.repaint();
         }
     } //------------------------END DockBoats INNER CLASS-----------------------
+    
     
     
     //**************************************************************************

@@ -230,6 +230,7 @@ public abstract class Player implements GameConstants{
         return this.currentSelectedBoat;
     }
     
+    //**************************************************************************
     /**
      * Set player name
      * @param pValue new player name, if is not a String or empty, throw exception
@@ -252,6 +253,17 @@ public abstract class Player implements GameConstants{
         this.fleetGrid = pGrid;
         if(this.fleetGrid != null){
             this.fleetGrid.setOwner(this); //Change owner
+        }
+    }
+    
+    /**
+     * Add new weapon
+     * @param pWeapon 
+     */
+    public void addWeapon(Weapon pWeapon){
+        if(pWeapon != null){
+            //Attention, could have 2 same weapon -> Add addAmmo instead
+            this.listWeapons.add(pWeapon);
         }
     }
 }
