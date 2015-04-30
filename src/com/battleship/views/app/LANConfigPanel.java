@@ -192,5 +192,21 @@ public class LANConfigPanel extends PagePanel implements ObserverModel{
     }
     
     
+    
+    
+    
+    //**************************************************************************
+    // UiElement Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+
+    @Override
+    public void reloadUI(){
+        
+    }
+    
 
 }

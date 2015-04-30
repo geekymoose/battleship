@@ -17,7 +17,7 @@ import java.awt.Point;
 /**
  * <h1>ClickShoot</h1>
  * <p>
- public class ClickShoot<br/>
+ * public class ClickShoot<br/>
  * implements ClickType
  * </p>
  *

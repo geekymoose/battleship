@@ -64,11 +64,7 @@ public class GameModel extends Model implements ObserverModel{
         this.listPlayers        = pConfig.getPlayers();
         
         this.counterTurn        = 1;
-        this.currentPlayerTurn  = 0;
-    }
-    
-    public void initMap(){
-        
+        this.currentPlayerTurn  = pConfig.getFirstPlayerTurn();
     }
     
     
@@ -110,4 +106,11 @@ public class GameModel extends Model implements ObserverModel{
         return this.counterTurn;
     }
     
+    /**
+     * Return id of current player turn
+     * @return int id current player turn
+     */
+    public int getIdPlayerTurn(){
+        return this.currentPlayerTurn;
+    }
 }

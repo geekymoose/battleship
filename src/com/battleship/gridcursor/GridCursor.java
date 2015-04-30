@@ -7,7 +7,6 @@ package com.battleship.gridcursor;
 import com.battleship.asset.GridCalculator;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
-import com.battleship.main.DebugTrack;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -22,8 +21,8 @@ import javax.swing.SwingUtilities;
 /**
  * <h1>GridCursor</h1>
  * <p>
- public class GridCursor
- </p>
+ * public class GridCursor
+ * </p>
  * <p>
  * This class is used to manage cursor action for vectorial drawing software
  * When user click on the draw panel, the action performed could be different

@@ -190,8 +190,9 @@ public abstract class FleetGridModel extends Model implements GameConstants{
             this.listBoats.add(pBoat);
         }
     }
+    
     /**
-     * Switch player weapon. Get the next player weapon.
+     * Switch current orientation for a boat to place
      */
     public void switchNextOrientation() {
         currentOrientation++;
@@ -201,7 +202,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     }
 
     /**
-     * Switch player weapon. Get the next player weapon.
+     * Switch previous orientation for a boat to place
      */
     public void switchPreviousOrientation() {
         currentOrientation--;

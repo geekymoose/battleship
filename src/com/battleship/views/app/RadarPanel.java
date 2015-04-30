@@ -34,24 +34,53 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     
     
     //**************************************************************************
-    // CONSTRUCTOR
+    // Constructors - Initialization
     //**************************************************************************
+    /**
+     * Create a new RadarPanel which display radar for game
+     * @param pParentPage parent of this radar
+     * @throws ExecError thrown if ExecError is null
+     */
     public RadarPanel(JPanel pParentPage) throws ExecError{
         super(pParentPage);
         this.currentGrid        = null;
-        this.fleetGridPlayers   = null;
-        
+        this.fleetGridPlayers   = new GridPanel[2];
     }
     
     
     /**
+     * Initialize the 2 grid on the RadarPanel. 
+     * The first grid is the owned by player 1
+     * @param pFleet1 fleet owned by player 1
+     * @param pFleet2 fleet owned by player 2
+     */
+    public void initGrids(GridPanel pFleet1, GridPanel pFleet2){
+        this.fleetGridPlayers[0]    = pFleet1;
+        this.fleetGridPlayers[1]    = pFleet2;
+        
+        this.fleetGridPlayers[0].setOpaque(false);
+        this.fleetGridPlayers[1].setOpaque(false);
+        
+        this.fleetGridPlayers[0].hideAllBoxMap();
+        this.fleetGridPlayers[1].hideAllBoxMap();
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
+    /**
      * Switch turn behaviors
-     * @param playerTurn player turn
+     * @param playerTurn player turn (First player is 0, second is 1 ...)
      */
     public void switchTurne(int playerTurn){
-        this.switchCursorBehavior(playerTurn);
         this.switchGrid(playerTurn);
+        this.switchCursorBehavior(playerTurn);
     }
+    
     
     /**
      * Switch radar displayed. display the radar for player whom number 
@@ -59,43 +88,59 @@ public class RadarPanel extends ContentPanel implements GameConstants{
      * @param playerTurn player number id (start at 0)
      */
     public void switchGrid(int playerTurn){
-        this.currentGrid = this.fleetGridPlayers[playerTurn];
         this.removeAll();
+        this.currentGrid = this.fleetGridPlayers[playerTurn];
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();
     }
     
-    private void switchCursorBehavior(int playerTurn){
-    }
-    
     
     /**
-     * Set fleet grid to display.
-     * @param pFleet1
-     * @param pFleet2 
+     * Switch cursor behavior for all player when cursor is above fleet grid. 
+     * @param playerTurn current player turn (Start at 0)
      */
-    public void setFleetGrids(GridPanel pFleet1, GridPanel pFleet2){
-        this.fleetGridPlayers       = new GridPanel[2];
-        this.fleetGridPlayers[0]    = pFleet1;
-        this.fleetGridPlayers[1]    = pFleet2;
-        
-        this.fleetGridPlayers[0].hideAllBoxMap();
-        this.fleetGridPlayers[1].hideAllBoxMap();
+    private void switchCursorBehavior(int playerTurn){
+        /*
+         * Note, in fact, there are no actions for this fleet panel, 
+         * player can only see his boats but not click
+         */
+        switch(playerTurn){
+            case 0:
+                this.fleetGridPlayers[0].getGridCursor().setClickShoot();;
+                this.fleetGridPlayers[1].getGridCursor().setClickNoAction();;
+                break;
+            case 1:
+                this.fleetGridPlayers[0].getGridCursor().setClickNoAction();;
+                this.fleetGridPlayers[1].getGridCursor().setClickShoot();;
+                break;
+        }
     }
     
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return array of GridPanel
+     * @return GridPanel[]
+     */
     public GridPanel[] getGrids(){
         return this.fleetGridPlayers;
     }
+    
+    /**
+     * Display current grid
+     */
     public void displayCurrentGrid(){
         this.currentGrid.visibleAllBoxMap();
-        this.repaint();
-        this.parentPage.repaint();
     }
     
+    /**
+     * Hide current grid
+     */
     public void hideCurrentGrid(){
         this.currentGrid.visibleAllBoxMap();
-        this.repaint();
-        this.parentPage.repaint();
     }
 }
