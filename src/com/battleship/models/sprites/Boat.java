@@ -7,7 +7,6 @@ package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
-import com.battleship.main.DebugTrack;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 
@@ -203,6 +202,13 @@ public abstract class Boat implements GameConstants{
     
     
     
+    
+    
+    
+    
+    
+    
+    
     //**************************************************************************
     // Inner class : Compartment
     //**************************************************************************
@@ -230,6 +236,11 @@ public abstract class Boat implements GameConstants{
         private     BoxMap      boxPosition;
         private     int[]       id_img;  //Image data (Identification)
         
+        
+
+        //**********************************************************************
+        // Constructors - Initialization
+        //**********************************************************************
         /**
          * Create a new compartment on BoxMap pPosition. Box map could be null, 
          * it means the boat is not placed at the moment
@@ -283,7 +294,7 @@ public abstract class Boat implements GameConstants{
         
 
         //**********************************************************************
-        // Sprite implements 
+        // Sprite implements
         //**********************************************************************
         @Override
         public boolean hit(){

@@ -139,11 +139,7 @@ public class BoxMapViewHexagon extends BoxMapView{
             case GameConstants.WATER:
                 Point p = ImgCalculator.hexaBoxMapUpperLeftCorner(this, this.dimension);
                 Image i = ThemeManager.getTheme().getImg(201600);
-                //Image ii = i.getScaledInstance(i.getWidth(null), -1, Image.SCALE_DEFAULT);
                 g2.drawImage(i, p.x, p.y, null);
-                
-                //g2.setColor(Color.CYAN);
-                //g2.fillPolygon(this.polygon);
                 break;
             case GameConstants.AIRCRAFT_CARRIER:
                 g2.setColor(Color.YELLOW);
@@ -174,8 +170,9 @@ public class BoxMapViewHexagon extends BoxMapView{
     
     @Override
     protected void drawHidden(Graphics2D g2){
-        g2.setColor(Color.GRAY);
-        g2.fillPolygon(this.polygon);
+        Point p = ImgCalculator.hexaBoxMapUpperLeftCorner(this, this.dimension);
+        Image i = ThemeManager.getTheme().getImg(201400);
+        g2.drawImage(i, p.x, p.y, null);
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
     }
