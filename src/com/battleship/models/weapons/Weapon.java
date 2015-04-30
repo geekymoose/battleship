@@ -73,6 +73,10 @@ public abstract class Weapon {
      * @return true if target hit, otherwise, return false (Target could be missed)
      */
     public boolean fireAt(int pX, int pY, Target[][] pTarget, FleetGridModel grid){
+        if(this.ammo == 0){
+            return false;
+        }
+        this.ammo--;
         if(grid instanceof FleetGridSquare){
             return shot.fireSquareGrid(pX, pY, pTarget);
         }

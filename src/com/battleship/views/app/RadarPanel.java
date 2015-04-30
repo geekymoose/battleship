@@ -6,6 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
+import com.battleship.models.game.Player;
 import com.battleship.views.tools.ContentPanel;
 import javax.swing.JPanel;
 
@@ -54,9 +55,10 @@ public class RadarPanel extends ContentPanel implements GameConstants{
      * nothing.
      * @param pFleet1       fleet owned by player 1
      * @param pFleet2       fleet owned by player 2
-     * @param pToDisplay    first grid to display (Player id)
+     * @param pOwner        id player owning this radar
+     * @param pShooter      owner biggest foe!
      */
-    public void initGrids(GridPanel pFleet1, GridPanel pFleet2, int pToDisplay){
+    public void initGrids(GridPanel pFleet1, GridPanel pFleet2, int pOwner, int pShooter){
         this.fleetGridPlayers[0]    = pFleet1;
         this.fleetGridPlayers[1]    = pFleet2;
         
@@ -66,7 +68,7 @@ public class RadarPanel extends ContentPanel implements GameConstants{
         this.fleetGridPlayers[0].hideAllBoxMap();
         this.fleetGridPlayers[1].hideAllBoxMap();
         
-        this.displayRadarPlayer(pToDisplay);
+        this.displayRadarPlayer(pOwner, pShooter);
     }
     
     
@@ -77,12 +79,18 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     // Functions
     //**************************************************************************
     /**
-     * Display radar owned by player given in parameter
-     * @param pIdPlayer id player owning this radar
+     * Display radar owned by player given in parameter. The first player id is 
+     * the grid owner, the grid displayed is his grid. The second parameter is 
+     * the played that will attack the grid
+     * @param pOwner    id player owning this radar
+     * @param pShooter  owner biggest foe!
      */
-    public void displayRadarPlayer(int pIdPlayer){
-        if(pIdPlayer>=0 && pIdPlayer <= 2){
-            this.switchGrid(pIdPlayer);
+    public void displayRadarPlayer(int pOwner, int pShooter){
+        if(pOwner>=0 && pOwner <= 2){
+            this.switchGrid(pOwner);
+            GamePanel   m   = ((GamePanel)this.parentPage);
+            Player      p   = m.getController().getGameConfig().getPlayers()[pShooter];
+            this.currentGrid.getGridCursor().setOwner(p);
         }
     }
     
@@ -90,11 +98,11 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     /**
      * Switch radar displayed. display the radar for player whom number 
      * is given in parameter (First player is number 0)
-     * @param playerTurn player number id (start at 0)
+     * @param pOwner player number id (start at 0)
      */
-    public void switchGrid(int playerTurn){
+    public void switchGrid(int pOwner){
         this.removeAll();
-        this.currentGrid = this.fleetGridPlayers[playerTurn];
+        this.currentGrid = this.fleetGridPlayers[pOwner];
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();

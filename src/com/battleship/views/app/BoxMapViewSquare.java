@@ -7,7 +7,6 @@ package com.battleship.views.app;
 
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
-import com.battleship.main.DebugTrack;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;

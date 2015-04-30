@@ -148,7 +148,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
         
         this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
-        this.p_radar.initGrids(radarPlayer1, radarPlayer2, conf.getSecondPlayerTurn());
+        this.p_radar.initGrids(radarPlayer1, radarPlayer2, conf.getSecondPlayerTurn(),
+                                                           conf.getFirstPlayerTurn());
         
         //TMP DEBUG
         fleetPlayer1.getGridCursor().setClickNoAction();
@@ -214,5 +215,17 @@ public class GamePanel extends PagePanel implements ObserverModel{
     
     @Override
     protected void goPreviousPage(){
+    }
+    
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // getters - Setters 
+    //**************************************************************************
+    public GameController getController(){
+        return this.controller;
     }
 }

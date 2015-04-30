@@ -7,16 +7,10 @@
 
 package com.battleship.controllers;
 
-import com.battleship.asset.Config;
-import com.battleship.asset.SwingFactory;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
-import com.battleship.views.app.GridPanel;
-import java.awt.Dimension;
-import javax.swing.JPanel;
 
 
 
@@ -54,21 +48,6 @@ public class GameController extends Controller{
     public GameController(GameModel pModel) throws ExecError{
         super(pModel);
         DebugTrack.showInitMsg("Create GameController controller");
-    }
-    
-    
-    /**
-     * @deprecated not used
-     * Create and return the GridPanel view linked with player fleet
-     * @param pPan
-     * @param pNumPlayer
-     * @return
-     * @throws ExecError 
-     */
-    public GridPanel initGridPlayer(JPanel pPan, int pNumPlayer) throws ExecError{
-        Dimension       dim = Config.getDimValues_dim("dim-playerfleet-boxmap");
-        FleetGridModel  m   = ((GameModel)this.model).getConfig().getPlayers()[0].getFleet();
-        return SwingFactory.loadGridPanel(pPan, m, dim);
     }
     
     

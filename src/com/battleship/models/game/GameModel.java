@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.CheatCode;
 import com.battleship.main.DebugTrack;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
@@ -58,6 +59,7 @@ public class GameModel extends Model implements ObserverModel{
      */
     public GameModel(GameConfigModel pConfig) {
         DebugTrack.showInitMsg("Create GameModel");
+        CheatCode.setData(this);
         this.config             = pConfig;
         this.gridWidth          = pConfig.getGridWidth();
         this.gridHeight         = pConfig.getGridHeight();

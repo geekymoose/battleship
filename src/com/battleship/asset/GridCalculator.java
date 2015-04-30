@@ -1,8 +1,6 @@
-/*
- * Class :      GridCalculator
- * Creation:    Apr 3, 2015
- * Author :     Constantin MASSON
- * 
+/* 
+ * Creation : 30 April 2015
+ * Project Computer Science L2 Semester 4 - BattleShip
  */
 
 package com.battleship.asset;
