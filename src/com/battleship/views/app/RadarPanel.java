@@ -126,4 +126,21 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     public void hideCurrentGrid(){
         this.currentGrid.visibleAllBoxMap();
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+    
+    @Override
+    public void reloadUI(){
+    
+    }
 }

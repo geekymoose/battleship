@@ -190,6 +190,24 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     
     
     
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+        this.reloadUI();
+    }
+    
+    @Override
+    public void reloadUI(){
+        this.controller.resetAim();
+        this.repaint();
+    }
+    
+    
+    
     //**************************************************************************
     // Functions Mouse listener
     //**************************************************************************

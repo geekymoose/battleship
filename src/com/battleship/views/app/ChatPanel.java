@@ -135,4 +135,21 @@ public class ChatPanel extends ContentPanel {
             }
         );
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+    
+    @Override
+    public void reloadUI(){
+    
+    }
 }

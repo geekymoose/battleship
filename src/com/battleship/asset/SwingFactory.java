@@ -183,6 +183,7 @@ public abstract class SwingFactory implements GameConstants{
         }
         pModel.addObserver(v);
         c.setView(v);
+        v.loadUI();
         return v;
     }
     
@@ -217,6 +218,7 @@ public abstract class SwingFactory implements GameConstants{
         }
         pModel.addObserver(v);
         c.setView(v);
+        v.loadUI();
         return v;
     }
 }
