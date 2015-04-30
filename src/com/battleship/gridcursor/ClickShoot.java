@@ -8,6 +8,7 @@
 package com.battleship.gridcursor;
 
 import com.battleship.controllers.GridController;
+import com.battleship.models.game.Player;
 import java.awt.Point;
 
 
@@ -25,6 +26,13 @@ import java.awt.Point;
  * @date Apr 4, 2015
  */
 public class ClickShoot implements ClickType{
+    private final Player owner;
+    
+    public ClickShoot(Player pOwner){
+        this.owner = pOwner;
+    }
+    
+    
     @Override
     public void mouseClicked_Left(Point p, GridController c){
     }
@@ -35,6 +43,7 @@ public class ClickShoot implements ClickType{
 
     @Override
     public void mouseReleased_left(Point p, GridController c){
+        c.shootBoxMap(p, owner);
     }
 
     @Override
@@ -51,7 +60,7 @@ public class ClickShoot implements ClickType{
 
     @Override
     public void mouseMoved(Point p, GridController c){
-        c.targetBoxMap(p);
+        c.hoverBoxMap(p);
     }
 
     @Override

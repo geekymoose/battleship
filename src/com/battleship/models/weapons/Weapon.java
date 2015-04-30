@@ -66,10 +66,10 @@ public abstract class Weapon {
      * Process a fire on the target from Target matrix at position pX:pY. FleetGridModel 
      * change the weapon behavior (For example, the range and explosion shape), 
      * therefore it is needed
-     * @param pX x target coordinate in Target matrix
-     * @param pY y target coordinate in Target matrix
-     * @param pTarget matrix where the target is located
-     * @param grid type grid (It is the grid instance)
+     * @param pX        x target coordinate in Target matrix
+     * @param pY        y target coordinate in Target matrix
+     * @param pTarget   matrix where the target is located
+     * @param grid      type grid (It is the grid instance)
      * @return true if target hit, otherwise, return false (Target could be missed)
      */
     public boolean fireAt(int pX, int pY, Target[][] pTarget, FleetGridModel grid){

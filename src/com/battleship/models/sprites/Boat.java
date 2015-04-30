@@ -291,12 +291,13 @@ public abstract class Boat implements GameConstants{
                 return false; //Already hit dude
             }
             Boat.this.lostOneLife();
+            this.isDestroyed = true;
             return true; //Boat hit
         }
 
         @Override
         public boolean canBeHit(){
-            return isDestroyed;
+            return !isDestroyed;
         }
 
         @Override

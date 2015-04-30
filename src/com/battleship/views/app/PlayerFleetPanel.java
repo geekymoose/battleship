@@ -58,17 +58,21 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
     }
     
     /**
-     * Initialize the 2 grid on the PlayerGridPanel.
-     * The first grid is the owned by player 1
-     * @param pFleet1 fleet owned by player 1
-     * @param pFleet2 fleet owned by player 2
+     * Initialize the 2 grid on the PlayerGridPanel and display the grid owned 
+     * by player playing first. If played id given is not a actual played, display 
+     * nothing
+     * @param pFleet1       fleet owned by player 1
+     * @param pFleet2       fleet owned by player 2
+     * @param pToDisplay    first grid to display (Player id)
      */
-    public void initGrids(GridPanel pFleet1, GridPanel pFleet2){
+    public void initGrids(GridPanel pFleet1, GridPanel pFleet2, int pToDisplay){
         this.fleetGridPlayers[0]    = pFleet1;
         this.fleetGridPlayers[1]    = pFleet2;
         
         this.fleetGridPlayers[0].setOpaque(false);
         this.fleetGridPlayers[1].setOpaque(false);
+        
+        this.displayGridPlayer(pToDisplay);
     }
     
     
@@ -77,12 +81,13 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
     // Functions
     //**************************************************************************
     /**
-     * Switch turn behaviors
-     * @param playerTurn player turn (First player is 0, second is 1 ...)
+     * Display grid owned by player given in parameter
+     * @param pIdPlayer id player owning the grid to display
      */
-    public void switchTurne(int playerTurn){
-        this.switchGrid(playerTurn);
-        this.switchCursorBehavior(playerTurn);
+    public void displayGridPlayer(int pIdPlayer){
+        if(pIdPlayer>=0 && pIdPlayer <= 2){
+            this.switchGrid(pIdPlayer);
+        }
     }
     
     /**
@@ -96,26 +101,5 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();
-    }
-    
-    /**
-     * Switch cursor behavior for all player when cursor is above fleet grid. 
-     * @param playerTurn current player turn (Start at 0)
-     */
-    private void switchCursorBehavior(int playerTurn){
-        /*
-         * Note, in fact, there are no actions for this fleet panel, 
-         * player can only see his boats but not click
-         */
-        switch(playerTurn){
-            case 0:
-                this.fleetGridPlayers[0].getGridCursor().setClickNoAction();;
-                this.fleetGridPlayers[1].getGridCursor().setClickNoAction();;
-                break;
-            case 1:
-                this.fleetGridPlayers[0].getGridCursor().setClickNoAction();;
-                this.fleetGridPlayers[1].getGridCursor().setClickNoAction();;
-                break;
-        }
     }
 }

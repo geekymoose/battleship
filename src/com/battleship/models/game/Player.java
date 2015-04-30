@@ -67,7 +67,7 @@ public abstract class Player implements GameConstants{
         this.fleetGrid              = null;
         
         //Add default weapon and set current weapon to this weapon
-        //this.listWeapons.add(new Missile(this, Config.getGameValues_int("infinite")));
+        this.listWeapons.add(new Missile(this, INFINITE_AMO));
         this.currentWeaponIndex     = 0;
         this.currentSelectedBoat    = null;
         this.listBoatsOwned         = new ArrayList();
@@ -75,9 +75,12 @@ public abstract class Player implements GameConstants{
     }
     
     /**
-     * Load and add in player boats list all boat owned by this player
+     * Load and add in player boats list all boat owned by this player. 
+     * Player could have more than max number of boats to place in a game, in 
+     * this case, player has to make a choice about which boats he want to use. 
      */
     private void recoverOwnedShip(){
+        //Note : at this stage of development, all player own these boats
         this.listBoatsOwned.add(new AircraftCarrier());
         this.listBoatsOwned.add(new Battleship());
         this.listBoatsOwned.add(new Cruiser());
@@ -126,10 +129,10 @@ public abstract class Player implements GameConstants{
     }
     
     /**
-     * Try to launch a shot at position pX, pY
-     * @param pX x target coordinate in the Target matrix
-     * @param pY y target coordinate in the Target matrix
-     * @param pWhere target matrix
+     * Try to launch a shot at position pX, pY on array of target given in parameter
+     * @param pX        x target coordinate in the Target matrix
+     * @param pY        y target coordinate in the Target matrix
+     * @param pWhere    target matrix
      * @return true if is able to shoot, otherwise, return false
      */
     public boolean shootAt(int pX, int pY, Target[][] pWhere) {
@@ -150,7 +153,7 @@ public abstract class Player implements GameConstants{
      */
     public boolean aimAt(int pX, int pY, Target[][] pWhere){
         Target target =  pWhere[pY][pX];
-        //To do in weapon, then, add here 
+        //To do in weapon, then, add here
         return false;
     }
     

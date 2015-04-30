@@ -76,6 +76,7 @@ public class Water implements Sprite{
     //**************************************************************************
     @Override
     public boolean hit(){
+        System.out.println("DEBUG in water: hit water");
         this.state = HIT;
         return true;
     }

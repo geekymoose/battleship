@@ -37,6 +37,7 @@ public class GameModel extends Model implements ObserverModel{
     private     final int               gridType;
     private     final int               gridWidth;
     private     final int               gridHeight;
+    
     private     Player[]                listPlayers;
     private     int                     counterTurn;
     private     int                     currentPlayerTurn;

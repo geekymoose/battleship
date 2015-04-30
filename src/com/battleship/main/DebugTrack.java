@@ -55,6 +55,12 @@ public abstract class DebugTrack {
     //**************************************************************************
     // Data process
     //**************************************************************************
+    /**
+     * Check if a constant name exists in constants list. Is this constant doesn't 
+     * exists, display error message and stop program
+     * @param o
+     * @param name 
+     */
     public static void isValidConstantsName(Object o, String name){
         if(debug_mode == false){return;}
         if(o==null){
