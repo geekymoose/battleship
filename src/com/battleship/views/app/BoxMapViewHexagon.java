@@ -4,13 +4,19 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.asset.ImgCalculator;
+import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 
 
 
@@ -131,8 +137,13 @@ public class BoxMapViewHexagon extends BoxMapView{
         
         switch(this.sprite.getId()){
             case GameConstants.WATER:
-                g2.setColor(Color.CYAN);
-                g2.fillPolygon(this.polygon);
+                Point p = ImgCalculator.hexaBoxMapUpperLeftCorner(this, this.dimension);
+                Image i = ThemeManager.getTheme().getImg(201600);
+                //Image ii = i.getScaledInstance(i.getWidth(null), -1, Image.SCALE_DEFAULT);
+                g2.drawImage(i, p.x, p.y, null);
+                
+                //g2.setColor(Color.CYAN);
+                //g2.fillPolygon(this.polygon);
                 break;
             case GameConstants.AIRCRAFT_CARRIER:
                 g2.setColor(Color.YELLOW);

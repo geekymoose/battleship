@@ -8,7 +8,9 @@ package com.battleship.views.tools;
 import com.battleship.asset.Config;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -238,22 +240,13 @@ public class Theme{
     
     
     //**************************************************************************
-    // Getters - Setters
+    // Getters for image
     //**************************************************************************
-    /**
-     * Return theme name
-     * @return theme name
-     */
-    public String getThemeName(){
-        return this.themeName;
-    }
-    
-    
     /**
      * Return image linked with pImageId value. If no image are linked with, 
      * return null and display JOptionPane warning message.<br/>
      * Note that a valid id should be given, if bad id given, no error will be 
-     * thrown! 
+     * thrown!
      * @param pImageId id value for image to display
      * @return image if exists, otherwise, return null
      */
@@ -265,6 +258,7 @@ public class Theme{
             return null;
         }
         return img;
+        //return img.getScaledInstance(img.getWidth(null), -1, Image.SCALE_DEFAULT);
     }
     
     
@@ -280,6 +274,36 @@ public class Theme{
     }
     
     
+    /**
+     * Return a Buffered image linked with pImageId value. If no image are linked with, 
+     * return null
+     * @param pImageId
+     * @return 
+     */
+    public BufferedImage getBufferedImg(int pImageId){
+        Image img = this.getImg(pImageId);
+        if(img == null){
+            return null;
+        }
+
+        // Create a buffered image with transparency
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), 
+                                                img.getHeight(null), 
+                                                BufferedImage.TYPE_INT_ARGB);
+        // Draw the image on to the buffered image
+        Graphics2D g2 = bimage.createGraphics();
+        g2.drawImage(img, 0, 0, null);
+        g2.dispose();
+        return bimage;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Special getters for image
+    //**************************************************************************
     /**
      * Return list of image used for dynamic event. ArrayList contains all 
      * event image, sorted. Parameter given is the first event image id, which 
@@ -328,5 +352,20 @@ public class Theme{
             }
         }
         return listDynamicImg;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return theme name
+     * @return theme name
+     */
+    public String getThemeName(){
+        return this.themeName;
     }
 }

@@ -95,5 +95,4 @@ public abstract class CheatCode implements GameConstants{
     public static void setData(RadarPanel model){
         CheatCode.radar = model;
     }
-    
 }

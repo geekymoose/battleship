@@ -158,6 +158,24 @@ public abstract class BoxMapView implements UiElement{
     // Getters - Setters
     //**************************************************************************
     /**
+     * Return current BoxMap dimension
+     * @return Dimension
+     */
+    public Dimension getDimension(){
+        return this.dimension;
+    }
+    
+    /**
+     * Return box position
+     * @return Point coordinate of position
+     */
+    public Point getPosition(){
+        return new Point(this.coordinate);
+    }
+    
+    
+    //**************************************************************************
+    /**
      * Change current visible value. Value false will apply a hidden context to 
      * current BoxMapView
      * @param pValue boolean value
@@ -182,13 +200,5 @@ public abstract class BoxMapView implements UiElement{
         if(pSprite != null){
             this.sprite = pSprite;
         }
-    }
-    
-    /**
-     * Return current BoxMap dimension
-     * @return Dimension
-     */
-    public Dimension getDimension(){
-        return this.dimension;
     }
 }

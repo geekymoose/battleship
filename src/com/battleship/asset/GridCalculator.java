@@ -25,7 +25,7 @@ public abstract class GridCalculator {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private static final int    BORDERS_FROM_TOP_AND_LEFT = 10;
+    public static final int     BORDERS_FROM_TOP_AND_LEFT = 10;
     private static int          t, s, r, h; //Constants for dimension hexa
     private static Dimension    dimBox;
     
