@@ -5,12 +5,16 @@
 
 package com.battleship.views.app;
 
+import com.battleship.asset.Config;
+import com.battleship.asset.ImgCalculator;
+import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -103,8 +107,12 @@ public class BoxMapViewSquare extends BoxMapView{
         
         switch(this.sprite.getId()){
             case GameConstants.WATER:
-                g2.setColor(Color.CYAN);
-                g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+                Point p = ImgCalculator.squareBoxMapUpperLeftCorner(this, this.dimension);
+                Image i = ThemeManager.getTheme().getImg(301600);
+                g2.drawImage(i, p.x, p.y, null);
+                
+                //g2.setColor(Color.CYAN);
+                //g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
                 break;
             case GameConstants.AIRCRAFT_CARRIER:
                 g2.setColor(Color.YELLOW);

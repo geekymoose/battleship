@@ -5,6 +5,10 @@
 
 package com.battleship.asset;
 
+import com.battleship.views.app.BoxMapView;
+import java.awt.Dimension;
+import java.awt.Point;
+
 
 
 
@@ -28,6 +32,7 @@ public abstract class ImgCalculator {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private static Dimension    dimBox;
     
     
     
@@ -49,6 +54,43 @@ public abstract class ImgCalculator {
     //**************************************************************************
     // Functions
     //**************************************************************************
+    /**
+     * Return Upper Left Corner for a Hexagon BoxMapView, in function of its position 
+     * in a grid
+     * @param pBox  Box where to place image
+     * @param dim   Box dimension
+     * @return upper left corner of this box
+     */
+    public static Point hexaBoxMapUpperLeftCorner(BoxMapView pBox, Dimension dim){
+        Point   p   = new Point();
+        //To be honest, some value as +1 -2 and -8 are, just cuz I saw it is working
+        int     dx  = GridCalculator.BORDERS_FROM_TOP_AND_LEFT+1;
+        int     dy  = GridCalculator.BORDERS_FROM_TOP_AND_LEFT-2;
+        
+        if(pBox.getPosition().x%2 != 0){
+            dy += dim.height/2;
+        }
+        p.x = dx + (pBox.getPosition().x * (dim.width-8));
+        p.y = dy + (pBox.getPosition().y * dim.height);
+        return p;
+    }
+    
+    
+    /**
+     * Return Upper Left Corner for a Square BoxMapView, in function of its position 
+     * in a grid
+     * @param pBox  Box where to place image
+     * @param dim   Box dimension
+     * @return upper left corner of this box
+     */
+    public static Point squareBoxMapUpperLeftCorner(BoxMapView pBox, Dimension dim){
+        Point   p   = new Point();
+        int     dx  = 1;
+        int     dy  = 1;
+        p.x = dx + (pBox.getPosition().x * dim.width);
+        p.y = dy + (pBox.getPosition().y * dim.height);
+        return p;
+    }
     
     
     

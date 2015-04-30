@@ -132,13 +132,18 @@
                 <img type="static" ext="png">414200</img>
             </grid>
             
+            
             <boxmap>
-                <img type="static" ext="png">201400</img>
-                <img type="static" ext="png">201500</img>
-                <img type="static" ext="png">201600</img>
-                <img type="static" ext="png">201700</img>
-                <img type="static" ext="png">201800</img>
-                
+                <square>
+                    <img type="static" ext="png">301600</img>
+                </square>
+                <hexa>
+                    <img type="static" ext="png">201400</img>
+                    <img type="static" ext="png">201500</img>
+                    <img type="static" ext="png">201600</img>
+                    <img type="static" ext="png">201700</img>
+                    <img type="static" ext="png">201800</img>
+                </hexa>
             </boxmap>
             
             
