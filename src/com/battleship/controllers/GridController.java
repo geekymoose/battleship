@@ -9,7 +9,9 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
+import com.battleship.models.game.Player;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -52,7 +54,19 @@ public class GridController extends Controller{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    public void targetBoxMap(Point p){
+    /**
+     * Process a player shoot on this grid. If position given doesn't exists in 
+     * grid aimed, do nothing 
+     * @param p         position aimed
+     * @param pShooter  player that is going to shoot
+     */
+    public void shootBoxMap(Point p, Player pShooter){
+        if((this.model.getBoxMapAt(p.x, p.y)) != null){
+            pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
+        }
+    }
+    
+    public void hoverBoxMap(Point p){
         this.model.targetBoxMap(p);
     }
     
@@ -81,5 +95,13 @@ public class GridController extends Controller{
      */
     public Dimension getBoxDimension(){
         return ((GridPanel)this.v).getBoxDimension();
+    }
+    
+    /**
+     * Return grid owner
+     * @return Player owner
+     */
+    public Player getOwner(){
+        return this.model.getOwner();
     }
 }

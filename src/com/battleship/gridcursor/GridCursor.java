@@ -7,6 +7,7 @@ package com.battleship.gridcursor;
 import com.battleship.asset.GridCalculator;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
+import com.battleship.models.game.Player;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -39,9 +40,10 @@ public class GridCursor implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     private     final GridController    controller;
+    private     final Player            owner;
     private     GridPanel               view;
     
-    private     int                     typeGrid;
+    private     final int               typeGrid;
     
     private     final ClickType         clickPlaceBoat;
     private     final ClickType         clickNoAction;
@@ -60,19 +62,23 @@ public class GridCursor implements GameConstants{
      * Create a new cursor.
      * @param pGrid         View cursor is linked with
      * @param pController   controller for this Cursor
+     * @param pOwner        Owner of this cursor
      */
-    public GridCursor(GridPanel pGrid, GridController pController){
+    public GridCursor(GridPanel pGrid, GridController pController, Player pOwner){
+        //Default value
+        this.controller             = pController;
+        this.view                   = pGrid;
+        this.owner                  = pOwner;
+        
+        //Set TypeClick
         this.clickPlaceBoat         = new ClickPlaceBoat();
         this.clickNoAction          = new ClickNoAction();
         this.clickNoArm             = new ClickNoArm();
-        this.clickShoot             = new ClickShoot();
-        
-        //Default value
-        this.clickType              = this.clickNoAction;
-        this.controller             = pController;
-        this.view                   = pGrid;
+        this.clickShoot             = new ClickShoot(this.owner);
         
         this.typeGrid               = this.view.getTypeGrid();
+        
+        this.clickType              = this.clickNoAction;
     }
     
     

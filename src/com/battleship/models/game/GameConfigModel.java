@@ -62,7 +62,7 @@ public class GameConfigModel extends Model implements GameConstants{
     private     int             gridType;
     
     private     final int       nbMaxPlayer;
-    private     Player[]        listPlayers;
+    private     final Player[]  listPlayers;
     private     int             currentNbPlayers;
     
     private     int             firstPlayer; //Player which start to play
@@ -88,13 +88,11 @@ public class GameConfigModel extends Model implements GameConstants{
         
         this.nbMaxPlayer        = Config.getGameValues_int("nb-max-players");
         this.currentNbPlayers   = 0;
-        
         this.listPlayers        = new Player[this.nbMaxPlayer];
         this.listPlayers[0]     = Session.getPlayer(); //If more than 2 players => Create in loop
         this.listPlayers[1]     = autoLoadPlayer1();
         
         this.gridDefaultType    = GRID_TYPE_SQUARE;
-        
         this.defaultConfig();
     }
     
@@ -105,7 +103,7 @@ public class GameConfigModel extends Model implements GameConstants{
         this.gridWidth      = this.gridDefaultWidth;
         this.gridHeight     = this.gridDefaultHeight;
         this.gridType       = this.gridDefaultType;
-        this.firstPlayer    = DEFAULT_FIRST_PLAYER;
+        this.firstPlayer    = Config.getGameValues_int("default-first-player");
         this.notifyObservers(null);
     }
     
@@ -274,14 +272,28 @@ public class GameConfigModel extends Model implements GameConstants{
         return this.firstPlayer;
     }
     
+    /**
+     * Return id second player
+     * @return int id player
+     */
+    public int getSecondPlayerTurn(){
+        switch(this.firstPlayer){
+            case 0:
+                return 1;
+            default:
+                return 0;
+        }
+    }
+    
     //**************************************************************************
     /**
-     * Set id of the player which is going to play first
+     * Set id of the player which is going to play first. If not valid id, 
+     * do nothing
      * @param pValue id player
      */
     public void setFirstPlayerTurn(int pValue){
-        if (pValue<0 || pValue > this.currentNbPlayers){
-            this.firstPlayer = DEFAULT_FIRST_PLAYER;
+        if (pValue>=0 || pValue < this.currentNbPlayers){
+            this.firstPlayer = pValue;
         }
     }
     

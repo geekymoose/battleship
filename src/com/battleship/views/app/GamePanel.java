@@ -77,8 +77,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
             throw new ExecError();
         }
         this.controller     = pController;
-        this.p_headbar      = new HeadBar();
-        this.gc             = new GridBagConstraints();
         this.dimBoxFleet    = Config.getDimValues_dim("dim-playerfleet-boxmap");
         this.dimBoxRadar    = Config.getDimValues_dim("dim-radar-boxmap");
         
@@ -91,6 +89,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * Initialize all components
      */
     private void initComponents() throws ExecError{
+        this.gc         = new GridBagConstraints();
+        this.p_headbar  = new HeadBar();
         p_centerPane    = new ContainerPanel();
         p_info          = new InformationPanel();
         p_fleet         = new PlayerFleetPanel(this);
@@ -103,7 +103,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_radar         .setOpaque(false);
         p_bigCont       .setOpaque(false);
         
-        
         this            .setLayout(new BorderLayout());
         p_centerPane    .setLayout(new GridBagLayout()); 
         p_bigCont       .setLayout(new GridBagLayout());
@@ -112,7 +111,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         gc.fill         = GridBagConstraints.HORIZONTAL;
         gc.insets       = new Insets(10, 10, 0, 10);
         
-        //Place radat
+        //Place radar
         gc.gridx        = 0;
         gc.gridy        = 0;
         p_centerPane    .add(p_radar, gc);
@@ -123,11 +122,10 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_centerPane    .add(p_fleet, gc);
         
         
-        p_bigCont.add(p_centerPane);
+        this.p_bigCont.add(p_centerPane);
         this.add(p_headbar, BorderLayout.NORTH);
-        
-        this.add(p_chat, BorderLayout.EAST);
-        this.add(p_info, BorderLayout.SOUTH);
+        this.add(p_chat,    BorderLayout.EAST);
+        this.add(p_info,    BorderLayout.SOUTH);
         this.add(p_bigCont, BorderLayout.CENTER);
         
         CheatCode.setData(p_radar);
@@ -149,11 +147,15 @@ public class GamePanel extends PagePanel implements ObserverModel{
         GridPanel radarPlayer1 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer1, dimBoxRadar);
         GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
         
-        this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2);
-        this.p_radar.initGrids(radarPlayer1, radarPlayer2);
+        this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
+        this.p_radar.initGrids(radarPlayer1, radarPlayer2, conf.getSecondPlayerTurn());
         
-        this.p_fleet.switchTurne(0); //Player 0
-        this.p_radar.switchTurne(1); //Player 1
+        //TMP DEBUG
+        fleetPlayer1.getGridCursor().setClickNoAction();
+        fleetPlayer2.getGridCursor().setClickNoAction();
+        
+        radarPlayer1.getGridCursor().setClickShoot();
+        radarPlayer2.getGridCursor().setClickShoot();
     }
     
     

@@ -23,7 +23,7 @@ import com.battleship.models.game.Player;
  * Type of weapon that has a shotTypeBomb shotType meaning it can only shoot 
  * like a bomb.
  * The center compartment (the compartment that was clicked on) and all 
- * the neighbouring compartment are hit (nine compartments hit with a square grid 
+ * the neighbor compartment are hit (nine compartments hit with a square grid 
  * and seven with an hexagon grid).
  * </p>
  *

@@ -48,7 +48,7 @@ public class ClickPlaceBoat implements ClickType{
 
     @Override
     public void mouseMoved(Point p, GridController c){
-        c.targetBoxMap(p);
+        c.hoverBoxMap(p);
     }
 
     @Override

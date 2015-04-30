@@ -182,14 +182,19 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         DebugTrack.showObjectToString(gridPlayer1);
         DebugTrack.showObjectToString(gridPlayer2);
         
-        GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer1, dimBox, Color.WHITE);
-        GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.gridPanel, gridPlayer2, dimBox, Color.WHITE);
+        GridPanel fleetPlayer1 = SwingFactory.loadGridPanel(this.gridPanel, 
+                                                            gridPlayer1, 
+                                                            dimBox, 
+                                                            Color.WHITE);
+        GridPanel fleetPlayer2 = SwingFactory.loadGridPanel(this.gridPanel, 
+                                                            gridPlayer2, 
+                                                            dimBox, 
+                                                            Color.WHITE);
         
         fleetPlayer1.getGridCursor().setClickPlaceBoat();
         fleetPlayer2.getGridCursor().setClickPlaceBoat();
         
-        this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2);
-        this.gridPanel.switchTurne(0); //0 for player 0
+        this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
     }
     
     @Override
@@ -214,12 +219,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     //**************************************************************************
     @Override
     public void loadUI(){
-    
     }
 
     @Override
     public void reloadUI(){
-        
     }
     
     
@@ -248,7 +251,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                         this.frame.rooting(Config.getRootsValues("game"), true);
                         break;
                     case 1:
-                        this.gridPanel.switchTurne(1); //1 for player 1
+                        this.gridPanel.displayGridPlayer(1); //1 for player 1
                         UiDialog.showWarning("Next Player", 
                                              "Beware! Next player has to place his boats!!");
                         break;

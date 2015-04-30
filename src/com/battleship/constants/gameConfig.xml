@@ -11,8 +11,9 @@
         
         <integer>
             <game>
-                <val id="nb-min-players">1</val>
+                <val id="nb-min-players">2</val>
                 <val id="nb-max-players">2</val>
+                <val id="default-first-player">0</val>
                 
                 <val id="nb-boats">5</val>
             </game>

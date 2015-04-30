@@ -85,7 +85,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         this.gridWidth  = pW;
         this.gridHeight = pH;
         this.gridType   = pT;
-        this.cursor     = new GridCursor(this, controller);
+        this.cursor     = new GridCursor(this, controller, controller.getOwner());
         this.setPreferredSize(dim);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
