@@ -126,11 +126,13 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      * Target one box map at position point p
      * @param p coordinate where target is located in the grid
      */
-    public void targetBoxMap(Point p){
+    public void hoverBoxMap(Point p){
         this.stopAiming();
-        BoxMap box = this.getBoxMapAt(p.x, p.y);
-        if(box!=null){
-            box.aim();
+        if(p!=null){
+            BoxMap box = this.getBoxMapAt(p.x, p.y);
+            if(box!=null){
+                box.aim();
+            }
         }
         this.notifyObservers(null);
     }
@@ -139,7 +141,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      * Target several BoxMap
      * @param tab 
      */
-    public void targetSeveralBoxMap(Point[] tab){
+    public void hoverSeveralBoxMap(Point[] tab){
         for(Point p : tab){
             BoxMap box = this.getBoxMapAt(p.x, p.y);
             if(box!=null){
@@ -150,7 +152,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     }
     
     /**
-     * stop aiming all tab
+     * stop aiming all tab in this fleetGridModel
      */
     private void stopAiming(){
         for(int y=0; y<this.gridHeight; y++){

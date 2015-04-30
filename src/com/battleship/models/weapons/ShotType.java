@@ -42,4 +42,22 @@ public interface ShotType {
      * @return true if target hit, otherwise, return false
      */
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget);
+    
+    /**
+     * aim a target in Square grid
+     * @param pX        x coordinate to aim
+     * @param pY        y coordinate to aim
+     * @param pTarget   grid of Target where to aim
+     * @return true if target hit, otherwise, return false
+     */
+    public boolean aimSquareGrid(int pX, int pY, Target[][] pTarget);
+    
+    /**
+     * aim a target in hexagon grid
+     * @param pX        x coordinate to aim
+     * @param pY        y coordinate to aim
+     * @param pTarget   grid of Target where to aim
+     * @return true if target hit, otherwise, return false
+     */
+    public boolean aimHexagonGrid(int pX, int pY, Target[][] pTarget);
 }

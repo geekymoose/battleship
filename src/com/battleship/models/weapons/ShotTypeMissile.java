@@ -30,14 +30,7 @@ import com.battleship.behaviors.Target;
  */
 public class ShotTypeMissile implements ShotType{
     //**************************************************************************
-    // Constructor - Initialization
-    //**************************************************************************
-    public ShotTypeMissile(){
-    }
-    
-
-    //**************************************************************************
-    // Functions
+    // Fire Functions
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
@@ -47,5 +40,19 @@ public class ShotTypeMissile implements ShotType{
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
         return pTarget[pY][pX].hit();
+    }
+    
+    
+    //**************************************************************************
+    // Aim Functions
+    //**************************************************************************
+    @Override
+    public boolean aimSquareGrid(int pX, int pY, Target[][] pTarget){
+        return pTarget[pY][pX].aim(); //pX pY must to be valid position
+    }
+
+    @Override
+    public boolean aimHexagonGrid(int pX, int pY, Target[][] pTarget){
+        return pTarget[pY][pX].aim(); //pX pY must to be valid position
     }
 }

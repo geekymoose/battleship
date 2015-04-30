@@ -149,6 +149,7 @@ public class GridCursor implements GameConstants{
     
     public void mouseExited(MouseEvent e){
         Point p = processCoordinate(e, controller.getBoxDimension());
+        this.clickType.mouseExited(p, controller);
     }
     
     

@@ -129,7 +129,8 @@ public abstract class Player implements GameConstants{
     }
     
     /**
-     * Try to launch a shot at position pX, pY on array of target given in parameter
+     * Try to launch a shot at position pX, pY on array of target given in parameter. 
+     * Coordinate must be valid
      * @param pX        x target coordinate in the Target matrix
      * @param pY        y target coordinate in the Target matrix
      * @param pWhere    target matrix
@@ -145,16 +146,15 @@ public abstract class Player implements GameConstants{
     }
     
     /**
-     * Aim a target. 
-     * @param pX x target coordinate in the Target matrix
-     * @param pY y target coordinate in the Target matrix
-     * @param pWhere target matrix
+     * Aim a target. Coordinate must be valid
+     * @param pX        x target coordinate in the Target matrix
+     * @param pY        y target coordinate in the Target matrix
+     * @param pWhere    target matrix
      * @return true if can be aimed by player, otherwise, return false
      */
     public boolean aimAt(int pX, int pY, Target[][] pWhere){
-        Target target =  pWhere[pY][pX];
-        //To do in weapon, then, add here
-        return false;
+        this.listWeapons.get(this.currentWeaponIndex).aimAt(pX, pY, pWhere, fleetGrid);
+        return true;
     }
     
     
