@@ -8,6 +8,7 @@ import com.battleship.behaviors.Target;
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Water;
+import java.awt.Point;
 
 
 
@@ -40,12 +41,12 @@ public abstract class BoxMap implements Target, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   final int               posX;
-    protected   final int               posY;
+    protected   final Point             coordinate;
     protected   final FleetGridModel    grid;
     
     protected   Sprite                  content;
     protected   boolean                 isTargeted;
+    protected   boolean                 isHover;
     
     
     
@@ -64,10 +65,10 @@ public abstract class BoxMap implements Target, GameConstants{
      */
     protected BoxMap(int pX, int pY, Sprite pSprite, FleetGridModel pGrid){
         this.content    = pSprite;
-        this.posX       = pX;
-        this.posY       = pY;
+        this.coordinate = new Point(pX, pY);
         this.grid       = pGrid;
         this.isTargeted = false;
+        this.isHover    = false;
     }
     
     
@@ -100,6 +101,28 @@ public abstract class BoxMap implements Target, GameConstants{
      */
     public void restContent(){
         this.content = new Water();
+    }
+    
+    /**
+     * Hover this BoxMap
+     */
+    public void hover(){
+        this.isHover = true;
+    }
+    
+    /**
+     * Check if is hover
+     * @return true if hover, otherwise, return false
+     */
+    public boolean isHover(){
+        return this.isHover;
+    }
+    
+    /**
+     * Reset hover to false
+     */
+    public void stopHover(){
+        this.isHover = false;
     }
     
     
@@ -151,19 +174,11 @@ public abstract class BoxMap implements Target, GameConstants{
     }
     
     /**
-     * return x coordinate
-     * @return x coordinate
+     * Return coordinate
+     * @return Point coordinate
      */
-    public int getPosX(){
-        return this.posX;
-    }
-    
-    /**
-     * Return y coordinate
-     * @return y coordinate
-     */
-    public int getPosY(){
-        return this.posY;
+    public Point getCoordinate(){
+        return this.coordinate;
     }
     
     public void setContent(Sprite pContent){

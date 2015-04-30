@@ -53,8 +53,8 @@ public class BoxMapHexagon extends BoxMap{
     @Override
     public BoxMap getNextBoxMap(int pDirection){
         //coordinate for the next BoxMap
-        int x = this.posX;
-        int y = this.posY;
+        int x = this.coordinate.x;
+        int y = this.coordinate.y;
         
         switch(pDirection){
             case VERTICAL:

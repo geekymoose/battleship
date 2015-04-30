@@ -120,6 +120,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x].setTargeted(m.getBoxMapAt(x, y).isTargeted());
                 this.tabBox[y][x].setSprite(m.getBoxMapAt(x, y).getContent());
+                this.tabBox[y][x].setHover(m.getBoxMapAt(x, y).isHover());
             }
         }
         this.repaint();
@@ -202,7 +203,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     
     @Override
     public void reloadUI(){
-        this.controller.resetAim();
+        this.controller.resetHoverAndAim();
         this.repaint();
     }
     

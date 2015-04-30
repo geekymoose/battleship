@@ -40,6 +40,7 @@ public abstract class BoxMapView implements UiElement{
     protected   Point       coordinate;
     
     protected   boolean     isHidden;
+    protected   boolean     isHover;
     protected   boolean     isTargeted;
     protected   Sprite      sprite;
     
@@ -48,21 +49,24 @@ public abstract class BoxMapView implements UiElement{
     protected   Image       imgBoatDead;
     protected   Image       imgWaterAlive;
     protected   Image       imgWaterDead;
-    protected   Image       imgHoverBoatAlive;
-    protected   Image       imgHoverBoatDead;
-    protected   Image       imgHoverWaterAlive;
-    protected   Image       imgHoverWaterDead;
     
     
     //Hidden image
     protected   Image       imgHiddenBoatDead;
     protected   Image       imgHiddenWaterAlive;
     protected   Image       imgHiddenWaterDead;
-    protected   Image       imgHoverHiddenValid;
-    protected   Image       imgHoverHiddenNotValid;
     
     //Targeted image
     protected   Image       imgTargeted;
+    
+    //Hover image
+    protected   Image       imgHoverBoatAlive;
+    protected   Image       imgHoverBoatDead;
+    protected   Image       imgHoverWaterAlive;
+    protected   Image       imgHoverWaterDead;
+    
+    protected   Image       imgHoverHiddenValid;
+    protected   Image       imgHoverHiddenNotValid;
     
     
     
@@ -86,6 +90,7 @@ public abstract class BoxMapView implements UiElement{
         this.coordinate = new Point(x, y);
         this.dimension  = pDimension;
         this.isHidden   = false;
+        this.isHover    = false;
         this.isTargeted = false;
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= Color.BLACK;
@@ -105,6 +110,7 @@ public abstract class BoxMapView implements UiElement{
         this.coordinate = new Point(x, y);
         this.dimension  = pDimension;
         this.isHidden   = false;
+        this.isHover    = false;
         this.isTargeted = false;
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= c;
@@ -131,6 +137,8 @@ public abstract class BoxMapView implements UiElement{
         }
         if(this.isTargeted){
             this.drawTargeted(g2);
+        } else if (this.isHover){
+            this.drawHover(g2);
         }
     }
     
@@ -151,6 +159,12 @@ public abstract class BoxMapView implements UiElement{
      * @param g2 
      */
     protected abstract void drawTargeted(Graphics2D g2);
+    
+    /**
+     * Draw box with decoration used when cursor is hover
+     * @param g2 
+     */
+    protected abstract void drawHover(Graphics2D g2);
     
     
     
@@ -205,6 +219,14 @@ public abstract class BoxMapView implements UiElement{
      */
     public void setTargeted(boolean pValue){
         this.isTargeted = pValue;
+    }
+    
+    /**
+     * Set hover value
+     * @param pValue 
+     */
+    public void setHover(boolean pValue){
+        this.isHover = pValue;
     }
     
     /**
