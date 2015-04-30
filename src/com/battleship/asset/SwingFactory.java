@@ -155,10 +155,10 @@ public abstract class SwingFactory implements GameConstants{
     
     /**
      * Generate the view grid for game
-     * @param parent
-     * @param pModel
-     * @param pDim
-     * @return
+     * @param parent    parent view for this grid
+     * @param pModel    Model the grid is going to display
+     * @param pDim      Dimension for one box displayed
+     * @return the new GridPanel which display the FleetGridModel given as model
      * @throws ExecError 
      */
     public static GridPanel loadGridPanel(JPanel parent, FleetGridModel pModel, Dimension pDim) 

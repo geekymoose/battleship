@@ -65,6 +65,8 @@ public class GameConfigModel extends Model implements GameConstants{
     private     Player[]        listPlayers;
     private     int             currentNbPlayers;
     
+    private     int             firstPlayer; //Player which start to play
+    
     
     
     
@@ -100,9 +102,10 @@ public class GameConfigModel extends Model implements GameConstants{
      * Set configuration to default values
      */
     private void defaultConfig(){
-        this.gridWidth  = this.gridDefaultWidth;
-        this.gridHeight = this.gridDefaultHeight;
-        this.gridType   = this.gridDefaultType;
+        this.gridWidth      = this.gridDefaultWidth;
+        this.gridHeight     = this.gridDefaultHeight;
+        this.gridType       = this.gridDefaultType;
+        this.firstPlayer    = DEFAULT_FIRST_PLAYER;
         this.notifyObservers(null);
     }
     
@@ -263,7 +266,25 @@ public class GameConfigModel extends Model implements GameConstants{
         return this.listPlayers.length;
     }
     
+    /**
+     * Return id of the player which will play first
+     * @return int id player
+     */
+    public int getFirstPlayerTurn(){
+        return this.firstPlayer;
+    }
+    
     //**************************************************************************
+    /**
+     * Set id of the player which is going to play first
+     * @param pValue id player
+     */
+    public void setFirstPlayerTurn(int pValue){
+        if (pValue<0 || pValue > this.currentNbPlayers){
+            this.firstPlayer = DEFAULT_FIRST_PLAYER;
+        }
+    }
+    
     /**
      * Set a new grid width, will replace the old one. Must be between 
      * {@value GameConstants#GRID_MIN_WIDTH} and {@value GameConstants#GRID_MAX_WIDTH},

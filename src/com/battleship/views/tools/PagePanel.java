@@ -81,17 +81,6 @@ public abstract class PagePanel extends JPanel implements UiElement{
      * Go at the previous page, if no previous page, do nothing
      */
     protected abstract void goPreviousPage();
-
-
-    @Override
-    public void loadUI(){
-    
-    }
-
-    @Override
-    public void reloadUI(){
-        
-    }
     
     
     

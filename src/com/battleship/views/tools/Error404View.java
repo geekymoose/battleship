@@ -68,4 +68,14 @@ public class Error404View extends PagePanel{
     protected void goPreviousPage(){
         //Not used
     }
+    
+    @Override
+    public void loadUI(){
+        //Not used
+    }
+
+    @Override
+    public void reloadUI(){
+        //Not used
+    }
 }

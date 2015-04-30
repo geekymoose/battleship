@@ -10,7 +10,6 @@ import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
-import com.battleship.gridcursor.GridCursor;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
@@ -19,7 +18,6 @@ import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -43,6 +41,9 @@ import javax.swing.JPanel;
  * @author  Jessica FAVIN
  */
 public class GamePanel extends PagePanel implements ObserverModel{
+    //**************************************************************************
+    // Variables - Constants
+    //**************************************************************************
     private     final GameController    controller;
     private     JPanel                  p_centerPane;
     private     JPanel                  p_bigCont;
@@ -57,8 +58,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private     HeadBar                 p_headbar;
     private     GridBagConstraints      gc;
     
-    private     GridCursor              cursor;
-    
     
     
     
@@ -72,8 +71,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * @param pController   controller for this page
      * @throws ExecError error if unable to create this panel
      */
-    public GamePanel(WindowFrame pFrame, GameController pController) 
-    throws ExecError{
+    public GamePanel(WindowFrame pFrame, GameController pController) throws ExecError{
         super(pFrame);
         if(pController == null){
             throw new ExecError();
@@ -87,6 +85,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
     }
+    
     
     /*
      * Initialize all components
@@ -134,11 +133,12 @@ public class GamePanel extends PagePanel implements ObserverModel{
         CheatCode.setData(p_radar);
     }
     
+    
     @Override
     public void initPage() throws ExecError{
-        GameConfigModel conf = this.controller.getGameConfig();
-        FleetGridModel gridPlayer1 = conf.getPlayers()[0].getFleet();
-        FleetGridModel gridPlayer2 = conf.getPlayers()[1].getFleet();
+        GameConfigModel conf        = this.controller.getGameConfig();
+        FleetGridModel  gridPlayer1 = conf.getPlayers()[0].getFleet();
+        FleetGridModel  gridPlayer2 = conf.getPlayers()[1].getFleet();
         
         DebugTrack.showObjectToString(gridPlayer1);
         DebugTrack.showObjectToString(gridPlayer2);
@@ -149,11 +149,11 @@ public class GamePanel extends PagePanel implements ObserverModel{
         GridPanel radarPlayer1 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer1, dimBoxRadar);
         GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
         
-        this.p_fleet.setFleetGrids(fleetPlayer1, fleetPlayer2);
-        this.p_radar.setFleetGrids(radarPlayer1, radarPlayer2);
+        this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2);
+        this.p_radar.initGrids(radarPlayer1, radarPlayer2);
         
-        this.p_fleet.switchTurne(0);
-        this.p_radar.switchTurne(1);
+        this.p_fleet.switchTurne(0); //Player 0
+        this.p_radar.switchTurne(1); //Player 1
     }
     
     
@@ -164,6 +164,10 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
+    public void switchTurn(){
+        
+    }
+    
     
     @Override
     public void paintComponent(Graphics g) {
@@ -171,21 +175,42 @@ public class GamePanel extends PagePanel implements ObserverModel{
         Image img = ThemeManager.getTheme().getImg(417000);
         g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
     }
+
     
-    public void switchTurn(){
+    @Override
+    public void update(ObservableModel o, Object arg){
+    
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // UiElement Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+    
+    }
+
+    @Override
+    public void reloadUI(){
         
     }
     
+    
+    
+    
+    
+    //**************************************************************************
+    // Rooting Functions
+    //**************************************************************************
     @Override
     protected void goNextPage(){
     }
     
     @Override
     protected void goPreviousPage(){
-    }
-
-    @Override
-    public void update(ObservableModel o, Object arg){
-    
     }
 }

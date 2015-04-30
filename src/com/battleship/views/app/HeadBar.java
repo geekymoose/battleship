@@ -10,7 +10,6 @@ import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.ZozoDecorator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Image;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
