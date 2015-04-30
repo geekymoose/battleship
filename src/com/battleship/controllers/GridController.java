@@ -61,13 +61,31 @@ public class GridController extends Controller{
      * @param pShooter  player that is going to shoot
      */
     public void shootBoxMap(Point p, Player pShooter){
+        this.resetAim();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
         }
     }
     
+    /**
+     * Player aim at this position
+     * @param p         position aimed
+     * @param pShooter  player that is going to shoot
+     */
+    public void aimBoxMap(Point p, Player pShooter){
+        this.resetAim();
+        if((this.model.getBoxMapAt(p.x, p.y)) != null){
+            pShooter.aimAt(p.x, p.y, this.model.getTabBoxMap());
+        }
+        this.model.notifyObservers(null);
+    }
+    
     public void hoverBoxMap(Point p){
-        this.model.targetBoxMap(p);
+        this.model.hoverBoxMap(p);
+    }
+    
+    public void resetAim(){
+        this.model.hoverBoxMap(null);
     }
     
     public boolean placeBoatAt(Point p){

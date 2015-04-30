@@ -30,24 +30,13 @@ import com.battleship.behaviors.Target;
  */
 public class ShotTypeNuclearBomb implements ShotType{
     //**************************************************************************
-    // Constructor - Initialization
-    //**************************************************************************
-    public ShotTypeNuclearBomb(){
-    }
-    
-
-    //**************************************************************************
-    // Functions
+    // Fire Functions
     //**************************************************************************
     @Override
     public boolean fireSquareGrid(int pX, int pY, Target[][] pTarget) {
         for(int i=-3; i<4; i++){
             for(int j=-3; j<4; j++){
-                try{
-                    pTarget[pX+i][pY+j].hit();
-                } catch(ArrayIndexOutOfBoundsException ex){
-                    //Means this square is not in the Target matrix (Out of range)
-                }
+                Weapon.hitTargetIfExists(pX+i, pY+j, pTarget);
             }
         }
         return true;
@@ -57,28 +46,41 @@ public class ShotTypeNuclearBomb implements ShotType{
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
         for(int i=-1; i<2; i++){
             for(int j=-2; j<3; j++){
-                try{
-                    pTarget[pY+i][pX+j].hit();
-                } catch(java.lang.ArrayIndexOutOfBoundsException ex){
-                    //Means this square is not in the Target matrix (Out of range)
-                }
+                Weapon.hitTargetIfExists(pX+i, pY+j, pTarget);
             }
         }
-
-        /*
-         * ATTENTION
-         * See fireHexagonGrid in ShotTYpeBomb for information about this try
-         */
-        try{
-            pTarget[pY-1][pX].hit();
-            pTarget[pY+2][pX-1].hit();
-            pTarget[pY+2][pX].hit();
-            pTarget[pY+2][pX+1].hit();
+        Weapon.hitTargetIfExists(pX, pY-1, pTarget);
+        Weapon.hitTargetIfExists(pX-1, pY+2, pTarget);
+        Weapon.hitTargetIfExists(pX, pY+2, pTarget);
+        Weapon.hitTargetIfExists(pX+1, pY+2, pTarget);
+        return true;
+    }
+    
+    
+    //**************************************************************************
+    // Aim Functions
+    //**************************************************************************
+    @Override
+    public boolean aimSquareGrid(int pX, int pY, Target[][] pTarget){
+        for(int i=-3; i<4; i++){
+            for(int j=-3; j<4; j++){
+                Weapon.aimTargetIfExists(pX+i, pY+j, pTarget);
+            }
         }
-        catch(ArrayIndexOutOfBoundsException ex){
-            //Nothing
+        return true;
+    }
 
+    @Override
+    public boolean aimHexagonGrid(int pX, int pY, Target[][] pTarget){
+        for(int i=-1; i<2; i++){
+            for(int j=-2; j<3; j++){
+                Weapon.aimTargetIfExists(pX+i, pY+j, pTarget);
+            }
         }
+        Weapon.aimTargetIfExists(pX, pY-1, pTarget);
+        Weapon.aimTargetIfExists(pX-1, pY+2, pTarget);
+        Weapon.aimTargetIfExists(pX, pY+2, pTarget);
+        Weapon.aimTargetIfExists(pX+1, pY+2, pTarget);
         return true;
     }
 }

@@ -81,6 +81,26 @@ public abstract class Weapon {
         }
     }
     
+    
+    /**
+     * Aim a target from Target matrix at position pX:pY. FleetGridModel 
+     * change the weapon behavior (For example, the range and explosion shape), 
+     * therefore it is needed
+     * @param pX        x target coordinate in Target matrix
+     * @param pY        y target coordinate in Target matrix
+     * @param pTarget   matrix where the target is located
+     * @param grid      type grid (It is the grid instance)
+     * @return true if target hit, otherwise, return false (Target could be missed)
+     */
+    public boolean aimAt(int pX, int pY, Target[][] pTarget, FleetGridModel grid){
+        if(grid instanceof FleetGridSquare){
+            return shot.aimSquareGrid(pX, pY, pTarget);
+        }
+        else{
+            return shot.aimHexagonGrid(pX, pY, pTarget);
+        }
+    }
+    
     /**
      * Add bullet in current ammo (Will add in the current number)
      * @param pValue ammo to add
@@ -107,5 +127,44 @@ public abstract class Weapon {
      */
     public int getAmmo(){
         return this.ammo;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Useful Functions
+    //**************************************************************************
+    /**
+     * Hit the target is exists, otherwise, do nothing and return false
+     * @param x         x coordinate
+     * @param y         y coordinate
+     * @param pTarget   array of target where to shoot
+     * @return true if hit, otherwise, return false
+     */
+    public static boolean hitTargetIfExists(int x, int y, Target[][] pTarget){
+        try {
+            return pTarget[y][x].hit();
+        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+            //Means this square is not in the Target matrix (Out of range)
+        }
+        return false;
+    }
+    
+    /**
+     * Aim the target is exists, otherwise, do nothing and return false
+     * @param x         x coordinate
+     * @param y         y coordinate
+     * @param pTarget   array of target where to aim
+     * @return true if aimed successfully, otherwise, return false
+     */
+    public static boolean aimTargetIfExists(int x, int y, Target[][] pTarget){
+        try {
+            return pTarget[y][x].aim();
+        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+            //Means this square is not in the Target matrix (Out of range)
+        }
+        return false;
     }
 }

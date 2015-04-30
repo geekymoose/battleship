@@ -52,6 +52,7 @@ public class ClickShoot implements ClickType{
 
     @Override
     public void mouseExited(Point p, GridController c){
+        c.resetAim();
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ClickShoot implements ClickType{
 
     @Override
     public void mouseMoved(Point p, GridController c){
-        c.hoverBoxMap(p);
+        c.aimBoxMap(p, owner);
     }
 
     @Override
