@@ -135,6 +135,8 @@
             
             <boxmap>
                 <square>
+                    <img type="static" ext="png">301200</img>
+                    <img type="static" ext="png">301300</img>
                     <img type="static" ext="png">301400</img>
                     <img type="static" ext="png">301500</img>
                     <img type="static" ext="png">301600</img>
@@ -142,6 +144,8 @@
                     <img type="static" ext="png">301800</img>
                 </square>
                 <hexa>
+                    <img type="static" ext="png">201200</img>
+                    <img type="static" ext="png">201300</img>
                     <img type="static" ext="png">201400</img>
                     <img type="static" ext="png">201500</img>
                     <img type="static" ext="png">201600</img>

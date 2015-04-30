@@ -141,9 +141,21 @@ public class BoxMapViewSquare extends BoxMapView{
     
     @Override
     protected void drawTargeted(Graphics2D g2){
-        g2.setColor(Color.DARK_GRAY);
-        g2.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        Image   i   = this.imgTargeted;
+        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+        g2.setColor(this.borderColor);
+        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
+
+    
+    @Override
+    protected void drawHover(Graphics2D g2){
+        Image   i   = this.imgHoverBoatAlive;
+        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+        g2.setColor(this.borderColor);
+        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);}
     
     
     
@@ -159,19 +171,22 @@ public class BoxMapViewSquare extends BoxMapView{
         this.imgBoatDead            = ThemeManager.getTheme().getImg(301800);
         this.imgWaterAlive          = ThemeManager.getTheme().getImg(301600);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(301700);
-        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(301400);
-        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(301400);
-        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(301400);
-        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(301400);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(301800);
         this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(301400);
         this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(301500);
-        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(301400);
-        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(301400);
 
         //Targeted image
-        this.imgTargeted            = ThemeManager.getTheme().getImg(301700);
+        this.imgTargeted            = ThemeManager.getTheme().getImg(301300);
+        
+        //Hover image
+        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(301200);
+        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(301200);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(301200);
+        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(301200);
+        
+        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(301200);
+        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(301200);
     }
 }

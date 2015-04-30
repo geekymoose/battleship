@@ -7,7 +7,6 @@ package com.battleship.views.app;
 import com.battleship.asset.ImgCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
-import com.battleship.constants.GameConstants;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -179,8 +178,20 @@ public class BoxMapViewHexagon extends BoxMapView{
 
     @Override
     protected void drawTargeted(Graphics2D g2){
-        g2.setColor(Color.DARK_GRAY);
-        g2.fillPolygon(this.polygon);
+        Image   i   = this.imgTargeted;
+        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+        g2.setColor(this.borderColor);
+        g2.drawPolygon(this.polygon);
+    }
+    
+    @Override
+    protected void drawHover(Graphics2D g2){
+        Image   i   = this.imgHoverBoatAlive;
+        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+        g2.setColor(this.borderColor);
+        g2.drawPolygon(this.polygon);
     }
     
     
@@ -196,19 +207,22 @@ public class BoxMapViewHexagon extends BoxMapView{
         this.imgBoatDead            = ThemeManager.getTheme().getImg(201800);
         this.imgWaterAlive          = ThemeManager.getTheme().getImg(201600);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(201700);
-        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(201400);
-        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(201400);
-        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(201400);
-        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(201400);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(201800);
         this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(201400);
         this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(201500);
-        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(201400);
-        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(201400);
 
         //Targeted image
-        this.imgTargeted            = ThemeManager.getTheme().getImg(201700);
+        this.imgTargeted            = ThemeManager.getTheme().getImg(201300);
+        
+        //Hover image
+        this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(201200);
+        this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(201200);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(201200);
+        this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(201200);
+        
+        this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(201200);
+        this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(201200);
     }
 }

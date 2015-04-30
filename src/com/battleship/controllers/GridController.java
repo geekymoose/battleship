@@ -9,7 +9,6 @@ package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.Player;
 import com.battleship.views.app.GridPanel;
@@ -61,7 +60,7 @@ public class GridController extends Controller{
      * @param pShooter  player that is going to shoot
      */
     public void shootBoxMap(Point p, Player pShooter){
-        this.resetAim();
+        this.model.stopAiming();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
         }
@@ -73,19 +72,20 @@ public class GridController extends Controller{
      * @param pShooter  player that is going to shoot
      */
     public void aimBoxMap(Point p, Player pShooter){
-        this.resetAim();
+        this.model.stopAiming();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             pShooter.aimAt(p.x, p.y, this.model.getTabBoxMap());
         }
         this.model.notifyObservers(null);
     }
     
+    
     public void hoverBoxMap(Point p){
         this.model.hoverBoxMap(p);
     }
     
-    public void resetAim(){
-        this.model.hoverBoxMap(null);
+    public void resetHoverAndAim(){
+        this.model.stopHoverAndAim();
     }
     
     public boolean placeBoatAt(Point p){

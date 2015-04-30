@@ -123,15 +123,30 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     }
     
     /**
+     * Check if this grid is valid, means all boats are placed in
+     * @return 
+     */
+    public boolean isValidFleetGrid(){
+        return this.listBoats.size() == this.nbBoatToPlace;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Hover and target Functions
+    //**************************************************************************
+    /**
      * Target one box map at position point p
      * @param p coordinate where target is located in the grid
      */
     public void hoverBoxMap(Point p){
-        this.stopAiming();
+        this.stopAllHover();
         if(p!=null){
             BoxMap box = this.getBoxMapAt(p.x, p.y);
             if(box!=null){
-                box.aim();
+                box.hover();
             }
         }
         this.notifyObservers(null);
@@ -145,7 +160,20 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         for(Point p : tab){
             BoxMap box = this.getBoxMapAt(p.x, p.y);
             if(box!=null){
-                box.aim();
+                box.hover();
+            }
+        }
+        this.notifyObservers(null);
+    }
+    
+    /*
+     * Stop hover and aim for all BoxMap 
+     */
+    public void stopHoverAndAim(){
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.tabBoxMap[y][x].stopHover();
+                this.tabBoxMap[y][x].stopAim();
             }
         }
         this.notifyObservers(null);
@@ -154,20 +182,25 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     /**
      * stop aiming all tab in this fleetGridModel
      */
-    private void stopAiming(){
+    public void stopAllHover(){
+        for(int y=0; y<this.gridHeight; y++){
+            for(int x=0; x<this.gridWidth; x++){
+                this.tabBoxMap[y][x].stopHover();
+            }
+        }
+        this.notifyObservers(null);
+    }
+    
+    /**
+     * stop aiming all tab in this fleetGridModel
+     */
+    public void stopAiming(){
         for(int y=0; y<this.gridHeight; y++){
             for(int x=0; x<this.gridWidth; x++){
                 this.tabBoxMap[y][x].stopAim();
             }
         }
-    }
-    
-    /**
-     * Check if this grid is valid, means all boats are placed in
-     * @return 
-     */
-    public boolean isValidFleetGrid(){
-        return this.listBoats.size() == this.nbBoatToPlace;
+        this.notifyObservers(null);
     }
     
     
