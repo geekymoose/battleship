@@ -30,7 +30,7 @@ import com.battleship.observers.ObserverModel;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class GameModel extends Model implements ObserverModel{
+public class GameModel extends Model{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -53,7 +53,7 @@ public class GameModel extends Model implements ObserverModel{
     //**************************************************************************
     /**
      * Constructor: create a new GameModel from a GameConfigModel class<br/>
- Set the configuration from GameConfigModel. After creation, basement config 
+     * Set the configuration from GameConfigModel. After creation, basement config 
      * could not be changed anymore (As gridWidth, gridHeight and gridType)
      * @param pConfig configuration to set
      */
@@ -79,11 +79,6 @@ public class GameModel extends Model implements ObserverModel{
     //**************************************************************************
     private void switchTurnBehaviors() {
         
-    }
-
-    @Override
-    public void update(ObservableModel o, Object arg){
-    
     }
     
     
