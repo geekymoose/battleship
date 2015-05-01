@@ -44,6 +44,7 @@ import javax.swing.JPanel;
 public class ChooseGamePanel extends PagePanel implements GameConstants, UiElement{
     private     JPanel                  p_container;
     private     GridBagConstraints      gc;
+    private     HeadBar                 p_hb;
     
     //Buttons
     private     AbstractButton          b_ia;
@@ -51,8 +52,8 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
     private     AbstractButton          b_lan;
     private     AbstractButton          b_internet;
     
+    //Images
     private     Image                   background;
-    private     HeadBar                 p_hb;
         
     
     
@@ -187,11 +188,11 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
 
     @Override
     public void loadUI(){
-        this.background = ThemeManager.getTheme().getImg(415000);
+        this.reloadUI();
     }
     
     @Override
     public void reloadUI(){
-        this.loadUI();
+        this.background = ThemeManager.getTheme().getImg(415000);
     }
 }

@@ -258,6 +258,49 @@ public abstract class DebugTrack {
     
     
     //**************************************************************************
+    // Debug Trace for call functions
+    //**************************************************************************
+    /**
+     * Display the stack data about a method.
+     * Display data about function called and data about functions calling the 
+     * first function. 
+     */
+    public static void showStackTrace(){
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        String  className1  = stackTraceElements[2].getClassName();
+        String  fileName1   = stackTraceElements[2].getFileName();
+        String  methodName1 = stackTraceElements[2].getMethodName();
+        int     nbLine1     = stackTraceElements[2].getLineNumber();
+        
+        
+        String  className2  = stackTraceElements[3].getClassName();
+        String  fileName2   = stackTraceElements[3].getFileName();
+        String  methodName2 = stackTraceElements[3].getMethodName();
+        int     nbLine2     = stackTraceElements[3].getLineNumber();
+        
+        System.out.println("\n\n ***** Stack Data *****\n");
+        System.out.println("\nData Called method :");
+        System.out.println("\tMethode : "+methodName1);
+        System.out.println("\tIn file : "+fileName1);
+        System.out.println("\tIn Class : "+className1);
+        System.out.println("\tIn Line : "+nbLine1);
+        
+        System.out.println("\nData method that called : ");
+        System.out.println("\tMethode : "+methodName2);
+        System.out.println("\tIn file : "+fileName2);
+        System.out.println("\tIn Class : "+className2);
+        System.out.println("\tIn Line : "+nbLine2);
+        
+        
+        //String str  = DebugTrack.getStackTraceChild(3);
+        //String str2 = DebugTrack.getStackTraceChild(4);
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
     // Application debug for data
     //**************************************************************************
     /**
