@@ -11,10 +11,7 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.Player;
-import com.battleship.views.app.GamePanel;
 import com.battleship.views.app.GridPanel;
-import com.battleship.views.app.PlayerFleetPanel;
-import com.battleship.views.app.RadarPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 

@@ -95,7 +95,7 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
      * is given in parameter (First player is number 0)
      * @param playerTurn player number id (start at 0)
      */
-    private void switchGrid(int playerTurn){
+    public void switchGrid(int playerTurn){
         this.removeAll();
         this.currentGrid = this.fleetGridPlayers[playerTurn];
         this.add(this.currentGrid);
