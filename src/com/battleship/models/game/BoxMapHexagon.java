@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.behaviors.Sprite;
+import java.util.ArrayList;
 
 
 
@@ -70,5 +71,19 @@ public class BoxMapHexagon extends BoxMap{
                 break;
         }
         return this.grid.getBoxMapAt(x, y);
+    }
+
+    @Override
+    public ArrayList<BoxMap> getNeighbor(){
+        ArrayList<BoxMap> l = new ArrayList();
+        for(int x=-1; x<2; x++){
+            for(int y=-1; y<2; y++){
+                BoxMap b = this.grid.getBoxMapAt(x, y);
+                if(b!=null){
+                    l.add(b);
+                }
+            }
+        }
+        return l;
     }
 }

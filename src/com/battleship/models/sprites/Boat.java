@@ -9,6 +9,7 @@ import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
+import java.util.ArrayList;
 
 
 
@@ -124,6 +125,7 @@ public abstract class Boat implements GameConstants{
      */
     private boolean isValidPosition(BoxMap pBox, int pOrientation){
         BoxMap  next    = pBox;
+        //Check if position is valid
         for(int k=0; k<this.tabCompartments.length;k++){
             //if(next==null || (!next.isEmpty() && next.getContent()!= tabCompartments[k])){
             if(next==null){
@@ -131,6 +133,13 @@ public abstract class Boat implements GameConstants{
             }
             else if((!next.isEmpty()) && next.getContent().getId() != this.idBoat){
                 return false;
+            }
+            //Check if position is not stick with another boat
+            ArrayList<BoxMap> l = next.getNeighbor();
+            for (BoxMap b : l){
+                if(b.getContent().getId() != this.idBoat && b.getContent().getId() != WATER){
+                    return false;
+                }
             }
             next = next.getNextBoxMap(pOrientation);
         }
