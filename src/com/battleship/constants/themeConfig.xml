@@ -132,6 +132,22 @@
                 <img type="static" ext="png">414200</img>
             </grid>
             
+            <weapon>
+                <img type="static" ext="png">500000</img>
+                <img type="static" ext="png">500100</img>
+                <img type="static" ext="png">500200</img>
+                <img type="static" ext="png">501000</img>
+                <img type="static" ext="png">501100</img>
+                <img type="static" ext="png">501200</img>
+                <img type="static" ext="png">502000</img>
+                <img type="static" ext="png">502100</img>
+                <img type="static" ext="png">502200</img>
+                <img type="static" ext="png">503000</img>
+                <img type="static" ext="png">503100</img>
+                <img type="static" ext="png">503200</img>
+                
+            </weapon>
+            
             
             <boxmap>
                 <square>

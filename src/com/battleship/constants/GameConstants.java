@@ -61,6 +61,10 @@ public interface GameConstants {
     // Weapon constants
     //**************************************************************************
     public static final int     INFINITE_AMO                = -42;
+    public static final int     MISSILE                     = 42;
+    public static final int     NUKE                        = 666;
+    public static final int     TORPEDO                     = 404;
+    public static final int     BOMB                        = 69;
     
     
     
