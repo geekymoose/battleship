@@ -152,8 +152,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
                                                            conf.getFirstPlayerTurn());
         
         //TMP DEBUG
-        fleetPlayer1.getGridCursor().setClickNoAction();
-        fleetPlayer2.getGridCursor().setClickNoAction();
+        fleetPlayer1.getGridCursor().setClickNoArm();
+        fleetPlayer2.getGridCursor().setClickNoArm();
         radarPlayer1.getGridCursor().setClickShoot();
         radarPlayer2.getGridCursor().setClickShoot();
         this.repaint();

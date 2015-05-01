@@ -23,8 +23,8 @@ public interface GameConstants {
     // Grid constants
     //**************************************************************************
     //Grid type
-    public static int       GRID_TYPE_SQUARE            = 1;
-    public static int       GRID_TYPE_HEXAGON           = 2;
+    public static final int     GRID_TYPE_SQUARE            = 1;
+    public static int           GRID_TYPE_HEXAGON           = 2;
     
     
     
@@ -32,27 +32,27 @@ public interface GameConstants {
     //**************************************************************************
     // Game constants
     //**************************************************************************
-    public static int       WAS_HIT                     = 1;
-    public static int       NOT_HIT                     = 2;
+    public static final int     WAS_HIT                     = 1;
+    public static final int     NOT_HIT                     = 2;
     
     //Position constants
-    public static int       VERTICAL                    = 1;
-    public static int       HORIZONTAL                  = 2;
-    public static int       STANDING_UP                 = 3;
-    public static int       STANDING_DOWN               = 4;
+    public static final int     VERTICAL                    = 1;
+    public static final int     HORIZONTAL                  = 2;
+    public static final int     STANDING_UP                 = 3;
+    public static final int     STANDING_DOWN               = 4;
     
     
     
     //**************************************************************************
     // Game constants
     //**************************************************************************
-    public static int       MODE_AI                     = 1;
-    public static int       MODE_V2                     = 2;
-    public static int       MODE_LAN                    = 3;
-    public static int       MODE_INTERNET               = 4;
+    public static final int     MODE_AI                     = 1;
+    public static final int     MODE_V2                     = 2;
+    public static final int     MODE_LAN                    = 3;
+    public static final int     MODE_INTERNET               = 4;
     
-    public static int       CREATE_GAME                 = 1;
-    public static int       JOIN_GAME                   = 2;
+    public static final int     CREATE_GAME                 = 1;
+    public static final int     JOIN_GAME                   = 2;
     
     
     
@@ -60,20 +60,28 @@ public interface GameConstants {
     //**************************************************************************
     // Weapon constants
     //**************************************************************************
-    public static int       INFINITE_AMO                = -42;
+    public static final int     INFINITE_AMO                = -42;
     
     
     
     
     
     //**************************************************************************
-    // Boats Selection constants
+    // Id Boats constants
     //**************************************************************************
-    public static int       NO_BOAT_SELECTED    = -1;
-    public static int       AIRCRAFT_CARRIER    = 0;
-    public static int       BATTLESHIP          = 1;
-    public static int       CRUISER             = 2;
-    public static int       DESTROYER           = 3;
-    public static int       SUBMARINE           = 4;
-    public static int       WATER               = 42;
+    public static final int     NO_BOAT_SELECTED        = -1;
+    public static final int     AIRCRAFT_CARRIER        = 0;
+    public static final int     BATTLESHIP              = 1;
+    public static final int     CRUISER                 = 2;
+    public static final int     DESTROYER               = 3;
+    public static final int     SUBMARINE               = 4;
+    public static final int     WATER                   = 42;
+    
+    
+    
+    //**************************************************************************
+    // Delay constants
+    //**************************************************************************
+    public static final int     DELAY_GAME              = 10;
+    public static final int     DELAY_WATER             = 30;
 }

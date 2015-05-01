@@ -11,7 +11,10 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.Player;
+import com.battleship.views.app.GamePanel;
 import com.battleship.views.app.GridPanel;
+import com.battleship.views.app.PlayerFleetPanel;
+import com.battleship.views.app.RadarPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 
@@ -62,7 +65,11 @@ public class GridController extends Controller{
     public void shootBoxMap(Point p, Player pShooter){
         this.model.stopAiming();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
-            pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
+            boolean shoot = pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
+            if(shoot == true){
+                //GamePanel g = (GamePanel)((RadarPanel)this.v).getParent();
+                //g.switchTurn();
+            }
         }
     }
     
