@@ -13,17 +13,23 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
+import com.battleship.models.game.GameModel;
+import com.battleship.models.game.Player;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
@@ -57,6 +63,11 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private     ChatPanel               p_chat;
     private     HeadBar                 p_headbar;
     private     GridBagConstraints      gc;
+    
+    private     SwitchPanel             switchPanel;
+    
+    //Image 
+    private     Image                   img_background;
     
     
     
@@ -97,6 +108,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_radar         = new RadarPanel(this);
         p_chat          = new ChatPanel(p_radar);
         p_bigCont       = new JPanel();
+        switchPanel     = new SwitchPanel();
         
         p_centerPane    .setOpaque(false);
         p_fleet         .setOpaque(false);
@@ -156,6 +168,10 @@ public class GamePanel extends PagePanel implements ObserverModel{
         fleetPlayer2.getGridCursor().setClickNoArm();
         radarPlayer1.getGridCursor().setClickShoot();
         radarPlayer2.getGridCursor().setClickShoot();
+        
+        //Change cursor owner, it means players 1 will attack grid 0 and reverso for player 0
+        radarPlayer1.getGridCursor().setOwner(conf.getPlayers()[1]);
+        radarPlayer2.getGridCursor().setOwner(conf.getPlayers()[0]);
         this.repaint();
     }
     
@@ -167,22 +183,40 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     // METHODS
     //**************************************************************************
-    public void switchTurn(){
-        
+    /**
+     * Switch the current display. It depend of action sent. 
+     * @param m         GameModel recovered from update function
+     * @param pAction   Action to do
+     */
+    public void switchTurnDisplay(GameModel m, int pAction){
+        switch(pAction){
+            case GameModel.SWITCH_PAGE:
+                int playerTurn  = m.getIdPlayerTurn();
+                int foe         = (playerTurn+1)%2;
+                this.p_radar.switchGrid(foe);
+                this.p_fleet.switchGrid(playerTurn);
+                this.switchPanel.display();
+                break;
+        }
     }
     
     
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(417000);
-        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
     }
 
     
     @Override
     public void update(ObservableModel o, Object arg){
-    
+        if(o instanceof Player){
+            this.repaint();
+        } else if (o instanceof GameModel && arg instanceof Integer){
+            this.switchTurnDisplay((GameModel)o, (int)arg);
+        } else {
+            this.repaint();
+        }
     }
     
     
@@ -194,15 +228,13 @@ public class GamePanel extends PagePanel implements ObserverModel{
     //**************************************************************************
     @Override
     public void loadUI(){
-    
+        this.reloadUI();
     }
 
     @Override
     public void reloadUI(){
-        
+        this.img_background = ThemeManager.getTheme().getImg(417000);
     }
-    
-    
     
     
     
@@ -221,11 +253,60 @@ public class GamePanel extends PagePanel implements ObserverModel{
     
     
     
-    
     //**************************************************************************
-    // getters - Setters 
+    // Inner class
     //**************************************************************************
-    public GameController getController(){
-        return this.controller;
+    /**
+     * <h1>SwitchPanel</h1>
+     * <p>
+     * public class SwitchPanel<br/>
+     * extends JPanel
+     * </p>
+     * 
+     * <p>Panel display between 2 round in V2 mode. It is used to hide 
+     * the players fleet during switching
+     * </p>
+     */
+    private class SwitchPanel extends JPanel{
+        private     JButton     b_confirm;
+        
+        public SwitchPanel(){
+            this.initComponents();
+        }
+        private void initComponents(){
+            this.b_confirm = new JButton("Next player");
+            this.b_confirm.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    stopSwitchPanel();
+                }
+            });
+            this.setBackground(Color.BLACK);
+            this.add(this.b_confirm);
+        }
+        
+        /**
+         * Start displaying this Panel. Remove grid (Radar and fleet) from 
+         * current game and display page without information about players state
+         */
+        public void display(){
+            GamePanel.this.remove(p_bigCont);
+            GamePanel.this.remove(p_info);
+            GamePanel.this.add(this);
+            GamePanel.this.revalidate();
+            GamePanel.this.repaint();
+        }
+        
+        /**
+         * Stop displaying this panel. Restore current game state with player 
+         * turn data
+         */
+        public void stopSwitchPanel(){
+            GamePanel.this.remove(this);
+            GamePanel.this.add(p_bigCont, BorderLayout.CENTER);
+            GamePanel.this.add(p_info, BorderLayout.SOUTH);
+            GamePanel.this.revalidate();
+            GamePanel.this.repaint();
+        }
     }
 }

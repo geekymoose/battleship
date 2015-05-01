@@ -18,7 +18,6 @@ import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
-import com.battleship.models.game.PlaceBoatsModel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
@@ -63,6 +62,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     GridBagConstraints              gbc;
     
     private     PlayerFleetPanel                gridPanel;
+    
+    //Image 
+    private     Image                           img_background;
     
     
     
@@ -200,14 +202,13 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(417000);
-        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
     }
     
     
     @Override
     public void update(ObservableModel o, Object arg){
-        PlaceBoatsModel m   = (PlaceBoatsModel)o;
+        //PlaceBoatsModel m   = (PlaceBoatsModel)o;
     }
     
     
@@ -219,10 +220,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     //**************************************************************************
     @Override
     public void loadUI(){
+        this.reloadUI();
     }
-
+    
     @Override
     public void reloadUI(){
+        this.img_background = ThemeManager.getTheme().getImg(417000);
     }
     
     

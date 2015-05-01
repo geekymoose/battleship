@@ -88,9 +88,6 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     public void displayRadarPlayer(int pOwner, int pShooter){
         if(pOwner>=0 && pOwner <= 2){
             this.switchGrid(pOwner);
-            GamePanel   m   = ((GamePanel)this.parentPage);
-            Player      p   = m.getController().getGameConfig().getPlayers()[pShooter];
-            this.currentGrid.getGridCursor().setOwner(p);
         }
     }
     

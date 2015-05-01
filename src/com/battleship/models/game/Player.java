@@ -18,7 +18,9 @@ import java.util.ArrayList;
 /**
  * <h1>Player</h1>
  * <p>
- * public class Player
+ * public class Player<br/>
+ * extends Model<br/>
+ * implements GameConstants
  * </p>
  * 
  * <p>
@@ -36,12 +38,13 @@ import java.util.ArrayList;
  * @see PlayerAI
  * @see PlayerHuman
  */
-public abstract class Player implements GameConstants{
+public abstract class Player extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
     private     String                  name;
     private     FleetGridModel          fleetGrid;
+    private     GameModel               game; //Game where player is playing
     private     ArrayList<Weapon>       listWeapons;
     private     ArrayList<Boat>         listBoatsOwned;
     private     int                     score;
@@ -61,10 +64,11 @@ public abstract class Player implements GameConstants{
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
     public Player() {
-        this.name                   = "NoName";
+        this.name                   = "MisterSwadow";
         this.score                  = 0;
         this.listWeapons            = new ArrayList();
         this.fleetGrid              = null;
+        this.game                   = null;
         
         //Add default weapon and set current weapon to this weapon
         this.listWeapons.add(new Missile(this, INFINITE_AMO));
@@ -103,6 +107,7 @@ public abstract class Player implements GameConstants{
         if(this.currentWeaponIndex>=this.listWeapons.size()){
             this.currentWeaponIndex = 0;
         }
+        this.notifyObservers(null);
     }
     
     /**
@@ -113,6 +118,7 @@ public abstract class Player implements GameConstants{
         if(this.currentWeaponIndex<0){
             this.currentWeaponIndex = (this.listWeapons.size()-1);
         }
+        this.notifyObservers(null);
     }
     
     /**
@@ -126,6 +132,24 @@ public abstract class Player implements GameConstants{
             return;
         }
         this.currentWeaponIndex = pValue;
+        this.notifyObservers(null);
+    }
+    
+    /**
+     * Add new weapon in current player weapon list. If weapon is already owned 
+     * by player, just add ammo.
+     * @param pWeapon weapon to add, if already exists, add ammo
+     */
+    public void addWeapon(Weapon pWeapon){
+        if(pWeapon != null){
+            for (Weapon w : this.listWeapons){
+                if(pWeapon.getClass() == w.getClass()){
+                    w.addAmmo(pWeapon.getAmmo());
+                    return;
+                }
+            }
+            this.listWeapons.add(pWeapon);
+        }
     }
     
     /**
@@ -139,8 +163,10 @@ public abstract class Player implements GameConstants{
     public boolean shootAt(int pX, int pY, Target[][] pWhere) {
         Target target =  pWhere[pY][pX];
         if(target.isValidTarget()){
-            this.listWeapons.get(this.currentWeaponIndex) .fireAt(pX, pY, pWhere, this.fleetGrid);
-            return true;
+            if (this.listWeapons.get(this.currentWeaponIndex).fireAt(pX, pY, pWhere, this.fleetGrid)==true){
+                this.game.switchTurnBehaviors();
+                return true;
+            }
         }
         return false;
     }
@@ -257,13 +283,10 @@ public abstract class Player implements GameConstants{
     }
     
     /**
-     * Add new weapon
-     * @param pWeapon 
+     * Set the GameModel de player
+     * @param pGame 
      */
-    public void addWeapon(Weapon pWeapon){
-        if(pWeapon != null){
-            //Attention, could have 2 same weapon -> Add addAmmo instead
-            this.listWeapons.add(pWeapon);
-        }
+    public void setGameModel(GameModel pGame){
+        this.game = pGame;
     }
 }

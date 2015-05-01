@@ -72,9 +72,11 @@ public class ClickShoot implements ClickType{
 
     @Override
     public void wheelMovedUp(Point p, GridController c){
+        owner.switchWeaponNext();
     }
 
     @Override
     public void wheelMovedDown(Point p, GridController c){
+        owner.switchWeaponPrevious();
     }
 }

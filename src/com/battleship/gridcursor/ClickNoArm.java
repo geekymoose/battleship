@@ -43,6 +43,7 @@ public class ClickNoArm implements ClickType{
 
     @Override
     public void mouseExited(Point p, GridController c){
+        c.resetHoverAndAim();
     }
 
     @Override
