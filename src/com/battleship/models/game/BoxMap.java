@@ -9,6 +9,7 @@ import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Water;
 import java.awt.Point;
+import java.util.ArrayList;
 
 
 
@@ -78,7 +79,7 @@ public abstract class BoxMap implements Target, GameConstants{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    /**
+    /** 
      * Return the next box map according to the direction given. 
      * In function of grid, some direction are forgiven. If one is used, 
      * null will be returned. (Note it should not append)
@@ -86,6 +87,12 @@ public abstract class BoxMap implements Target, GameConstants{
      * @return next BoxMap, null if there is no next BoxMap (Border reached)
      */
     public abstract BoxMap getNextBoxMap(int pDirection);
+    
+    /**
+     * Return all neighbor of this BoxMap
+     * @return ArrayList of neighbor
+     */
+    public abstract ArrayList<BoxMap> getNeighbor();
     
     /**
      * Check is this BoxMap is empty : there is only water here (Means content 

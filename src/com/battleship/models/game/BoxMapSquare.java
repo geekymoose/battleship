@@ -6,6 +6,7 @@ package com.battleship.models.game;
 
 import com.battleship.behaviors.Sprite;
 import static com.battleship.constants.GameConstants.VERTICAL;
+import java.util.ArrayList;
 
 
 
@@ -64,5 +65,21 @@ public class BoxMapSquare extends BoxMap{
                 break;
         }
         return this.grid.getBoxMapAt(x, y);
+    }
+
+    @Override
+    public ArrayList<BoxMap> getNeighbor(){
+        int x = this.coordinate.x;
+        int y = this.coordinate.y;
+        ArrayList<BoxMap> l = new ArrayList();
+        for(int i=-1; i<2; i++){
+            for(int j=-1; j<2; j++){
+                BoxMap b = this.grid.getBoxMapAt(x+i, y+j);
+                if(b!=null){
+                    l.add(b);
+                }
+            }
+        }
+        return l;
     }
 }
