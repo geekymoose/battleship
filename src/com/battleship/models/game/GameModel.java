@@ -5,9 +5,10 @@
 package com.battleship.models.game;
 
 import com.battleship.asset.CheatCode;
+import com.battleship.asset.Session;
+import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
-import com.battleship.observers.ObservableModel;
-import com.battleship.observers.ObserverModel;
+import javax.swing.SwingUtilities;
 
 
 
@@ -17,7 +18,8 @@ import com.battleship.observers.ObserverModel;
  * <h1>GameModel</h1>
  * <p>
  * public class GameModel<br/>
- * extends Model
+ * extends Model<br/>
+ * implements GameConstants
  * </p>
  * 
  * <p>
@@ -30,18 +32,23 @@ import com.battleship.observers.ObserverModel;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public class GameModel extends Model{
+public class GameModel extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     GameConfigModel         config;
-    private     final int               gridType;
-    private     final int               gridWidth;
-    private     final int               gridHeight;
+    //Runtime constants
+    public      static final int    SWITCH_TURN             = 1;
+    public      static final int    SWITCH_PAGE             = 2;
     
-    private     Player[]                listPlayers;
-    private     int                     counterTurn;
-    private     int                     currentPlayerTurn;
+    //Variables
+    private     GameConfigModel     config;
+    private     final int           gridType;
+    private     final int           gridWidth;
+    private     final int           gridHeight;
+    
+    private     Player[]            listPlayers;
+    private     int                 counterTurn;
+    private     int                 currentPlayerTurn;
     
     
     
@@ -68,6 +75,11 @@ public class GameModel extends Model{
         
         this.counterTurn        = 1;
         this.currentPlayerTurn  = pConfig.getFirstPlayerTurn();
+        
+        //Add this GameModel in every player
+        for (Player p : this.listPlayers){
+            p.setGameModel(this);
+        }
     }
     
     
@@ -77,8 +89,45 @@ public class GameModel extends Model{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    private void switchTurnBehaviors() {
+    /**
+     * Switch turn behavior. It depend of current game mode
+     * <ul>
+     *  <li>Mode AI : start AI shoot</li>
+     *  <li>Mode V2 : display a switching panel</li>
+     *  <li>Mode LAN : do nothing, juste wait for other player shot</li>
+     * </ul>
+     * 
+     */
+    public void switchTurnBehaviors() {
+        this.counterTurn++;
+        switch(this.currentPlayerTurn){
+            case 0:
+                this.currentPlayerTurn = 1;
+                break;
+            default:
+                this.currentPlayerTurn = 0;
+                break;
+        }
         
+        int mode = Session.getGameMode();
+        switch(mode){
+            case GameConstants.MODE_AI:
+                break;
+            case GameConstants.MODE_V2:
+                this.notifyObservers(null);
+                    SwingUtilities.invokeLater(new Runnable(){
+                        public void run(){
+                            try {
+                                Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
+                                notifyObservers(GameModel.SWITCH_PAGE);
+                            } catch(InterruptedException ex) {
+                            }
+                        }
+                    });
+                break;
+            case GameConstants.MODE_LAN:
+                break;
+        }
     }
     
     

@@ -149,6 +149,7 @@ public abstract class SwingFactory implements GameConstants{
         v.initPage();
         SwingFactory.model_gameModel    = m;
         SwingFactory.view_game          = v;
+        c.initPlayerObservers();
         return v;
     }
     

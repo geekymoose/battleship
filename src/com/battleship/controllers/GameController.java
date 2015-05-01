@@ -11,6 +11,8 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
+import com.battleship.models.game.Player;
+import com.battleship.views.app.GamePanel;
 
 
 
@@ -48,6 +50,16 @@ public class GameController extends Controller{
     public GameController(GameModel pModel) throws ExecError{
         super(pModel);
         DebugTrack.showInitMsg("Create GameController controller");
+    }
+    
+    /**
+     * Initialize observers for players
+     */
+    public void initPlayerObservers(){
+        for (Player p:this.model.getConfig().getPlayers()){
+            p.addObserver((GamePanel)this.v);
+        }
+        this.model.getConfig().getPlayers();
     }
     
     
