@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -38,6 +39,6 @@ public class Bomb extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Bomb(Player pOwner, int pAmmo){
-        super(new ShotTypeBomb(), pOwner, pAmmo);
+        super(GameConstants.BOMB, new ShotTypeBomb(), pOwner, pAmmo);
     }
 }

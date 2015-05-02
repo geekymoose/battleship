@@ -28,7 +28,7 @@ public interface Sprite {
     //**************************************************************************
     // Constants
     //**************************************************************************
-    public final int NB_STATES                  = 4;
+    //public final int NB_STATES                  = 4;
     public final int ALIVE_BOAT                 = 1;
     public final int ALIVE_WATER                = 2;
     public final int DEAD_BOAT                  = 3;

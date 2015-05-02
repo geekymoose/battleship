@@ -103,7 +103,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         this.gc         = new GridBagConstraints();
         this.p_headbar  = new HeadBar();
         p_centerPane    = new ContainerPanel();
-        p_info          = new InformationPanel();
+        p_info          = new InformationPanel(this, this.controller);
         p_fleet         = new PlayerFleetPanel(this);
         p_radar         = new RadarPanel(this);
         p_chat          = new ChatPanel(p_radar);
@@ -198,6 +198,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.switchPanel.display();
                 break;
         }
+        this.p_info.updateData();
     }
     
     

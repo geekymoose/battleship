@@ -32,6 +32,7 @@
             <panel>
                 <val id="dim-dock"              width="250" height="0"/>
                 <val id="dim-dockboat"          width="300" height="70"/>
+                <val id="dim-weapon-icon"       width="45" height="45"/>
             </panel>
             
             <boxmap>

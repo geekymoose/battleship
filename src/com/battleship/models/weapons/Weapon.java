@@ -31,6 +31,7 @@ public abstract class Weapon {
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    protected final int         id;
     protected int               ammo;
     protected final ShotType    shot;
     protected Player            owner;
@@ -44,11 +45,13 @@ public abstract class Weapon {
     //**************************************************************************
     /**
      * Create a new weapon
+     * @param pId       weapon id
      * @param pAmmo     weapon start ammo
      * @param pShot     ShotType
      * @param pOwner    weapon owner
      */
-    protected Weapon(ShotType pShot, Player pOwner, int pAmmo){
+    protected Weapon(int pId, ShotType pShot, Player pOwner, int pAmmo){
+        this.id         = pId;
         this.ammo       = pAmmo;
         this.shot       = pShot;
         this.owner      = pOwner;
@@ -131,6 +134,14 @@ public abstract class Weapon {
      */
     public int getAmmo(){
         return this.ammo;
+    }
+    
+    /**
+     * Return current weapon id
+     * @return int weapon id
+     */
+    public int getWeaponId(){
+        return this.id;
     }
     
     

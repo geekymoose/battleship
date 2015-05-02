@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -36,6 +37,6 @@ public class Missile extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Missile(Player pOwner, int pAmmo){
-        super(new ShotTypeMissile(), pOwner, pAmmo);
+        super(GameConstants.MISSILE, new ShotTypeMissile(), pOwner, pAmmo);
     }
 }
