@@ -76,4 +76,12 @@ public class GameController extends Controller{
     public GameConfigModel getGameConfig(){
         return this.model.getConfig();
     }
+    
+    /**
+     * Return the GameModel 
+     * @return GameModel
+     */
+    public GameModel getGameModel(){
+        return this.model;
+    }
 }

@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -39,6 +40,6 @@ public class Torpedo extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Torpedo(Player pOwner, int pAmmo){
-        super(new ShotTypeTorpedo(), pOwner, pAmmo);
+        super(GameConstants.TORPEDO, new ShotTypeTorpedo(), pOwner, pAmmo);
     }
 }

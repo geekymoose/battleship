@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -37,6 +38,6 @@ public class NuclearBomb extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public NuclearBomb(Player pOwner, int pAmmo){
-        super(new ShotTypeNuclearBomb(), pOwner, pAmmo);
+        super(GameConstants.NUKE, new ShotTypeNuclearBomb(), pOwner, pAmmo);
     }
 }

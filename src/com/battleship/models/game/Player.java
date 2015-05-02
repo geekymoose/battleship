@@ -127,11 +127,28 @@ public abstract class Player extends Model implements GameConstants{
      * in case of invalid value
      * @param pValue weapon index to switch with
      */
-    public void switchWeaponWith(int pValue){
+    public void switchWeaponPosition(int pValue){
         if(pValue<0 || pValue >= this.listWeapons.size()){
             return;
         }
         this.currentWeaponIndex = pValue;
+        this.notifyObservers(null);
+    }
+    
+    /**
+     * Switch weapon with the weapon given in parameter (Parameter is the 
+     * id of the weapon user want. If player doesn't have this weapon, no 
+     * switching is done
+     * @param pWeaponId id of the weapon
+     */
+    public void switchWeaponWith(int pWeaponId){
+        int index = 0;
+        for(Weapon w : this.listWeapons){
+            if(w.getWeaponId() == pWeaponId){
+                this.currentWeaponIndex = index;
+            }
+            index++;
+        }
         this.notifyObservers(null);
     }
     
@@ -241,6 +258,14 @@ public abstract class Player extends Model implements GameConstants{
     }
     
     /**
+     * Return current score
+     * @return int score
+     */
+    public int getScore(){
+        return this.score;
+    }
+    
+    /**
      * Return player fleet grid
      * @return 
      */
@@ -254,6 +279,14 @@ public abstract class Player extends Model implements GameConstants{
      */
     public Boat getSelectedBoat(){
         return this.currentSelectedBoat;
+    }
+    
+    /**
+     * Return current selected weapon
+     * @return Weapon selected
+     */
+    public Weapon getCurrentWeapon(){
+        return this.listWeapons.get(this.currentWeaponIndex);
     }
     
     //**************************************************************************

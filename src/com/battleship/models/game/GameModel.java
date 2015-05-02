@@ -160,4 +160,12 @@ public class GameModel extends Model implements GameConstants{
     public int getIdPlayerTurn(){
         return this.currentPlayerTurn;
     }
+    
+    /**
+     * Return the current player turn
+     * @return Player current player
+     */
+    public Player getPlayerTurn(){
+        return this.listPlayers[this.currentPlayerTurn];
+    }
 }
