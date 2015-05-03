@@ -10,19 +10,18 @@ import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.PlaceBoatsController;
+import com.battleship.models.game.Player;
 import com.battleship.models.sprites.Boat;
-import com.battleship.uibutton.ImgButton;
-import com.battleship.uibutton.ZozoDecorator;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverModel;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 
 
@@ -42,12 +41,19 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class DockPanel extends ContentPanel implements GameConstants{
+public class DockPanel extends ContentPanel implements ObserverModel, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
     private PlaceBoatsController    controller;
     private GridBagConstraints      gbc;
+    
+    private DockBoats               aircraftCarrier;
+    private DockBoats               battleship;
+    private DockBoats               submarine;
+    private DockBoats               cruiser;
+    private DockBoats               destroyer;
+    private OrientationButton       orientationButton;
     
     
     
@@ -65,43 +71,44 @@ public class DockPanel extends ContentPanel implements GameConstants{
         this.controller         = pController;
         this.gbc                = new GridBagConstraints();
         this.initComponents();
+        this.loadUI();
     }
     
     private void initComponents(){
+        this.aircraftCarrier    = new AircraftCarrierDock();
+        this.battleship         = new BattleshipDock();
+        this.submarine          = new SubmarineDock();
+        this.cruiser            = new CruiserDock();
+        this.destroyer          = new DestroyerDock();
+        this.orientationButton  = new OrientationButton();
+        
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
         
         gbc.insets = new Insets(10,10,10,10);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        this.add(new AircraftCarrier(), gbc);
+        this.add(this.aircraftCarrier , gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 1;
-        this.add(new Battleship(), gbc);
+        this.add(this.battleship, gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 2;
-        this.add(new Submarine(), gbc);
+        this.add(this.submarine, gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 3;
-        this.add(new Cruiser(), gbc);
+        this.add(this.cruiser, gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 4;
-        this.add(new Destroyer(), gbc);
+        this.add(this.destroyer, gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 5;
-        AbstractButton but = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
-        but.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("DEBUG IN DOCKPANEL: change p");
-                    }
-        });
-        this.add(but, gbc);
+        this.add(this.orientationButton, gbc);
     }
     
     
@@ -113,12 +120,22 @@ public class DockPanel extends ContentPanel implements GameConstants{
     //**************************************************************************
     @Override
     public void loadUI(){
-    
+        this.reloadUI();
     }
     
     @Override
     public void reloadUI(){
-    
+        this.aircraftCarrier    .reloadUI();
+        this.battleship         .reloadUI();
+        this.submarine          .reloadUI();
+        this.cruiser            .reloadUI();
+        this.destroyer          .reloadUI();
+        this.orientationButton  .reloadUI();
+    }
+
+    @Override
+    public void update(ObservableModel o, Object arg){
+        this.repaint();
     }
     
     
@@ -139,14 +156,24 @@ public class DockPanel extends ContentPanel implements GameConstants{
      * Enable user to select the boat he want to place
      * </p>
      */
-    private abstract class DockBoats extends JPanel implements MouseListener{
-        protected   int     currentImg;
+    private abstract class DockBoats extends ContentPanel implements MouseListener{
+        //**********************************************************************
+        // Variables
+        //**********************************************************************
         protected   int     defaultImg;
         protected   int     selectedImg;
         protected   int     hoverImg;
         protected   int     idBoat;
         
+        protected   Image   img_current;
+        protected   Image   img_default;
+        protected   Image   img_select;
+        protected   Image   img_hover;
         
+        
+        //**********************************************************************
+        // Constructor and initialization
+        //**********************************************************************
         /**
          * Create a new DockBoats
          */
@@ -158,16 +185,36 @@ public class DockPanel extends ContentPanel implements GameConstants{
         }
         
         @Override
+        public void loadUI(){
+            this.reloadUI();
+        }
+        
+        @Override
+        public void reloadUI(){
+            this.img_default    = ThemeManager.getTheme().getImg(this.defaultImg);
+            this.img_select     = ThemeManager.getTheme().getImg(this.selectedImg);
+            this.img_hover      = ThemeManager.getTheme().getImg(this.hoverImg);
+            this.img_current    = this.img_default;
+        }
+        
+        
+        
+        //**********************************************************************
+        // Functions
+        //**********************************************************************
+        @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
             Boat    selectedBoat    = controller.getCurrentPlayer().getSelectedBoat();
-            Image   img1            = ThemeManager.getTheme().getImg(this.selectedImg);
-            Image   img2            = ThemeManager.getTheme().getImg(this.currentImg);
             
             if(selectedBoat != null && selectedBoat.getBoatId() == this.idBoat) {
-                g.drawImage(img1, 0, 0, img1.getWidth(this), img1.getHeight(this),this);
+                g.drawImage(this.img_select, 0, 0, 
+                            this.img_select.getWidth(this), 
+                            this.img_select.getHeight(this), this);
             } else{ 
-                g.drawImage(img2, 0, 0, img2.getWidth(this), img2.getHeight(this), this);
+                g.drawImage(this.img_current, 0, 0, 
+                            this.img_current.getWidth(this), 
+                            this.img_current.getHeight(this),this);
             }
         }
         
@@ -192,13 +239,13 @@ public class DockPanel extends ContentPanel implements GameConstants{
 
         @Override
         public void mouseEntered(MouseEvent e){
-            this.currentImg = this.hoverImg;
+            this.img_current = this.img_hover;
             this.repaint();
         }
-
+        
         @Override
         public void mouseExited(MouseEvent e){
-            this.currentImg = this.defaultImg;
+            this.img_current = this.img_default;
             this.repaint();
             DockPanel.this.repaint();
         }
@@ -207,62 +254,148 @@ public class DockPanel extends ContentPanel implements GameConstants{
     
     
     //**************************************************************************
-    private class AircraftCarrier extends DockBoats {
-        public AircraftCarrier(){
+    private class AircraftCarrierDock extends DockBoats {
+        public AircraftCarrierDock(){
             super(GameConstants.AIRCRAFT_CARRIER);
             this.defaultImg     = 418100;
             this.hoverImg       = 418200;
             this.selectedImg    = 418300;
-            this.currentImg     = this.defaultImg;
         }
     } 
     
     
     //**************************************************************************
-    private class Battleship extends DockBoats {
-        public Battleship(){
+    private class BattleshipDock extends DockBoats {
+        public BattleshipDock(){
             super(GameConstants.BATTLESHIP);
             this.defaultImg     = 419100;
             this.hoverImg       = 419200;
             this.selectedImg    = 419300;
-            this.currentImg     = this.defaultImg;
         }
     } 
     
     
     //**************************************************************************
-    private class Submarine extends DockBoats {
-        public Submarine(){
+    private class SubmarineDock extends DockBoats {
+        public SubmarineDock(){
             super(GameConstants.SUBMARINE);
             this.defaultImg     = 421100;
             this.hoverImg       = 421200;
             this.selectedImg    = 421300;
-            this.currentImg     = this.defaultImg;
         }
     } 
     
     
     //**************************************************************************
-    private class Cruiser extends DockBoats {
-        public Cruiser(){
+    private class CruiserDock extends DockBoats {
+        public CruiserDock(){
             super(GameConstants.CRUISER);
             this.defaultImg     = 420100;
             this.hoverImg       = 420200;
             this.selectedImg    = 420300;
-            this.currentImg     = this.defaultImg;
         }
     } 
     
     
     //**************************************************************************
-    private class Destroyer extends DockBoats {
-        public Destroyer(){
+    private class DestroyerDock extends DockBoats {
+        public DestroyerDock(){
             super(GameConstants.DESTROYER);
             this.defaultImg     = 422100;
             this.hoverImg       = 422200;
             this.selectedImg    = 422300;
-            this.currentImg     = this.defaultImg;
         }
     } //------------------------END BOATS INNER CLASS-----------------------
     
+    
+    
+    //**************************************************************************
+    // Inner class for orientation button
+    //**************************************************************************
+    private class OrientationButton extends ContentPanel implements MouseListener{
+        protected   Image   currentImg;
+        protected   Image   img_vertical;
+        protected   Image   img_horizontal;
+        protected   Image   img_standingUp;
+        protected   Image   img_standingDown;
+        
+        
+        
+        //**********************************************************************
+        // Constructor and initialization
+        //**********************************************************************
+        /**
+         * Create a new DockBoats
+         */
+        protected OrientationButton(){
+            this.setPreferredSize(new Dimension(55,55));
+            this.addMouseListener(this);
+            this.setOpaque(false);
+        }
+
+        @Override
+        public void loadUI(){
+            this.reloadUI();
+        }
+        @Override
+        public void reloadUI(){
+            this.img_vertical       = ThemeManager.getTheme().getImg(413400);
+            this.img_horizontal     = ThemeManager.getTheme().getImg(413500);
+            this.img_standingUp     = ThemeManager.getTheme().getImg(413600);
+            this.img_standingDown   = ThemeManager.getTheme().getImg(413700);
+            this.currentImg         = this.img_vertical;
+        }
+        
+        
+        //**********************************************************************
+        // Functions
+        //**********************************************************************
+        @Override
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            int     orientation     = controller.getCurrentPlayer().getFleet().getCurrentOrientation();
+            Image   current         = null;
+            
+            switch(orientation){
+                case GameConstants.VERTICAL:
+                    current = img_vertical;
+                    break;
+                case GameConstants.HORIZONTAL:
+                    current = img_horizontal;
+                    break;
+                case GameConstants.STANDING_UP:
+                    current = img_standingUp;
+                    break;
+                case GameConstants.STANDING_DOWN:
+                    current = img_standingDown;
+                    break;
+            }
+            g.drawImage(current, 0, 0, current.getWidth(this), current.getHeight(this), this);
+        }
+        
+        
+        //**********************************************************************
+        // Funtion for mouse Listener
+        //**********************************************************************
+        @Override
+        public void mouseClicked(MouseEvent e){
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e){
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e){
+            controller.getCurrentPlayer().getFleet().switchNextOrientation();
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e){
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e){
+        }
+    }
 }

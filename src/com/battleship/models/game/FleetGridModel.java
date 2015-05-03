@@ -248,6 +248,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         if(currentOrientation>=listOrientations.size()){
             currentOrientation = 0;
         }
+        this.notifyObservers(null);
     }
 
     /**
@@ -258,6 +259,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         if(currentOrientation<0){
             currentOrientation = (listOrientations.size()-1);
         }
+        this.notifyObservers(null);
     }
     
     

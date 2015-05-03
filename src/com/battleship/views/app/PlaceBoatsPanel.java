@@ -101,7 +101,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.p_buttonPanel  = new JPanel();
         this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
-        this.b_placeRandom  = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
+        this.b_placeRandom  = new ZozoDecorator(new ImgButton(413800, 414000, 413900));
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
         p_hb                = new HeadBar();
         
@@ -208,6 +208,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         fleetPlayer1.getGridCursor().setClickPlaceBoat();
         fleetPlayer2.getGridCursor().setClickPlaceBoat();
         
+        gridPlayer1.addObserver(this.p_dock);
+        gridPlayer2.addObserver(this.p_dock);
+        
         this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
     }
     
@@ -220,6 +223,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     
     @Override
     public void update(ObservableModel o, Object arg){
+        this.repaint();
         //PlaceBoatsModel m   = (PlaceBoatsModel)o;
     }
     
