@@ -86,4 +86,9 @@ public class Water implements Sprite{
     public int getState(){
         return (this.isHit ? Sprite.DEAD_WATER : Sprite.ALIVE_WATER);
     }
+
+    @Override
+    public int getValue(){
+        return GameConstants.NO_VALUE;
+    }
 }

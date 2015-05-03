@@ -63,4 +63,10 @@ public interface Sprite {
      * @return 
      */
     public int getState();
+    
+    /**
+     * Return the value of this sprite
+     * @return int value
+     */
+    public int getValue();
 }

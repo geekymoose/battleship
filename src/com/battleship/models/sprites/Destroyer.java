@@ -5,6 +5,7 @@
 
 package com.battleship.models.sprites;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 
 
@@ -35,6 +36,7 @@ public class Destroyer extends Boat {
      * Create a new Destroyer
      */
     public Destroyer(){
-        super(GameConstants.DESTROYER, "Destroyer", 2, 2);
+        super(GameConstants.DESTROYER, "Destroyer", 2, 2,
+              Config.getGameValues_int("value-destroyer"));
     }
 }

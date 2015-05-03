@@ -93,7 +93,6 @@ public class Config {
     public static void createConfig() throws ExecError{
         Config.singleton            = new Config();
         DOMParser                   .createDOMParser(); //XML parser
-        Session                     .createSession();   //Create user session
         
         //Root constants 
         Config.l_roots              = DOMParser.getIntegerConstants(rootsPath);
@@ -114,6 +113,7 @@ public class Config {
         Config.l_dynamicImageNames  = DOMParser.getThemeImgName(themeConfigPath, "dynamic");
         
         //Create theme manager, must be called at the end!!
+        Session.createSession();   //Create user session
         ThemeManager.createThemeManager();
     }
     
