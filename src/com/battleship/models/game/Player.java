@@ -247,7 +247,11 @@ public abstract class Player extends Model implements GameConstants{
      */
     public void placeAllRandomBoat(){
         for(Boat b : this.listBoatsOwned){
-            this.placeRandomBoat(b);
+            boolean placed = this.placeRandomBoat(b);
+            if(placed == false){
+                this.placeAllRandomBoat();
+                return;
+            }
         }
     }
     
@@ -255,17 +259,23 @@ public abstract class Player extends Model implements GameConstants{
      * Place one boat in random position on the player fleet grid
      * @param pBoat boat to place
      */
-    private void placeRandomBoat(Boat pBoat){
+    private boolean placeRandomBoat(Boat pBoat){
         //Set a random orientation
-        Integer o = this.getFleet().getRandomOrientation();
-        BoxMap box ;
-        Point p = new Point();
+        Integer o       = this.getFleet().getRandomOrientation();
+        BoxMap  box;
+        Point   p       = new Point();
+        int     count   = 0;
         do{
-            p.x = RandomManager.getRandomBetween(0, this.fleetGrid.gridWidth-1);
-            p.y = RandomManager.getRandomBetween(0, this.fleetGrid.gridHeight-1);
-            box = this.fleetGrid.getBoxMapAt(p.x, p.y);
-        } while(pBoat.isValidPosition(box, o) == false);
+            count++;
+            p.x         = RandomManager.getRandomBetween(0, this.fleetGrid.gridWidth-1);
+            p.y         = RandomManager.getRandomBetween(0, this.fleetGrid.gridHeight-1);
+            box         = this.fleetGrid.getBoxMapAt(p.x, p.y);
+        } while(pBoat.isValidPosition(box, o) == false && count<300);
+        if(count>=300){
+            return false;
+        }
         pBoat.placeAt(box, o);
+        return true;
     }
     
     
