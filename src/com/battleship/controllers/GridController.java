@@ -64,8 +64,7 @@ public class GridController extends Controller{
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             boolean shoot = pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
             if(shoot == true){
-                //GamePanel g = (GamePanel)((RadarPanel)this.v).getParent();
-                //g.switchTurn();
+                this.model.getGameModel().switchTurnBehaviors();
             }
         }
     }

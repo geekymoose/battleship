@@ -223,6 +223,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             }
         );
         
+        //Buttons for grid management
         b_right.addActionListener(
             new ActionListener() {
                 @Override

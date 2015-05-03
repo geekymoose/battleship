@@ -78,9 +78,10 @@ public class GameModel extends Model implements GameConstants{
         this.counterTurn        = 1;
         this.currentPlayerTurn  = pConfig.getFirstPlayerTurn();
         
-        //Add this GameModel in every player
+        //Add this GameModel in every player and Fleet of player
         for (Player p : this.listPlayers){
             p.setGameModel(this);
+            p.getFleet().setGame(this);
         }
     }
     
@@ -107,18 +108,31 @@ public class GameModel extends Model implements GameConstants{
         
         switch(mode){
             case GameConstants.MODE_AI:
-                if(Session.getPlayer().getFleet().isFleetDestroyed()){
-                    notifyObservers(GameModel.GAME_OVER);
-                } 
-                else if(foe.getFleet().isFleetDestroyed()){
-                    notifyObservers(GameModel.GAME_VICTORY);
-                }
-                
-                //AI player shoot on session player
-                if(foe instanceof PlayerAI){
-                    ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
-                }
-                
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        try {
+                            Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
+                        } catch(InterruptedException ex) {
+                        }
+                        if(Session.getPlayer().getFleet().isFleetDestroyed()){
+                            notifyObservers(GameModel.GAME_OVER);
+                        } 
+                        else if(foe.getFleet().isFleetDestroyed()){
+                            notifyObservers(GameModel.GAME_VICTORY);
+                        }
+                        counterTurn++;
+                        currentPlayerTurn  = foeIndex;
+                        
+                        //AI player shoot on session player
+                        if(foe instanceof PlayerAI){
+                            DebugTrack.showExecMsg("AI Turn");
+                            counterTurn++;
+                            currentPlayerTurn  = 0;
+                            ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
+                            notifyObservers(GameModel.SWITCH_TURN);
+                        }
+                    }
+                });
                 break;
                 
             case GameConstants.MODE_V2:

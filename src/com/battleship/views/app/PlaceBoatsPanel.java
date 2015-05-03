@@ -252,7 +252,21 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         int mode = Session.getGameMode();
         switch(mode){
             case MODE_AI:
+                //-1 invalid grid, 0 last player reached, 1 next player (AI)
+                switch(this.controller.switchPlayer()){
+                    case -1:
+                        DebugTrack.quickModeRoot(this.frame, "game");
+                        UiDialog.showWarning("beware!", "Some boats are missing on the grid!!\n"
+                                + "Do you want to figth with less boats than your enemy? "
+                                + "Woow! We've got a warrior here!");
+                        break;
+                    default:
+                        this.controller.getGameConfig().getPlayers()[1].placeAllRandomBoat();
+                        this.frame.rooting(Config.getRootsValues("game"), true);
+                        break;
+                }
                 break;
+                        
             case MODE_V2:
                 //-1 invalid grid, 0 last player reached, 1 next player
                 switch(this.controller.switchPlayer()){
@@ -272,6 +286,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                         break;
                 }
                 break;
+                
             case MODE_LAN:
                 break;
             case MODE_INTERNET:
