@@ -164,6 +164,11 @@ public abstract class BoxMap implements Target, GameConstants{
         this.isTargeted = false;
     }
     
+    @Override
+    public int getValue(){
+        return this.content.getValue();
+    }
+    
     
     
     

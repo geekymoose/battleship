@@ -18,6 +18,16 @@
                 <val id="nb-boats">5</val>
             </game>
             
+            <score>
+                <boat-value>
+                <val id="value-aircraft-carrier">5</val>
+                <val id="value-battleship">10</val>
+                <val id="value-cruiser">15</val>
+                <val id="value-destroyer">15</val>
+                <val id="value-submarine">20</val>
+                </boat-value>
+            </score>
+            
             
             <timer>
                 <val id="default-button-timer">50</val>

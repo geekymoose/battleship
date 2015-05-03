@@ -43,6 +43,7 @@ public abstract class Boat implements GameConstants{
     protected   final int           idBoat;
     protected String                boatname;
     protected int                   nbLives;
+    protected int                   value;
     protected int                   orientation;
     protected final Compartment[]   tabCompartments;
     protected FleetGridModel        grid;
@@ -64,11 +65,13 @@ public abstract class Boat implements GameConstants{
      * @param pName     Boat name
      * @param pNbLives  Total number lives
      * @param pSize     Number of compartments occupy by the boat
+     * @param pValue    value of this boat (Used for score value)
      */
-    protected Boat(int pBoatId, String pName, int pNbLives, int pSize){
+    protected Boat(int pBoatId, String pName, int pNbLives, int pSize, int pValue){
         this.idBoat             = pBoatId;
         this.boatname           = pName;
         this.nbLives            = pNbLives;
+        this.value              = pValue;
         this.orientation        = 0; //Orientation is set when palced
         this.grid               = null; //Not used atm
         this.tabCompartments    = new Compartment[pSize];
@@ -329,6 +332,11 @@ public abstract class Boat implements GameConstants{
         @Override
         public int getState(){
             return (this.isDestroyed() ? Sprite.DEAD_BOAT : Sprite.ALIVE_BOAT);
+        }
+        
+        @Override
+        public int getValue(){
+            return value;
         }
     } //----------------------------------END INNER CLASS-----------------------
 }

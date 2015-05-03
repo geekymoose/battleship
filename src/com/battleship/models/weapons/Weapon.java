@@ -8,6 +8,7 @@
 package com.battleship.models.weapons;
 
 import com.battleship.behaviors.Target;
+import com.battleship.constants.GameConstants;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.FleetGridSquare;
 import com.battleship.models.game.Player;
@@ -18,7 +19,10 @@ import com.battleship.models.game.Player;
 
 /**
  * <h1>Weapon</h1>
- * <p>public abstract class Weapon</p>
+ * <p>
+ * public abstract class Weapon<br/>
+ * implements GameConstants
+ * </p>
  *
  *
  * 
@@ -27,7 +31,7 @@ import com.battleship.models.game.Player;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class Weapon {
+public abstract class Weapon implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -35,6 +39,7 @@ public abstract class Weapon {
     protected int               ammo;
     protected final ShotType    shot;
     protected Player            owner;
+    protected int               price;
     
     
     
@@ -55,6 +60,7 @@ public abstract class Weapon {
         this.ammo       = pAmmo;
         this.shot       = pShot;
         this.owner      = pOwner;
+        this.price      = NO_VALUE;
     }
     
     
@@ -142,6 +148,14 @@ public abstract class Weapon {
      */
     public int getWeaponId(){
         return this.id;
+    }
+    
+    /**
+     * Return current weapon price
+     * @return int price
+     */
+    public int getPrice(){
+        return this.price;
     }
     
     

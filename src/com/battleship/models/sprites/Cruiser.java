@@ -5,6 +5,7 @@
 
 package com.battleship.models.sprites;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 
 
@@ -35,6 +36,7 @@ public class Cruiser extends Boat {
      * Create a new Cruiser
      */
     public Cruiser(){
-        super(GameConstants.CRUISER, "Cruiser", 3, 3);
+        super(GameConstants.CRUISER, "Cruiser", 3, 3,
+              Config.getGameValues_int("value-cruiser"));
     }
 }

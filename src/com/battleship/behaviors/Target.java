@@ -55,4 +55,9 @@ public interface Target{
      * Reset aim status (Not targeted anymore)
      */
     public void stopAim();
+    
+    /**
+     * Return the value of this target
+     */
+    public int getValue();
 }

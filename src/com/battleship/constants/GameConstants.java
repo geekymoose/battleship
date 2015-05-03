@@ -35,6 +35,8 @@ public interface GameConstants {
     public static final int     WAS_HIT                     = 1;
     public static final int     NOT_HIT                     = 2;
     
+    public static final int     NO_VALUE                    = -1;
+    
     //Position constants
     public static final int     VERTICAL                    = 1;
     public static final int     HORIZONTAL                  = 2;

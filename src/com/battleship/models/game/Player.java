@@ -49,6 +49,7 @@ public abstract class Player extends Model implements GameConstants{
     private     ArrayList<Weapon>       listWeapons;
     private     ArrayList<Boat>         listBoatsOwned;
     private     int                     score;
+    private     int                     scoreCombo;
     private     int                     currentWeaponIndex;
     private     Boat                    currentSelectedBoat; //selectedBoat
     
@@ -67,6 +68,7 @@ public abstract class Player extends Model implements GameConstants{
     public Player() {
         this.name                   = "MisterSwadow";
         this.score                  = 0;
+        this.scoreCombo             = 1;
         this.listWeapons            = new ArrayList();
         this.fleetGrid              = null;
         this.game                   = null;
@@ -187,6 +189,13 @@ public abstract class Player extends Model implements GameConstants{
         Target target =  pWhere[pY][pX];
         if(target.isValidTarget()){
             if (this.listWeapons.get(this.currentWeaponIndex).fireAt(pX, pY, pWhere, this.fleetGrid)==true){
+                int targetValue = target.getValue();
+                if(targetValue != GameConstants.NO_VALUE){
+                    this.scoreCombo++;
+                    this.score += (targetValue * this.scoreCombo);
+                } else{
+                    this.scoreCombo = 1;
+                }
                 return true;
             }
         }
