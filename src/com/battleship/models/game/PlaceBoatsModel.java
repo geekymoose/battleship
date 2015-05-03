@@ -89,7 +89,23 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     
 
     //**************************************************************************
-    // Functions
+    // Check Functions
+    //**************************************************************************
+    /**
+     * Check if current player who place boats is the last
+     * @return true if is last player, otherwise, return false
+     */
+    private boolean isLastPlayer(){
+        return this.playerTurn >= (this.config.getNbPlayers()-1);
+    }
+    
+    
+    
+    
+    
+
+    //**************************************************************************
+    // Check Functions
     //**************************************************************************
     /**
      * Reset current player fleet grid
@@ -99,11 +115,10 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     }
     
     /**
-     * Check if current player who place boats is the last
-     * @return true if is last player, otherwise, return false
+     * Place all boats in a random position
      */
-    private boolean isLastPlayer(){
-        return this.playerTurn >= (this.config.getNbPlayers()-1);
+    public void placeAllRandom(){
+        this.config.getPlayers()[this.playerTurn].placeAllRandomBoat();
     }
     
     /**

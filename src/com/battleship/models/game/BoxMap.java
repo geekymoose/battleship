@@ -187,6 +187,14 @@ public abstract class BoxMap implements Target, GameConstants{
         return this.coordinate;
     }
     
+    /**
+     * Return FleetGrid where BoxMap is placed
+     * @return FleetGrid
+     */
+    public FleetGridModel getFleetGrid(){
+        return this.grid;
+    }
+    
     public void setContent(Sprite pContent){
         if(pContent != null){
             this.content = pContent;

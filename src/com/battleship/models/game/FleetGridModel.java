@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.asset.Config;
+import com.battleship.asset.RandomManager;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.Boat;
 import java.awt.Point;
@@ -302,6 +303,15 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      */
     public int getCurrentOrientation(){
         return this.listOrientations.get(currentOrientation);
+    }
+    
+    /**
+     * Return a random orientation valid for this kind of grid
+     * @return random orientation
+     */
+    public int getRandomOrientation(){
+        int randomPos = RandomManager.getRandomBetween(0, this.listOrientations.size()-1);
+        return this.listOrientations.get(randomPos);
     }
     
     /**

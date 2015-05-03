@@ -4,6 +4,9 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.RandomManager;
+import com.battleship.behaviors.Target;
+
 
 
 
@@ -49,13 +52,15 @@ public class PlayerAI extends Player{
     //**************************************************************************
     // Functions
     //**************************************************************************
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Getters - Setters
-    //**************************************************************************
+    /**
+     * Process a random shoot on enemy grid
+     * @param pWhere where to shoot
+     */
+    public void processAiShoot(Target[][] pWhere){
+        int posX, posY;
+        do{
+            posX = RandomManager.getRandomBetween(0, pWhere[0].length);
+            posY = RandomManager.getRandomBetween(0, pWhere.length);
+        } while(this.shootAt(posX, posY, pWhere) == false);
+    }
 }

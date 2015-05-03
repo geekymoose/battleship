@@ -119,15 +119,15 @@ public abstract class Boat implements GameConstants{
     
     /**
      * Check if position started at pBox map position is a valid position. 
+     * Using specific orientation
      * @param pBox          First box position
      * @param pOrientation  Boat orientation
      * @return true if valid, otherwise, return false
      */
-    private boolean isValidPosition(BoxMap pBox, int pOrientation){
+    public boolean isValidPosition(BoxMap pBox, int pOrientation){
         BoxMap  next    = pBox;
         //Check if position is valid
-        for(int k=0; k<this.tabCompartments.length;k++){
-            //if(next==null || (!next.isEmpty() && next.getContent()!= tabCompartments[k])){
+        for(int k=0; k<this.tabCompartments.length; k++){
             if(next==null){
                 return false;
             }
@@ -158,12 +158,14 @@ public abstract class Boat implements GameConstants{
         if(!isValidPosition(pBox, pOrientation)){
             return false;
         }
+        this.resetPosition();
         BoxMap box = pBox;
         this.tabCompartments[0].setBoxPosition(box); //Place first position
         for(int k=1; k<this.tabCompartments.length; k++){
             box = box.getNextBoxMap(pOrientation);
             this.tabCompartments[k].setBoxPosition(box);
         }
+        pBox.getFleetGrid().addBoat(this);//Add this boat in the grid
         return true;
     }
     

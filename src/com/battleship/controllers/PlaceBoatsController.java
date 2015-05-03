@@ -85,6 +85,13 @@ public class PlaceBoatsController extends Controller{
         this.model.resetPlayerGrid();
     }
     
+    /**
+     * Place all boat owned by current player turn in random position
+     */
+    public void placeAllBoatsRandom(){
+        this.model.placeAllRandom();
+    }
+    
     /*
      * Select a boat
      */

@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.RandomManager;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.*;
@@ -232,13 +233,35 @@ public abstract class Player extends Model implements GameConstants{
     public boolean placeBoatAt(Point p, int pOrientation){
         BoxMap box = this.fleetGrid.getBoxMapAt(p.x, p.y);
         if(this.currentSelectedBoat != null && box != null){
-            boolean isPlaced = this.currentSelectedBoat.placeAt(box, pOrientation);
-            if(isPlaced){
-                this.fleetGrid.addBoat(currentSelectedBoat);
-            }
-            return isPlaced;
+            return this.currentSelectedBoat.placeAt(box, pOrientation);
         }
         return false;
+    }
+    
+    /**
+     * Place all boat in random position on the fleet grid
+     */
+    public void placeAllRandomBoat(){
+        for(Boat b : this.listBoatsOwned){
+            this.placeRandomBoat(b);
+        }
+    }
+    
+    /**
+     * Place one boat in random position on the player fleet grid
+     * @param pBoat boat to place
+     */
+    private void placeRandomBoat(Boat pBoat){
+        //Set a random orientation
+        Integer o = this.getFleet().getRandomOrientation();
+        BoxMap box ;
+        Point p = new Point();
+        do{
+            p.x = RandomManager.getRandomBetween(0, this.fleetGrid.gridWidth-1);
+            p.y = RandomManager.getRandomBetween(0, this.fleetGrid.gridHeight-1);
+            box = this.fleetGrid.getBoxMapAt(p.x, p.y);
+        } while(pBoat.isValidPosition(box, o) == false);
+        pBoat.placeAt(box, o);
     }
     
     

@@ -113,6 +113,12 @@ public class GameModel extends Model implements GameConstants{
                 else if(foe.getFleet().isFleetDestroyed()){
                     notifyObservers(GameModel.GAME_VICTORY);
                 }
+                
+                //AI player shoot on session player
+                if(foe instanceof PlayerAI){
+                    ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
+                }
+                
                 break;
                 
             case GameConstants.MODE_V2:

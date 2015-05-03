@@ -56,6 +56,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     JPanel                          p_buttonPanel;
     private     AbstractButton                  b_valide;
     private     AbstractButton                  b_reset;
+    private     AbstractButton                  b_placeRandom;
     private     AbstractButton                  b_back;
     
     private     Dimension                       dimBox;
@@ -100,6 +101,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.p_buttonPanel  = new JPanel();
         this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
+        this.b_placeRandom  = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
         p_hb                = new HeadBar();
         
@@ -114,6 +116,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.p_buttonPanel  .setLayout(new FlowLayout());
         this.p_buttonPanel  .add(b_back);
         this.p_buttonPanel  .add(b_reset);
+        this.p_buttonPanel  .add(b_placeRandom);
         this.p_buttonPanel  .add(b_valide);
         
         p_container         .setLayout(new BorderLayout());
@@ -153,6 +156,15 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Reset Place Boats");
                     controller.resetFleetGrid();
+                }
+            }
+        );
+        
+        b_placeRandom.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DebugTrack.showExecMsg("Place random");
+                    controller.placeAllBoatsRandom();
                 }
             }
         );
