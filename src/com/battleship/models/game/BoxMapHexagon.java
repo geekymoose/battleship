@@ -75,14 +75,28 @@ public class BoxMapHexagon extends BoxMap{
 
     @Override
     public ArrayList<BoxMap> getNeighbor(){
+        int x = this.coordinate.x;
+        int y = this.coordinate.y;
+        
         ArrayList<BoxMap> l = new ArrayList();
-        for(int x=-1; x<2; x++){
-            for(int y=-1; y<2; y++){
-                BoxMap b = this.grid.getBoxMapAt(x, y);
-                if(b!=null){
-                    l.add(b);
-                }
-            }
+        BoxMap b;
+        
+        if(x%2==0){
+            if((b = this.grid.getBoxMapAt(x, y))        != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x, y-1))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x, y+1))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x-1, y-1))    != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x-1, y))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x+1, y-1))    != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x+1, y))      != null){ l.add(b); }
+        }else{
+            if((b = this.grid.getBoxMapAt(x, y-1))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x-1, y))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x, y))        != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x+1, y))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x-1, y+1))    != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x, y+1))      != null){ l.add(b); }
+            if((b = this.grid.getBoxMapAt(x+1, y+1))    != null){ l.add(b); }
         }
         return l;
     }
