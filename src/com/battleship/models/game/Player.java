@@ -108,6 +108,7 @@ public abstract class Player extends Model implements GameConstants{
         if(this.currentWeaponIndex>=this.listWeapons.size()){
             this.currentWeaponIndex = 0;
         }
+        this.fleetGrid.stopAiming();
         this.notifyObservers(null);
     }
     
@@ -119,6 +120,7 @@ public abstract class Player extends Model implements GameConstants{
         if(this.currentWeaponIndex<0){
             this.currentWeaponIndex = (this.listWeapons.size()-1);
         }
+        this.fleetGrid.stopAiming();
         this.notifyObservers(null);
     }
     
@@ -133,6 +135,7 @@ public abstract class Player extends Model implements GameConstants{
             return;
         }
         this.currentWeaponIndex = pValue;
+        this.fleetGrid.stopAiming();
         this.notifyObservers(null);
     }
     
@@ -150,6 +153,7 @@ public abstract class Player extends Model implements GameConstants{
             }
             index++;
         }
+        this.fleetGrid.stopAiming();
         this.notifyObservers(null);
     }
     
@@ -168,6 +172,7 @@ public abstract class Player extends Model implements GameConstants{
             }
             this.listWeapons.add(pWeapon);
         }
+        this.notifyObservers(null);
     }
     
     /**

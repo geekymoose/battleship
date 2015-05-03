@@ -170,6 +170,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
         radarPlayer1.getGridCursor().setClickShoot();
         radarPlayer2.getGridCursor().setClickShoot();
         
+        conf.getPlayers()[0].addObserver(this.p_radar);
+        conf.getPlayers()[1].addObserver(this.p_radar);
+        
         //Change cursor owner, it means players 1 will attack grid 0 and reverso for player 0
         radarPlayer1.getGridCursor().setOwner(conf.getPlayers()[1]);
         radarPlayer2.getGridCursor().setOwner(conf.getPlayers()[0]);

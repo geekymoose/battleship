@@ -6,7 +6,8 @@ package com.battleship.views.app;
 
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
-import com.battleship.models.game.Player;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
 import javax.swing.JPanel;
 
@@ -25,7 +26,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class RadarPanel extends ContentPanel implements GameConstants{
+public class RadarPanel extends ContentPanel implements ObserverModel, GameConstants{
     //**************************************************************************
     // VARIABLES 
     //**************************************************************************
@@ -139,5 +140,9 @@ public class RadarPanel extends ContentPanel implements GameConstants{
     @Override
     public void reloadUI(){
     
+    }
+
+    @Override
+    public void update(ObservableModel o, Object arg){
     }
 }
