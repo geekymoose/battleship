@@ -30,6 +30,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -190,6 +191,20 @@ public class GamePanel extends PagePanel implements ObserverModel{
      */
     public void switchTurnDisplay(GameModel m, int pAction){
         switch(pAction){
+            case GameModel.GAME_OVER:
+                DebugTrack.showDebugMsg("Game Over");
+                this.p_bigCont.removeAll();
+                this.p_bigCont.add(new EndGamePanel(GameModel.GAME_OVER));
+                this.p_bigCont.revalidate();
+                this.repaint();
+                break;
+            case GameModel.GAME_VICTORY:
+                this.p_bigCont.removeAll();
+                this.p_bigCont.add(new EndGamePanel(GameModel.GAME_VICTORY));
+                this.p_bigCont.revalidate();
+                this.repaint();
+                DebugTrack.showDebugMsg("Victory");
+                break;
             case GameModel.SWITCH_PAGE:
                 int playerTurn  = m.getIdPlayerTurn();
                 int foe         = (playerTurn+1)%2;
@@ -198,7 +213,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.switchPanel.display();
                 break;
         }
-        this.p_info.updateData();
+        this.p_info.updateData(); //Update data in the information panel
     }
     
     
@@ -255,7 +270,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
     
     
     //**************************************************************************
-    // Inner class
+    // Inner class for break between 2 shoot (In V2 mode)
     //**************************************************************************
     /**
      * <h1>SwitchPanel</h1>
@@ -308,6 +323,42 @@ public class GamePanel extends PagePanel implements ObserverModel{
             GamePanel.this.add(p_info, BorderLayout.SOUTH);
             GamePanel.this.revalidate();
             GamePanel.this.repaint();
+        }
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Inner class Victory / Game Over
+    //**************************************************************************
+    /**
+     * <h1>EndGamePanel</h1>
+     * <p>
+     * private class EndGamePanel
+     * extends JPanel
+     * </p>
+     * <p>Display the game issue for current player : Game over or victory</p>
+     */
+    private class EndGamePanel extends JPanel{
+        private JLabel  l_titleReward;
+        public EndGamePanel(int pValue){
+            this.setBackground(Color.BLACK);
+            this.l_titleReward = new JLabel();
+            this.l_titleReward.setForeground(Color.WHITE);
+            this.setPreferredSize(new Dimension(600,400));
+            this.add(this.l_titleReward);
+            
+            //Display voctory or game over
+            switch(pValue){
+                case GameModel.GAME_VICTORY:
+                    this.l_titleReward.setText("Victory");
+                    break;
+                case GameModel.GAME_OVER:
+                    this.l_titleReward.setText("Game over");
+                    break;
+            }
         }
     }
 }

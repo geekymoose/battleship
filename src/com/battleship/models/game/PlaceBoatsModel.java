@@ -51,12 +51,12 @@ public class PlaceBoatsModel extends Model implements GameConstants{
             throw new ExecError();
         }
         this.config         = pConfig;
-        this.playerTurn     = 0;
+        this.playerTurn     = 0; //Player 0 place boats first
         DebugTrack.showObjectToString(pConfig);
     }
     
     /**
-     * Create grid for all player
+     * Create grid of each player
      */
     public void createPlayersGrid(){
         for(Player p : this.config.getPlayers()){
@@ -65,8 +65,8 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     }
     
     /**
-     * Create grid for one player
-     * @param pPlayer 
+     * Create grid owned by one player
+     * @param pPlayer owner of the new grid
      */
     private void createPlayerGrid(Player pPlayer){
         int width       = this.config.getGridWidth();
@@ -100,7 +100,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     
     /**
      * Check if current player who place boats is the last
-     * @return 
+     * @return true if is last player, otherwise, return false
      */
     private boolean isLastPlayer(){
         return this.playerTurn >= (this.config.getNbPlayers()-1);
