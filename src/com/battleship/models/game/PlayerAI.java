@@ -57,10 +57,12 @@ public class PlayerAI extends Player{
      * @param pWhere where to shoot
      */
     public void processAiShoot(Target[][] pWhere){
+        //Note this implementation is naive
         int posX, posY;
         do{
-            posX = RandomManager.getRandomBetween(0, pWhere[0].length);
-            posY = RandomManager.getRandomBetween(0, pWhere.length);
-        } while(this.shootAt(posX, posY, pWhere) == false);
+            posX = RandomManager.getRandomBetween(0, (pWhere[0].length-1));
+            posY = RandomManager.getRandomBetween(0, (pWhere.length-1));
+        } while(pWhere[posY][posX].isValidTarget() == false);
+        this.shootAt(posX, posY, pWhere);
     }
 }

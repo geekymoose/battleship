@@ -182,7 +182,6 @@ public abstract class Player extends Model implements GameConstants{
         Target target =  pWhere[pY][pX];
         if(target.isValidTarget()){
             if (this.listWeapons.get(this.currentWeaponIndex).fireAt(pX, pY, pWhere, this.fleetGrid)==true){
-                this.game.switchTurnBehaviors();
                 return true;
             }
         }

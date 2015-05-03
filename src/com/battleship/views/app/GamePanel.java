@@ -212,6 +212,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.p_fleet.switchGrid(playerTurn);
                 this.switchPanel.display();
                 break;
+            default:
+                this.repaint();
+                break;
         }
         this.p_info.updateData(); //Update data in the information panel
     }

@@ -49,6 +49,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     protected int                   gridWidth;             
     protected int                   gridHeight;
     protected Player                owner;
+    protected GameModel             game;
     protected BoxMap[][]            tabBoxMap;
     protected ArrayList<Boat>       listBoats; //Boats placed on the grid
     protected int                   nbBoatToPlace; //Determined by config
@@ -315,6 +316,15 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     }
     
     /**
+     * Return game where FleetGrid is used
+     * @return GameModel where FleetGrid is placed
+     */
+    public GameModel getGameModel(){
+        return this.game;
+    }
+    
+    //**************************************************************************
+    /**
      * Set owner of this fleet. Beware, if owner already exists, will be replaced 
      * by this new owner. If null given, fleet will be owned by no one. (Owner is 
      * null)
@@ -322,5 +332,13 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      */
     public void setOwner(Player pOwner){
         this.owner = pOwner;
+    }
+    
+    /**
+     * Set the game where this FleetGrid is used. Do nothing if null
+     * @param pGame game where FleetGrid is used
+     */
+    public void setGame(GameModel pGame){
+        this.game = pGame;
     }
 }
