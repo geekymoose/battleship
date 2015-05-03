@@ -46,14 +46,13 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     protected int                   gridWidth;             
-    protected int                   gridHeight;    
-    protected int                   nbAliveBoats;
+    protected int                   gridHeight;
     protected Player                owner;
     protected BoxMap[][]            tabBoxMap;
     protected ArrayList<Boat>       listBoats; //Boats placed on the grid
-    protected int                   nbBoatToPlace;
+    protected int                   nbBoatToPlace; //Determined by config
     protected ArrayList<Integer>    listOrientations; //Available orientation
-    protected int                   currentOrientation;
+    protected int                   currentOrientation; //Selected orientation atm
     
     
     
@@ -75,7 +74,6 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     protected FleetGridModel(int pWidth, int pHeight, Player pOwner){
         this.gridWidth          = pWidth;
         this.gridHeight         = pHeight;
-        this.nbAliveBoats       = 0;
         this.owner              = pOwner;
         this.listBoats          = new ArrayList();
         this.listOrientations   = new ArrayList();
@@ -93,7 +91,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
                 this.getBoxMapAt(x, y).restContent();
             }
         }
-        //Add reset boat position in compartment
+        //Reset boat position in compartment and reinitialize list of boats
         for(Boat b : this.listBoats){
             b.resetPosition();
         }
@@ -124,10 +122,23 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     
     /**
      * Check if this grid is valid, means all boats are placed in
-     * @return 
+     * @return true if is valid fleet (Ready to be played), otherwise, return false
      */
     public boolean isValidFleetGrid(){
         return this.listBoats.size() == this.nbBoatToPlace;
+    }
+    
+    /**
+     * Check if all boat in the fleet are dead
+     * @return true if all dead, otherwise, return false
+     */
+    public boolean isFleetDestroyed(){
+        for (Boat b : this.listBoats){
+            if (!b.isDead()){
+                return false;
+            }
+        }
+        return true;
     }
     
     
@@ -138,7 +149,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     // Hover and target Functions
     //**************************************************************************
     /**
-     * Target one box map at position point p
+     * Hover one box map at position point p
      * @param p coordinate where target is located in the grid
      */
     public void hoverBoxMap(Point p){
@@ -153,10 +164,11 @@ public abstract class FleetGridModel extends Model implements GameConstants{
     }
     
     /**
-     * Target several BoxMap
-     * @param tab 
+     * Hover several BoxMap
+     * @param tab list of Point coordinate where to apply hover
      */
     public void hoverSeveralBoxMap(Point[] tab){
+        this.stopAllHover();
         for(Point p : tab){
             BoxMap box = this.getBoxMapAt(p.x, p.y);
             if(box!=null){

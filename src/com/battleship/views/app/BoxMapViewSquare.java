@@ -49,7 +49,7 @@ public class BoxMapViewSquare extends BoxMapView{
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * 
+     * Create a new BoxMap view for square mode
      * @param coordinateX   coordinate in the grid
      * @param coordinateY   coordinate in the grid
      * @param pDim          BoxDefault dimension
@@ -57,7 +57,7 @@ public class BoxMapViewSquare extends BoxMapView{
      */
     public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite){
         super(coordinateX, coordinateY, pDim, pSprite);
-        this.rect = this.createRectangle(this.coordinate);
+        this.rect = this.createRectangle();
     }
     
     /**
@@ -70,13 +70,13 @@ public class BoxMapViewSquare extends BoxMapView{
      */
     public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite, Color c){
         super(coordinateX, coordinateY, pDim, pSprite, c);
-        this.rect = this.createRectangle(this.coordinate);
+        this.rect = this.createRectangle();
     }
     
     /*
-     * @param pCoordinate box coordinate in the grid
+     * Create a rectangle
      */
-    private Rectangle createRectangle(Point pCoordinate){
+    private Rectangle createRectangle(){
         Point p     = new Point();
         p.x         = this.dimension.width * this.coordinate.x;
         p.y         = this.dimension.height * this.coordinate.y;

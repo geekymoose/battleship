@@ -95,8 +95,7 @@ public abstract class BoxMap implements Target, GameConstants{
     public abstract ArrayList<BoxMap> getNeighbor();
     
     /**
-     * Check is this BoxMap is empty : there is only water here (Means content 
-     * is instance of Water
+     * Check is this BoxMap is empty : mean there is only water
      * @return true if empty, otherwise, return false
      */
     public boolean isEmpty(){

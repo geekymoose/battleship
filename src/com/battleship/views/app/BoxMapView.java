@@ -44,6 +44,7 @@ public abstract class BoxMapView implements UiElement{
     protected   boolean     isTargeted;
     protected   Sprite      sprite;
     
+    //IMAGES
     //Visible images
     protected   Image       imgBoatAlive;
     protected   Image       imgBoatDead;

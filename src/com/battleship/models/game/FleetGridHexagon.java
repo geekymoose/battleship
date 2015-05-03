@@ -47,6 +47,5 @@ public class FleetGridHexagon extends FleetGridModel{
         this.listOrientations.add(GameConstants.VERTICAL);
         this.listOrientations.add(GameConstants.STANDING_UP);
         this.listOrientations.add(GameConstants.STANDING_DOWN);
-        
     }
 }

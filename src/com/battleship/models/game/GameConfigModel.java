@@ -61,8 +61,9 @@ public class GameConfigModel extends Model implements GameConstants{
     private     int             gridHeight;
     private     int             gridType;
     
-    private     final int       nbMaxPlayer;
-    private     final Player[]  listPlayers;
+    private     int             nbMaxPlayer;
+    private     int             nbMinPlayer;
+    private     Player[]        listPlayers;
     private     int             currentNbPlayers;
     
     private     int             firstPlayer; //Player which start to play
@@ -86,14 +87,45 @@ public class GameConfigModel extends Model implements GameConstants{
         this.gridMinHeight      = Config.getDimValues_int("grid-min-height");
         this.gridMaxHeight      = Config.getDimValues_int("grid-max-height");
         
-        this.nbMaxPlayer        = Config.getGameValues_int("nb-max-players");
-        this.currentNbPlayers   = 0;
-        this.listPlayers        = new Player[this.nbMaxPlayer];
-        this.listPlayers[0]     = Session.getPlayer(); //If more than 2 players => Create in loop
-        this.listPlayers[1]     = autoLoadPlayer1();
-        
         this.gridDefaultType    = GRID_TYPE_SQUARE;
+        this.initPlayer();
         this.defaultConfig();
+    }
+    
+    /**
+     * Initialize the players. Depending of game mode. First player is the 
+     * session player
+     * <ul>
+     *  <li>Mode AI : will create an AI player</li>
+     *  <li>Mode V2 : will create second human player</li>
+     *  <li>Mode LAN : no player created, use add(Player)</li>
+     *  <li>Mode INTERNET : no player created, use add(Player)</li>
+     * </ul>
+     */
+    private void initPlayer(){
+        this.nbMaxPlayer        = Config.getGameValues_int("nb-max-players");
+        this.nbMinPlayer        = Config.getGameValues_int(("nb-min-players"));
+        this.listPlayers        = new Player[this.nbMaxPlayer];
+        switch(Session.getGameMode()){
+            case MODE_AI:
+                this.listPlayers[0]     = Session.getPlayer();
+                this.listPlayers[1]     = new PlayerAI();
+                this.currentNbPlayers   = 2;
+                break;
+            case MODE_V2:
+                this.listPlayers[0]     = Session.getPlayer();
+                this.listPlayers[1]     = new PlayerHuman();
+                this.currentNbPlayers   = 2;
+                break;
+            case MODE_LAN:
+                this.listPlayers[0] = Session.getPlayer();
+                this.currentNbPlayers   = 1;
+                break;
+            case MODE_INTERNET:
+                this.listPlayers[0] = Session.getPlayer();
+                this.currentNbPlayers   = 1;
+                break;
+        }
     }
     
     /**
@@ -113,33 +145,6 @@ public class GameConfigModel extends Model implements GameConstants{
      */
     public void resetConfig(){
         this.defaultConfig();
-    }
-    
-    /**
-     * Create second player according to game mode :
-     * <ul>
-     * <li>Mode AI : will create an AI player</li>
-     * <li>Mode V2 : will create second human player</li>
-     * <li>Mode LAN : no player created, use add(Player)</li>
-     * <li>Mode INTERNET : no player created, use add(Player)</li>
-     * </ul>
-     * @return second player (Null if LAN or INTERNET mode)
-     */
-    private Player autoLoadPlayer1(){
-        Player player2 = null;
-        switch(Session.getGameMode()){
-            case MODE_AI:
-                player2 = new PlayerAI();
-                break;
-            case MODE_V2:
-                player2 = new PlayerHuman();
-                break;
-            case MODE_LAN:
-                break;
-            case MODE_INTERNET:
-                break;
-        }
-        return player2;
     }
     
     
@@ -184,12 +189,12 @@ public class GameConfigModel extends Model implements GameConstants{
     }
     
     /**
-     * Check if config is valid
+     * Check if configuration is valid. Means number players is between min number 
+     * players (Include) and max number players (Include)
      * @return true if valid, otherwise, return false
      */
     public boolean isValid(){
-        //return this.currentNbPlayers == 2;
-        return true;
+        return currentNbPlayers>=nbMinPlayer && currentNbPlayers<=nbMaxPlayer;
     }
     
     /**
@@ -299,7 +304,7 @@ public class GameConfigModel extends Model implements GameConstants{
     
     /**
      * Set a new grid width, will replace the old one. Must be between 
-     * {@value GameConstants#GRID_MIN_WIDTH} and {@value GameConstants#GRID_MAX_WIDTH},
+     * {@value GameConstants#GRID_MIN_WIDTH} and {@value GameConstants#GRID_MAX_WIDTH}, 
      * otherwise, do nothing
      * @param pValue new width
      */

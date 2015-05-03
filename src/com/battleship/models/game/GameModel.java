@@ -39,6 +39,8 @@ public class GameModel extends Model implements GameConstants{
     //Runtime constants
     public      static final int    SWITCH_TURN             = 1;
     public      static final int    SWITCH_PAGE             = 2;
+    public      static final int    GAME_OVER               = 3;
+    public      static final int    GAME_VICTORY            = 4;
     
     //Variables
     private     GameConfigModel     config;
@@ -98,38 +100,46 @@ public class GameModel extends Model implements GameConstants{
      * </ul>
      * 
      */
-    public void switchTurnBehaviors() {
-        this.counterTurn++;
-        switch(this.currentPlayerTurn){
-            case 0:
-                this.currentPlayerTurn = 1;
-                break;
-            default:
-                this.currentPlayerTurn = 0;
-                break;
-        }
+    public void switchTurnBehaviors(){
+        int     foeIndex        = (this.currentPlayerTurn+1)%2;  //Works only for 2 players
+        Player  foe             = this.listPlayers[foeIndex];
+        int     mode            = Session.getGameMode();
         
-        int mode = Session.getGameMode();
         switch(mode){
             case GameConstants.MODE_AI:
+                if(Session.getPlayer().getFleet().isFleetDestroyed()){
+                    notifyObservers(GameModel.GAME_OVER);
+                } 
+                else if(foe.getFleet().isFleetDestroyed()){
+                    notifyObservers(GameModel.GAME_VICTORY);
+                }
                 break;
+                
             case GameConstants.MODE_V2:
                 this.notifyObservers(null);
-                    SwingUtilities.invokeLater(new Runnable(){
-                        public void run(){
-                            try {
-                                Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
-                                notifyObservers(GameModel.SWITCH_PAGE);
-                            } catch(InterruptedException ex) {
-                            }
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        try {
+                            Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
+                        } catch(InterruptedException ex) {
                         }
-                    });
+                        if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
+                            notifyObservers(GameModel.GAME_OVER);
+                            return;
+                        } else if(foe.getFleet().isFleetDestroyed()){
+                            notifyObservers(GameModel.GAME_VICTORY);
+                            return;
+                        }
+                        counterTurn++;
+                        currentPlayerTurn  = foeIndex;
+                        notifyObservers(GameModel.SWITCH_PAGE);
+                    }
+                });
                 break;
             case GameConstants.MODE_LAN:
                 break;
         }
     }
-    
     
     
     
