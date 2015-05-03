@@ -124,6 +124,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
             }
         }
         this.repaint();
+        this.parentPage.repaint();
     }
     
     

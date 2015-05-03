@@ -44,11 +44,19 @@ public class ShotTypeTorpedo implements ShotType{
 
     @Override
     public boolean fireHexagonGrid(int pX, int pY, Target[][] pTarget) {
-        Weapon.hitTargetIfExists(pX, pY, pTarget);
-        Weapon.hitTargetIfExists(pX-1, pY, pTarget);
-        Weapon.hitTargetIfExists(pX+1, pY, pTarget);
-        Weapon.hitTargetIfExists(pX-1, pY+1, pTarget);
-        Weapon.hitTargetIfExists(pX+1, pY+1, pTarget);
+        if(pX%2==0){
+            Weapon.hitTargetIfExists(pX, pY, pTarget);
+            Weapon.hitTargetIfExists(pX-1, pY-1, pTarget);
+            Weapon.hitTargetIfExists(pX-1, pY, pTarget);
+            Weapon.hitTargetIfExists(pX+1, pY-1, pTarget);
+            Weapon.hitTargetIfExists(pX+1, pY, pTarget);
+        } else{
+            Weapon.hitTargetIfExists(pX, pY, pTarget);
+            Weapon.hitTargetIfExists(pX-1, pY, pTarget);
+            Weapon.hitTargetIfExists(pX+1, pY, pTarget);
+            Weapon.hitTargetIfExists(pX-1, pY+1, pTarget);
+            Weapon.hitTargetIfExists(pX+1, pY+1, pTarget);
+        }
         return true;
     }
     
@@ -68,11 +76,19 @@ public class ShotTypeTorpedo implements ShotType{
 
     @Override
     public boolean aimHexagonGrid(int pX, int pY, Target[][] pTarget){
-        Weapon.aimTargetIfExists(pX, pY, pTarget);
-        Weapon.aimTargetIfExists(pX-1, pY, pTarget);
-        Weapon.aimTargetIfExists(pX+1, pY, pTarget);
-        Weapon.aimTargetIfExists(pX-1, pY+1, pTarget);
-        Weapon.aimTargetIfExists(pX+1, pY+1, pTarget);
+        if(pX%2==0){
+            Weapon.aimTargetIfExists(pX, pY, pTarget);
+            Weapon.aimTargetIfExists(pX-1, pY-1, pTarget);
+            Weapon.aimTargetIfExists(pX-1, pY, pTarget);
+            Weapon.aimTargetIfExists(pX+1, pY-1, pTarget);
+            Weapon.aimTargetIfExists(pX+1, pY, pTarget);
+        } else{
+            Weapon.aimTargetIfExists(pX, pY, pTarget);
+            Weapon.aimTargetIfExists(pX-1, pY, pTarget);
+            Weapon.aimTargetIfExists(pX+1, pY, pTarget);
+            Weapon.aimTargetIfExists(pX-1, pY+1, pTarget);
+            Weapon.aimTargetIfExists(pX+1, pY+1, pTarget);
+        }
         return true;
     }
 }
