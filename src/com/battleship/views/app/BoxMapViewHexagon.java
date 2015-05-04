@@ -203,10 +203,10 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     public void reloadUI(){
         //Visible images
-        this.imgBoatAlive           = ThemeManager.getTheme().getImg(201400);
+        this.imgBoatAlive           = ThemeManager.getTheme().getImg(201700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(201800);
         this.imgWaterAlive          = ThemeManager.getTheme().getImg(201600);
-        this.imgWaterDead           = ThemeManager.getTheme().getImg(201700);
+        this.imgWaterDead           = ThemeManager.getTheme().getImg(201900);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(201800);

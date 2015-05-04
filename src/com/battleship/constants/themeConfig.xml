@@ -91,6 +91,10 @@
                 <img type="static" ext="png">410200</img>
                 <img type="static" ext="png">410300</img>
                 
+                <img type="static" ext="png">410400</img>
+                <img type="static" ext="png">410500</img>
+                <img type="static" ext="png">410600</img>
+                
                 <img type="static" ext="png">412100</img>
                 <img type="static" ext="png">412200</img>
                 <img type="static" ext="png">412300</img>
@@ -122,10 +126,6 @@
                 
                 <img type="static" ext="png">425100</img>
                 <img type="static" ext="png">425200</img>
-                
-                <img type="static" ext="png">413800</img>
-                <img type="static" ext="png">413900</img>
-                <img type="static" ext="png">414000</img>
             </buttons>
             
             <title>
@@ -170,6 +170,7 @@
                     <img type="static" ext="png">301600</img>
                     <img type="static" ext="png">301700</img>
                     <img type="static" ext="png">301800</img>
+                    <img type="static" ext="png">301900</img>
                 </square>
                 <hexa>
                     <img type="static" ext="png">201200</img>
@@ -179,6 +180,7 @@
                     <img type="static" ext="png">201600</img>
                     <img type="static" ext="png">201700</img>
                     <img type="static" ext="png">201800</img>
+                    <img type="static" ext="png">201900</img>
                 </hexa>
             </boxmap>
             

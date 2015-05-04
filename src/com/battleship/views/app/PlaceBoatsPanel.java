@@ -101,7 +101,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.p_buttonPanel  = new JPanel();
         this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
-        this.b_placeRandom  = new ZozoDecorator(new ImgButton(413800, 414000, 413900)).getUiButton();
+        this.b_placeRandom  = new ZozoDecorator(new ImgButton(410400, 410500, 410600)).getUiButton();
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
         p_hb                = new HeadBar(this);
         
