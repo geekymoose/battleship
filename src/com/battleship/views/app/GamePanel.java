@@ -256,6 +256,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
     @Override
     public void reloadUI(){
         this.img_background = ThemeManager.getTheme().getImg(417000);
+        this.repaint();
     }
     
     
