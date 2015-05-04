@@ -90,8 +90,13 @@ public class ExecError extends Exception {
         this.extraData = "";
         if(param instanceof ArrayList){
             ArrayList list = (ArrayList) param;
+            int counter = 0;
             for (Object str : list){
-                this.extraData += str.toString()+" ";
+                counter++;
+                if(counter%5 == 0){
+                    this.extraData += "\n";
+                }
+                this.extraData += str.toString()+" - ";
             }
         }
         else if( param instanceof String){
@@ -130,13 +135,13 @@ public class ExecError extends Exception {
                 str = "Unable to display themes list";
                 break;
             case 502:
-                str = "Unable to load the theme! "
+                str = "Unable to load the theme!\n"
                        +"Theme "+this.extraData
                        +" doesn't exists in theme folder";
                 break;
             case 503:
-                str = "Unable to load theme, some file are missing! "
-                       +"Files "+this.extraData+"are missing!";
+                str = "Unable to load theme, some file are missing!\n\n"
+                       +"Files "+this.extraData+" are missing!";
                 break;
             
                 

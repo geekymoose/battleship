@@ -30,6 +30,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -78,6 +79,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     //Image
     private     Image                   img_background;
+    private     ImageIcon               img_gridHexa;
+    private     ImageIcon               img_gridSquare;
     
     //Data
     private     int                     gridWidth; //Not used atm
@@ -137,9 +140,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_right     .setOpaque(false);
         p_buttons   .setOpaque(false);
         
-        l_grid1     = new JLabel(ThemeManager.getTheme().getImgIcon(414100));
-        l_grid2     = new JLabel(ThemeManager.getTheme().getImgIcon(414200));
-        
         this            .setLayout(new BorderLayout());
         p_buttons       .setLayout(new FlowLayout());
         p_center        .setLayout(cl);
@@ -147,6 +147,9 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_left          .setLayout(new BorderLayout());
         p_right         .setLayout(new BorderLayout());
         p_bigCont       .setLayout(new GridBagLayout());
+        
+        l_grid1         = new JLabel(this.img_gridHexa);
+        l_grid2         = new JLabel(this.img_gridSquare);
         
         
         b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
@@ -300,12 +303,16 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
 
     @Override
     public void reloadUI(){
-       this.img_background = ThemeManager.getTheme().getImg(415000);
-       this.b_right     .reloadUI();
-       this.b_left      .reloadUI();
-       this.b_validate  .reloadUI();
-       this.b_reset     .reloadUI();
-       this.b_back      .reloadUI();
+       this.img_background  = ThemeManager.getTheme().getImg(415000);
+       this.img_gridHexa    = ThemeManager.getTheme().getImgIcon(414100);
+       this.img_gridSquare  = ThemeManager.getTheme().getImgIcon(414200);
+       this.b_right         .reloadUI();
+       this.b_left          .reloadUI();
+       this.b_validate      .reloadUI();
+       this.b_reset         .reloadUI();
+       this.b_back          .reloadUI();
+       this.l_grid1.setIcon(this.img_gridHexa);
+       this.l_grid2.setIcon(this.img_gridSquare);
        this.repaint();
     }
     

@@ -103,7 +103,9 @@ public class HeadBar extends ContentPanel{
     @Override
     public void reloadUI(){
         this.title = ThemeManager.getTheme().getImgIcon(426100);
+        this.b_music.reloadUI();
         this.l_title.setIcon(title);
+        this.repaint();
     }
     
     
