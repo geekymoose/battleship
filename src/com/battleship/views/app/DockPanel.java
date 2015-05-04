@@ -10,7 +10,6 @@ import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.PlaceBoatsController;
-import com.battleship.models.game.Player;
 import com.battleship.models.sprites.Boat;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;

@@ -6,9 +6,6 @@
 package com.battleship.uibutton;
 
 import com.battleship.views.tools.UiElement;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
 
 
 
@@ -22,7 +19,10 @@ import javax.swing.AbstractButton;
  * implements UiElement, MouseListener
  * </p>
  * 
- * <p>decorate an UiButton</p>
+ * <p>
+ * Decorate an UiButton. To use the UiButton, getUiButton need to be called to 
+ * return the button
+ * </p>
  *
  * @date    Mar 29, 2015
  * @author  Constantin MASSON
@@ -31,7 +31,7 @@ import javax.swing.AbstractButton;
  * 
  * @see UiButton
  */
-public abstract class UiButtonDecorator extends AbstractButton implements UiElement{
+public abstract class UiButtonDecorator implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -47,8 +47,6 @@ public abstract class UiButtonDecorator extends AbstractButton implements UiElem
      */
     protected UiButtonDecorator(UiButton pButton){
         this.uibutton = pButton;
-        this.setLayout(new BorderLayout());
-        this.add(pButton);
     }
     
     
@@ -65,13 +63,11 @@ public abstract class UiButtonDecorator extends AbstractButton implements UiElem
         this.uibutton.reloadUI();
     }
     
-    @Override
-    public void addActionListener(ActionListener listener){
-        this.uibutton.addActionListener(listener);
-    }
-    
-    @Override
-    public void setEnabled(boolean value){
-        this.uibutton.setEnabled(value);
+    /**
+     * Return the button decorated by this decorator
+     * @return UiButton decorated
+     */
+    public UiButton getUiButton(){
+        return this.uibutton;
     }
 }

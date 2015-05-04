@@ -8,6 +8,7 @@ import com.battleship.asset.ThemeManager;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.uibutton.ImgButton;
+import com.battleship.uibutton.UiButton;
 import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
@@ -16,7 +17,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -40,7 +40,7 @@ public class HeadBar extends ContentPanel{
     private JLabel              l_title;
     private JLabel              l_music;
     private ImageIcon           title;
-    private AbstractButton      b_music;
+    private UiButton            b_music;
     private JPanel              p_logo;
     private JPanel              p_theme;
     private JComboBox           themes;
@@ -71,7 +71,7 @@ public class HeadBar extends ContentPanel{
         this.l_title    = new JLabel();
         this.l_music    = new JLabel("Music");
         this.themes     = new JComboBox();
-        this.b_music    = new ZozoDecorator(new ImgButton(425100, 425100, 425200));
+        this.b_music    = new ZozoDecorator(new ImgButton(425100, 425100, 425200)).getUiButton();
         
         this.b_music    .setPreferredSize(new Dimension(30,30));
         this            .setLayout(new BorderLayout());

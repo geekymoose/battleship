@@ -21,7 +21,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 
 
@@ -47,10 +46,10 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
     private     HeadBar                 p_hb;
     
     //Buttons
-    private     AbstractButton          b_ia;
-    private     AbstractButton          b_2players;
-    private     AbstractButton          b_lan;
-    private     AbstractButton          b_internet;
+    private     UiButton                b_ia;
+    private     UiButton                b_2players;
+    private     UiButton                b_lan;
+    private     UiButton                b_internet;
     
     //Images
     private     Image                   background;
@@ -83,10 +82,10 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
         
         p_hb = new HeadBar(this);
         //Create buttons 
-        b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
-        b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300));
-        b_lan           = new ZozoDecorator(new ImgButton(409100, 409200, 409300));
-        b_internet      = new ZozoDecorator(new ImgButton(410100, 410200, 410300));
+        b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300)).getUiButton();
+        b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300)).getUiButton();
+        b_lan           = new ZozoDecorator(new ImgButton(409100, 409200, 409300)).getUiButton();
+        b_internet      = new ZozoDecorator(new ImgButton(410100, 410200, 410300)).getUiButton();
 
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.insets = new Insets(10, 10, 0, 10);
@@ -188,7 +187,11 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
 
     @Override
     public void loadUI(){
-        this.reloadUI();
+        this            .reloadUI();
+        this.b_ia       .reloadUI();
+        this.b_2players .reloadUI();
+        this.b_lan      .reloadUI();
+        this.b_internet .reloadUI();
     }
     
     @Override
