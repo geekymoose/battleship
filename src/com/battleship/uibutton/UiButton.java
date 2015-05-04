@@ -7,6 +7,7 @@ package com.battleship.uibutton;
 
 import com.battleship.asset.ThemeManager;
 import com.battleship.views.tools.UiElement;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -143,6 +144,10 @@ public abstract class UiButton extends JButton implements MouseListener, UiEleme
         this.img_entered    = ThemeManager.getTheme().getImgIcon(this.id_entered);
         this.img_exited     = ThemeManager.getTheme().getImgIcon(this.id_exited);
         this.setIcon(img_default);
+        
+        int width   = this.getIcon().getIconWidth();
+        int height  = this.getIcon().getIconHeight();
+        this.setPreferredSize(new Dimension(width,height));
     }
     
     
