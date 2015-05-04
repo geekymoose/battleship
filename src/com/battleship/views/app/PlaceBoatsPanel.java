@@ -103,7 +103,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
         this.b_placeRandom  = new ZozoDecorator(new ImgButton(413800, 414000, 413900));
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
-        p_hb                = new HeadBar();
+        p_hb                = new HeadBar(this);
         
         p_container         = new ContainerPanel();
         p_bigContainer      = new JPanel();
@@ -242,6 +242,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     @Override
     public void reloadUI(){
         this.img_background = ThemeManager.getTheme().getImg(417000);
+        this.p_dock.reloadUI();
+        this.repaint();
     }
     
     

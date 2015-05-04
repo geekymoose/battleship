@@ -11,8 +11,6 @@ import com.battleship.main.DebugTrack;
 
 
 
-
-
 /**
  * <h1>PlaceBoatsModel</h1>
  * <p>

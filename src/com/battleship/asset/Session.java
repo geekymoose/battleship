@@ -48,6 +48,7 @@ public class Session {
     private     boolean             isConnected;
     private     ArrayList<Weapon>   listWeapon;
     private     Player              player; //used only during a game
+    private     int                 money;
     
     
     
@@ -79,6 +80,7 @@ public class Session {
         this.name           = "Unknown";
         this.isConnected    = false;
         this.player         = new PlayerHuman();
+        this.money          = 0;
     }
     
     

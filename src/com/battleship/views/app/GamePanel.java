@@ -102,7 +102,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
      */
     private void initComponents() throws ExecError{
         this.gc         = new GridBagConstraints();
-        this.p_headbar  = new HeadBar();
+        this.p_headbar  = new HeadBar(this);
         p_centerPane    = new ContainerPanel();
         p_info          = new InformationPanel(this, this.controller);
         p_fleet         = new PlayerFleetPanel(this);

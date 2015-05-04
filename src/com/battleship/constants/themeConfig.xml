@@ -57,7 +57,6 @@
         
         <ui>
             <background>
-                <img type="static" ext="jpg">411100</img>
                 <img type="static" ext="jpg">415000</img>
                 <img type="static" ext="png">416000</img>
                 <img type="static" ext="jpg">417000</img>

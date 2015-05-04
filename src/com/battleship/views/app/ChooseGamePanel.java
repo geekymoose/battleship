@@ -81,7 +81,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
         this.p_container.setLayout(new GridBagLayout());
         this.p_container.setOpaque(false); //For background
         
-        p_hb = new HeadBar();
+        p_hb = new HeadBar(this);
         //Create buttons 
         b_ia            = new ZozoDecorator(new ImgButton(407100, 407200, 407300));
         b_2players      = new ZozoDecorator(new ImgButton(408100, 408200, 408300));
@@ -194,5 +194,6 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
     @Override
     public void reloadUI(){
         this.background = ThemeManager.getTheme().getImg(415000);
+        this.repaint();
     }
 }
