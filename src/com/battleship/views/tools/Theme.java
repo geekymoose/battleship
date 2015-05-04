@@ -113,13 +113,13 @@ public class Theme{
      * @param file current file position
      * @param all 
      */
-    private void addTree(File file, ArrayList<String> list) {
+    private void addTree(File file, ArrayList<String> pList) {
         File[] children = file.listFiles();
         if (children != null) {
             for (File child : children) {
                 if(child.isDirectory()){
-                    list.add(child.getPath()+"/");
-                    addTree(child, list);
+                    pList.add(child.getPath()+"/");
+                    this.addTree(child, pList);
                 }
             }
         }

@@ -155,7 +155,8 @@ public class BoxMapViewSquare extends BoxMapView{
         Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);}
+        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+    }
     
     
     
@@ -167,10 +168,10 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     public void reloadUI(){
         //Visible images
-        this.imgBoatAlive           = ThemeManager.getTheme().getImg(301400);
+        this.imgBoatAlive           = ThemeManager.getTheme().getImg(301700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(301800);
         this.imgWaterAlive          = ThemeManager.getTheme().getImg(301600);
-        this.imgWaterDead           = ThemeManager.getTheme().getImg(301700);
+        this.imgWaterDead           = ThemeManager.getTheme().getImg(301900);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(301800);

@@ -5,6 +5,7 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.Config;
+import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import com.battleship.views.tools.UiElement;
 import java.awt.Color;

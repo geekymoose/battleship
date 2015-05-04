@@ -184,7 +184,6 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
         //Not used
     }
 
-
     @Override
     public void loadUI(){
         this            .reloadUI();

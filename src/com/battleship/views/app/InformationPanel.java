@@ -168,6 +168,7 @@ public class InformationPanel extends ContentPanel implements Observer {
 
     @Override
     public void loadUI(){
+        this.reloadUI();
     }
     
     @Override
