@@ -6,10 +6,16 @@ package com.battleship.views.app;
 
 import com.battleship.asset.ThemeManager;
 import com.battleship.exceptions.ExecError;
+import com.battleship.main.DebugTrack;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.ZozoDecorator;
+import com.battleship.views.tools.ContentPanel;
+import com.battleship.views.tools.PagePanel;
+import com.battleship.views.tools.UiDialog;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -27,47 +33,96 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class HeadBar extends JPanel{
-    JLabel l_title;
-    JLabel l_music      = new JLabel("MUSIC");
-    private ImageIcon title =  ThemeManager.getTheme().getImgIcon(426100);
-    // A Améliorer
-    AbstractButton b_music = new ZozoDecorator(new ImgButton(425100, 425100, 425200));
-    JPanel p_logo       = new JPanel();
-    JPanel p_theme      = new JPanel();
-    JComboBox themes    = new JComboBox();
+public class HeadBar extends ContentPanel{
     //**************************************************************************
-    // CONSTRUCTOR
+    // Variables - Constants
+    //**************************************************************************
+    private JLabel              l_title;
+    private JLabel              l_music;
+    private ImageIcon           title;
+    private AbstractButton      b_music;
+    private JPanel              p_logo;
+    private JPanel              p_theme;
+    private JComboBox           themes;
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Initialization - Constructors
     //**************************************************************************
     /**
      * Constructor of the HeadBar
+     * @param pParent
      * @throws ExecError 
      */
-    public HeadBar() throws ExecError{
-        l_title = new JLabel(title);
-        this    .setLayout(new BorderLayout());
-        b_music.setPreferredSize(new Dimension(30,30));
-        this    .add(l_title, BorderLayout.WEST);
-        p_theme .add(themes);
-        p_theme .add(b_music);
-        this    .add(p_theme, BorderLayout.EAST);
+    public HeadBar(JPanel pParent) throws ExecError{
+        super(pParent);
+        this.initComponents();
+        this.initThemeComboBox();
         
+        this.loadUI();
+    }
+    
+    private void initComponents(){
+        this.p_theme    = new JPanel();
+        this.p_logo     = new JPanel();
+        this.l_title    = new JLabel();
+        this.l_music    = new JLabel("Music");
+        this.themes     = new JComboBox();
+        this.b_music    = new ZozoDecorator(new ImgButton(425100, 425100, 425200));
         
+        this.b_music    .setPreferredSize(new Dimension(30,30));
+        this            .setLayout(new BorderLayout());
+        
+        this            .add(l_title, BorderLayout.WEST);
+        this.p_theme    .add(themes);
+        this.p_theme    .add(b_music);
+        this            .add(p_theme, BorderLayout.EAST);
+    }
+    
+    private void initThemeComboBox() throws ExecError{
         for(String str : ThemeManager.getThemeManager().getAllThemeNames()){
             this.themes.addItem(str);
         }
-        
-        //ThemeManager.getThemeManager().loadTheme("Selected theme yeah man");
-        
-        
+        this.themes.setSelectedItem(ThemeManager.getTheme().getThemeName());
+        this.themes.addActionListener(new ThemeListener());
+    }
+    
+    
+    
+    //**************************************************************************
+    // UI Functions
+    //**************************************************************************
+    @Override
+    public void loadUI(){
+        this.reloadUI();
     }
 
+    @Override
+    public void reloadUI(){
+        this.title = ThemeManager.getTheme().getImgIcon(426100);
+        this.l_title.setIcon(title);
+    }
+    
+    
+    
     //**************************************************************************
-    // METHODS
+    // ActionListener
     //**************************************************************************
-
-    //**************************************************************************
-    // SETTERS / GETTERS
-    //**************************************************************************
-
+    private class ThemeListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String themeName = (String)themes.getSelectedItem();
+            try {
+                ThemeManager.getThemeManager().loadTheme(themeName);
+            } catch(ExecError ex) {
+                DebugTrack.showErrMsg("Unable to load theme "+themeName);
+                UiDialog.showWarning("Theme not valide", ex.getMessage());
+            }
+            themes.setSelectedItem(ThemeManager.getTheme().getThemeName());
+            ((PagePanel)parentPage).loadUI();
+        }
+    }
 }

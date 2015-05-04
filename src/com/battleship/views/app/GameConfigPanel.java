@@ -117,7 +117,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_card1     = new JPanel();
         p_card2     = new JPanel();
         p_bigbigCont= new JPanel();
-        p_hb        = new HeadBar();
+        p_hb        = new HeadBar(this);
         
         cl          = new CardLayout();
         gbc         = new GridBagConstraints();

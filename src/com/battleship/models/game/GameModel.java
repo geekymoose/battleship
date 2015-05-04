@@ -37,6 +37,7 @@ public class GameModel extends Model implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     //Runtime constants
+    public      static final int    SWITCH_UPDATE           = 0;
     public      static final int    SWITCH_TURN             = 1;
     public      static final int    SWITCH_PAGE             = 2;
     public      static final int    GAME_OVER               = 3;
@@ -108,6 +109,7 @@ public class GameModel extends Model implements GameConstants{
         
         switch(mode){
             case GameConstants.MODE_AI:
+                notifyObservers(GameModel.SWITCH_UPDATE);
                 SwingUtilities.invokeLater(new Runnable(){
                     public void run(){
                         try {
@@ -122,7 +124,6 @@ public class GameModel extends Model implements GameConstants{
                         }
                         counterTurn++;
                         currentPlayerTurn  = foeIndex;
-                        
                         //AI player shoot on session player
                         if(foe instanceof PlayerAI){
                             DebugTrack.showExecMsg("AI Turn");
@@ -136,7 +137,7 @@ public class GameModel extends Model implements GameConstants{
                 break;
                 
             case GameConstants.MODE_V2:
-                this.notifyObservers(null);
+                notifyObservers(GameModel.SWITCH_UPDATE);
                 SwingUtilities.invokeLater(new Runnable(){
                     public void run(){
                         try {
