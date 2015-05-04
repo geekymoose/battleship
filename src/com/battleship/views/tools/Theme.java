@@ -150,7 +150,7 @@ public class Theme{
             String          imgName     = (String)pair.getKey();
             String          imgExt      = (String)pair.getValue();
             if(this.loadImage(imgName, imgExt) == -1){
-                this.listMissingImg.add(imgName+imgExt); //Unable to load image
+                this.listMissingImg.add(imgName+"."+imgExt); //Unable to load image
             }
         }
         
@@ -162,7 +162,7 @@ public class Theme{
             String          imgName     = (String)pair.getKey();
             String          imgExt      = (String)pair.getValue();
             if(this.loadEventImage(imgName, imgExt) == -1){
-                this.listMissingImg.add(imgName+imgExt);
+                this.listMissingImg.add(imgName+"."+imgExt);
             }
         }
         

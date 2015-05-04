@@ -134,12 +134,15 @@ public class RadarPanel extends ContentPanel implements ObserverModel, GameConst
     //**************************************************************************
     @Override
     public void loadUI(){
-    
+        this.reloadUI();
     }
     
     @Override
     public void reloadUI(){
-    
+        for(GridPanel grid : this.fleetGridPlayers){
+            grid.reloadUI();
+        }
+        this.repaint();
     }
 
     @Override

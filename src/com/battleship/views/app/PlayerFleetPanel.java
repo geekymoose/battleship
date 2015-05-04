@@ -112,11 +112,14 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
     //**************************************************************************
     @Override
     public void loadUI(){
-    
+        this.reloadUI();
     }
     
     @Override
     public void reloadUI(){
-    
+        for(GridPanel grid : this.fleetGridPlayers){
+            grid.reloadUI();
+        }
+        this.repaint();
     }
 }

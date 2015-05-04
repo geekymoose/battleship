@@ -205,6 +205,11 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     @Override
     public void reloadUI(){
         this.controller.resetHoverAndAim();
+        for(BoxMapView tmpTabBox[] : this.tabBox){
+            for(BoxMapView box : tmpTabBox){
+                box.reloadUI();
+            }
+        }
         this.repaint();
     }
     

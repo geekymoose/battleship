@@ -32,7 +32,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -243,7 +242,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     @Override
     public void reloadUI(){
         this.img_background = ThemeManager.getTheme().getImg(417000);
-        this.p_dock.reloadUI();
+        this.p_dock         .reloadUI();
+        this.gridPanel      .reloadUI();
         this.b_valide       .reloadUI();
         this.b_reset        .reloadUI();
         this.b_placeRandom  .reloadUI();

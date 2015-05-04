@@ -197,6 +197,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
     @Override
     public void reloadUI(){
         this.background = ThemeManager.getTheme().getImg(415000);
+        this.p_hb.reloadUI();
         this.repaint();
     }
 }
