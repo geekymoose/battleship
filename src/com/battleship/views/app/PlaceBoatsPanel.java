@@ -18,6 +18,7 @@ import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
+import com.battleship.uibutton.UiButton;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.WindowFrame;
@@ -54,10 +55,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     
     private     HeadBar                         p_hb;
     private     JPanel                          p_buttonPanel;
-    private     AbstractButton                  b_valide;
-    private     AbstractButton                  b_reset;
-    private     AbstractButton                  b_placeRandom;
-    private     AbstractButton                  b_back;
+    private     UiButton                        b_valide;
+    private     UiButton                        b_reset;
+    private     UiButton                        b_placeRandom;
+    private     UiButton                        b_back;
     
     private     Dimension                       dimBox;
     private     GridBagConstraints              gbc;
@@ -99,10 +100,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private void initComponents() throws ExecError{
         this                .setLayout(new BorderLayout());
         this.p_buttonPanel  = new JPanel();
-        this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
-        this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
-        this.b_placeRandom  = new ZozoDecorator(new ImgButton(413800, 414000, 413900));
-        this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
+        this.b_valide       = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
+        this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
+        this.b_placeRandom  = new ZozoDecorator(new ImgButton(413800, 414000, 413900)).getUiButton();
+        this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
         p_hb                = new HeadBar(this);
         
         p_container         = new ContainerPanel();
@@ -243,6 +244,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     public void reloadUI(){
         this.img_background = ThemeManager.getTheme().getImg(417000);
         this.p_dock.reloadUI();
+        this.b_valide       .reloadUI();
+        this.b_reset        .reloadUI();
+        this.b_placeRandom  .reloadUI();
+        this.b_back         .reloadUI();
         this.repaint();
     }
     

@@ -17,6 +17,7 @@ import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.asset.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.asset.ThemeManager;
+import com.battleship.uibutton.UiButton;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.UiElement;
 import com.battleship.views.tools.WindowFrame;
@@ -29,7 +30,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -55,6 +55,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     GameConfigController    controller;
     private     CardLayout              cl;
     private     GridBagConstraints      gbc;
+    
     private     JPanel                  p_buttons;
     private     JPanel                  p_center;
     private     JPanel                  p_container;
@@ -69,11 +70,14 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JLabel                  l_grid1;
     private     JLabel                  l_grid2;
     
-    private     AbstractButton          b_right;
-    private     AbstractButton          b_left;
-    private     AbstractButton          b_validate;
-    private     AbstractButton          b_reset;
-    private     AbstractButton          b_back;
+    private     UiButton                b_right;
+    private     UiButton                b_left;
+    private     UiButton                b_validate;
+    private     UiButton                b_reset;
+    private     UiButton                b_back;
+    
+    //Image
+    private     Image                   img_background;
     
     //Data
     private     int                     gridWidth; //Not used atm
@@ -145,11 +149,11 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_bigCont       .setLayout(new GridBagLayout());
         
         
-        b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300));
-        b_reset         = new ZozoDecorator(new ImgButton(405100, 405200, 405300));
-        b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300));
-        b_right         = new ZozoDecorator(new ImgButton(413100, 413200, 413300));
-        b_left          = new ZozoDecorator(new ImgButton(412100, 412200, 412300));
+        b_validate      = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
+        b_reset         = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
+        b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
+        b_right         = new ZozoDecorator(new ImgButton(413100, 413200, 413300)).getUiButton();
+        b_left          = new ZozoDecorator(new ImgButton(412100, 412200, 412300)).getUiButton();
         
         p_buttons       .add(b_back);
         p_buttons       .add(b_reset);
@@ -186,6 +190,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             p_center.add(l_grid1, "GRID_SQUARE");
             p_center.add(l_grid2, "GRID_HEXA");
         }
+        this.loadUI();
     }
   
     
@@ -290,12 +295,18 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
 
     @Override
     public void loadUI(){
-        //Not used
+        this.reloadUI();
     }
 
     @Override
     public void reloadUI(){
-        //Not used
+       this.img_background = ThemeManager.getTheme().getImg(415000);
+       this.b_right     .reloadUI();
+       this.b_left      .reloadUI();
+       this.b_validate  .reloadUI();
+       this.b_reset     .reloadUI();
+       this.b_back      .reloadUI();
+       this.repaint();
     }
     
     
@@ -352,7 +363,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image img = ThemeManager.getTheme().getImg(415000);
-        g.drawImage(img,0,0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
     }
 }
