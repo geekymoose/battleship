@@ -116,11 +116,16 @@ public class GameModel extends Model implements GameConstants{
                             Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
                         } catch(InterruptedException ex) {
                         }
+                        
                         if(Session.getPlayer().getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_OVER);
+                            return;
                         } 
                         else if(foe.getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_VICTORY);
+                            return;
                         }
                         counterTurn++;
                         currentPlayerTurn  = foeIndex;
@@ -145,9 +150,11 @@ public class GameModel extends Model implements GameConstants{
                         } catch(InterruptedException ex) {
                         }
                         if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_OVER);
                             return;
                         } else if(foe.getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_VICTORY);
                             return;
                         }

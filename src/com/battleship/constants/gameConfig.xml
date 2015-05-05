@@ -51,5 +51,11 @@
             </timer>
         </integer>
         
+        <double>
+            <rate>
+                <val id="rate-score-money">0.1</val>
+            </rate>
+        </double>
+        
     </constants>
 </root>
