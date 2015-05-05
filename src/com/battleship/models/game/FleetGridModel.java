@@ -7,6 +7,9 @@ package com.battleship.models.game;
 import com.battleship.asset.Config;
 import com.battleship.asset.RandomManager;
 import com.battleship.constants.GameConstants;
+import com.battleship.dynamic.EventApp;
+import com.battleship.dynamic.ExplosionEvent;
+import com.battleship.dynamic.UiEventApp;
 import com.battleship.models.sprites.Boat;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -42,19 +45,21 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class FleetGridModel extends Model implements GameConstants{
+public abstract class FleetGridModel extends Model implements UiEventApp, GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected int                   gridWidth;             
-    protected int                   gridHeight;
-    protected Player                owner;
-    protected GameModel             game;
-    protected BoxMap[][]            tabBoxMap;
-    protected ArrayList<Boat>       listBoats; //Boats placed on the grid
-    protected int                   nbBoatToPlace; //Determined by config
-    protected ArrayList<Integer>    listOrientations; //Available orientation
-    protected int                   currentOrientation; //Selected orientation atm
+    protected   int                         gridWidth;             
+    protected   int                         gridHeight;
+    protected   Player                      owner;
+    protected   GameModel                   game;
+    protected   BoxMap[][]                  tabBoxMap;
+    protected   ArrayList<Boat>             listBoats; //Boats placed on the grid
+    protected   int                         nbBoatToPlace; //Determined by config
+    protected   ArrayList<Integer>          listOrientations; //Available orientation
+    protected   int                         currentOrientation; //Selected orientation atm
+    
+    private     ArrayList<ExplosionEvent>   listExplosions;
     
     
     
@@ -81,6 +86,7 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         this.listOrientations   = new ArrayList();
         this.currentOrientation = 0;
         this.nbBoatToPlace      = Config.getGameValues_int("nb-boats");
+        this.listExplosions     = new ArrayList();
     }
     
     /**
@@ -97,7 +103,8 @@ public abstract class FleetGridModel extends Model implements GameConstants{
         for(Boat b : this.listBoats){
             b.resetPosition();
         }
-        this.listBoats = new ArrayList();
+        this.listBoats      = new ArrayList();
+        this.listExplosions = new ArrayList();
         this.notifyObservers(null);
     }
     
@@ -141,6 +148,42 @@ public abstract class FleetGridModel extends Model implements GameConstants{
             }
         }
         return true;
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Event Functions
+    //**************************************************************************
+    /**
+     * Add an explosion in this grid
+     * @param pDelay
+     * @param pIdImg
+     * @param pEventType
+     * @param pPosition 
+     */
+    public void addExplosion(int pDelay, int pIdImg, int pEventType, Point pPosition){
+        ExplosionEvent explosion = new ExplosionEvent(pDelay, pIdImg, pEventType, this, pPosition);
+        this.listExplosions.add(explosion);
+        explosion.startTimer();
+    }
+
+    @Override
+    public void startUiEvent(EventApp pEvent){
+        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
+    }
+
+    @Override
+    public void updateUiEvent(EventApp pEvent){
+        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
+    }
+
+    @Override
+    public void stopUiEvent(EventApp pEvent){
+        this.listExplosions.remove((ExplosionEvent)pEvent);
+        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
     }
     
     
@@ -299,6 +342,14 @@ public abstract class FleetGridModel extends Model implements GameConstants{
      */
     public ArrayList<Integer> getListOrientations(){
         return this.listOrientations;
+    }
+    
+    /**
+     * Return list of explosion on this FleetGridModel
+     * @return ArrayList<ExplosionEvent> list of explosions
+     */
+    public ArrayList<ExplosionEvent> getListExplosions(){
+        return this.listExplosions;
     }
     
     /**

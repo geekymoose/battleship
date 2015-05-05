@@ -6,8 +6,9 @@
 package com.battleship.uibutton;
 
 import com.battleship.dynamic.ImageIconEvent;
-import com.battleship.dynamic.UiStaticEvent;
+import com.battleship.dynamic.UiEventApp;
 import com.battleship.asset.Config;
+import com.battleship.dynamic.EventApp;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,7 +23,7 @@ import java.awt.event.MouseEvent;
  * @author Constantin MASSON
  * @date Mar 31, 2015
  */
-public class HoverAnimButton extends UiButtonDecorator implements UiStaticEvent{
+public class HoverAnimButton extends UiButtonDecorator implements UiEventApp{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -42,7 +43,7 @@ public class HoverAnimButton extends UiButtonDecorator implements UiStaticEvent{
         super(pButton);
         int delay       = Config.getGameValues_int("default-button-timer");
         int idEntered   = this.uibutton.getIdEntered();
-        this.event      = new ImageIconEvent(delay, idEntered, this);
+        this.event      = new ImageIconEvent(delay, idEntered, EventApp.STATIC_EVENT, this);
         
         this.uibutton.addMouseListener(new MouseAdapter() {
             @Override
@@ -59,17 +60,17 @@ public class HoverAnimButton extends UiButtonDecorator implements UiStaticEvent{
     // Functions
     //**************************************************************************
     @Override
-    public void startUiImageEvent(){
+    public void startUiEvent(EventApp pEvent){
         //Nothing
     }
     
     @Override
-    public void updateUiImageEvent(){
+    public void updateUiEvent(EventApp pEvent){
         this.uibutton.setIcon(event.getImgIcon());
     }
     
     @Override
-    public void stopUiImageEvent(){
+    public void stopUiEvent(EventApp pEvent){
         this.uibutton.resetButton();
     } 
 }

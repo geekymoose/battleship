@@ -47,7 +47,7 @@
             
             
             <timer>
-                <val id="default-button-timer">50</val>
+                <val id="timer-boat-explosion">50</val>
             </timer>
         </integer>
         
