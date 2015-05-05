@@ -5,6 +5,7 @@
 package com.battleship.models.game;
 
 import com.battleship.asset.RandomManager;
+import com.battleship.asset.Session;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.*;
@@ -43,6 +44,8 @@ public abstract class Player extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    private     static int              counterPlayer = 0;
+    private     int                     idPlayer;
     private     String                  name;
     private     FleetGridModel          fleetGrid;
     private     GameModel               game; //Game where player is playing
@@ -62,10 +65,21 @@ public abstract class Player extends Model implements GameConstants{
     // Constructor - Initialization
     //**************************************************************************
     /**
+     * Create a Player owning several weapon
+     * @param pList list of weapon to add 
+     */
+    public Player(ArrayList<Weapon> pList){
+        this();
+        this.listWeapons = pList;
+    }
+    
+    /**
      * Create a new player. Player name is unknown, score = 0 
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
     public Player() {
+        this.idPlayer               = Player.counterPlayer;
+        Player.counterPlayer++;
         this.name                   = "MisterSwadow";
         this.score                  = 0;
         this.scoreCombo             = 1;
@@ -173,6 +187,7 @@ public abstract class Player extends Model implements GameConstants{
                 }
             }
             this.listWeapons.add(pWeapon);
+            pWeapon.setOwner(this);
         }
         this.notifyObservers(null);
     }
@@ -333,6 +348,14 @@ public abstract class Player extends Model implements GameConstants{
      */
     public Weapon getCurrentWeapon(){
         return this.listWeapons.get(this.currentWeaponIndex);
+    }
+    
+    /**
+     * Return player id
+     * @return 
+     */
+    private int getIdPlayer(){
+        return this.idPlayer;
     }
     
     //**************************************************************************

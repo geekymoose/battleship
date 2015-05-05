@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
@@ -41,5 +42,8 @@ public class Torpedo extends Weapon{
     //**************************************************************************
     public Torpedo(Player pOwner, int pAmmo){
         super(GameConstants.TORPEDO, new ShotTypeTorpedo(), pOwner, pAmmo);
+        this.name           = "Torpedo";
+        this.priceWeapon    = Config.getGameValues_int("price-torpedo");
+        this.priceAmmo      = Config.getGameValues_int("price-ammo-torpedo");
     }
 }

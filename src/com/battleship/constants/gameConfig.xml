@@ -28,6 +28,23 @@
                 </boat-value>
             </score>
             
+            <price>
+                <weapons>
+                    <val id="price-bomb">200</val>
+                    <val id="price-torpedo">100</val>
+                    <val id="price-nuke">400</val>
+                    <val id="price-missile">-42</val><!--means it's free-->
+                </weapons>
+                
+                <ammo>
+                    <val id="price-ammo-bomb">100</val>
+                    <val id="price-ammo-torpedo">50</val>
+                    <val id="price-ammo-nuke">200</val>
+                    <val id="price-ammo-missile">-42</val><!--means it's free-->
+                    
+                </ammo>
+            </price>
+            
             
             <timer>
                 <val id="default-button-timer">50</val>

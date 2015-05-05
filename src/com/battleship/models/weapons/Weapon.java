@@ -35,11 +35,13 @@ public abstract class Weapon implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected final int         id;
-    protected int               ammo;
-    protected final ShotType    shot;
-    protected Player            owner;
-    protected int               price;
+    protected   final int           id;
+    protected   String              name;
+    protected   int                 ammo;
+    protected   final ShotType      shot;
+    protected   Player              owner;
+    protected   int                 priceWeapon;
+    protected   int                 priceAmmo;
     
     
     
@@ -56,11 +58,13 @@ public abstract class Weapon implements GameConstants{
      * @param pOwner    weapon owner
      */
     protected Weapon(int pId, ShotType pShot, Player pOwner, int pAmmo){
-        this.id         = pId;
-        this.ammo       = pAmmo;
-        this.shot       = pShot;
-        this.owner      = pOwner;
-        this.price      = NO_VALUE;
+        this.id             = pId;
+        this.ammo           = pAmmo;
+        this.shot           = pShot;
+        this.owner          = pOwner;
+        this.priceWeapon    = NO_VALUE;
+        this.priceAmmo      = NO_VALUE;
+        this.name           = "NoData";
     }
     
     
@@ -154,8 +158,33 @@ public abstract class Weapon implements GameConstants{
      * Return current weapon price
      * @return int price
      */
-    public int getPrice(){
-        return this.price;
+    public int getPriceWeapon(){
+        return this.priceWeapon;
+    }
+    
+    /**
+     * Return current weapon ammo price 
+     * @return int ammo price
+     */
+    public int getPriceAmmo(){
+        return this.priceAmmo;
+    }
+    
+    /**
+     * Return current weapon name
+     * @return String name of the weapon
+     */
+    public String getName(){
+        return this.name;
+    }
+    
+    //**************************************************************************
+    /**
+     * Change weapon owner
+     * @param pOwner 
+     */
+    public void setOwner(Player pOwner){
+        this.owner = pOwner;
     }
     
     

@@ -4,6 +4,9 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.models.weapons.Weapon;
+import java.util.ArrayList;
+
 
 
 
@@ -33,6 +36,14 @@ public class PlayerHuman extends Player{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
+    /**
+     * Create a human with a existing list a weapon (Could be the Session Player) 
+     * for example
+     * @param pList 
+     */
+    public PlayerHuman(ArrayList<Weapon> pList){
+        super(pList);
+    }
     /**
      * Create a new Human player
      */
