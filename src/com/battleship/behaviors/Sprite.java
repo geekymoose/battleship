@@ -5,6 +5,8 @@
 
 package com.battleship.behaviors;
 
+import com.battleship.dynamic.ExplosionEvent;
+
 
 
 
@@ -69,4 +71,10 @@ public interface Sprite {
      * @return int value
      */
     public int getValue();
+    
+    /**
+     * Return name of the first explosion image for this sprite
+     * @return int first image name (Is a number)
+     */
+    public int getExplosion();
 }

@@ -43,6 +43,7 @@ public class Water implements Sprite{
     // Constants - Variables
     //**************************************************************************
     private     boolean     isHit;
+    private     int         idImgExplosion;
     
     
     
@@ -57,6 +58,7 @@ public class Water implements Sprite{
      */
     public Water(){
         this.isHit = false;
+        this.idImgExplosion = 105001;
     }
     
     
@@ -90,5 +92,10 @@ public class Water implements Sprite{
     @Override
     public int getValue(){
         return GameConstants.NO_VALUE;
+    }
+
+    @Override
+    public int getExplosion(){
+        return this.idImgExplosion;
     }
 }

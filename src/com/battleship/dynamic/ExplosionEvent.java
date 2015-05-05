@@ -1,6 +1,7 @@
-/* 
- * Creation : 28 March 2015
- * Project Computer Science L2 Semester 4 - BattleShip
+/*
+ * Class :      ExplosionEvent
+ * Creation:    May 5, 2015
+ * Author :     Constantin MASSON
  * 
  * 
  * IMPORTANT NOTE
@@ -12,52 +13,50 @@
  * It is working only if img have a numeric! (Some update will maybe add name 
  * with ABC characters, but later)
  * 
- * 
  */
+
 package com.battleship.dynamic;
+
 import com.battleship.asset.ThemeManager;
 import com.battleship.views.tools.UiElement;
+import java.awt.Image;
+import java.awt.Point;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
+
+
 
 
 
 /**
- * <h1>ImageIconEvent</h1>
- * <p>
- * public class ImageIconEvent<br/>
- * extends EventApp<br/>
- * implements UiElement
- * </p>
- * 
- * <p>ImageIconEvent is an event with specific ImageIcon state element to display. 
- * It extends EventApp and implements UiElement</p>
- * 
- * 
- * @date    Mar 29, 2015
- * @author  Constantin MASSON
- * @author  Anthony CHAFFOT
- * @author  Jessica FAVIN
- * 
- * @see EventApp
+ * <h1>ExplosionEvent</h1>
+ * <p>public class ExplosionEvent</p>
+ *
+ * @author Constantin MASSON
+ * @date May 5, 2015
  */
-public class ImageIconEvent extends EventApp implements UiElement{
+public class ExplosionEvent extends DynamicEvent implements UiElement{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create an ImageIconEvent
-     * 
+     * Create a new Dynamic event at specific position. 
+     * Position is a Point coordinate of the center of the event
      * @param pDelay        Delay to apply at this event
      * @param pFirst        position of the first state (Usually 0)
      * @param pEventType    set event type (LOOP_EVENT or STATIC_EVENT)
      * @param pCont         Where event is apply
+     * @param pPosition     explosion center of this event
      */
-    public ImageIconEvent(int pDelay, int pFirst, int pEventType, UiEventApp pCont){
-        super(pDelay,pFirst, pEventType, pCont);
+    public ExplosionEvent(int pDelay, int pFirst, int pEventType, UiEventApp pCont, Point pPosition){
+        super(pDelay, pFirst, pEventType, pCont, pPosition);
         this.loadUI();
     }
+    
+    
 
+    //**************************************************************************
+    // Functions
+    //**************************************************************************
     @Override
     public void loadUI(){
         this.reloadUI();
@@ -65,31 +64,29 @@ public class ImageIconEvent extends EventApp implements UiElement{
     
     @Override
     public void reloadUI(){
-        ArrayList<ImageIcon> list;
-        list = ThemeManager.getTheme().getDynamicImgIcon(000/* Add img*/);
+        ArrayList<Image> list;
+        list = ThemeManager.getTheme().getDynamicImg(105001);
         super.setListStates(list);
     }
     
     
-    
-    
-    
+
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
-    /**
-     * Return current event image
-     * @return ImageIcon to display at the moment
-     */
-    public ImageIcon getImgIcon(){
-        return ((ImageIcon)super.getCurrentState());
+    @Override
+    public Point getUpperLeftCorner(){
+        //return new Point(this.posX-(this.width/2), this.posY-(this.height/2));
+        int w   = ((Image)super.getListStates().get(this.currentStatePos)).getWidth(null);
+        int h   = ((Image)super.getListStates().get(this.currentStatePos)).getHeight(null);
+        return new Point(this.position.x-(w/2), this.position.y-(h/2));
     }
     
     /**
-     * Return first event image
-     * @return ImageIcon
+     * Return current event image
+     * @return Image
      */
-    public ImageIcon getFirstIcon(){
-        return ((ImageIcon)super.getFirstState());
+    public Image getCurrentImg(){
+        return (Image)super.getCurrentState();
     }
 }

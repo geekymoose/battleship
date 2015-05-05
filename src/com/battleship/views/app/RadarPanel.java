@@ -89,6 +89,7 @@ public class RadarPanel extends ContentPanel implements ObserverModel, GameConst
     public void displayRadarPlayer(int pOwner, int pShooter){
         if(pOwner>=0 && pOwner <= 2){
             this.switchGrid(pOwner);
+            this.setAttackedGrid(pOwner);
         }
     }
     
@@ -104,6 +105,17 @@ public class RadarPanel extends ContentPanel implements ObserverModel, GameConst
         this.add(this.currentGrid);
         this.revalidate();
         this.repaint();
+    }
+    
+    /**
+     * Set new attacked grid, other player has their cursor set to noAction.
+     * @param pOwner player number id (start at 0)
+     */
+    public void setAttackedGrid(int pOwner){
+        for(GridPanel grid:this.fleetGridPlayers){
+            grid.getGridCursor().setClickNoAction();
+        }
+        this.fleetGridPlayers[pOwner].getGridCursor().setClickShoot();
     }
     
     

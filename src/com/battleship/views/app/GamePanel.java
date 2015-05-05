@@ -6,7 +6,6 @@ package com.battleship.views.app;
 
 import com.battleship.asset.CheatCode;
 import com.battleship.asset.Config;
-import com.battleship.asset.Session;
 import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.controllers.GameController;
@@ -170,8 +169,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         //TMP DEBUG
         fleetPlayer1.getGridCursor().setClickNoArm();
         fleetPlayer2.getGridCursor().setClickNoArm();
-        radarPlayer1.getGridCursor().setClickShoot();
-        radarPlayer2.getGridCursor().setClickShoot();
+        //radarPlayer1.getGridCursor().setClickNoAction();
+        //radarPlayer2.getGridCursor().setClickNoAction();
         
         conf.getPlayers()[0].addObserver(this.p_radar);
         conf.getPlayers()[1].addObserver(this.p_radar);
@@ -197,6 +196,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
      */
     public void switchTurnDisplay(GameModel m, int pAction){
         switch(pAction){
+            
             case GameModel.GAME_OVER:
                 DebugTrack.showDebugMsg("Game Over");
                 this.p_bigCont.removeAll();
@@ -204,6 +204,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.p_bigCont.revalidate();
                 this.repaint();
                 break;
+                
             case GameModel.GAME_VICTORY:
                 DebugTrack.showDebugMsg("Victory");
                 this.p_bigCont.removeAll();
@@ -211,12 +212,18 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.p_bigCont.revalidate();
                 this.repaint();
                 break;
+                
             case GameModel.SWITCH_PAGE:
+                //Display the switch panel which create a break to switch player
                 int playerTurn  = m.getIdPlayerTurn();
                 int foe         = (playerTurn+1)%2;
                 this.p_radar.switchGrid(foe);
                 this.p_fleet.switchGrid(playerTurn);
                 this.switchPanel.display();
+                break;
+                
+            case GameModel.SWITCH_BEHAVIORS:
+                this.p_radar.setAttackedGrid(m.getIdPlayerTurn());
                 break;
             default:
                 this.repaint();
