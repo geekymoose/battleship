@@ -199,7 +199,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
         switch(pAction){
             case GameModel.GAME_OVER:
                 DebugTrack.showDebugMsg("Game Over");
-                Session.getSession().earnMoney(this.controller.getGameConfig().getPlayers()[0].getScore());
                 this.p_bigCont.removeAll();
                 this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_OVER));
                 this.p_bigCont.revalidate();
@@ -207,7 +206,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 break;
             case GameModel.GAME_VICTORY:
                 DebugTrack.showDebugMsg("Victory");
-                Session.getSession().earnMoney(this.controller.getGameConfig().getPlayers()[0].getScore());
                 this.p_bigCont.removeAll();
                 this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_VICTORY));
                 this.p_bigCont.revalidate();
