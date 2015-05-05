@@ -7,6 +7,7 @@
             <val id="config">102</val>
             <val id="place-boats">103</val>
             <val id="game">42</val>
+            <val id="bazaar">1024</val>
         </integer>
     </constants>
 </rooter>

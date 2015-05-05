@@ -5,8 +5,11 @@
 
 package com.battleship.asset;
 
+import com.battleship.constants.GameConstants;
+import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.models.game.Player;
 import com.battleship.models.game.PlayerHuman;
+import com.battleship.models.weapons.Missile;
 import com.battleship.models.weapons.Weapon;
 import java.util.ArrayList;
 
@@ -76,11 +79,21 @@ public class Session {
      * Initialize session status
      */
     private void initAccount(){
-        this.isConnected    = false;
         this.name           = "Unknown";
         this.isConnected    = false;
-        this.player         = new PlayerHuman();
         this.money          = 0;
+        this.listWeapon     = new ArrayList();
+        this.recoverData();
+        this.player         = null;
+    }
+    
+    /**
+     * Recover data from file if already played, otherwise, create new session
+     */
+    public void recoverData(){
+        this.listWeapon.add(new Missile(this.player, GameConstants.INFINITE_AMO));
+        this.money  = 0;
+        this.name   = "Unknown";
     }
     
     
@@ -88,8 +101,83 @@ public class Session {
     
     
     //**************************************************************************
-    // Functions
+    // Functions weapon sell / Buy
     //**************************************************************************
+    /**
+     * Add new weapon in current player weapon list. If weapon is already owned,
+     * throw ForbiddenAction Exception. Do nothing if null
+     * @param pWeapon weapon to add, if already exists, throw Exception
+     * @throws ForbiddenAction if already owned
+     */
+    private void addWeapon(Weapon pWeapon) throws ForbiddenAction{
+        if(pWeapon != null){
+            for(Weapon w : this.listWeapon){
+                if(pWeapon.getClass() == w.getClass()){
+                    throw new ForbiddenAction("You already have a "+pWeapon.getName()+" !");
+                }
+            }
+            this.listWeapon.add(pWeapon);
+            pWeapon.setOwner(this.player);
+        }
+    }
+    
+    /**
+     * Add ammo for a specific weapon. Session user must already have this weapon, 
+     * otherwise, throw a ForbiddenAction Exception. Add this amount of ammo 
+     * in current loader
+     * @param pWeapon   weapon where to add ammo
+     * @param pAmmo     Ammo to add in the weapon
+     * @throws ForbiddenAction if already owned
+     */
+    private void addAmmoWeapon(Weapon pWeapon, int pAmmo) throws ForbiddenAction{
+        if(pWeapon != null){
+            for(Weapon w : this.listWeapon){
+                if(pWeapon.getClass() == w.getClass()){
+                    w.addAmmo(pAmmo);
+                }
+            }
+            throw new ForbiddenAction("You must by a "+pWeapon.getName()+" before !");
+        }
+    }
+    
+    /**
+     * Try to buy a new weapon. Add in owned weapon if can do this, otherwise, 
+     * throw ForbiddenAction Exception (Not enough money, already owned etc)
+     * @param pWeapon   weapon to buy
+     * @throws ForbiddenAction throw if unable to buy
+     */
+    public void buyWeapon(Weapon pWeapon) throws ForbiddenAction{
+        if(pWeapon.getPriceWeapon() > this.money){
+            throw new ForbiddenAction("You don't have enough money!!!");
+        }else{
+            this.addWeapon(pWeapon);
+        }
+    }
+    
+    /**
+     * Try to buy a ammo for weapon. 
+     * @param pWeapon   weapon to buy
+     * @param pAmmo     
+     * @throws ForbiddenAction throw if unable to buy
+     */
+    public void buyAmmoWeapon(Weapon pWeapon, int pAmmo) throws ForbiddenAction{
+        if((pWeapon.getPriceAmmo()*pAmmo) > this.money){
+            throw new ForbiddenAction("You don't have enough money!!!");
+        }else{
+            this.addAmmoWeapon(pWeapon, pAmmo);
+        }
+    }
+    
+    /**
+     * Earn an among of money. It will add to current money. Do nothing if 
+     * value if less than 0
+     * @param pValue to add
+     */
+    public void earnMoney(int pValue){
+        if(pValue>=0){
+            this.money += pValue;
+        }
+    }
     
     
     
@@ -98,6 +186,13 @@ public class Session {
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
+    /**
+     * Return the current session
+     * @return Session
+     */
+    public static Session getSession(){
+        return Session.singleton;
+    }
     /**
      * Return current game mode used by this session
      * @return int game mode
@@ -112,6 +207,14 @@ public class Session {
      */
     public static Player getPlayer(){
         return Session.singleton.player;
+    }
+    
+    /**
+     * Return list of weapon owned by session player
+     * @return ArrayList<weapon> list of weapon owned
+     */
+    public static ArrayList<Weapon> getListWeapons(){
+        return Session.singleton.listWeapon;
     }
     
     

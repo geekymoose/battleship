@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
@@ -39,5 +40,8 @@ public class NuclearBomb extends Weapon{
     //**************************************************************************
     public NuclearBomb(Player pOwner, int pAmmo){
         super(GameConstants.NUKE, new ShotTypeNuclearBomb(), pOwner, pAmmo);
+        this.name           = "Nuke";
+        this.priceWeapon    = Config.getGameValues_int("price-nuke");
+        this.priceAmmo      = Config.getGameValues_int("price-ammo-nuke");
     }
 }

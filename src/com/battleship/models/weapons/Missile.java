@@ -7,6 +7,7 @@
 
 package com.battleship.models.weapons;
 
+import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
@@ -38,5 +39,8 @@ public class Missile extends Weapon{
     //**************************************************************************
     public Missile(Player pOwner, int pAmmo){
         super(GameConstants.MISSILE, new ShotTypeMissile(), pOwner, pAmmo);
+        this.name           = "Bomb";
+        this.priceWeapon    = Config.getGameValues_int("price-missile");
+        this.priceAmmo      = Config.getGameValues_int("price-ammo-missile");
     }
 }

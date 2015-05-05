@@ -6,6 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.asset.CheatCode;
 import com.battleship.asset.Config;
+import com.battleship.asset.Session;
 import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.controllers.GameController;
@@ -17,11 +18,13 @@ import com.battleship.models.game.GameModel;
 import com.battleship.models.game.Player;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
+import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -196,17 +199,19 @@ public class GamePanel extends PagePanel implements ObserverModel{
         switch(pAction){
             case GameModel.GAME_OVER:
                 DebugTrack.showDebugMsg("Game Over");
+                Session.getSession().earnMoney(this.controller.getGameConfig().getPlayers()[0].getScore());
                 this.p_bigCont.removeAll();
-                this.p_bigCont.add(new EndGamePanel(GameModel.GAME_OVER));
+                this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_OVER));
                 this.p_bigCont.revalidate();
                 this.repaint();
                 break;
             case GameModel.GAME_VICTORY:
+                DebugTrack.showDebugMsg("Victory");
+                Session.getSession().earnMoney(this.controller.getGameConfig().getPlayers()[0].getScore());
                 this.p_bigCont.removeAll();
-                this.p_bigCont.add(new EndGamePanel(GameModel.GAME_VICTORY));
+                this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_VICTORY));
                 this.p_bigCont.revalidate();
                 this.repaint();
-                DebugTrack.showDebugMsg("Victory");
                 break;
             case GameModel.SWITCH_PAGE:
                 int playerTurn  = m.getIdPlayerTurn();
@@ -351,17 +356,32 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * </p>
      * <p>Display the game issue for current player : Game over or victory</p>
      */
-    private class EndGamePanel extends JPanel{
-        private JLabel  l_titleReward;
-        public EndGamePanel(int pValue){
-            this.setBackground(Color.BLACK);
-            this.l_titleReward = new JLabel();
-            this.l_titleReward.setForeground(Color.WHITE);
+    private class EndGamePanel extends ContentPanel{
+        private JLabel      l_titleReward;
+        private JButton     b_return;
+        private JButton     b_goBazaar;
+        private int         kindOfEnd;
+        
+        public EndGamePanel(PagePanel pParent, int pValue){
+            super(pParent);
+            this.kindOfEnd = pValue;
+            this.initComponents();
+            this.setButtons();
+        }
+        
+        private void initComponents(){
+            this.b_return       = new JButton("Return");
+            this.b_goBazaar     = new JButton("Go bazaar");
+            this.l_titleReward  = new JLabel();
+            
+            this.setLayout(new FlowLayout());
             this.setPreferredSize(new Dimension(600,400));
-            this.add(this.l_titleReward);
+            this.setBackground(Color.BLACK);
+            this.l_titleReward.setForeground(Color.WHITE);
+            
             
             //Display voctory or game over
-            switch(pValue){
+            switch(this.kindOfEnd){
                 case GameModel.GAME_VICTORY:
                     this.l_titleReward.setText("Victory");
                     break;
@@ -369,6 +389,40 @@ public class GamePanel extends PagePanel implements ObserverModel{
                     this.l_titleReward.setText("Game over");
                     break;
             }
+            
+            this.add(this.l_titleReward);
+            this.add(this.b_return);
+            this.add(this.b_goBazaar);
+        }
+        
+        /*
+         * Set button function
+         */
+        private void setButtons(){
+            PagePanel page = ((PagePanel)parentPage);
+            this.b_goBazaar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    page.getFrame().rooting(Config.getRootsValues("bazaar"), true);
+                }
+            });
+            
+            this.b_return.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    page.getFrame().rooting(Config.getRootsValues("choose-game"), true);
+                }
+            });
+        }
+
+
+
+        @Override
+        public void loadUI(){
+        }
+        
+        @Override
+        public void reloadUI(){
         }
     }
 }
