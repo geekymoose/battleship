@@ -95,6 +95,7 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     //**************************************************************************
     @Override
     public void rooting(int path, Object param){
+        //Note this rooting mode, with XML file, was experimental
         this.getContentPane().removeAll();
         boolean reset = false;
         if (param instanceof Boolean && (Boolean)param == true){
