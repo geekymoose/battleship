@@ -4,9 +4,11 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.Config;
 import com.battleship.behaviors.Target;
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
+import com.battleship.dynamic.EventApp;
 import com.battleship.models.sprites.Water;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -140,7 +142,14 @@ public abstract class BoxMap implements Target, GameConstants{
     //**************************************************************************
     @Override
     public boolean hit(){
-        return this.content.hit();
+        if(this.content.hit()==true){
+            int img     = this.content.getExplosion();
+            int delay   = Config.getGameValues_int("timer-boat-explosion");
+            this.grid.addExplosion(delay, 0, EventApp.STATIC_EVENT, coordinate);
+            return true;
+        } else{
+            return false;
+        }
     }
 
     @Override

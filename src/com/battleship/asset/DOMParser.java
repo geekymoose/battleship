@@ -224,6 +224,32 @@ public class DOMParser {
      * @return HashMap with constants (key is String, value is Integer format)
      * @throws ExecError throws if unable to load constants
      */
+    public static HashMap<String, Double> getDoubleConstants(String pPath) 
+    throws ExecError{
+        HashMap<String, Double> list    = new HashMap();
+        
+        Document            doc         = DOMParser.getDoc(pPath);
+        Element             constants   = (Element)doc.getElementsByTagName("constants").item(0);
+        Element             integer     = (Element)constants.getElementsByTagName("double").item(0);
+        ArrayList<Element>  listValue   = DOMParser.getAllRecursiveChildElement(integer, "val");
+        
+        for(Element e : listValue){
+            String  key     = e.getAttribute("id");
+            double  value   = Double.valueOf(e.getTextContent());
+            DebugTrack.showInitConstant(key, value);
+            list.put(key, value);
+        }
+        return list;
+    }
+    
+    
+    /**
+     * Return all constants in the path given. Recover only Integer constants 
+     * (Means the constants in integer attribute from constants xml file)
+     * @param pPath file where to find constants
+     * @return HashMap with constants (key is String, value is Integer format)
+     * @throws ExecError throws if unable to load constants
+     */
     public static HashMap<String, Dimension> getDimensionConstants(String pPath) 
     throws ExecError{
         HashMap<String, Dimension> list    = new HashMap();

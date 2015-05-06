@@ -44,19 +44,21 @@ import javax.swing.JPanel;
  * implements GameConstants
  * </p>
  *
- * @author Constantin MASSON
- * @date May 4, 2015
+ * @date    May 4, 2015
+ * @author  Constantin MASSON
  */
 public class BazaarPanel extends PagePanel implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     ArrayList<ShopWeaponPanel>      listWeaponSell;
-    private     Image                           img_background;
+    private     ArrayList<ShopWeaponPanel>  listWeaponSell;
     
     private     JPanel              p_shopWeaponPan;
     private     HeadBar             headBar;
     private     UiButton            buttonBack;
+    
+    //Images
+    private     Image               img_background;
     
     
     
@@ -68,50 +70,59 @@ public class BazaarPanel extends PagePanel implements GameConstants{
     //**************************************************************************
     /**
      * Create a new BazaarPanel
-     * @param pFrame
-     * @throws ExecError 
+     * @param pFrame frame WindowFrame where Bazaar is placed
+     * @throws ExecError thrown if pFrame is null
      */
     public BazaarPanel(WindowFrame pFrame) throws ExecError{
         super(pFrame);
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
-        this.listWeaponSell = new ArrayList();
-        this.listWeaponSell.add(new ShopWeaponPanel(new Bomb(null, 1)));
-        this.listWeaponSell.add(new ShopWeaponPanel(new NuclearBomb(null, 1)));
-        this.listWeaponSell.add(new ShopWeaponPanel(new Torpedo(null, 1)));
         this.initComponents();
+        this.initButtons();
     }
     
+    /*
+     * Initialize all components
+     */
     private void initComponents() throws ExecError{
         this.headBar            = new HeadBar(this);
         this.buttonBack         = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
         this.p_shopWeaponPan    = new JPanel();
+        this.listWeaponSell     = new ArrayList();
+        this.listWeaponSell     .add(new ShopWeaponPanel(new Bomb(null, 1)));
+        this.listWeaponSell     .add(new ShopWeaponPanel(new NuclearBomb(null, 1)));
+        this.listWeaponSell     .add(new ShopWeaponPanel(new Torpedo(null, 1)));
         
         this.p_shopWeaponPan    .setLayout(new GridLayout(this.listWeaponSell.size(), 1));
         this                    .setLayout(new BorderLayout());
         this                    .setOpaque(false);
         this.p_shopWeaponPan    .setOpaque(false);
         
+        //Add elements
         for(ShopWeaponPanel ugh : this.listWeaponSell){
             this.p_shopWeaponPan.add(ugh);
+        }
         
+        this.add(this.headBar,          BorderLayout.NORTH);
+        this.add(this.p_shopWeaponPan,  BorderLayout.CENTER);
+        this.add(this.buttonBack,       BorderLayout.SOUTH);
+    }
+    
+    /**
+     * Initialize button functions
+     */
+    private void initButtons(){
         this.buttonBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 goPreviousPage();
             }
         });
-        }
-        
-        this.add(this.headBar, BorderLayout.NORTH);
-        this.add(this.p_shopWeaponPan, BorderLayout.CENTER);
-        this.add(this.buttonBack, BorderLayout.SOUTH);
     }
     
     
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -159,8 +170,17 @@ public class BazaarPanel extends PagePanel implements GameConstants{
     }
     
     
+    
+    //**************************************************************************
+    // Inner class ShopWeaponPanel
+    //**************************************************************************
     /**
-     * 
+     * <h1>ShopWeaponPanel</h1>
+     * <p>
+     * private class ShopWeaponPanel<br/>
+     * extends ContentPanel<br/>
+     * implements MouseListener
+     * </p>
      */
     private class ShopWeaponPanel extends ContentPanel implements MouseListener{
         //**********************************************************************

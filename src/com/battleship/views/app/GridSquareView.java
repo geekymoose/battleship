@@ -6,10 +6,12 @@
 package com.battleship.views.app;
 
 import com.battleship.controllers.GridController;
+import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.sprites.Water;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 
@@ -78,6 +80,16 @@ public class GridSquareView extends GridPanel{
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim, new Water(), c);
             }
+        }
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for(ExplosionEvent e : this.listExplosions){
+            int x = (e.getPosition().x * tabBox[0][0].getDimension().width)+5;
+            int y = (e.getPosition().y * tabBox[0][0].getDimension().height)+8;
+            g.drawImage(e.getCurrentImg(), x, y, this);
         }
     }
 }

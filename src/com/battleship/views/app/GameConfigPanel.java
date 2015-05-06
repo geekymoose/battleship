@@ -64,8 +64,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_right;
     private     JPanel                  p_bigCont;
     private     JPanel                  p_bigbigCont;
-    private     JPanel                  p_card1;
-    private     JPanel                  p_card2;
     private     HeadBar                 p_hb;
     
     private     JLabel                  l_grid1;
@@ -83,8 +81,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     ImageIcon               img_gridSquare;
     
     //Data
-    private     int                     gridWidth; //Not used atm
-    private     int                     gridHeight;//Not used atm
     private     int                     gridType;
     
     
@@ -115,30 +111,28 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
      * Init components
      */
     private void initComponents() throws ExecError{
-        p_buttons   = new JPanel();
-        p_center    = new JPanel();
-        p_container = new ContainerPanel();
-        p_left      = new JPanel();
-        p_right     = new JPanel();
-        p_bigCont   = new JPanel();
-        p_card1     = new JPanel();
-        p_card2     = new JPanel();
-        p_bigbigCont= new JPanel();
-        p_hb        = new HeadBar(this);
+        p_buttons       = new JPanel();
+        p_center        = new JPanel();
+        p_container     = new ContainerPanel();
+        p_left          = new JPanel();
+        p_right         = new JPanel();
+        p_bigCont       = new JPanel();
+        p_bigbigCont    = new JPanel();
+        p_hb            = new HeadBar(this);
         
-        cl          = new CardLayout();
-        gbc         = new GridBagConstraints();
-        p_bigbigCont.setLayout(new BorderLayout());
-        gbc.ipadx = 50;
-        gbc.ipady = 50;
+        cl              = new CardLayout();
+        gbc             = new GridBagConstraints();
+        p_bigbigCont    .setLayout(new BorderLayout());
+        gbc.ipadx       = 50;
+        gbc.ipady       = 50;
         
-        p_bigbigCont.setOpaque(false);
-        p_bigCont   .setOpaque(false);
-        p_container .setOpaque(false);
-        p_center    .setOpaque(false);
-        p_left      .setOpaque(false);
-        p_right     .setOpaque(false);
-        p_buttons   .setOpaque(false);
+        p_bigbigCont    .setOpaque(false);
+        p_bigCont       .setOpaque(false);
+        p_container     .setOpaque(false);
+        p_center        .setOpaque(false);
+        p_left          .setOpaque(false);
+        p_right         .setOpaque(false);
+        p_buttons       .setOpaque(false);
         
         this            .setLayout(new BorderLayout());
         p_buttons       .setLayout(new FlowLayout());
@@ -162,16 +156,13 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_buttons       .add(b_reset);
         p_buttons       .add(b_validate);
         
-        p_left          .add(b_left, BorderLayout.CENTER);
-        p_right         .add(b_right, BorderLayout.CENTER);
-        
-        //p_center        .add(l_grid1, "GRID1");
-        //p_center        .add(l_grid2, "GRID2");
+        p_left          .add(b_left,    BorderLayout.CENTER);
+        p_right         .add(b_right,   BorderLayout.CENTER);
         
         p_container     .add(p_buttons, BorderLayout.SOUTH);
-        p_container     .add(p_right, BorderLayout.EAST);
-        p_container     .add(p_left, BorderLayout.WEST);
-        p_container     .add(p_center, BorderLayout.CENTER);
+        p_container     .add(p_right,   BorderLayout.EAST);
+        p_container     .add(p_left,    BorderLayout.WEST);
+        p_container     .add(p_center,  BorderLayout.CENTER);
         
         //Magouille pour sizer le borderlayout
         p_bigCont.add(p_container, gbc);
@@ -284,8 +275,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     //**************************************************************************
     @Override
     public void update(ObservableModel o, Object arg){
-        this.gridWidth  = ((GameConfigModel)o).getGridWidth();
-        this.gridHeight = ((GameConfigModel)o).getGridHeight();
         this.gridType   = ((GameConfigModel)o).getGridType();
         
         //Button reset state
@@ -314,6 +303,13 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
        this.l_grid1.setIcon(this.img_gridHexa);
        this.l_grid2.setIcon(this.img_gridSquare);
        this.repaint();
+    }
+
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
     }
     
     
@@ -365,11 +361,4 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             }
         }
     } //End previous
-
-    
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
-    }
 }

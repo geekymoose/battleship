@@ -8,7 +8,12 @@ import com.battleship.asset.CheatCode;
 import com.battleship.asset.Session;
 import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 
 
@@ -42,6 +47,7 @@ public class GameModel extends Model implements GameConstants{
     public      static final int    SWITCH_PAGE             = 2;
     public      static final int    GAME_OVER               = 3;
     public      static final int    GAME_VICTORY            = 4;
+    public      static final int    SWITCH_BEHAVIORS        = 5;
     
     //Variables
     private     GameConfigModel     config;
@@ -109,35 +115,13 @@ public class GameModel extends Model implements GameConstants{
         
         switch(mode){
             case GameConstants.MODE_AI:
-                notifyObservers(GameModel.SWITCH_UPDATE);
-                SwingUtilities.invokeLater(new Runnable(){
-                    public void run(){
-                        try {
-                            Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
-                        } catch(InterruptedException ex) {
-                        }
-                        if(Session.getPlayer().getFleet().isFleetDestroyed()){
-                            notifyObservers(GameModel.GAME_OVER);
-                        } 
-                        else if(foe.getFleet().isFleetDestroyed()){
-                            notifyObservers(GameModel.GAME_VICTORY);
-                        }
-                        counterTurn++;
-                        currentPlayerTurn  = foeIndex;
-                        //AI player shoot on session player
-                        if(foe instanceof PlayerAI){
-                            DebugTrack.showExecMsg("AI Turn");
-                            counterTurn++;
-                            currentPlayerTurn  = 0;
-                            ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
-                            notifyObservers(GameModel.SWITCH_TURN);
-                        }
-                    }
-                });
+                notifyObservers(GameModel.SWITCH_BEHAVIORS);
+                DoBreak doBreak = new DoBreak(GameConstants.DELAY_SWITCH_BREAK);
+                doBreak.start();
                 break;
                 
             case GameConstants.MODE_V2:
-                notifyObservers(GameModel.SWITCH_UPDATE);
+                notifyObservers(GameModel.SWITCH_BEHAVIORS);
                 SwingUtilities.invokeLater(new Runnable(){
                     public void run(){
                         try {
@@ -145,9 +129,11 @@ public class GameModel extends Model implements GameConstants{
                         } catch(InterruptedException ex) {
                         }
                         if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_OVER);
                             return;
                         } else if(foe.getFleet().isFleetDestroyed()){
+                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
                             notifyObservers(GameModel.GAME_VICTORY);
                             return;
                         }
@@ -198,5 +184,49 @@ public class GameModel extends Model implements GameConstants{
      */
     public Player getPlayerTurn(){
         return this.listPlayers[this.currentPlayerTurn];
+    }
+    
+    
+    //**************************************************************************
+    // Inner Class : Temporary solution, it's a little bit ugly
+    //**************************************************************************
+    private class DoBreak implements ActionListener{
+        private final Timer timer;
+        
+        public DoBreak(int pDelay){
+            this.timer = new Timer(pDelay, this);
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e){
+            int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
+            Player  foe             = listPlayers[foeIndex];
+            if(Session.getPlayer().getFleet().isFleetDestroyed()){
+                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+                notifyObservers(GameModel.GAME_OVER);
+                return;
+            } 
+            else if(foe.getFleet().isFleetDestroyed()){
+                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+                notifyObservers(GameModel.GAME_VICTORY);
+                return;
+            }
+            counterTurn++;
+            currentPlayerTurn  = foeIndex;
+            notifyObservers(GameModel.SWITCH_BEHAVIORS);
+            //AI player shoot on session player
+            if(foe instanceof PlayerAI){
+                DebugTrack.showExecMsg("AI Turn");
+                counterTurn++;
+                currentPlayerTurn  = 0;
+                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
+                //notifyObservers(GameModel.SWITCH_TURN);
+            }
+            this.timer.stop();
+        }
+        
+        public void start(){
+            this.timer.start();
+        }
     }
 }
