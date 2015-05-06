@@ -145,7 +145,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : LAN");
                     Session.setGameMode(MODE_LAN);
-                    //To do later
+                    frame.rooting(Config.getRootsValues("reseau"), true);
                 }
             }
         );

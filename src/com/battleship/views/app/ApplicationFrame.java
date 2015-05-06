@@ -42,6 +42,7 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     private     final int   PLACE_BOATS     = Config.getRootsValues("place-boats");
     private     final int   GAME            = Config.getRootsValues("game");
     private     final int   BAZAAR          = Config.getRootsValues("bazaar");
+    private     final int   RESEAU          = Config.getRootsValues("reseau");
     
     private     final int   FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
     private     final int   FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
@@ -117,7 +118,9 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
             }else if(path == this.BAZAAR){
                 this.p_mainContent = new BazaarPanel(this);
                 
-            } else {
+            } else if (path == this.RESEAU){
+                this.p_mainContent = new ConnectPanel(this);
+            }else {
                 throw new ExecError(404); //Page not found
             }
         } catch(ExecError ex){
