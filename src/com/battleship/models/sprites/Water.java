@@ -70,8 +70,12 @@ public class Water implements Sprite{
     //**************************************************************************
     @Override
     public boolean hit(){
-        this.isHit = true;
-        return true;
+        if(this.isHit == true){
+            return false;
+        }else{
+            this.isHit = true;
+            return true;
+        }
     }
     
     @Override
