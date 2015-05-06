@@ -8,6 +8,7 @@
             <val id="place-boats">103</val>
             <val id="game">42</val>
             <val id="bazaar">1024</val>
+            <val id="reseau">2048</val>
         </integer>
     </constants>
 </rooter>
