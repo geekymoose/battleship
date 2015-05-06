@@ -11,26 +11,39 @@ import javax.swing.Timer;
 
 /**
  * <h1>TimerManager</h1>
- * <p>public class TimerManager</p>
+ * <p>
+ * public class TimerManager<br/>
+ * implements ActionListener
+ * </p>
+ * 
  * <p>Create a Timer class with function to start and stop timer</p>
  *
  * @date    Mar 26, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
+ * 
+ * @see javax.swing.Timer
  */
 public abstract class TimerManager implements ActionListener{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     Timer       timer;
+    private final Timer timer;
     
     
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
+    /**
+     * Create a new TimerManager
+     * @param pDelay delay to apply between to actionPerformed call
+     */
     public TimerManager(int pDelay){
-        this.timer              = new Timer(pDelay, this);
+        if(pDelay<=0){
+            pDelay = 1;
+        }
+        this.timer = new Timer(pDelay, this);
     }
     
     
@@ -50,5 +63,29 @@ public abstract class TimerManager implements ActionListener{
      */
     public void stopTimer(){
         this.timer.stop();
+    }
+    
+    
+    
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Return current delay
+     * @return int current timer delay
+     */
+    public int getDelay(){
+        return this.timer.getDelay();
+    }
+    
+    /**
+     * Set new delay, if less than 1, set to 1
+     * @param pDelay new delay
+     */
+    public void setDelay(int pDelay){
+        if(pDelay<=0){
+            pDelay = 1;
+        }
+        this.timer.setDelay(pDelay);
     }
 }

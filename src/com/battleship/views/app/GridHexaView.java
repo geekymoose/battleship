@@ -5,10 +5,12 @@
 package com.battleship.views.app;
 
 import com.battleship.controllers.GridController;
+import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.sprites.Water;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 
@@ -77,6 +79,17 @@ public class GridHexaView extends GridPanel{
             for (int x = 0; x < this.gridWidth; x++) {
                 this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim, new Water(), c);
             }
+        }
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for(ExplosionEvent e : this.listExplosions){
+            int x   = (e.getPosition().x * (tabBox[0][0].getDimension().width-8))+15;
+            int y   = (e.getPosition().y * tabBox[0][0].getDimension().height)+10;
+            int dy  = (e.getPosition().x%2==0)? 0:25;
+            g.drawImage(e.getCurrentImg(), x, y+dy, this);
         }
     }
 }

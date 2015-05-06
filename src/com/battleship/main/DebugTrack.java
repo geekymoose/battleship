@@ -121,6 +121,17 @@ public abstract class DebugTrack {
      * @param type  data type
      * @param value value created
      */
+    public static void showInitConstant(String type, double value){
+        if(debug_mode == false){return;}
+        while(type.length()<15){ type += " "; }
+        System.out.println(" *** Constants -> name : "+type+"\t-\tvalue : "+value);
+    }
+    
+    /**
+     * Display data about a constant created (From XML file or other)
+     * @param type  data type
+     * @param value value created
+     */
     public static void showInitConstant(String type, Dimension value){
         if(debug_mode == false){return;}
         while(type.length()<15){ type += " "; }

@@ -8,7 +8,6 @@ package com.battleship.asset;
 import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.models.game.Player;
-import com.battleship.models.game.PlayerHuman;
 import com.battleship.models.weapons.Missile;
 import com.battleship.models.weapons.Weapon;
 import java.util.ArrayList;
@@ -76,24 +75,17 @@ public class Session {
     }
     
     /**
-     * Initialize session status
+     * Initialize session status with default values
      */
     private void initAccount(){
         this.name           = "Unknown";
         this.isConnected    = false;
         this.money          = 0;
         this.listWeapon     = new ArrayList();
-        this.recoverData();
+        this.money          = 0;
+        this.name           = "Unknown";
         this.player         = null;
-    }
-    
-    /**
-     * Recover data from file if already played, otherwise, create new session
-     */
-    public void recoverData(){
-        this.listWeapon.add(new Missile(this.player, GameConstants.INFINITE_AMO));
-        this.money  = 0;
-        this.name   = "Unknown";
+        this.listWeapon     .add(new Missile(this.player, GameConstants.INFINITE_AMO));
     }
     
     
@@ -179,6 +171,17 @@ public class Session {
         }
     }
     
+    /**
+     * Ear an among of money calculated from current score
+     * @param pScore score
+     */
+    public void earMoneyFromScore(int pScore){
+        if(pScore>=0){
+            int value = (int)(pScore * Config.getGameValues_double("rate-score-money"));
+            this.earnMoney(value);
+        }
+    }
+    
     
     
     
@@ -211,14 +214,14 @@ public class Session {
     
     /**
      * Return list of weapon owned by session player
-     * @return ArrayList<weapon> list of weapon owned
+     * @return ArrayList of Weapon with weapon owned
      */
     public static ArrayList<Weapon> getListWeapons(){
         return Session.singleton.listWeapon;
     }
     
     
-    
+    //**************************************************************************
     /**
      * Set a new game mode for this Session
      * @param pValue 

@@ -49,6 +49,7 @@ public class Config {
     private static      HashMap<String, Dimension>  l_dimConfig_dim;
     private static      HashMap<String, Integer>    l_dimConfig_int;
     private static      HashMap<String, Integer>    l_gameConfig_int;
+    private static      HashMap<String, Double>     l_gameConfig_double;
     private static      HashMap<String, String>     l_gameConfig_str;
     private static      HashMap<String, String>     l_themeConfig_str;
     private static      HashMap<String, Integer>    l_roots;
@@ -103,6 +104,7 @@ public class Config {
         Config.l_dimConfig_int      = DOMParser.getIntegerConstants(dimConfigPath);
         Config.l_gameConfig_int     = DOMParser.getIntegerConstants(gameConfigPath);
         Config.l_gameConfig_str     = DOMParser.getStringConstants(gameConfigPath);
+        Config.l_gameConfig_double  = DOMParser.getDoubleConstants(gameConfigPath);
         
         //Theme constants
         Config.l_themeConfig_str    = DOMParser.getStringConstants(themeConfigPath);
@@ -174,6 +176,17 @@ public class Config {
      */
     public static int getGameValues_int(String pName){
         Integer val = Config.l_gameConfig_int.get(pName);
+        DebugTrack.isValidConstantsName(val, pName);
+        return val;
+    }
+    
+    /**
+     * Return game constants with double value
+     * @param pName
+     * @return 
+     */
+    public static double getGameValues_double(String pName){
+        double val = Config.l_gameConfig_double.get(pName);
         DebugTrack.isValidConstantsName(val, pName);
         return val;
     }

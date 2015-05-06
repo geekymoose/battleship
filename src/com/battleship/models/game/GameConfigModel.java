@@ -107,6 +107,7 @@ public class GameConfigModel extends Model implements GameConstants{
         this.nbMinPlayer        = Config.getGameValues_int(("nb-min-players"));
         this.listPlayers        = new Player[this.nbMaxPlayer];
         Session.setPlayer(new PlayerHuman(Session.getListWeapons()));
+        Session.getPlayer().setName("Session");
         switch(Session.getGameMode()){
             case MODE_AI:
                 this.listPlayers[0]     = Session.getPlayer();

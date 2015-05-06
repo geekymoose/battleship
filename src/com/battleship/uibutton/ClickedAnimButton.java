@@ -7,9 +7,10 @@ package com.battleship.uibutton;
 
 import com.battleship.dynamic.ImageIconEvent;
 import java.awt.event.MouseEvent;
-import com.battleship.dynamic.UiStaticEvent;
+import com.battleship.dynamic.UiEventApp;
 import java.awt.event.MouseAdapter;
 import com.battleship.asset.Config;
+import com.battleship.dynamic.EventApp;
 
 
 
@@ -18,8 +19,8 @@ import com.battleship.asset.Config;
  * <p>
  * public class ClickedAnimButton<br/>
  * UiButtonDecorator<br/>
- * implements UiStaticEvent
- * </p>
+ implements UiEventApp
+ </p>
  *
  * 
  * @date    Mar 29, 2015
@@ -27,7 +28,7 @@ import com.battleship.asset.Config;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEvent{
+public class ClickedAnimButton extends UiButtonDecorator implements UiEventApp{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -47,7 +48,7 @@ public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEven
         super(pButton);
         int delay       = Config.getGameValues_int("default-button-timer");
         int idClicked   = this.uibutton.getIdClicked();
-        this.event      = new ImageIconEvent(delay, idClicked, this);
+        this.event      = new ImageIconEvent(delay, idClicked, EventApp.STATIC_EVENT, this);
         
         this.uibutton.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,17 +65,17 @@ public class ClickedAnimButton extends UiButtonDecorator implements UiStaticEven
     // Functions
     //**************************************************************************
     @Override
-    public void startUiImageEvent(){
+    public void startUiEvent(EventApp pEvent){
         //Nothing
     }
     
     @Override
-    public void updateUiImageEvent(){
+    public void updateUiEvent(EventApp pEvent){
         this.uibutton.setIcon(event.getImgIcon());
     }
     
     @Override
-    public void stopUiImageEvent(){
+    public void stopUiEvent(EventApp pEvent){
         this.uibutton.resetButton();
     }
 }

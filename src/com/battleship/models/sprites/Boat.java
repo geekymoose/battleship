@@ -7,6 +7,7 @@ package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
+import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 import java.util.ArrayList;
@@ -248,7 +249,7 @@ public abstract class Boat implements GameConstants{
     private class Compartment implements Sprite {
         private     boolean     isDestroyed;
         private     BoxMap      boxPosition;
-        private     int[]       id_img;  //Image data (Identification)
+        private     int         idImgExplosion;
         
         
 
@@ -264,6 +265,7 @@ public abstract class Boat implements GameConstants{
         protected Compartment(BoxMap pPosition){
             this.isDestroyed    = false;
             this.boxPosition    = pPosition;
+            this.idImgExplosion = 105001;
         }
 
 
@@ -337,6 +339,11 @@ public abstract class Boat implements GameConstants{
         @Override
         public int getValue(){
             return value;
+        }
+
+        @Override
+        public int getExplosion(){
+            return this.idImgExplosion;
         }
     } //----------------------------------END INNER CLASS-----------------------
 }
