@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * extends Player
  * </p>
  *
- * @date    Mar 24, 2015
+ * @since   Mar 24, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -30,7 +30,7 @@ public class PlayerHuman extends Player{
     /**
      * Create a human with a existing list a weapon (Could be the Session Player) 
      * for example
-     * @param pList 
+     * @param pList list of owned weapon
      */
     public PlayerHuman(ArrayList<Weapon> pList){
         super(pList);

@@ -23,7 +23,7 @@ import java.awt.Point;
  * upper left corner and so on
  * </p>
  * 
- * @date    Apr 30, 2015
+ * @since   Apr 30, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT

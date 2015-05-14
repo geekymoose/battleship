@@ -4,6 +4,7 @@
  */
 package com.battleship.models.game;
 
+import com.battleship.asset.PooFactory;
 import com.battleship.asset.RandomManager;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.GameConstants;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
  * </p>
  *
  * 
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -43,8 +44,6 @@ public abstract class Player extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     static int              counterPlayer = 0;
-    private     int                     idPlayer;
     private     String                  name;
     private     FleetGridModel          fleetGrid;
     private     GameModel               game; //Game where player is playing
@@ -77,8 +76,6 @@ public abstract class Player extends Model implements GameConstants{
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
     public Player() {
-        this.idPlayer               = Player.counterPlayer;
-        Player.counterPlayer++;
         this.name                   = "MisterSwadow";
         this.score                  = 0;
         this.scoreCombo             = 1;
@@ -87,7 +84,7 @@ public abstract class Player extends Model implements GameConstants{
         this.game                   = null;
         
         //Add default weapon and set current weapon to this weapon
-        this.listWeapons.add(new Missile(this, INFINITE_AMO));
+        this.listWeapons.add(new Missile(this, Weapon.INFINITE_AMO));
         this.currentWeaponIndex     = 0;
         this.currentSelectedBoat    = null;
         this.listBoatsOwned         = new ArrayList();
@@ -189,6 +186,16 @@ public abstract class Player extends Model implements GameConstants{
             pWeapon.setOwner(this);
         }
         this.notifyObservers(null);
+    }
+    
+    /**
+     * Add a weapon in player weapon list, using weapon id. 
+     * @param pIdWeapon id of the weapon to add
+     * @param pAmmo     ammo of the weapon
+     */
+    public void addWeapon(int pIdWeapon, int pAmmo){
+        Weapon w = PooFactory.createWeaponFromId(pIdWeapon, pAmmo);
+        this.addWeapon(w);
     }
     
     /**
@@ -327,7 +334,7 @@ public abstract class Player extends Model implements GameConstants{
     
     /**
      * Return player fleet grid
-     * @return 
+     * @return FleetGridModel fleet owned by player
      */
     public FleetGridModel getFleet(){
         return this.fleetGrid;
@@ -335,7 +342,7 @@ public abstract class Player extends Model implements GameConstants{
     
     /**
      * Return current selected boat
-     * @return Boat
+     * @return Boat selected boat
      */
     public Boat getSelectedBoat(){
         return this.currentSelectedBoat;
@@ -347,14 +354,6 @@ public abstract class Player extends Model implements GameConstants{
      */
     public Weapon getCurrentWeapon(){
         return this.listWeapons.get(this.currentWeaponIndex);
-    }
-    
-    /**
-     * Return player id
-     * @return 
-     */
-    private int getIdPlayer(){
-        return this.idPlayer;
     }
     
     //**************************************************************************
@@ -374,7 +373,7 @@ public abstract class Player extends Model implements GameConstants{
     /**
      * Set player fleet grid (If already have one, the old will be lost). 
      * If null given, old grid is deleted and replaced by null
-     * @param pGrid 
+     * @param pGrid fleetGrid to set for the player
      */
     public void setFleetGrid(FleetGridModel pGrid){
         this.fleetGrid = pGrid;
@@ -385,9 +384,17 @@ public abstract class Player extends Model implements GameConstants{
     
     /**
      * Set the GameModel de player
-     * @param pGame 
+     * @param pGame place player in a game
      */
     public void setGameModel(GameModel pGame){
         this.game = pGame;
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Network function
+    //**************************************************************************
 }

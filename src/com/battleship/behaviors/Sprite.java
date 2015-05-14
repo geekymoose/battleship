@@ -5,8 +5,6 @@
 
 package com.battleship.behaviors;
 
-import com.battleship.dynamic.ExplosionEvent;
-
 
 
 
@@ -19,7 +17,7 @@ import com.battleship.dynamic.ExplosionEvent;
  * A Sprite is a item which is placed on a BoxMap. It could be hit by a shot.
  * </p>
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -62,7 +60,7 @@ public interface Sprite {
     
     /**
      * Return current sprite state. For example, sprite can be a boat, water, hit
-     * @return 
+     * @return int state of the sprite
      */
     public int getState();
     

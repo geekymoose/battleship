@@ -27,7 +27,7 @@ import javax.swing.JPanel;
  * </p>
  * 
  * 
- * @date    Feb 11. 2015
+ * @since   Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -65,7 +65,7 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     //**************************************************************************
     /**
      * Create a new Application Frame
-     * @throws ExecError
+     * @throws ExecError thrown if unable to create ApplicationFrame
      */
     public ApplicationFrame() throws ExecError {
         this.setTitle(Config.getGameValues_str("frame-title"));

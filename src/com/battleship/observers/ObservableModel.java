@@ -12,15 +12,16 @@ package com.battleship.observers;
  * <p>public interface ObservableModel</p>
  * 
  * <p>
- This class represents an ObservableModel object. 
- </p>
+ * This class represents an ObservableModel object. 
+ * </p>
  *
- * @date    Feb 11, 2015
+ * 
+ * @since   Feb 11, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
- * @see     ObserverModel
  * 
+ * @see     ObserverModel
  */
 public interface ObservableModel{
     /**

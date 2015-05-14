@@ -13,7 +13,7 @@ package com.battleship.views.tools;
  * <h1>WindowFrame</h1>
  * <p>public interface WindowFrame</p>
  *
- * @date    Mar 11, 2015
+ * @since   Mar 11, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

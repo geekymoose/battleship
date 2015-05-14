@@ -29,7 +29,7 @@ import javax.swing.Timer;
  * a GameConfigModel class.
  * </p>
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -244,7 +244,7 @@ public class GameModel extends Model implements GameConstants{
     //**************************************************************************
     /**
      * Return game config used by this game
-     * @return 
+     * @return GameConfigModel 
      */
     public GameConfigModel getConfig(){
         return this.config;

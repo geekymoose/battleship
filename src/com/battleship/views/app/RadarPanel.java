@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * </p>
  * <p>Display user radar grid</p>
  * 
- * @date    11 févr. 2015
+ * @since   11 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

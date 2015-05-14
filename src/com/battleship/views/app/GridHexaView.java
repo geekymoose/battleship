@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  * </p>
  * <p>Display an hexagon grid</p>
  *
- * @date    Apr 1, 2015
+ * @since   Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -62,14 +62,14 @@ public class GridHexaView extends GridPanel{
     
     /**
      * Create a new Hexagon grid in view with the choice of the color
-     * @param pParent
-     * @param pController
-     * @param pW
-     * @param pH
-     * @param pType
-     * @param pDim
+     * @param pParent       parent PagePanel where grid is placed
+     * @param pController   grid controller
+     * @param pW            grid width
+     * @param pH            grid height
+     * @param pType         grid type
+     * @param pDim          grid dimension
      * @param c Color for the borders of the grid
-     * @throws ExecError 
+     * @throws ExecError thrown if error during creation
      */
     public GridHexaView(JPanel pParent, GridController pController, 
                         int pW, int pH, int pType, Dimension pDim, Color c) throws ExecError{

@@ -18,10 +18,8 @@ import javax.swing.Timer;
  * 
  * <p>Create a Timer class with function to start and stop timer</p>
  *
- * @date    Mar 26, 2015
+ * @since   Mar 26, 2015
  * @author  Constantin MASSON
- * @author  Anthony CHAFFOT
- * @author  Jessica FAVIN
  * 
  * @see javax.swing.Timer
  */

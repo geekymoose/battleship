@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  * same time.
  * </p>
  *
- * @date    Mar 13, 2015
+ * @since   Mar 13, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -36,7 +36,7 @@ import javax.swing.ImageIcon;
  * for further information about constants used
  * </p>
  *
- * @date    Mar 14, 2015
+ * @since   Mar 14, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -228,7 +228,7 @@ public class Theme{
     /**
      * Check if image exists. (Check from id image)
      * @param pImageId id of image to find
-     * @return 
+     * @return true if image exists, otherwise, return false
      */
     public boolean imgExists(int pImageId){
         Image img =  this.listImg.get(pImageId);
@@ -277,8 +277,8 @@ public class Theme{
     /**
      * Return a Buffered image linked with pImageId value. If no image are linked with, 
      * return null
-     * @param pImageId
-     * @return 
+     * @param pImageId id of image to get
+     * @return BufferedImage created
      */
     public BufferedImage getBufferedImg(int pImageId){
         Image img = this.getImg(pImageId);

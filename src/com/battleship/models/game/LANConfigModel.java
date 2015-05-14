@@ -19,7 +19,7 @@ import com.battleship.main.DebugTrack;
  * 
  * <p>Description</p>
  * 
- * @date    24 mars 2015
+ * @since   24 mars 2015
  * @author  Contsantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

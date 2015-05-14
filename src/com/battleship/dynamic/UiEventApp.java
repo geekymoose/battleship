@@ -17,10 +17,8 @@ package com.battleship.dynamic;
  * </p>
  * 
  * 
- * @date    Mar 26, 2015
+ * @since   Mar 26, 2015
  * @author  Constantin MASSON
- * @author  Anthony CHAFFOT
- * @author  Jessica FAVIN
  * 
  * @see StaticImageEvent
  */

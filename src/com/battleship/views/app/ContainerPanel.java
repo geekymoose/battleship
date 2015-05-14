@@ -21,7 +21,7 @@ import javax.swing.BorderFactory;
  * </p>
  * <p><Display a special background</p>
  * 
- * @date    3 Apr. 2015
+ * @since   3 Apr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

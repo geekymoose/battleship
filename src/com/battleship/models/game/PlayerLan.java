@@ -19,7 +19,7 @@ import com.battleship.behaviors.Target;
  * </p>
  * <p>Player is controlled player in remote computer</p>
  *
- * @date    Mar 24, 2015
+ * @since   Mar 24, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT

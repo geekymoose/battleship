@@ -26,7 +26,7 @@ import java.util.HashMap;
  * ThemeManager creation. It could be changed later.
  * </p>
  *
- * @date    Mar 14, 2015
+ * @since   Mar 14, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -9,7 +9,7 @@ import java.awt.Dimension;
 
 
 /**
- * @date    31 mars 2015
+ * @since   31 mars 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

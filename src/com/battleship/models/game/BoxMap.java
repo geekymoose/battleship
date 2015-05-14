@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * </p>
  *
  * 
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT

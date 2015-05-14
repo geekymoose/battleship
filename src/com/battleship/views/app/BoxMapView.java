@@ -25,7 +25,7 @@ import java.awt.Point;
  * </p>
  * <p>Display a BoxMap</p>
  *
- * @date    Apr 1, 2015
+ * @since   Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -128,7 +128,7 @@ public abstract class BoxMapView implements UiElement{
     //**************************************************************************
     /**
      * Draw the BoxMap
-     * @param g2 
+     * @param g2 Graphics2D
      */
     public void draw(Graphics2D g2){
         if(this.isHidden){
@@ -145,7 +145,7 @@ public abstract class BoxMapView implements UiElement{
     
     /**
      * Draw default box
-     * @param g2 
+     * @param g2 Graphics 2D used
      */
     protected abstract void drawDefault(Graphics2D g2);
     
@@ -157,13 +157,13 @@ public abstract class BoxMapView implements UiElement{
     
     /**
      * Draw box with decoration used when targeted
-     * @param g2 
+     * @param g2 Graphics 2D used
      */
     protected abstract void drawTargeted(Graphics2D g2);
     
     /**
      * Draw box with decoration used when cursor is hover
-     * @param g2 
+     * @param g2 Graphics 2D used
      */
     protected abstract void drawHover(Graphics2D g2);
     
@@ -216,7 +216,7 @@ public abstract class BoxMapView implements UiElement{
     
     /**
      * Set targeted value
-     * @param pValue 
+     * @param pValue  true if targeted or false if not
      */
     public void setTargeted(boolean pValue){
         this.isTargeted = pValue;
@@ -224,7 +224,7 @@ public abstract class BoxMapView implements UiElement{
     
     /**
      * Set hover value
-     * @param pValue 
+     * @param pValue true if hover or false if not
      */
     public void setHover(boolean pValue){
         this.isHover = pValue;

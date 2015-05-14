@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * <p>public abstract class DebugTrack</p>
  * <p>Create a debug trace for data</p>
  *
- * @date    Mar 12, 2015
+ * @since   Mar 12, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -57,9 +57,10 @@ public abstract class DebugTrack {
     //**************************************************************************
     /**
      * Check if a constant name exists in constants list. Is this constant doesn't 
-     * exists, display error message and stop program
-     * @param o
-     * @param name 
+     * exists, display error message and stop program. Object o is the object 
+     * created from constants name. If o is null, constants name doesn't exists
+     * @param o     object to check, should be create from constants name
+     * @param name  constants name
      */
     public static void isValidConstantsName(Object o, String name){
         if(debug_mode == false){return;}
@@ -180,7 +181,7 @@ public abstract class DebugTrack {
     /**
      * Display a message for tmp debug. Display which function called the track 
      * and show data
-     * @param str 
+     * @param str String to display with debug format
      */
     public static void showDebugMsg(String str){
         if(debug_mode == false){return;}
@@ -189,7 +190,7 @@ public abstract class DebugTrack {
     
     /**
      * Display data about a point
-     * @param p 
+     * @param p Point to display
      */
     public static void showPointData(Point p){
         if(debug_mode == false){return;}
@@ -199,8 +200,8 @@ public abstract class DebugTrack {
     
     /**
      * Display data about a point (From 2 coordinates)
-     * @param x
-     * @param y 
+     * @param x coordinate
+     * @param y coordinate
      */
     public static void showPointData(int x, int y){
         if(debug_mode == false){return;}

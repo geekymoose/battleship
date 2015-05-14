@@ -44,7 +44,7 @@ import javax.swing.JPanel;
  * extends PagePanel
  * </p>
  * 
- * @date    11 févr. 2015
+ * @since   11 févr. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -19,7 +19,7 @@ package com.battleship.uibutton;
  * for further informations.
  * </p>
  *
- * @date    Mar 29, 2015
+ * @since   Mar 29, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -19,8 +19,8 @@ import com.battleship.main.DebugTrack;
  * implements GameConstants
  * </p>
  *
- * @author Constantin MASSON
- * @date Apr 2, 2015
+ * @since   Apr 2, 2015
+ * @author  Constantin MASSON
  */
 public class PlaceBoatsModel extends Model implements GameConstants{
     //**************************************************************************
@@ -40,8 +40,8 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     /**
      * Create a new PlaceBoatsModel use to place user boats. There are 2 players 
      * (Means there are 2 FleetGridModel)
-     * @param pConfig
-     * @throws ExecError 
+     * @param pConfig is the configuration used to create the game
+     * @throws ExecError thrown if error
      */
     //public PlaceBoatsModel(GameConfigModel pConfig, FleetGridModel[] pFleets) throws ExecError{
     public PlaceBoatsModel(GameConfigModel pConfig) throws ExecError{
@@ -151,7 +151,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     //**************************************************************************
     /**
      * Return type grid
-     * @return 
+     * @return int grid type
      */
     public int getGridType(){
         return this.config.getGridType();
@@ -159,7 +159,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     
     /**
      * Return grid Width
-     * @return 
+     * @return int grid width
      */
     public int getGridWidth(){
         return this.config.getGridWidth();
@@ -167,7 +167,7 @@ public class PlaceBoatsModel extends Model implements GameConstants{
     
     /**
      * Return grid height
-     * @return 
+     * @return int grid height
      */
     public int getGridHeight(){
         return this.config.getGridHeight();

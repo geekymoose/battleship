@@ -33,7 +33,7 @@ import com.battleship.constants.GameConstants;
  * <p>This sprite was already hit by a shot, it is of no use to shot on again.</p>
  *
  * 
- * @date    Feb 15, 2015
+ * @since   Feb 15, 2015
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  * @author  Contsantin MASSON

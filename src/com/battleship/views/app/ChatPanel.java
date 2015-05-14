@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  * <h1></h1>
  * 
  * 
- * @date    Feb 11. 2015
+ * @since   Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -44,7 +44,7 @@ public class ChatPanel extends ContentPanel {
     //**************************************************************************
     /**
      * Constructor of the ChatPanel
-     * @param pParent 
+     * @param pParent parent panel
      */
     public ChatPanel(JPanel pParent) {
         super(pParent);

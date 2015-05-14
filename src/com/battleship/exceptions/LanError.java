@@ -14,7 +14,7 @@ package com.battleship.exceptions;
  * extends Exception
  * </p>
  *
- * @date    May 14, 2015
+ * @since   May 14, 2015
  * @author  Constantin MASSON
  */
 public class LanError extends Exception {

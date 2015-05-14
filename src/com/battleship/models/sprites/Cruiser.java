@@ -25,7 +25,7 @@ import com.battleship.constants.GameConstants;
  *      <li>Number Lives : 3</li>
  *  </ul>
  * 
- * @date    Feb 11. 2015
+ * @since   Feb 11. 2015
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  * @author  Contsantin MASSON

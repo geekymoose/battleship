@@ -20,7 +20,7 @@ import javax.swing.AbstractButton;
  * <p>A button with text and a background</p>
  * 
  *
- * @date    Mar 29, 2015
+ * @since   Mar 29, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -85,7 +85,7 @@ public class MsgButton extends UiButton{
     
     /**
      * Create a simple button with only a text
-     * @param pMsg 
+     * @param pMsg  message to display
      */
     public MsgButton(String pMsg){
         super();

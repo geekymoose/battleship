@@ -22,8 +22,8 @@ import java.awt.Point;
  * implements ClickType
  * </p>
  *
- * @author Constantin MASSON
- * @date Apr 4, 2015
+ * @since   Apr 4, 2015
+ * @author  Constantin MASSON
  */
 public class ClickShoot implements ClickType{
     private Player owner;

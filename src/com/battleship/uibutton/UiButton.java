@@ -29,7 +29,7 @@ import javax.swing.JButton;
  * <p>User Interface button</p>
  * 
  * 
- * @date    Mar 26, 2015
+ * @since   Mar 26, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
