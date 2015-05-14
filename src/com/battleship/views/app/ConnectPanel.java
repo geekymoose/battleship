@@ -8,10 +8,6 @@ import com.battleship.asset.Config;
 import com.battleship.asset.Session;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
-import static com.battleship.constants.GameConstants.MODE_AI;
-import static com.battleship.constants.GameConstants.MODE_INTERNET;
-import static com.battleship.constants.GameConstants.MODE_LAN;
-import static com.battleship.constants.GameConstants.MODE_V2;
 import com.battleship.controllers.GameConfigController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -38,10 +34,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * @date 5 mai 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @since   5 mai 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class ConnectPanel extends PagePanel implements GameConstants, UiElement {
     private GameConfigController    controller;
@@ -63,17 +59,12 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     // CONSTRUCTOR
     //**************************************************************************
 
-    /**
-     *
-     * @param pFrame
-     * @param pController
-     * @throws ExecError
-     */
     public ConnectPanel(WindowFrame pFrame) throws ExecError {
         super(pFrame);
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.loadUI();
+        System.out.println("AAAA");
     }
 
     //**************************************************************************

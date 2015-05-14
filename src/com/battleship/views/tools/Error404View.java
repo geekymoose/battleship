@@ -21,7 +21,7 @@ import javax.swing.JLabel;
  * </p>
  * <p>Page displayed if error</p>
  *
- * @date    Mar 13, 2015
+ * @since   Mar 13, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -44,7 +44,7 @@ public class Error404View extends PagePanel{
      * Create error 404 page with specific error message from id constants
      * @param pFrame    Frame containing this panel
      * @param pMsg      message to display
-     * @throws ExecError
+     * @throws ExecError thrown if unable to create page 
      */
     public Error404View(WindowFrame pFrame, String pMsg) throws ExecError{
         super(pFrame);

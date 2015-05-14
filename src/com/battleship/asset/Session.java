@@ -5,7 +5,6 @@
 
 package com.battleship.asset;
 
-import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.models.game.Player;
 import com.battleship.models.weapons.Missile;
@@ -21,21 +20,21 @@ import java.util.ArrayList;
  * <p>public class Session</p>
  * 
  * <p>
- * This class is used for account. It represent the current logged session. <br/>
+ * This class is used for account. It represent the current logged session. </p><p>
  * When user launch the game program, Session is created. According to 
  * game mode, the Session need a web login or local login. (Or no 
  * login at all). 
- * <br/>
+ * </p><p>
  * Save user data. When user start the game, a empty session is created (No data) 
  * Depending of the game mode (AI / 2v2 / LAN / Internet), the session is 
  * set with data (For example, it save current game type and recover 
  * weapons user have got)
- * <br/>
+ * </p><p>
  * Pattern Singleton is used for Session
  * </p>
  *
  * 
- * @date    Feb 25, 2015
+ * @since   Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -85,7 +84,7 @@ public class Session {
         this.money          = 0;
         this.name           = "Unknown";
         this.player         = null;
-        this.listWeapon     .add(new Missile(this.player, GameConstants.INFINITE_AMO));
+        this.listWeapon     .add(new Missile(this.player, Weapon.INFINITE_AMO));
     }
     
     
@@ -149,7 +148,7 @@ public class Session {
     /**
      * Try to buy a ammo for weapon. 
      * @param pWeapon   weapon to buy
-     * @param pAmmo     
+     * @param pAmmo     among of ammo to buy
      * @throws ForbiddenAction throw if unable to buy
      */
     public void buyAmmoWeapon(Weapon pWeapon, int pAmmo) throws ForbiddenAction{
@@ -224,7 +223,7 @@ public class Session {
     //**************************************************************************
     /**
      * Set a new game mode for this Session
-     * @param pValue 
+     * @param pValue  game mode
      */
     public static void setGameMode(int pValue){
         Session.singleton.gameMode = pValue;
@@ -232,7 +231,7 @@ public class Session {
     
     /**
      * Set the player of this account
-     * @param pPlayer 
+     * @param pPlayer Session Player
      */
     public static void setPlayer(Player pPlayer){
         Session.singleton.player = pPlayer;

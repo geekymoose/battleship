@@ -24,7 +24,7 @@ import com.battleship.views.tools.UiElement;
  * return the button
  * </p>
  *
- * @date    Mar 29, 2015
+ * @since   Mar 29, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -43,7 +43,7 @@ public abstract class UiButtonDecorator implements UiElement{
     //**************************************************************************
     /**
      * Create a new decorator
-     * @param pButton 
+     * @param pButton button to decorate
      */
     protected UiButtonDecorator(UiButton pButton){
         this.uibutton = pButton;

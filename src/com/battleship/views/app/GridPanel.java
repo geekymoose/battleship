@@ -4,10 +4,8 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.asset.Config;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GridController;
-import com.battleship.dynamic.EventApp;
 import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.gridcursor.GridCursor;
 import com.battleship.exceptions.ExecError;
@@ -42,7 +40,7 @@ import javax.swing.JPanel;
  * <p>Display a grid with BoxMapView.</p>
  * 
  *
- * @date    Apr 1, 2015
+ * @since   Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -176,7 +174,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     //**************************************************************************
     /**
      * Return grid cursor
-     * @return 
+     * @return GridCursor cursor for this grid panel
      */
     public GridCursor getGridCursor(){
         return this.cursor;
@@ -184,7 +182,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     
     /**
      * Return box Dimension
-     * @return 
+     * @return Dimension of the box
      */
     public Dimension getBoxDimension(){
         return this.tabBox[0][0].getDimension();
@@ -192,7 +190,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     
     /**
      * Return type grid
-     * @return 
+     * @return int type grid
      */
     public int getTypeGrid(){
         return this.gridType;

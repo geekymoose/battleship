@@ -16,7 +16,7 @@ package com.battleship.behaviors;
  * a weapon.</p>
  *
  * 
- * @date    Feb 15, 2015
+ * @since   Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -58,7 +58,7 @@ public interface Target{
     
     /**
      * Return the value of this target
-     * @return 
+     * @return int value
      */
     public int getValue();
 }

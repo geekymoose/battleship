@@ -27,7 +27,7 @@ import java.awt.Rectangle;
  * </p>
  * <p>Display a BoxMap for Square grid</p>
  *
- * @date    Apr 1, 2015
+ * @since   Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

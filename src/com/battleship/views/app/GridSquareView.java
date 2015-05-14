@@ -22,8 +22,8 @@ import javax.swing.JPanel;
  * <h1>GridSquareView</h1>
  * <p>public class GridSquareView</p>
  *
- * @author Constantin MASSON
- * @date Apr 1, 2015
+ * @since   Apr 1, 2015
+ * @author  Constantin MASSON
  */
 public class GridSquareView extends GridPanel{
     //**************************************************************************

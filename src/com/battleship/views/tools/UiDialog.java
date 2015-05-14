@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * <p>Manage display for JDialog</p>
  *
  * 
- * @date    Mar 28, 2015
+ * @since   Mar 28, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -41,9 +41,9 @@ public abstract class UiDialog {
     
     /**
      * Display a confirm dialog and return value
-     * @param pTitle
-     * @param pMsg
-     * @return 
+     * @param pTitle    dialog title (Displayed at the window top)
+     * @param pMsg      Message to display
+     * @return          choice
      */
     public static int showConfirmDialog(String pTitle, String pMsg){
         JOptionPane opt = new JOptionPane();

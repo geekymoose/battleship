@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.asset.Config;
-import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -28,7 +27,7 @@ import com.battleship.models.game.Player;
  * </p>
  *
  * 
- * @date Feb 15, 2015
+ * @since   Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -38,7 +37,7 @@ public class Missile extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Missile(Player pOwner, int pAmmo){
-        super(GameConstants.MISSILE, new ShotTypeMissile(), pOwner, pAmmo);
+        super(Weapon.MISSILE, new ShotTypeMissile(), pOwner, pAmmo);
         this.name           = "Bomb";
         this.priceWeapon    = Config.getGameValues_int("price-missile");
         this.priceAmmo      = Config.getGameValues_int("price-ammo-missile");

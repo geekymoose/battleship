@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  * DOMParser read xml file and return matched data.
  * </p>
  * 
- * @date    Mar 28, 2015
+ * @since   Mar 28, 2015
  * @author  Constantin MASSON
  * 
  * @see Config
@@ -275,9 +275,10 @@ public class DOMParser {
      * Create and return an ArrayList with all theme image names. Image have 
      * different type as static and dynamic. Return all image from type given, 
      * for example, if type is "static", every image with type="static" will 
-     * be added in ArrayList (And only these one)<br/>
+     * be added in ArrayList (And only these one)
      * HashMap format : key = name / value = ext
-     * @param pPath file where to find image
+     * @param pPath     file where to find image
+     * @param pType     type of image to get (static / dynamic)
      * @return ArrayList with image names
      * @throws ExecError throws if unable to load constants
      */

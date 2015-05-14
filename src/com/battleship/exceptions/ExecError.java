@@ -4,7 +4,6 @@
  */
 package com.battleship.exceptions;
 
-import com.battleship.asset.Config;
 import com.battleship.main.DebugTrack;
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ import java.util.ArrayList;
  * 
  * <p>Exception thrown if a parameter is wrong</p>
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

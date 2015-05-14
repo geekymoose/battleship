@@ -26,7 +26,7 @@ import java.awt.Polygon;
  * </p>
  * <p>Display a BoxMap for Hexagon grid</p>
  *
- * @date    Apr 1, 2015
+ * @since   Apr 1, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

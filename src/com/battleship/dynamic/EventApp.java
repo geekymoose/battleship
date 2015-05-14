@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * </ul>
  * 
  *
- * @date    May 5, 2015
+ * @since   May 5, 2015
  * @author  Constantin MASSON
  * 
  * @param <E> object managed by this event (As Image or ImageIcon for example)
@@ -147,7 +147,7 @@ public abstract class EventApp <E> extends TimerManager{
     
     /**
      * Return list of states
-     * @return ArrayList <E> list of states
+     * @return ArrayList of E state
      */
     public ArrayList<E> getListStates(){
         return this.listStates;

@@ -31,8 +31,8 @@ import java.util.ArrayList;
  * <h1>ExplosionEvent</h1>
  * <p>public class ExplosionEvent</p>
  *
- * @author Constantin MASSON
- * @date May 5, 2015
+ * @since   May 5, 2015
+ * @author  Constantin MASSON
  */
 public class ExplosionEvent extends DynamicEvent implements UiElement{
     //**************************************************************************

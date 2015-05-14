@@ -5,10 +5,10 @@
 package com.battleship.network;
 
 /**
- * @date 5 mai 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @since   5 mai 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 public class ListenRequest implements Runnable {
 

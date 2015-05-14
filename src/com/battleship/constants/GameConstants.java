@@ -13,7 +13,7 @@ package com.battleship.constants;
  * <p>public interface GameConstants</p>
  * <p>All constants used for the game</p>
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -55,18 +55,6 @@ public interface GameConstants {
     
     public static final int     CREATE_GAME                 = 1;
     public static final int     JOIN_GAME                   = 2;
-    
-    
-    
-    
-    //**************************************************************************
-    // Weapon constants
-    //**************************************************************************
-    public static final int     INFINITE_AMO                = -42;
-    public static final int     MISSILE                     = 42;
-    public static final int     NUKE                        = 666;
-    public static final int     TORPEDO                     = 404;
-    public static final int     BOMB                        = 69;
     
     
     

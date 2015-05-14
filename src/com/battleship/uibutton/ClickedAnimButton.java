@@ -19,11 +19,11 @@ import com.battleship.dynamic.EventApp;
  * <p>
  * public class ClickedAnimButton<br/>
  * UiButtonDecorator<br/>
- implements UiEventApp
- </p>
+ * implements UiEventApp
+ * </p>
  *
  * 
- * @date    Mar 29, 2015
+ * @since   Mar 29, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

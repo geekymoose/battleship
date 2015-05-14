@@ -27,16 +27,14 @@ import com.battleship.exceptions.ForbiddenAction;
  * A new game will be created later with this configuration class.
  * </p>
  * <h2>Configure options</h2>
- * <p>
  * <ul>
  *  <li>Grid width: int number</li>
  *  <li>Grid height: int number</li>
  *  <li>Grid type: square or hexagon</li>
- *  </ul>
- * </p>
+ * </ul>
  * 
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -120,10 +118,6 @@ public class GameConfigModel extends Model implements GameConstants{
                 this.currentNbPlayers   = 2;
                 break;
             case MODE_LAN:
-                this.listPlayers[0] = Session.getPlayer();
-                this.currentNbPlayers   = 1;
-                break;
-            case MODE_INTERNET:
                 this.listPlayers[0] = Session.getPlayer();
                 this.currentNbPlayers   = 1;
                 break;
@@ -249,7 +243,7 @@ public class GameConfigModel extends Model implements GameConstants{
     
     /**
      * Return current grid type (Ex: SQUARE or HEXAGON)
-     * @return 
+     * @return  int grid type
      */
     public int getGridType() {
         return this.gridType;
@@ -265,7 +259,7 @@ public class GameConfigModel extends Model implements GameConstants{
     
     /**
      * Return current number players in this game config 
-     * @return 
+     * @return int number of players in the game
      */
     public int getNbPlayers(){
         return this.listPlayers.length;
@@ -306,8 +300,7 @@ public class GameConfigModel extends Model implements GameConstants{
     
     /**
      * Set a new grid width, will replace the old one. Must be between 
-     * {@value GameConstants#GRID_MIN_WIDTH} and {@value GameConstants#GRID_MAX_WIDTH}, 
-     * otherwise, do nothing
+     * minimum value and maximum value otherwise, do nothing
      * @param pValue new width
      */
     public void setGridWidth(int pValue) {
@@ -319,8 +312,7 @@ public class GameConfigModel extends Model implements GameConstants{
 
     /**
      * Set a new gridWidth, will replace the old one. Must be between 
-     * {@value GameConstants#GRID_MIN_HEIGHT} and {@value GameConstants#GRID_MAX_HEIGHT},
-     * otherwise, do nothing
+     * minimum value and maximum value otherwise, do nothing
      * @param pValue new width
      */
     public void setGridHeight(int pValue) {

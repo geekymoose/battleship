@@ -37,15 +37,14 @@ import javax.swing.JTextArea;
  * implements ObserverModel
  * </p>
  * 
- * <p>Description</p>
+ * <p>Configuration for lan mode</p>
  * 
- * @date    24 mars 2015
+ * @since   24 mars 2015
  * @author  Contsantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
 public class LANConfigPanel extends PagePanel implements ObserverModel{
-    
     private     LANConfigController     controller;
     
     private     JPanel                  p_gameList;

@@ -18,8 +18,8 @@ import java.awt.Point;
  * <h1>ClickNoAction</h1>
  * <p>public class ClickNoAction</p>
  *
- * @author Constantin MASSON
- * @date Apr 3, 2015
+ * @since   Apr 3, 2015
+ * @author  Constantin MASSON
  */
 public class ClickNoAction implements ClickType{
     @Override

@@ -11,6 +11,7 @@ import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.models.game.Player;
+import com.battleship.models.weapons.Weapon;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -30,7 +31,7 @@ import javax.swing.JTextArea;
 /**
  *
  *
- * @date    11 Feb. 2015
+ * @since   11 Feb. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -71,8 +72,8 @@ public class InformationPanel extends ContentPanel implements Observer {
     /**
      * Create a new information panel
      * @param pParentPage parent page
-     * @param pController 
-     * @throws ExecError
+     * @param pController controller for this panel
+     * @throws ExecError thrown if unable to create Information panel
      */
     public InformationPanel(JPanel pParentPage, GameController pController) throws ExecError{
         super(pParentPage);
@@ -262,7 +263,7 @@ public class InformationPanel extends ContentPanel implements Observer {
     //**************************************************************************
     private class NukeIcon extends WeaponBtn {
         public NukeIcon(){
-            super(GameConstants.NUKE);
+            super(Weapon.NUKE);
             this.defaultImg     = 502200;
             this.hoverImg       = 502100;
             this.selectedImg    = 502000;
@@ -273,7 +274,7 @@ public class InformationPanel extends ContentPanel implements Observer {
     //**************************************************************************
     private class MissileIcon extends WeaponBtn {
         public MissileIcon(){
-            super(GameConstants.MISSILE);
+            super(Weapon.MISSILE);
             this.defaultImg     = 501200;
             this.hoverImg       = 501100;
             this.selectedImg    = 501000;
@@ -284,7 +285,7 @@ public class InformationPanel extends ContentPanel implements Observer {
     //**************************************************************************
     private class TorpedoIcon extends WeaponBtn {
         public TorpedoIcon(){
-            super(GameConstants.TORPEDO);
+            super(Weapon.TORPEDO);
             this.defaultImg     = 503200;
             this.hoverImg       = 503100;
             this.selectedImg    = 503000;
@@ -295,7 +296,7 @@ public class InformationPanel extends ContentPanel implements Observer {
     //**************************************************************************
     private class BombIcon extends WeaponBtn {
         public BombIcon(){
-            super(GameConstants.BOMB);
+            super(Weapon.BOMB);
             this.defaultImg     = 500200;
             this.hoverImg       = 500100;
             this.selectedImg    = 500000;

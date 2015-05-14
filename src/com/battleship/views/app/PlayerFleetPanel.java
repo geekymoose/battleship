@@ -29,7 +29,7 @@ import javax.swing.JPanel;
  * </p>
  * 
  * 
- * @date    11 Feb. 2015
+ * @since   11 Feb. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -14,7 +14,7 @@ import java.awt.EventQueue;
 
 /**
  * 
- * @date    Feb 17, 2015
+ * @since   Feb 17, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -23,7 +23,7 @@ public class Main {
     
     /**
      * Launch the program
-     * @param args 
+     * @param args program parameters 
      */
     public static void main(String[] args){
         EventQueue.invokeLater(new Runnable() {

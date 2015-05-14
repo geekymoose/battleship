@@ -3,12 +3,10 @@
  */
 package com.battleship.network;
 
-import java.util.ArrayList;
-
 
 
 /**
- * @date    30 avr. 2015
+ * @since   30 avr. 2015
  * @author  Anthony CHAFFOT
  */
 public class Game {

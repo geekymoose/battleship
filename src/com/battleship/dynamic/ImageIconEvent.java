@@ -34,7 +34,7 @@ import javax.swing.ImageIcon;
  * It extends EventApp and implements UiElement</p>
  * 
  * 
- * @date    Mar 29, 2015
+ * @since   Mar 29, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

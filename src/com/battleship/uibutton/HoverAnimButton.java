@@ -20,8 +20,8 @@ import java.awt.event.MouseEvent;
  * <h1>HoverAnimButton</h1>
  * <p>public class HoverAnimButton</p>
  *
- * @author Constantin MASSON
- * @date Mar 31, 2015
+ * @since   Mar 31, 2015
+ * @author  Constantin MASSON
  */
 public class HoverAnimButton extends UiButtonDecorator implements UiEventApp{
     //**************************************************************************

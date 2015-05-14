@@ -22,8 +22,8 @@ import java.awt.Point;
  * 
  * <p>DynamicEvent is an event with playing in a specific position.</p>
  *
- * @author Constantin MASSON
- * @date May 5, 2015
+ * @since   May 5, 2015
+ * @author  Constantin MASSON
  * 
  * @see EventApp
  */

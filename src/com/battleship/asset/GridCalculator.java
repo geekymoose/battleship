@@ -16,7 +16,7 @@ import java.awt.Point;
  * <h1>GridCalculator</h1>
  * <p>public abstract class GridCalculator</p>
  *
- * @date    Apr 2, 2015
+ * @since   Apr 2, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -78,12 +78,12 @@ public abstract class GridCalculator {
     //**************************************************************************
     /**
      * Convert absolute pixel position to coordinate position for square
-     * (pxToSquareCoor -> pixelToSquareCoordinate)
+     * (pxToSquareCoor to pixelToSquareCoordinate)
      *
      * @param pX    x value
      * @param pY    y value 
      * @param pDim  BoxMap Dimension
-     * @return
+     * @return Point position
      */
     public static Point pxToSquareCoor(int pX, int pY, Dimension pDim){
         initSquareValues(pDim);
@@ -97,7 +97,7 @@ public abstract class GridCalculator {
      *
      * @param pX x value
      * @param pY y value 
-     * @return
+     * @return Point position
      */
     private static Point pxToSquareCoor(int pX, int pY){
         int x = pX/dimBox.width;
@@ -108,12 +108,12 @@ public abstract class GridCalculator {
     
     /**
      * Convert absolute pixel position to coordinate position. (for Hexagon grid)
-     * (pxToHexaCoor -> pixelToHexagonCoordinate)
+     * (pxToHexaCoor to pixelToHexagonCoordinate)
      *
      * @param mx        x value
      * @param my        y value 
      * @param pDim      Box Dimension
-     * @return
+     * @return Point position
      */
     public static Point pxToHexaCoor(int mx, int my, Dimension pDim) {
         initHexaValues(pDim);
@@ -128,7 +128,7 @@ public abstract class GridCalculator {
      *
      * @param mx x value
      * @param my  y value 
-     * @return
+     * @return Point position
      */
     private static Point pxToHexaCoor(int mx, int my) {
         Point p = new Point(-1, -1);

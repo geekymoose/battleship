@@ -20,8 +20,8 @@ import javax.swing.JPanel;
  * </p>
  * <p>ContentPanel are placed into a PagePanel.</p>
  *
- * @author Constantin MASSON
- * @date Mar 13, 2015
+ * @since   Mar 13, 2015
+ * @author  Constantin MASSON
  */
 public abstract class ContentPanel extends JPanel implements UiElement{
     //**************************************************************************
@@ -80,7 +80,7 @@ public abstract class ContentPanel extends JPanel implements UiElement{
     
     /**
      * Set content parent
-     * @param pParent 
+     * @param pParent  content parent
      */
     public void setParent(JPanel pParent){
         this.parentPage = pParent;

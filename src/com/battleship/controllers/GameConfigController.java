@@ -21,10 +21,11 @@ import com.battleship.models.game.GameConfigModel;
  * 
  * <p>Controller for ConfigGame model</p>
  *
- * @date    Feb 25, 2015
+ * @since   Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see     GameConfigModel
  * @see     GameConfigView
  */

@@ -18,14 +18,14 @@ import java.util.HashMap;
  * <p>public class Config</p>
  * <p>
  * Keep all program data as constants used, path etc. Create all important 
- * class program need to run properly. 
- * <br/>
+ * class program need to run properly.
+ * </p><p>
  * All constants data are from xml files. These files are loaded in this 
  * class thanks to a xml parser. DOMParser is used for this work. See 
  * DOMParser class for further information about its running process.
  * </p>
  *
- * @date    Mar 28, 2015
+ * @since   Mar 28, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -149,8 +149,8 @@ public class Config {
     
     /**
      * Return dimension constants with Dimension format
-     * @param pName
-     * @return 
+     * @param pName constants name
+     * @return Dimension for this constants
      */
     public static Dimension getDimValues_dim(String pName){
         Dimension dim = Config.l_dimConfig_dim.get(pName);
@@ -160,8 +160,8 @@ public class Config {
     
     /**
      * Return dimension constants with int format
-     * @param pName
-     * @return 
+     * @param pName constants name
+     * @return Integer value of a dimension
      */
     public static int getDimValues_int(String pName){
         Integer dim = Config.l_dimConfig_int.get(pName);
@@ -171,8 +171,8 @@ public class Config {
     
     /**
      * Return game constants with int value
-     * @param pName
-     * @return 
+     * @param pName constants name
+     * @return int constants for the game
      */
     public static int getGameValues_int(String pName){
         Integer val = Config.l_gameConfig_int.get(pName);
@@ -182,8 +182,8 @@ public class Config {
     
     /**
      * Return game constants with double value
-     * @param pName
-     * @return 
+     * @param pName constants name
+     * @return double constants for the game
      */
     public static double getGameValues_double(String pName){
         double val = Config.l_gameConfig_double.get(pName);
@@ -193,8 +193,8 @@ public class Config {
     
     /**
      * Return game constants with string value
-     * @param pName
-     * @return 
+     * @param pName constants name
+     * @return String value
      */
     public static String getGameValues_str(String pName){
         String val = Config.l_gameConfig_str.get(pName);
@@ -203,9 +203,9 @@ public class Config {
     }
     
     /**
-     * return theme constants
-     * @param pName
-     * @return 
+     * Return a string constants used for theme as theme path etc
+     * @param pName constants name
+     * @return String constants
      */
     public static String getThemeValues_str(String pName){
         String str = Config.l_themeConfig_str.get(pName);
@@ -215,7 +215,7 @@ public class Config {
     
     /**
      * Return all image name to load (Static image only)
-     * @return 
+     * @return HashMap of String : String
      */
     public static HashMap<String, String> getStaticImgNames(){
         return Config.l_staticImgNames;
@@ -223,7 +223,7 @@ public class Config {
     
     /**
      * Return all image name to load (Dynamic image only)
-     * @return 
+     * @return HashMap of String : String
      */
     public static HashMap<String, String> getDynamicImgNames(){
         return Config.l_dynamicImageNames;

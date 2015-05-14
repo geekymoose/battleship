@@ -9,10 +9,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * @date 5 mai 2015
- * @author Constantin MASSON
- * @author Anthony CHAFFOT
- * @author Jessica FAVIN
+ * @since   5 mai 2015
+ * @author  Constantin MASSON
+ * @author  Anthony CHAFFOT
+ * @author  Jessica FAVIN
  */
 class Connection implements Runnable {
 

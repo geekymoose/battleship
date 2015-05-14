@@ -22,6 +22,7 @@ package com.battleship.asset;
  * This class manage all random tools
  * </p>
  *
+ * 
  * @author Constantin MASSON
  */
 public abstract class RandomManager {

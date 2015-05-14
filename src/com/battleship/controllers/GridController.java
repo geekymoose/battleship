@@ -23,7 +23,7 @@ import java.awt.Point;
  * <h1>GridController</h1>
  * <p>public class GridController</p>
  *
- * @date    Apr 2, 2015
+ * @since   Apr 2, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT

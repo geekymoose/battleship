@@ -25,8 +25,8 @@ import com.battleship.views.app.GamePanel;
  * extends Controller
  * </p>
  *
- * @author Constantin MASSON
- * @date Mar 24, 2015
+ * @since   Mar 24, 2015
+ * @author  Constantin MASSON
  */
 public class GameController extends Controller{
     //**************************************************************************

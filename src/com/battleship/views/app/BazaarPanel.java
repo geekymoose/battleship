@@ -44,7 +44,7 @@ import javax.swing.JPanel;
  * implements GameConstants
  * </p>
  *
- * @date    May 4, 2015
+ * @since   May 4, 2015
  * @author  Constantin MASSON
  */
 public class BazaarPanel extends PagePanel implements GameConstants{
@@ -239,13 +239,13 @@ public class BazaarPanel extends PagePanel implements GameConstants{
                 public void actionPerformed(ActionEvent e){
                     try{
                         switch(idWeapon){
-                            case GameConstants.BOMB:
+                            case Weapon.BOMB:
                                 Session.getSession().buyWeapon(new Bomb(null, 1));
                                 break;
-                            case GameConstants.NUKE:
+                            case Weapon.NUKE:
                                 Session.getSession().buyWeapon(new NuclearBomb(null, 1));
                                 break;
-                            case GameConstants.TORPEDO:
+                            case Weapon.TORPEDO:
                                 Session.getSession().buyWeapon(new Torpedo(null, 1));
                                 break;
                         }
@@ -269,15 +269,15 @@ public class BazaarPanel extends PagePanel implements GameConstants{
         @Override
         public void reloadUI(){
             switch(this.idWeapon){
-                case GameConstants.BOMB:
+                case Weapon.BOMB:
                     this.img_default    = ThemeManager.getTheme().getImgIcon(500200);
                     this.img_hover      = ThemeManager.getTheme().getImgIcon(500100);
                     break;
-                case GameConstants.NUKE:
+                case Weapon.NUKE:
                     this.img_default    = ThemeManager.getTheme().getImgIcon(502200);
                     this.img_hover      = ThemeManager.getTheme().getImgIcon(502100);
                     break;
-                case GameConstants.TORPEDO:
+                case Weapon.TORPEDO:
                     this.img_default    = ThemeManager.getTheme().getImgIcon(503200);
                     this.img_hover      = ThemeManager.getTheme().getImgIcon(503100);
                     break;

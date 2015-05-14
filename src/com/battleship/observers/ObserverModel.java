@@ -13,10 +13,11 @@ package com.battleship.observers;
  * <h1>ObserverModel</h1>
  * <p>public interface ObserverModel</p>
  *
- * @date    Feb 25, 2015
+ * @since   Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
+ * 
  * @see     ObservableModel
  */
 public interface ObserverModel {

@@ -35,7 +35,7 @@ import javax.swing.JPanel;
  * Display the dock with all boats to place on the grid.
  * </p>
  * 
- * @date    Feb 11. 2015
+ * @since   Feb 11. 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * </ul>
  *
  *
- * @date    Feb 11. 2015
+ * @since   Feb 11. 2015
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  * @author  Contsantin MASSON
@@ -114,7 +114,7 @@ public abstract class Boat implements GameConstants{
     //**************************************************************************
     /**
      * Check if boat is placed on a grid
-     * @return 
+     * @return true if placed, otherwise, return false
      */
     public boolean isPlaced(){
         return this.tabCompartments[0] != null;

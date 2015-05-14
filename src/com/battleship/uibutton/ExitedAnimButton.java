@@ -22,8 +22,8 @@ import java.awt.event.MouseEvent;
  * <h1>ExitedAnimButton</h1>
  * <p>public class ExitedAnimButton</p>
  *
- * @author Constantin MASSON
- * @date Mar 31, 2015
+ * @since   Mar 31, 2015
+ * @author  Constantin MASSON
  */
 public class ExitedAnimButton  extends UiButtonDecorator implements UiEventApp{
     //**************************************************************************

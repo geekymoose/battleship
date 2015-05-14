@@ -24,8 +24,8 @@ import com.battleship.views.app.RadarPanel;
  * implements GameConstants
  * </p>
  *
- * @author Constantin MASSON
- * @date Apr 4, 2015
+ * @author  Constantin MASSON
+ * @since   Apr 4, 2015
  */
 public abstract class CheatCode implements GameConstants{
     //**************************************************************************

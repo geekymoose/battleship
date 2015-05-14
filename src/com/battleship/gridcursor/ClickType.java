@@ -21,7 +21,7 @@ import java.awt.Point;
  * UPDATE : coordinate from Point p are actual grid coordinate!!!
  * </p>
  * 
- * @date    Apr 2, 2015
+ * @since   Apr 2, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

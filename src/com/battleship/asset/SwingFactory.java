@@ -47,7 +47,7 @@ import javax.swing.JPanel;
  * This class enable us to automatically create this items for the view.
  * </p>
  *
- * @date    Feb 25, 2015
+ * @since   Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -160,7 +160,7 @@ public abstract class SwingFactory implements GameConstants{
      * @param pModel    Model the grid is going to display
      * @param pDim      Dimension for one box displayed
      * @return the new GridPanel which display the FleetGridModel given as model
-     * @throws ExecError 
+     * @throws ExecError thrown if unable to create the grid
      */
     public static GridPanel loadGridPanel(JPanel parent, FleetGridModel pModel, Dimension pDim) 
     throws ExecError{
@@ -190,12 +190,12 @@ public abstract class SwingFactory implements GameConstants{
     
     /**
      * Generate the view grid for game
-     * @param parent
-     * @param pModel
-     * @param pDim
-     * @param color
-     * @return 
-     * @throws ExecError 
+     * @param parent    parent view for this grid
+     * @param pModel    Model the grid is going to display
+     * @param pDim      Dimension for one box displayed
+     * @param color     BoxMap border
+     * @return the new GridPanel which display the FleetGridModel given as model
+     * @throws ExecError thrown if unable to create the grid
      */
     public static GridPanel loadGridPanel(JPanel parent, FleetGridModel pModel, Dimension pDim, Color color) 
     throws ExecError{

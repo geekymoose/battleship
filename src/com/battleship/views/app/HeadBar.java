@@ -28,7 +28,7 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @date    3 mars 2015
+ * @since   3 mars 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
@@ -54,8 +54,8 @@ public class HeadBar extends ContentPanel{
     //**************************************************************************
     /**
      * Constructor of the HeadBar
-     * @param pParent
-     * @throws ExecError 
+     * @param pParent parent application
+     * @throws ExecError thrown if error (parent is null)
      */
     public HeadBar(JPanel pParent) throws ExecError{
         super(pParent);

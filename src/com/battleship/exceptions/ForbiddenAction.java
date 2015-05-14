@@ -15,7 +15,7 @@ package com.battleship.exceptions;
  * extends Exception
  * </p>
  *
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

@@ -15,7 +15,7 @@ import com.battleship.exceptions.ExecError;
  * <p>public abstract class Controller</p>
  * <p>Each controller extends this class. Define a controller</p>
  *
- * @date    Mar 12, 2015
+ * @since   Mar 12, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -68,7 +68,7 @@ public abstract class Controller <V,M>{
     /**
      * Add a view for this controller.
      * @param pView view to link with this controller
-     * @throws com.battleship.exceptions.ExecError
+     * @throws ExecError thrown if unable to set the view (Null_
      */
     public void setView(V pView) throws ExecError{
         if(pView==null){

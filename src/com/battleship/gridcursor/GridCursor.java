@@ -30,7 +30,7 @@ import javax.swing.SwingUtilities;
  * depending on typeClick
  * </p>
  * 
- * @date    Apr 2, 2015
+ * @since   Apr 2, 2015
  * @author  Constantin MASSON
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN

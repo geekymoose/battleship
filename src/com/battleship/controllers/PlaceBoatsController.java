@@ -22,7 +22,7 @@ import com.battleship.models.game.Player;
  * </p>
  * <p>Controller for a fleet grid</p>
  *
- * @date    Feb 25, 2015
+ * @since   Feb 25, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -109,7 +109,7 @@ public class PlaceBoatsController extends Controller{
     }
     /**
      * Return type grid
-     * @return 
+     * @return int grid type
      */
     public int getGridType(){
         return this.model.getGridType();
@@ -117,7 +117,7 @@ public class PlaceBoatsController extends Controller{
     
     /**
      * Return grid Width
-     * @return 
+     * @return int grid width
      */
     public int getWidth(){
         return this.model.getGridWidth();
@@ -125,7 +125,7 @@ public class PlaceBoatsController extends Controller{
     
     /**
      * Return grid height
-     * @return 
+     * @return int grid height
      */
     public int getHeight(){
         return this.model.getGridHeight();

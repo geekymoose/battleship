@@ -20,21 +20,26 @@ import com.battleship.models.game.Player;
 /**
  * <h1>Weapon</h1>
  * <p>
- * public abstract class Weapon<br/>
- * implements GameConstants
+ * public abstract class Weapon
  * </p>
  *
  *
  * 
- * @date    Feb 15, 2015
+ * @since   Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  */
-public abstract class Weapon implements GameConstants{
+public abstract class Weapon{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
+    public static final int         INFINITE_AMO    = -42;
+    public static final int         MISSILE         = 42;
+    public static final int         NUKE            = 666;
+    public static final int         TORPEDO         = 404;
+    public static final int         BOMB            = 69;
+    
     protected   final int           id;
     protected   String              name;
     protected   int                 ammo;
@@ -62,8 +67,8 @@ public abstract class Weapon implements GameConstants{
         this.ammo           = pAmmo;
         this.shot           = pShot;
         this.owner          = pOwner;
-        this.priceWeapon    = NO_VALUE;
-        this.priceAmmo      = NO_VALUE;
+        this.priceWeapon    = GameConstants.NO_VALUE;
+        this.priceAmmo      = GameConstants.NO_VALUE;
         this.name           = "NoData";
     }
     
@@ -181,7 +186,7 @@ public abstract class Weapon implements GameConstants{
     //**************************************************************************
     /**
      * Change weapon owner
-     * @param pOwner 
+     * @param pOwner Player owner
      */
     public void setOwner(Player pOwner){
         this.owner = pOwner;
@@ -204,7 +209,7 @@ public abstract class Weapon implements GameConstants{
     public static boolean hitTargetIfExists(int x, int y, Target[][] pTarget){
         try {
             return pTarget[y][x].hit();
-        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+        } catch(ArrayIndexOutOfBoundsException ex){
             //Means this square is not in the Target matrix (Out of range)
         }
         return false;
@@ -220,7 +225,7 @@ public abstract class Weapon implements GameConstants{
     public static boolean aimTargetIfExists(int x, int y, Target[][] pTarget){
         try {
             return pTarget[y][x].aim();
-        } catch(java.lang.ArrayIndexOutOfBoundsException ex){
+        } catch(ArrayIndexOutOfBoundsException ex){
             //Means this square is not in the Target matrix (Out of range)
         }
         return false;

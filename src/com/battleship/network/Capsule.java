@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 
 /**
- * @date    1 mai 2015
+ * @since   1 mai 2015
  * @author  Anthony CHAFFOT
  */
 public class Capsule implements Serializable{

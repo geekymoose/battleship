@@ -40,7 +40,7 @@ import java.util.ArrayList;
  * <p>Hexagon grid</p>
  *
  * 
- * @date    Feb 9, 2015
+ * @since   Feb 9, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -159,10 +159,10 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
     //**************************************************************************
     /**
      * Add an explosion in this grid
-     * @param pDelay
-     * @param pIdImg
-     * @param pEventType
-     * @param pPosition 
+     * @param pDelay        frequency of refresh
+     * @param pIdImg        first image id
+     * @param pEventType    event type
+     * @param pPosition     where to place event (Coordinate in grid)
      */
     public void addExplosion(int pDelay, int pIdImg, int pEventType, Point pPosition){
         ExplosionEvent explosion = new ExplosionEvent(pDelay, pIdImg, pEventType, this, pPosition);
@@ -275,7 +275,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
      * used only for adding in the list a boat placed on the grid. Placement 
      * in the grid is done by over function from Player
      * </strong>
-     * @param pBoat 
+     * @param pBoat Boat to add
      */
     public void addBoat(Boat pBoat){
         if(this.listBoats.contains(pBoat) != true){
@@ -354,6 +354,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
     
     /**
      * Return current orientation value
+     * @return int current orientation
      */
     public int getCurrentOrientation(){
         return this.listOrientations.get(currentOrientation);
@@ -381,7 +382,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
      * Set owner of this fleet. Beware, if owner already exists, will be replaced 
      * by this new owner. If null given, fleet will be owned by no one. (Owner is 
      * null)
-     * @param pOwner
+     * @param pOwner Player owner of this fleetGrid
      */
     public void setOwner(Player pOwner){
         this.owner = pOwner;

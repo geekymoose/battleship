@@ -8,7 +8,6 @@
 package com.battleship.models.weapons;
 
 import com.battleship.asset.Config;
-import com.battleship.constants.GameConstants;
 import com.battleship.models.game.Player;
 
 
@@ -31,7 +30,7 @@ import com.battleship.models.game.Player;
  *
  *
  * 
- * @date    Feb 15, 2015
+ * @since   Feb 15, 2015
  * @author  Constantin MASSON
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
@@ -41,7 +40,7 @@ public class Torpedo extends Weapon{
     // Constructor - Initialization
     //**************************************************************************
     public Torpedo(Player pOwner, int pAmmo){
-        super(GameConstants.TORPEDO, new ShotTypeTorpedo(), pOwner, pAmmo);
+        super(Weapon.TORPEDO, new ShotTypeTorpedo(), pOwner, pAmmo);
         this.name           = "Torpedo";
         this.priceWeapon    = Config.getGameValues_int("price-torpedo");
         this.priceAmmo      = Config.getGameValues_int("price-ammo-torpedo");
