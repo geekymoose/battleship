@@ -4,10 +4,7 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.asset.CheatCode;
-import com.battleship.asset.Config;
-import com.battleship.asset.SwingFactory;
-import com.battleship.asset.ThemeManager;
+import com.battleship.asset.*;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -15,15 +12,15 @@ import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
 import com.battleship.models.game.Player;
-import com.battleship.observers.ObservableModel;
-import com.battleship.observers.ObserverModel;
-import com.battleship.views.tools.ContentPanel;
+import com.battleship.observers.*;
+import com.battleship.uibutton.*;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,7 +28,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -65,9 +65,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
     private     RadarPanel              p_radar;
     private     ChatPanel               p_chat;
     private     HeadBar                 p_headbar;
-    private     GridBagConstraints      gc;
     
-    private     SwitchPanel             switchPanel;
+    private     SwitchPanel             p_switchPanel;
+    private     EndGamePanel            p_endGamePanel;
     
     //Image 
     private     Image                   img_background;
@@ -103,15 +103,16 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * Initialize all components
      */
     private void initComponents() throws ExecError{
-        this.gc         = new GridBagConstraints();
         this.p_headbar  = new HeadBar(this);
         p_centerPane    = new ContainerPanel();
         p_info          = new InformationPanel(this, this.controller);
         p_fleet         = new PlayerFleetPanel(this);
         p_radar         = new RadarPanel(this);
         p_chat          = new ChatPanel(p_radar);
+        
         p_bigCont       = new JPanel();
-        switchPanel     = new SwitchPanel();
+        p_switchPanel   = new SwitchPanel();
+        p_endGamePanel  = new EndGamePanel(this);
         
         p_centerPane    .setOpaque(false);
         p_fleet         .setOpaque(false);
@@ -122,6 +123,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
         p_centerPane    .setLayout(new GridBagLayout()); 
         p_bigCont       .setLayout(new GridBagLayout());
         
+        GridBagConstraints  gc = new GridBagConstraints();
         //Put the 2 panels into the boerderlayout's center
         gc.fill         = GridBagConstraints.HORIZONTAL;
         gc.insets       = new Insets(10, 10, 0, 10);
@@ -169,8 +171,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
         //TMP DEBUG
         fleetPlayer1.getGridCursor().setClickNoArm();
         fleetPlayer2.getGridCursor().setClickNoArm();
-        //radarPlayer1.getGridCursor().setClickNoAction();
-        //radarPlayer2.getGridCursor().setClickNoAction();
         
         conf.getPlayers()[0].addObserver(this.p_radar);
         conf.getPlayers()[1].addObserver(this.p_radar);
@@ -200,17 +200,17 @@ public class GamePanel extends PagePanel implements ObserverModel{
             case GameModel.GAME_OVER:
                 DebugTrack.showDebugMsg("Game Over");
                 this.p_bigCont.removeAll();
-                this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_OVER));
+                this.p_endGamePanel.setOutcome(GameModel.GAME_OVER);
+                this.p_bigCont.add(this.p_endGamePanel);
                 this.p_bigCont.revalidate();
-                this.repaint();
                 break;
                 
             case GameModel.GAME_VICTORY:
                 DebugTrack.showDebugMsg("Victory");
                 this.p_bigCont.removeAll();
-                this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_VICTORY));
+                this.p_endGamePanel.setOutcome(GameModel.GAME_VICTORY);
+                this.p_bigCont.add(this.p_endGamePanel);
                 this.p_bigCont.revalidate();
-                this.repaint();
                 break;
                 
             case GameModel.SWITCH_PAGE:
@@ -219,17 +219,19 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 int foe         = (playerTurn+1)%2;
                 this.p_radar.switchGrid(foe);
                 this.p_fleet.switchGrid(playerTurn);
-                this.switchPanel.display();
+                this.p_switchPanel.display();
                 break;
                 
+            //Change behavior for radar grid cursor.
             case GameModel.SWITCH_BEHAVIORS:
                 this.p_radar.setAttackedGrid(m.getIdPlayerTurn());
                 break;
+                
             default:
-                this.repaint();
                 break;
         }
         this.p_info.updateData(); //Update data in the information panel
+        this.repaint();
     }
     
     
@@ -266,9 +268,11 @@ public class GamePanel extends PagePanel implements ObserverModel{
     @Override
     public void reloadUI(){
         this.img_background = ThemeManager.getTheme().getImg(417000);
-        this.p_headbar  .reloadUI();
-        this.p_fleet    .reloadUI();
-        this.p_radar    .reloadUI();
+        this.p_headbar      .reloadUI();
+        this.p_fleet        .reloadUI();
+        this.p_radar        .reloadUI();
+        this.p_endGamePanel .reloadUI();
+        this.p_switchPanel  .reloadUI();
         this.repaint();
     }
     
@@ -303,34 +307,84 @@ public class GamePanel extends PagePanel implements ObserverModel{
      * the players fleet during switching
      * </p>
      */
-    private class SwitchPanel extends JPanel{
-        private     JButton     b_confirm;
+    private class SwitchPanel extends ContainerPanel implements KeyListener{
+        //**********************************************************************
+        // Constants - Variables
+        //**********************************************************************
+        private     JPanel      wrapper_center;
         
+        private     JLabel      l_switchTitle;
+        private     JLabel      l_nextPlayerName;
+        private     JLabel      l_nbTurn;
+        private     JLabel      l_switchMessage;
+        
+        
+        
+        //**********************************************************************
+        // Constructors - Initialization
+        //**********************************************************************
         public SwitchPanel(){
             this.initComponents();
-        }
-        private void initComponents(){
-            this.b_confirm = new JButton("Next player");
-            this.b_confirm.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e){
-                    stopSwitchPanel();
-                }
-            });
-            this.setBackground(Color.BLACK);
-            this.add(this.b_confirm);
+            this.setFocusable(true);
+            this.addKeyListener(this);
         }
         
+        private void initComponents(){
+            this.wrapper_center     = new JPanel();
+            this.l_switchTitle      = new JLabel();
+            this.l_nextPlayerName   = new JLabel();
+            this.l_nbTurn           = new JLabel();
+            this.l_switchMessage    = new JLabel();
+            
+            this.l_switchTitle      .setForeground(Color.WHITE);
+            this.l_nextPlayerName   .setForeground(Color.WHITE);
+            this.l_nbTurn           .setForeground(Color.WHITE);
+            this.l_switchMessage    .setForeground(Color.WHITE);
+            
+            GridBagConstraints gbc  = new GridBagConstraints();
+            this.setLayout(new GridBagLayout());
+            this.wrapper_center     .setLayout(new BoxLayout(this.wrapper_center, BoxLayout.Y_AXIS));
+            this.wrapper_center     .setOpaque(false);
+            
+            //Add in center wrapper
+            this.wrapper_center     .add(this.l_switchTitle);
+            this.wrapper_center     .add(this.l_nextPlayerName);
+            this.wrapper_center     .add(this.l_nbTurn);
+            this.wrapper_center     .add(this.l_switchMessage);
+            
+            this.add(this.wrapper_center, gbc);
+        }
+        
+        
+        //**********************************************************************
+        // Functions
+        //**********************************************************************
         /**
          * Start displaying this Panel. Remove grid (Radar and fleet) from 
          * current game and display page without information about players state
          */
         public void display(){
+            String  name = GamePanel.this.controller.getGameModel().getPlayerTurn().getName();
+            String  turn = String.valueOf(GamePanel.this.controller.getGameModel().getNbTurn());
+            Font    font = new Font("Arial", Font.BOLD, 25);
+            
+            this.l_switchTitle      .setText("Call the next player!!!");
+            this.l_nextPlayerName   .setText("Player turn : "+name);
+            this.l_nbTurn           .setText("current turn : "+turn);
+            this.l_switchMessage    .setText("Tape space to continue...");
+            
+            this.l_switchTitle      .setFont(font);
+            this.l_nextPlayerName   .setFont(font);
+            this.l_nbTurn           .setFont(font);
+            this.l_switchMessage    .setFont(font);
+            
             GamePanel.this.remove(p_bigCont);
             GamePanel.this.remove(p_info);
+            GamePanel.this.remove(p_chat);
             GamePanel.this.add(this);
             GamePanel.this.revalidate();
             GamePanel.this.repaint();
+            this.requestFocusInWindow();
         }
         
         /**
@@ -341,8 +395,38 @@ public class GamePanel extends PagePanel implements ObserverModel{
             GamePanel.this.remove(this);
             GamePanel.this.add(p_bigCont, BorderLayout.CENTER);
             GamePanel.this.add(p_info, BorderLayout.SOUTH);
+            GamePanel.this.add(p_chat, BorderLayout.EAST);
             GamePanel.this.revalidate();
             GamePanel.this.repaint();
+        }
+        
+        @Override
+        public void loadUI(){
+            this.reloadUI();
+        }
+        
+        @Override
+        public void reloadUI(){
+        }
+        
+        
+        //**********************************************************************
+        // KeyListener
+        //**********************************************************************
+        @Override
+        public void keyTyped(KeyEvent e){
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e){
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e){
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_SPACE) {
+                this.stopSwitchPanel();
+            }
         }
     }
     
@@ -356,54 +440,72 @@ public class GamePanel extends PagePanel implements ObserverModel{
     /**
      * <h1>EndGamePanel</h1>
      * <p>
-     * private class EndGamePanel
+     * private class EndGamePanel<br/>
      * extends JPanel
      * </p>
      * <p>Display the game issue for current player : Game over or victory</p>
      */
-    private class EndGamePanel extends ContentPanel{
-        private JLabel      l_titleReward;
-        private JButton     b_return;
-        private JButton     b_goBazaar;
-        private int         kindOfEnd;
+    private class EndGamePanel extends ContainerPanel{
+        //**********************************************************************
+        // Constants - Variables
+        //**********************************************************************
+        private JPanel      wrapper_general;
+        private JPanel      wrapper_center;
+        private JPanel      wrapper_bottom;
         
-        public EndGamePanel(PagePanel pParent, int pValue){
+        private JLabel      l_titleReward;
+        private UiButton    b_goBazaar;
+        private UiButton    b_return;
+        private int         gameOutcome;
+        
+        
+        //**********************************************************************
+        // Constructors - Initialization
+        //**********************************************************************
+        public EndGamePanel(PagePanel pParent){
             super(pParent);
-            this.kindOfEnd = pValue;
             this.initComponents();
-            this.setButtons();
+            this.initButtons();
         }
         
         private void initComponents(){
-            this.b_return       = new JButton("Return");
-            this.b_goBazaar     = new JButton("Go bazaar");
+            this.b_return       = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
+            this.b_goBazaar     = new ZozoDecorator(new ImgButton(410100, 410200, 410300)).getUiButton();
             this.l_titleReward  = new JLabel();
+            this.wrapper_general= new JPanel();
+            this.wrapper_bottom = new JPanel();
+            this.wrapper_center = new JPanel();
             
-            this.setLayout(new FlowLayout());
-            this.setPreferredSize(new Dimension(600,400));
-            this.setBackground(Color.BLACK);
-            this.l_titleReward.setForeground(Color.WHITE);
+            GridBagConstraints  gc = new GridBagConstraints();
+            this                .setLayout(new GridBagLayout());
+            this.wrapper_general.setLayout(new BorderLayout());
+            this.wrapper_center .setLayout(new BoxLayout(this.wrapper_center, BoxLayout.Y_AXIS));
+            this.wrapper_bottom .setLayout(new FlowLayout());
             
+            this.wrapper_general.setOpaque(false);
+            this.wrapper_center .setOpaque(false);
+            this.wrapper_bottom .setOpaque(false);
             
-            //Display voctory or game over
-            switch(this.kindOfEnd){
-                case GameModel.GAME_VICTORY:
-                    this.l_titleReward.setText("Victory");
-                    break;
-                case GameModel.GAME_OVER:
-                    this.l_titleReward.setText("Game over");
-                    break;
-            }
+            this                .setPreferredSize(new Dimension(600,400));
             
-            this.add(this.l_titleReward);
-            this.add(this.b_return);
-            this.add(this.b_goBazaar);
+            this.l_titleReward  .setForeground(Color.WHITE);
+            this.l_titleReward  .setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+            
+            //Add elements in wrapper
+            this.wrapper_center .add(this.l_titleReward);
+            this.wrapper_center .add(this.b_goBazaar);
+            this.wrapper_bottom .add(this.b_return);
+            
+            //Add general wrapper
+            this.wrapper_general.add(this.wrapper_center, BorderLayout.CENTER);
+            this.wrapper_general.add(this.wrapper_bottom, BorderLayout.SOUTH);
+            this.add(this.wrapper_general, gc);
         }
         
         /*
          * Set button function
          */
-        private void setButtons(){
+        private void initButtons(){
             PagePanel page = ((PagePanel)parentPage);
             this.b_goBazaar.addActionListener(new ActionListener() {
                 @Override
@@ -420,14 +522,36 @@ public class GamePanel extends PagePanel implements ObserverModel{
             });
         }
 
-
-
+        
+        //**********************************************************************
+        // Functions
+        //**********************************************************************
         @Override
         public void loadUI(){
+            this.reloadUI();
         }
         
         @Override
         public void reloadUI(){
+            this.b_goBazaar.reloadUI();
+            this.b_return.reloadUI();
         }
-    }
+        
+        /**
+         * Set outcome of game. Display specific reward (Victory / Game over)
+         * @param pOutCome 
+         */
+        public void setOutcome(int pOutCome){
+            this.gameOutcome = pOutCome;
+            //Display voctory or game over
+            switch(this.gameOutcome){
+                case GameModel.GAME_VICTORY:
+                    this.l_titleReward.setText("Victory");
+                    break;
+                case GameModel.GAME_OVER:
+                    this.l_titleReward.setText("Game over");
+                    break;
+            }
+        }
+    } //------------------------------------------------------------------------
 }

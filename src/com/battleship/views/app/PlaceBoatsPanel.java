@@ -60,7 +60,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     private     UiButton                        b_back;
     
     private     Dimension                       dimBox;
-    private     GridBagConstraints              gbc;
     
     private     PlayerFleetPanel                gridPanel;
     
@@ -110,7 +109,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         
         this.gridPanel      = new PlayerFleetPanel(this); 
         this.p_dock         = new DockPanel(this, this.controller);
-        
+        GridBagConstraints gbc;
         gbc                 = new GridBagConstraints();
         p_bigContainer      .setLayout(new GridBagLayout());
         this.p_buttonPanel  .setLayout(new FlowLayout());

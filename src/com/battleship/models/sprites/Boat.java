@@ -7,7 +7,6 @@ package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
-import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 import java.util.ArrayList;

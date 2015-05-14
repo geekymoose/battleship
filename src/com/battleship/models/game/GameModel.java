@@ -10,9 +10,6 @@ import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 
@@ -59,6 +56,11 @@ public class GameModel extends Model implements GameConstants{
     private     int                 counterTurn;
     private     int                 currentPlayerTurn;
     
+    //Break timer
+    private     Timer               breakV1;
+    private     Timer               breakV2;
+    private     Timer               breakLan;
+    
     
     
     
@@ -90,6 +92,32 @@ public class GameModel extends Model implements GameConstants{
             p.setGameModel(this);
             p.getFleet().setGame(this);
         }
+        this.setBreakTimers();
+    }
+    
+    /*
+     * Create and set break timer. This timer create a break between two 
+     * player turn. Action created by switch is set using game mode
+     */
+    private void setBreakTimers(){
+        this.breakV1 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                switchAiModeTurn();
+            }
+        });
+        this.breakV2 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                switchV2ModeTurn();
+            }
+        });
+        this.breakLan = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                switchLanModeTurn();
+            }
+        });
     }
     
     
@@ -97,7 +125,7 @@ public class GameModel extends Model implements GameConstants{
     
     
     //**************************************************************************
-    // Functions
+    // Switch turn Functions
     //**************************************************************************
     /**
      * Switch turn behavior. It depend of current game mode
@@ -106,46 +134,106 @@ public class GameModel extends Model implements GameConstants{
      *  <li>Mode V2 : display a switching panel</li>
      *  <li>Mode LAN : do nothing, juste wait for other player shot</li>
      * </ul>
-     * 
      */
     public void switchTurnBehaviors(){
-        int     foeIndex        = (this.currentPlayerTurn+1)%2;  //Works only for 2 players
-        Player  foe             = this.listPlayers[foeIndex];
-        int     mode            = Session.getGameMode();
-        
-        switch(mode){
+        switch(Session.getGameMode()){
             case GameConstants.MODE_AI:
                 notifyObservers(GameModel.SWITCH_BEHAVIORS);
-                DoBreak doBreak = new DoBreak(GameConstants.DELAY_SWITCH_BREAK);
-                doBreak.start();
+                this.breakV1.start();
                 break;
                 
             case GameConstants.MODE_V2:
                 notifyObservers(GameModel.SWITCH_BEHAVIORS);
-                SwingUtilities.invokeLater(new Runnable(){
-                    public void run(){
-                        try {
-                            Thread.sleep(GameConstants.DELAY_SWITCH_BREAK);
-                        } catch(InterruptedException ex) {
-                        }
-                        if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
-                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                            notifyObservers(GameModel.GAME_OVER);
-                            return;
-                        } else if(foe.getFleet().isFleetDestroyed()){
-                            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                            notifyObservers(GameModel.GAME_VICTORY);
-                            return;
-                        }
-                        counterTurn++;
-                        currentPlayerTurn  = foeIndex;
-                        notifyObservers(GameModel.SWITCH_PAGE);
-                    }
-                });
+                this.breakV2.start();
                 break;
+                
             case GameConstants.MODE_LAN:
+                notifyObservers(GameModel.SWITCH_BEHAVIORS);
+                this.breakLan.start();
                 break;
         }
+    }
+    
+    /**
+     * Change behavior for V1 Mode (AI)
+     */
+    private void switchAiModeTurn(){
+        int     oldPlayerTurn   = currentPlayerTurn;
+        int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
+        Player  foe             = listPlayers[foeIndex];
+        if(Session.getPlayer().getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_OVER);
+        } 
+        else if(foe.getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_VICTORY);
+        }
+        else{
+            this.counterTurn++;
+            this.currentPlayerTurn  = foeIndex;
+            this.notifyObservers(GameModel.SWITCH_BEHAVIORS);
+            //AI player shoot on session player
+            if(foe instanceof PlayerAI){
+                DebugTrack.showExecMsg("AI Turn");
+                this.counterTurn++;
+                this.currentPlayerTurn  = oldPlayerTurn;
+                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
+            }
+        }
+        this.breakV1.stop(); //Stop break timer
+    }
+    
+    /**
+     * Change behavior for V2 Mode (2 Players with same computer)
+     */
+    public void switchV2ModeTurn(){
+        int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
+        Player  foe             = listPlayers[foeIndex];
+        if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_OVER);
+        } 
+        else if(foe.getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_VICTORY);
+        } 
+        else {
+            counterTurn++;
+            currentPlayerTurn  = foeIndex;
+            notifyObservers(GameModel.SWITCH_PAGE);
+        }
+        this.breakV2.stop();
+    }
+    
+    /**
+     * Change behavior for LAN Mode (Network)
+     */
+    public void switchLanModeTurn(){
+        int     oldPlayerTurn   = currentPlayerTurn;
+        int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
+        Player  foe             = listPlayers[foeIndex];
+        if(Session.getPlayer().getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_OVER);
+        } 
+        else if(foe.getFleet().isFleetDestroyed()){
+            Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
+            notifyObservers(GameModel.GAME_VICTORY);
+        }
+        else{
+            this.counterTurn++;
+            this.currentPlayerTurn  = foeIndex;
+            this.notifyObservers(GameModel.SWITCH_BEHAVIORS);
+            //AI player shoot on session player
+            if(foe instanceof PlayerLan){
+                DebugTrack.showExecMsg("AI Turn");
+                this.counterTurn++;
+                this.currentPlayerTurn  = oldPlayerTurn;
+                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
+            }
+        }
+        this.breakLan.stop();
     }
     
     
@@ -163,11 +251,11 @@ public class GameModel extends Model implements GameConstants{
     }
     
     /**
-     * Return nb turn player
-     * @return 
+     * Return current turn. On turn is done all player have played
+     * @return current turn position 
      */
     public int getNbTurn(){
-        return this.counterTurn;
+        return this.counterTurn/2;
     }
     
     /**
@@ -184,49 +272,5 @@ public class GameModel extends Model implements GameConstants{
      */
     public Player getPlayerTurn(){
         return this.listPlayers[this.currentPlayerTurn];
-    }
-    
-    
-    //**************************************************************************
-    // Inner Class : Temporary solution, it's a little bit ugly
-    //**************************************************************************
-    private class DoBreak implements ActionListener{
-        private final Timer timer;
-        
-        public DoBreak(int pDelay){
-            this.timer = new Timer(pDelay, this);
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e){
-            int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
-            Player  foe             = listPlayers[foeIndex];
-            if(Session.getPlayer().getFleet().isFleetDestroyed()){
-                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                notifyObservers(GameModel.GAME_OVER);
-                return;
-            } 
-            else if(foe.getFleet().isFleetDestroyed()){
-                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                notifyObservers(GameModel.GAME_VICTORY);
-                return;
-            }
-            counterTurn++;
-            currentPlayerTurn  = foeIndex;
-            notifyObservers(GameModel.SWITCH_BEHAVIORS);
-            //AI player shoot on session player
-            if(foe instanceof PlayerAI){
-                DebugTrack.showExecMsg("AI Turn");
-                counterTurn++;
-                currentPlayerTurn  = 0;
-                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
-                //notifyObservers(GameModel.SWITCH_TURN);
-            }
-            this.timer.stop();
-        }
-        
-        public void start(){
-            this.timer.start();
-        }
     }
 }
