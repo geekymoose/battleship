@@ -100,19 +100,19 @@ public class GameModel extends Model implements GameConstants{
      * player turn. Action created by switch is set using game mode
      */
     private void setBreakTimers(){
-        this.breakV1 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+        this.breakV1 = new Timer(GameConstants.DELAY_BREAK_V1, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 switchAiModeTurn();
             }
         });
-        this.breakV2 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+        this.breakV2 = new Timer(GameConstants.DELAY_BREAK_V2, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 switchV2ModeTurn();
             }
         });
-        this.breakLan = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+        this.breakLan = new Timer(GameConstants.DELAY_BREAK_LAN, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 switchLanModeTurn();
