@@ -86,8 +86,8 @@ public class GridHexaView extends GridPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ExplosionEvent e : this.listExplosions){
-            int x   = (e.getPosition().x * (tabBox[0][0].getDimension().width-8))+15;
-            int y   = (e.getPosition().y * tabBox[0][0].getDimension().height)+10;
+            int x   = (e.getPosition().x * (tabBox[0][0].getDimension().width-8))+19;
+            int y   = (e.getPosition().y * tabBox[0][0].getDimension().height)+19;
             int dy  = (e.getPosition().x%2==0)? 0:25;
             g.drawImage(e.getCurrentImg(), x, y+dy, this);
         }

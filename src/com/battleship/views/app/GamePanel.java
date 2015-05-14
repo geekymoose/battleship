@@ -169,8 +169,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
         //TMP DEBUG
         fleetPlayer1.getGridCursor().setClickNoArm();
         fleetPlayer2.getGridCursor().setClickNoArm();
-        //radarPlayer1.getGridCursor().setClickNoAction();
-        //radarPlayer2.getGridCursor().setClickNoAction();
         
         conf.getPlayers()[0].addObserver(this.p_radar);
         conf.getPlayers()[1].addObserver(this.p_radar);
@@ -202,7 +200,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.p_bigCont.removeAll();
                 this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_OVER));
                 this.p_bigCont.revalidate();
-                this.repaint();
                 break;
                 
             case GameModel.GAME_VICTORY:
@@ -210,7 +207,6 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.p_bigCont.removeAll();
                 this.p_bigCont.add(new EndGamePanel(this, GameModel.GAME_VICTORY));
                 this.p_bigCont.revalidate();
-                this.repaint();
                 break;
                 
             case GameModel.SWITCH_PAGE:
@@ -222,14 +218,16 @@ public class GamePanel extends PagePanel implements ObserverModel{
                 this.switchPanel.display();
                 break;
                 
+            //Change behavior for radar grid cursor.
             case GameModel.SWITCH_BEHAVIORS:
                 this.p_radar.setAttackedGrid(m.getIdPlayerTurn());
                 break;
+                
             default:
-                this.repaint();
                 break;
         }
         this.p_info.updateData(); //Update data in the information panel
+        this.repaint();
     }
     
     
