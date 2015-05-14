@@ -10,8 +10,6 @@ import com.battleship.constants.GameConstants;
 import com.battleship.main.DebugTrack;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -59,6 +57,11 @@ public class GameModel extends Model implements GameConstants{
     private     int                 counterTurn;
     private     int                 currentPlayerTurn;
     
+    //Break timer
+    private     Timer               breakV1;
+    private     Timer               breakV2;
+    private     Timer               breakLan;
+    
     
     
     
@@ -90,6 +93,31 @@ public class GameModel extends Model implements GameConstants{
             p.setGameModel(this);
             p.getFleet().setGame(this);
         }
+        this.setBreakTimers();
+    }
+    
+    /**
+     * Set action for break timer
+     */
+    private void setBreakTimers(){
+        this.breakV1 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+            
+            }
+        });
+        this.breakV2 = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+            
+            }
+        });
+        this.breakLan = new Timer(GameConstants.DELAY_SWITCH_BREAK, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+            
+            }
+        });
     }
     
     

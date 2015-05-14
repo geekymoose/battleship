@@ -5,7 +5,6 @@
 package com.battleship.models.game;
 
 import com.battleship.asset.RandomManager;
-import com.battleship.asset.Session;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.GameConstants;
 import com.battleship.models.sprites.*;
@@ -114,7 +113,7 @@ public abstract class Player extends Model implements GameConstants{
     
     
     //**************************************************************************
-    // Game Functions
+    // Weapons Functions
     //**************************************************************************
     /**
      * Switch player weapon. Get the next player weapon.
