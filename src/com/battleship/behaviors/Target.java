@@ -58,6 +58,7 @@ public interface Target{
     
     /**
      * Return the value of this target
+     * @return 
      */
     public int getValue();
 }
