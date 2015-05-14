@@ -346,7 +346,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
     
     /**
      * Return list of explosion on this FleetGridModel
-     * @return ArrayList<ExplosionEvent> list of explosions
+     * @return ArrayList of ExplosionEvent
      */
     public ArrayList<ExplosionEvent> getListExplosions(){
         return this.listExplosions;
@@ -394,4 +394,12 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
     public void setGame(GameModel pGame){
         this.game = pGame;
     }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Function for network 
+    //**************************************************************************
 }
