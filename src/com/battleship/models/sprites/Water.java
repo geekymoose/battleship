@@ -85,7 +85,7 @@ public class Water implements Sprite{
     
     @Override
     public int getId(){
-        return GameConstants.WATER;
+        return Sprite.WATER;
     }
         
     @Override

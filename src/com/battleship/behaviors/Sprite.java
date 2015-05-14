@@ -28,11 +28,17 @@ public interface Sprite {
     //**************************************************************************
     // Constants
     //**************************************************************************
-    //public final int NB_STATES                  = 4;
-    public final int ALIVE_BOAT                 = 1;
-    public final int ALIVE_WATER                = 2;
-    public final int DEAD_BOAT                  = 3;
-    public final int DEAD_WATER                 = 4;
+    public static final int     AIRCRAFT_CARRIER    = 0;
+    public static final int     BATTLESHIP          = 1;
+    public static final int     CRUISER             = 2;
+    public static final int     DESTROYER           = 3;
+    public static final int     SUBMARINE           = 4;
+    public static final int     WATER               = 42;
+    
+    public final int            ALIVE_BOAT          = 1;
+    public final int            ALIVE_WATER         = 2;
+    public final int            DEAD_BOAT           = 3;
+    public final int            DEAD_WATER          = 4;
     
     
     

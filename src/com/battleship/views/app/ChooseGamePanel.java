@@ -125,7 +125,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : AI");
                     Session.setGameMode(MODE_AI);
-                    frame.rooting(Config.getRootsValues("config"), true);
+                    frame.rooting(ApplicationFrame.CONFIG, true);
                 }
             }
         );
@@ -135,7 +135,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : V2");
                     Session.setGameMode(MODE_V2);
-                    frame.rooting(Config.getRootsValues("config"), true);
+                    frame.rooting(ApplicationFrame.CONFIG, true);
                 }
             }
         );
@@ -145,7 +145,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
                 public void actionPerformed(ActionEvent e) {
                     DebugTrack.showExecMsg("Game mode : LAN");
                     Session.setGameMode(MODE_LAN);
-                    frame.rooting(Config.getRootsValues("reseau"), true);
+                    frame.rooting(ApplicationFrame.NETWORK, true);
                 }
             }
         );
@@ -153,9 +153,7 @@ public class ChooseGamePanel extends PagePanel implements GameConstants, UiEleme
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.showExecMsg("Game mode : Internet");
-                    Session.setGameMode(MODE_INTERNET);
-                    frame.rooting(Config.getRootsValues("bazaar"), true);
+                    frame.rooting(ApplicationFrame.BAZAAR, true);
                 }
             }
         );

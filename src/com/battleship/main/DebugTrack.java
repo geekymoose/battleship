@@ -42,11 +42,11 @@ public abstract class DebugTrack {
      * can be apply, some root need class created before. (Which could ne be 
      * set in this case)
      * @param pFrame    main app frame where to display
-     * @param str       root value
+     * @param pWhere    root value
      */
-    public static void quickModeRoot(WindowFrame pFrame, String str){
+    public static void quickModeRoot(WindowFrame pFrame, int pWhere){
         if(DebugTrack.quick_debug_mode == true){
-            pFrame.rooting(Config.getRootsValues(str), true);
+            pFrame.rooting(pWhere, true);
         }
     }
     

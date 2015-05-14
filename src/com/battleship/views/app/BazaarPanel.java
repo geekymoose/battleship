@@ -166,7 +166,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
     
     @Override
     protected void goPreviousPage(){
-        frame.rooting(Config.getRootsValues("choose-game"), null);
+        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
     }
     
     

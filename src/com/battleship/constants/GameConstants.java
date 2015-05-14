@@ -26,7 +26,11 @@ public interface GameConstants {
     public static final int     GRID_TYPE_SQUARE            = 1;
     public static int           GRID_TYPE_HEXAGON           = 2;
     
-    
+    //Position constants
+    public static final int     VERTICAL                    = 1;
+    public static final int     HORIZONTAL                  = 2;
+    public static final int     STANDING_UP                 = 3;
+    public static final int     STANDING_DOWN               = 4;
     
     
     //**************************************************************************
@@ -37,13 +41,6 @@ public interface GameConstants {
     
     public static final int     NO_VALUE                    = -1;
     
-    //Position constants
-    public static final int     VERTICAL                    = 1;
-    public static final int     HORIZONTAL                  = 2;
-    public static final int     STANDING_UP                 = 3;
-    public static final int     STANDING_DOWN               = 4;
-    
-    
     
     //**************************************************************************
     // Game constants
@@ -51,26 +48,9 @@ public interface GameConstants {
     public static final int     MODE_AI                     = 1;
     public static final int     MODE_V2                     = 2;
     public static final int     MODE_LAN                    = 3;
-    public static final int     MODE_INTERNET               = 4;
     
     public static final int     CREATE_GAME                 = 1;
     public static final int     JOIN_GAME                   = 2;
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Id Boats constants
-    //**************************************************************************
-    public static final int     NO_BOAT_SELECTED        = -1;
-    public static final int     AIRCRAFT_CARRIER        = 0;
-    public static final int     BATTLESHIP              = 1;
-    public static final int     CRUISER                 = 2;
-    public static final int     DESTROYER               = 3;
-    public static final int     SUBMARINE               = 4;
-    public static final int     WATER                   = 42;
-    
     
     
     //**************************************************************************

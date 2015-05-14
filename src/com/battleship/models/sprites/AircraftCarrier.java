@@ -6,7 +6,7 @@
 package com.battleship.models.sprites;
 
 import com.battleship.asset.Config;
-import com.battleship.constants.GameConstants;
+import com.battleship.behaviors.Sprite;
 
 
 
@@ -36,7 +36,7 @@ public class AircraftCarrier extends Boat{
      * Create a new AircraftCarrier
      */
     public AircraftCarrier(){
-        super(GameConstants.AIRCRAFT_CARRIER, 
+        super(Sprite.AIRCRAFT_CARRIER, 
               "AircraftCarrier", 5, 5, 
               Config.getGameValues_int("value-aircraft-carrier"));
     }
