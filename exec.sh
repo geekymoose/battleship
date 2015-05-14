@@ -9,9 +9,9 @@
 # Variables and Constants
 #*******************************************************************************
 PWD_EXEC=`pwd`
-DOSS_GENERATED="jjgenerated"
-DOSS_BUILD=$DOSS_GENERATED"/build"
-DOSS_UML=$DOSS_GENERATED"/uml"
+DOSS_GENERATED="jjgenerated/"
+DOSS_BUILD=$DOSS_GENERATED"build/"
+DOSS_UML=$DOSS_GENERATED"uml/"
 
 
 
@@ -44,12 +44,14 @@ function createArbo(){
 	mkdir $DOSS_UML ; checkError
 }
 
+function createJavaDoc(){
+	javadoc -Xdoclint:syntax,reference,missing,accessibility -d $DOSS_GENERATED"javadoc" -sourcepath src/ -subpackages com
+}
+
 # Execute
 function execute(){
 	javac -d $DOSS_BUILD -sourcepath src src/com/battleship/main/Main.java
 	java -cp $DOSS_BUILD com.battleship.main.Main
-	#javac -d build -sourcepath src src/com/battleship/main/Main.java
-	#java -cp build com.battleship.main.Main
 }
 
 
@@ -57,6 +59,7 @@ function execute(){
 
 createArbo
 loadUML
+createJavaDoc
 execute
 
 

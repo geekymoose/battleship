@@ -175,14 +175,12 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
             if(this.controller.isValidConfig()){
                 switch(mode){
                     case MODE_AI:
-                        frame.rooting(Config.getRootsValues("choose-game"), null);
+                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
                         break;
                     case MODE_V2:
-                        frame.rooting(Config.getRootsValues("choose-game"), null);
+                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
                         break;
                     case MODE_LAN:
-                        break;
-                    case MODE_INTERNET:
                         break;
                 }
             }

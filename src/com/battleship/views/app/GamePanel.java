@@ -510,14 +510,14 @@ public class GamePanel extends PagePanel implements ObserverModel{
             this.b_goBazaar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    page.getFrame().rooting(Config.getRootsValues("bazaar"), true);
+                    page.getFrame().rooting(ApplicationFrame.BAZAAR, true);
                 }
             });
             
             this.b_return.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    page.getFrame().rooting(Config.getRootsValues("choose-game"), true);
+                    page.getFrame().rooting(ApplicationFrame.CHOOSE_GAME, true);
                 }
             });
         }

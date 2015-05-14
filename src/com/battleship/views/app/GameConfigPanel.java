@@ -325,14 +325,12 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         if(this.controller.isValidConfig()){
             switch(mode){
                 case MODE_AI:
-                    frame.rooting(Config.getRootsValues("place-boats"), true);
+                    frame.rooting(ApplicationFrame.PLACE_BOATS, true);
                     break;
                 case MODE_V2:
-                    frame.rooting(Config.getRootsValues("place-boats"), true);
+                    frame.rooting(ApplicationFrame.PLACE_BOATS, true);
                     break;
                 case MODE_LAN:
-                    break;
-                case MODE_INTERNET:
                     break;
             }
         }
@@ -348,14 +346,12 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             if(this.controller.isValidConfig()){
                 switch(mode){
                     case MODE_AI:
-                        frame.rooting(Config.getRootsValues("choose-game"), null);
+                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
                         break;
                     case MODE_V2:
-                        frame.rooting(Config.getRootsValues("choose-game"), null);
+                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
                         break;
                     case MODE_LAN:
-                        break;
-                    case MODE_INTERNET:
                         break;
                 }
             }

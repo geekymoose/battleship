@@ -8,6 +8,7 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.asset.Config;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.asset.ThemeManager;
+import com.battleship.behaviors.Sprite;
 import com.battleship.constants.GameConstants;
 import com.battleship.controllers.PlaceBoatsController;
 import com.battleship.models.sprites.Boat;
@@ -40,7 +41,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class DockPanel extends ContentPanel implements ObserverModel, GameConstants{
+public class DockPanel extends ContentPanel implements ObserverModel{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -255,7 +256,7 @@ public class DockPanel extends ContentPanel implements ObserverModel, GameConsta
     //**************************************************************************
     private class AircraftCarrierDock extends DockBoats {
         public AircraftCarrierDock(){
-            super(GameConstants.AIRCRAFT_CARRIER);
+            super(Sprite.AIRCRAFT_CARRIER);
             this.defaultImg     = 418100;
             this.hoverImg       = 418200;
             this.selectedImg    = 418300;
@@ -266,7 +267,7 @@ public class DockPanel extends ContentPanel implements ObserverModel, GameConsta
     //**************************************************************************
     private class BattleshipDock extends DockBoats {
         public BattleshipDock(){
-            super(GameConstants.BATTLESHIP);
+            super(Sprite.BATTLESHIP);
             this.defaultImg     = 419100;
             this.hoverImg       = 419200;
             this.selectedImg    = 419300;
@@ -277,7 +278,7 @@ public class DockPanel extends ContentPanel implements ObserverModel, GameConsta
     //**************************************************************************
     private class SubmarineDock extends DockBoats {
         public SubmarineDock(){
-            super(GameConstants.SUBMARINE);
+            super(Sprite.SUBMARINE);
             this.defaultImg     = 421100;
             this.hoverImg       = 421200;
             this.selectedImg    = 421300;
@@ -288,7 +289,7 @@ public class DockPanel extends ContentPanel implements ObserverModel, GameConsta
     //**************************************************************************
     private class CruiserDock extends DockBoats {
         public CruiserDock(){
-            super(GameConstants.CRUISER);
+            super(Sprite.CRUISER);
             this.defaultImg     = 420100;
             this.hoverImg       = 420200;
             this.selectedImg    = 420300;
@@ -299,7 +300,7 @@ public class DockPanel extends ContentPanel implements ObserverModel, GameConsta
     //**************************************************************************
     private class DestroyerDock extends DockBoats {
         public DestroyerDock(){
-            super(GameConstants.DESTROYER);
+            super(Sprite.DESTROYER);
             this.defaultImg     = 422100;
             this.hoverImg       = 422200;
             this.selectedImg    = 422300;

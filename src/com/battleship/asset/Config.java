@@ -42,7 +42,6 @@ public class Config {
     public  static      String      themeConfigPath;
     public  static      String      dimConfigPath;
     public  static      String      gameConfigPath;
-    public  static      String      rootsPath;
     
     
     //List with all constants used for application
@@ -52,7 +51,6 @@ public class Config {
     private static      HashMap<String, Double>     l_gameConfig_double;
     private static      HashMap<String, String>     l_gameConfig_str;
     private static      HashMap<String, String>     l_themeConfig_str;
-    private static      HashMap<String, Integer>    l_roots;
     
     
     //List with loaded image name / ext
@@ -80,7 +78,6 @@ public class Config {
      */
     private Config(){
         String constantsPath        = "src/com/battleship/constants/";
-        this.rootsPath              = constantsPath+"roots.xml";
         this.dimConfigPath          = constantsPath+"dimConfig.xml";
         this.themeConfigPath        = constantsPath+"themeConfig.xml";
         this.gameConfigPath         = constantsPath+"gameConfig.xml";
@@ -94,9 +91,6 @@ public class Config {
     public static void createConfig() throws ExecError{
         Config.singleton            = new Config();
         DOMParser                   .createDOMParser(); //XML parser
-        
-        //Root constants 
-        Config.l_roots              = DOMParser.getIntegerConstants(rootsPath);
         
         
         //Load app constants
@@ -141,12 +135,6 @@ public class Config {
     //**************************************************************************
     // Getters - Setters for Constants
     //**************************************************************************
-    public static int getRootsValues(String pName){
-        Integer root = Config.l_roots.get(pName);
-        DebugTrack.isValidConstantsName(root, pName);
-        return root;
-    }
-    
     /**
      * Return dimension constants with Dimension format
      * @param pName constants name

@@ -6,7 +6,6 @@
 package com.battleship.models.sprites;
 
 import com.battleship.behaviors.Sprite;
-import com.battleship.constants.GameConstants;
 import com.battleship.models.game.BoxMap;
 import com.battleship.models.game.FleetGridModel;
 import java.util.ArrayList;
@@ -15,13 +14,9 @@ import java.util.ArrayList;
 
 /**
  * <h1>Boat</h1>
- * <p>
- * public abstract class Boat<br/>
- * implements Sprite
- * </p>
+ * <p>public abstract class Boat</p>
  *
- * <p>
- * Define a boat item. Every one in the fleet must extends boat.</p>
+ * <p>Define a boat item. Every one in the fleet must extends boat.</p>
  * <ul>
  *  <li>AircraftCarrier</li>
  *  <li>Battleship</li>
@@ -36,7 +31,7 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Contsantin MASSON
  */
-public abstract class Boat implements GameConstants{
+public abstract class Boat{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -140,7 +135,7 @@ public abstract class Boat implements GameConstants{
             //Check if position is not stick with another boat
             ArrayList<BoxMap> l = next.getNeighbor();
             for (BoxMap b : l){
-                if(b.getContent().getId() != this.idBoat && b.getContent().getId() != WATER){
+                if(b.getContent().getId() != this.idBoat && b.getContent().getId() != Sprite.WATER){
                     return false;
                 }
             }

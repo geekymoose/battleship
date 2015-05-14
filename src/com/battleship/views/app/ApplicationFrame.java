@@ -36,16 +36,15 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     //**************************************************************************
     // Variables and Constants
     //**************************************************************************
-    //Constants -> load roots
-    private     final int   CHOOSE_GAME     = Config.getRootsValues("choose-game");
-    private     final int   CONFIG          = Config.getRootsValues("config");
-    private     final int   PLACE_BOATS     = Config.getRootsValues("place-boats");
-    private     final int   GAME            = Config.getRootsValues("game");
-    private     final int   BAZAAR          = Config.getRootsValues("bazaar");
-    private     final int   RESEAU          = Config.getRootsValues("reseau");
+    public  static final int     CHOOSE_GAME    = 101;
+    public  static final int     CONFIG         = 102;
+    public  static final int     PLACE_BOATS    = 103;
+    public  static final int     GAME           = 104;
+    public  static final int     BAZAAR         = 105;
+    public  static final int     NETWORK        = 106;
     
-    private     final int   FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
-    private     final int   FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
+    private final int           FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
+    private final int           FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
     
     
     //Variables 
@@ -104,26 +103,29 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
         }
         //Get the requier page
         try{
-            if(path == this.CHOOSE_GAME){
-                this.p_mainContent = new ChooseGamePanel(this);
-                
-            } else if(path == this.CONFIG){
-                this.p_mainContent = SwingFactory.loadConfigGame(this, reset);
-                
-            } else if(path == this.PLACE_BOATS){
-                this.p_mainContent = SwingFactory.loadPlaceBoats(this, reset);
-                
-            } else if(path == this.GAME){
-                this.p_mainContent = SwingFactory.loadGame(this, reset);
-                
-            }else if(path == this.BAZAAR){
-                this.p_mainContent = new BazaarPanel(this);
-                
-            } else if (path == this.RESEAU){
-                this.p_mainContent = new ConnectPanel(this);
-            }else {
-                throw new ExecError(404); //Page not found
+            switch(path){
+                case CHOOSE_GAME:
+                    this.p_mainContent = new ChooseGamePanel(this);
+                    break;
+                case CONFIG:
+                    this.p_mainContent = SwingFactory.loadConfigGame(this, reset);
+                    break;
+                case PLACE_BOATS:
+                    this.p_mainContent = SwingFactory.loadPlaceBoats(this, reset);
+                    break;
+                case GAME:
+                    this.p_mainContent = SwingFactory.loadGame(this, reset);
+                    break;
+                case BAZAAR:
+                    this.p_mainContent = new BazaarPanel(this);
+                    break;
+                case NETWORK:
+                    this.p_mainContent = new ConnectPanel(this);
+                    break;
+                default:
+                    throw new ExecError(404); //Page not found
             }
+            
         } catch(ExecError ex){
             try {
                 this.p_mainContent = new Error404View(this, ex.getMessage());
