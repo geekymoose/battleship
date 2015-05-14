@@ -90,5 +90,7 @@ public interface GameConstants {
     //**************************************************************************
     public static final int     DELAY_GAME              = 10;
     public static final int     DELAY_WATER             = 30;
-    public static final int     DELAY_SWITCH_BREAK      = 500;
+    public static final int     DELAY_BREAK_V1          = 600;
+    public static final int     DELAY_BREAK_V2          = 1000;
+    public static final int     DELAY_BREAK_LAN         = 600;
 }
