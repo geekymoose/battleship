@@ -188,7 +188,6 @@ public class GameModel extends Model implements GameConstants{
      * Change behavior for V2 Mode (2 Players with same computer)
      */
     public void switchV2ModeTurn(){
-        int     oldPlayerTurn   = currentPlayerTurn;
         int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
         Player  foe             = listPlayers[foeIndex];
         if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
@@ -252,11 +251,11 @@ public class GameModel extends Model implements GameConstants{
     }
     
     /**
-     * Return nb turn player
-     * @return 
+     * Return current turn. On turn is done all player have played
+     * @return current turn position 
      */
     public int getNbTurn(){
-        return this.counterTurn;
+        return this.counterTurn/2;
     }
     
     /**
@@ -273,49 +272,5 @@ public class GameModel extends Model implements GameConstants{
      */
     public Player getPlayerTurn(){
         return this.listPlayers[this.currentPlayerTurn];
-    }
-    
-    
-    //**************************************************************************
-    // Inner Class : Temporary solution, it's a little bit ugly
-    //**************************************************************************
-    private class DoBreak implements ActionListener{
-        private final Timer timer;
-        
-        public DoBreak(int pDelay){
-            this.timer = new Timer(pDelay, this);
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e){
-            int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
-            Player  foe             = listPlayers[foeIndex];
-            if(Session.getPlayer().getFleet().isFleetDestroyed()){
-                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                notifyObservers(GameModel.GAME_OVER);
-                return;
-            } 
-            else if(foe.getFleet().isFleetDestroyed()){
-                Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-                notifyObservers(GameModel.GAME_VICTORY);
-                return;
-            }
-            counterTurn++;
-            currentPlayerTurn  = foeIndex;
-            notifyObservers(GameModel.SWITCH_BEHAVIORS);
-            //AI player shoot on session player
-            if(foe instanceof PlayerAI){
-                DebugTrack.showExecMsg("AI Turn");
-                counterTurn++;
-                currentPlayerTurn  = 0;
-                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
-                //notifyObservers(GameModel.SWITCH_TURN);
-            }
-            this.timer.stop();
-        }
-        
-        public void start(){
-            this.timer.start();
-        }
     }
 }

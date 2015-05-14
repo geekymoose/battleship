@@ -5,6 +5,7 @@
 
 package com.battleship.views.tools;
 
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
@@ -26,7 +27,8 @@ public abstract class ContentPanel extends JPanel implements UiElement{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    protected   JPanel       parentPage;
+    private     ArrayList<UiElement>    listUiElements;
+    protected   JPanel                  parentPage;
     
     
     
