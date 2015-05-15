@@ -342,6 +342,6 @@ public abstract class DebugTrack {
      */
     private static String getfctName(){
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        return stackTraceElements[2].getClassName();
+        return stackTraceElements[3].getClassName();
     }
 }
