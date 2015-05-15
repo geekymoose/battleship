@@ -64,5 +64,6 @@ public class PlayerAI extends Player{
             posY = RandomManager.getRandomBetween(0, (pWhere.length-1));
         } while(pWhere[posY][posX].isValidTarget() == false);
         this.shootAt(posX, posY, pWhere);
+        int box = ((BoxMap)pWhere[posY][posX]).content.getId();
     }
 }

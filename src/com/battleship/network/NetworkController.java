@@ -4,6 +4,7 @@
  */
 package com.battleship.network;
 
+import com.battleship.main.DebugTrack;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -15,43 +16,43 @@ import java.net.Socket;
  * @author  Jessica FAVIN
  */
 public class NetworkController {
-
-    private Socket clientSocket;
-    private ObjectOutputStream output;
-    private ObjectInputStream input;
-
+    private Socket              clientSocket;
+    private ObjectOutputStream  output;
+    private ObjectInputStream   input;
+    
+    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-
     public NetworkController() {
 
     }
-
+    
+    
     //**************************************************************************
     // METHODS
     //**************************************************************************
+    /**
+     * Try to connect to server
+     * @param ipServer
+     * @return 
+     */
     public boolean tryConnect(String ipServer) {
-        boolean flag = false;
         try {
-            clientSocket = new Socket(ipServer, 10000);
-            flag = true;
-            //CONNEXION REUSSI
+            this.clientSocket   = new Socket(ipServer, 5000);
+            Connection connect  = new Connection(clientSocket, this);
+            return true;
         } catch (Exception ex) {
-            //ERREUR de CONNEXION DONC INVOCATION MESSAGE ERREUR
-            flag = false;
+            DebugTrack.showErrMsg("Unable to connect, error msg : "+ex.getMessage());
         }
-
-        if (flag == true) {
-            Connection connect = new Connection(clientSocket, this); 
-        }
-        return flag;
+        return false;
     }
     
-    public void execRequest(Capsule cpsl){
-        Request rqt = cpsl.getRequest();
-        
+    
+    public void execRequest(Capsule pCapsule){
+        Request rqt = pCapsule.getRequest();
     }
+    
 
     //**************************************************************************
     // SETTERS / GETTERS
