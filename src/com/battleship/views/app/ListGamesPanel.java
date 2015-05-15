@@ -11,6 +11,12 @@ import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.exceptions.LanError;
 import com.battleship.main.DebugTrack;
+import com.battleship.network.Capsule;
+import com.battleship.network.Request;
+import com.battleship.network.ServerGame;
+import com.battleship.observers.ObservableLan;
+import com.battleship.observers.ObservableModel;
+import com.battleship.observers.ObserverLan;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.UiButton;
 import com.battleship.uibutton.ZozoDecorator;
@@ -42,7 +48,9 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ListGamesPanel extends PagePanel implements GameConstants, UiElement {
+public class ListGamesPanel extends PagePanel implements GameConstants, 
+                                                         UiElement,
+                                                         ObserverLan{
     private HeadBar                 p_hb;
     private JPanel                  p_container;
     private JPanel                  p_buttons;
@@ -65,6 +73,8 @@ public class ListGamesPanel extends PagePanel implements GameConstants, UiElemen
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.setBtnActions();
+        Session.getNetwork().deleteAllObserver();
+        Session.getNetwork().addObserver(this);
         this.loadUI();
     }
     
@@ -181,39 +191,52 @@ public class ListGamesPanel extends PagePanel implements GameConstants, UiElemen
         this.p_hb.reloadUI();
         this.repaint();
     }
-    
-    
 
+    
+    //**************************************************************************
+    // Network
+    //**************************************************************************
+    @Override
+    public void update(ObservableLan o, Object arg){
+        if(arg instanceof ArrayList){
+            this.p_listPanel.updateListGame((ArrayList<ServerGame>)arg);
+        }
+    }
+    
+    
+    
+    
     //**************************************************************************
     // Inner class
     //**************************************************************************
     private class TablePanel extends ContentPanel{
-        private ArrayList<GameAvailable> games = new ArrayList();
-        //**************************************************************************
+        //**********************************************************************
         // CONSTRUCTOR
-        //**************************************************************************
-        public TablePanel(){
-            //this.setLayout(new FlowLayout());
+        //**********************************************************************
+        private TablePanel(){
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
             this.setBackground(Color.DARK_GRAY);
-            games.add(new GameAvailable(1, "Titre de la premiere game", 1,2));
-            games.add(new GameAvailable(1, "Bienvenue chez les zozos", 1,1));
-            games.add(new GameAvailable(1, "Coucou les petits cacas", 2,2));
-            games.add(new GameAvailable(1, "WELCOME BITCHIES", 1,1));
-            games.add(new GameAvailable(1, "Titre de la premiere game", 2,2));
-            games.add(new GameAvailable(1, "Coucou les petits cacas", 2,2));
-            games.add(new GameAvailable(1, "WELCOME BITCHIES", 1,1));
-            games.add(new GameAvailable(1, "Titre de la premiere game", 2,2));
+            Session.getNetwork().sendCapsule(new Capsule(Request.LIST_OF_GAMES, null));
+        }
         
-            for(int i =0; i< games.size(); i++){
-                this.add(this.games.get(i));
+        private void updateListGame(ArrayList<ServerGame> pList){
+            this.removeAll();
+            if(pList.isEmpty()){
+                DebugTrack.showExecMsg("Not game available");
+            } 
+            else {
+                for(ServerGame g : pList){
+                    this.add(new GameAvailable(g));
+                }
             }
+            
+            this.revalidate();
         }
 
         @Override
         public void loadUI(){
         }
-
+        
         @Override
         public void reloadUI(){
         }
@@ -237,10 +260,14 @@ public class ListGamesPanel extends PagePanel implements GameConstants, UiElemen
         private JButton     b_join;
         //private JButton b_spectator;
 
-        //**************************************************************************
+        //**********************************************************************
         // CONSTRUCTOR
-        //**************************************************************************
-        public GameAvailable(Integer id, String title, Integer nbPlayer, int grid){
+        //**********************************************************************
+        private GameAvailable(ServerGame pGame){
+            this.initComponents(pGame.getId(), pGame.getTitle(), pGame.getNbPlayers(), pGame.getType());
+        }
+        
+        private void initComponents(Integer id, String title, Integer nbPlayer, int grid){
             p_id                = new JPanel();
             p_title             = new JPanel();
             p_nbPlayer          = new JPanel();
