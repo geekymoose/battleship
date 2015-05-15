@@ -5,6 +5,7 @@
 package com.battleship.controllers;
 
 import com.battleship.exceptions.ExecError;
+import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
 
@@ -99,5 +100,12 @@ public class GameConfigController extends Controller{
      */
     public void changeGridType(int pValue){
         this.model.setGridType(pValue);
+    }
+    
+    /*
+     * Set game title 
+     */
+    public void setTitle(String pValue) throws ForbiddenAction{
+        this.model.setTitle(pValue);
     }
 }

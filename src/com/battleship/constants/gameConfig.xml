@@ -10,6 +10,10 @@
         </string>
         
         <integer>
+            <config>
+                <val id="game-title-max-length">25</val>
+            </config>
+            
             <game>
                 <val id="nb-min-players">2</val>
                 <val id="nb-max-players">2</val>

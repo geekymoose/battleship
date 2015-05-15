@@ -5,8 +5,6 @@
 package com.battleship.models.game;
 
 import com.battleship.asset.RandomManager;
-import static com.battleship.behaviors.Sprite.DEAD_BOAT;
-import static com.battleship.behaviors.Sprite.DEAD_WATER;
 import com.battleship.behaviors.Target;
 import com.battleship.models.weapons.Torpedo;
 import java.awt.Point;
@@ -54,7 +52,7 @@ public class PlayerAI extends Player{
      */
     public PlayerAI(){
         super();
-        difficulty = EASY;
+        difficulty = HARD;
         //height et width pas implémentés dès le début => erreur null pointer
         //grid = new int [this.fleetGrid.gridHeight][this.fleetGrid.gridWidth];
         grid = new int [10][10];
