@@ -45,9 +45,9 @@ public abstract class Player extends Model implements GameConstants{
     // Constants - Variables
     //**************************************************************************
     private     String                  name;
-    private     FleetGridModel          fleetGrid;
+    protected   FleetGridModel          fleetGrid;
     private     GameModel               game; //Game where player is playing
-    private     ArrayList<Weapon>       listWeapons;
+    protected   ArrayList<Weapon>       listWeapons;
     private     ArrayList<Boat>         listBoatsOwned;
     private     int                     score;
     private     int                     scoreCombo;
