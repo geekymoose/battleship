@@ -7,10 +7,14 @@ package com.battleship.network;
 import com.battleship.asset.Session;
 import com.battleship.exceptions.LanError;
 import com.battleship.main.DebugTrack;
+import com.battleship.models.game.Model;
+import com.battleship.observers.ObservableLan;
+import com.battleship.observers.ObserverLan;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * @since   5 mai 2015
@@ -18,12 +22,24 @@ import java.net.Socket;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class Network {
-    private Socket              clientSocket;
-    private ObjectOutputStream  output;
-    private ObjectInputStream   input;
-    private int                 state = 0;
-    private Thread              thread;
+public class Network extends Model implements ObservableLan{
+    //**************************************************************************
+    // Variables - Constants
+    //**************************************************************************
+    protected   ArrayList<ObserverLan> listObservers;
+    private Socket                      clientSocket;
+    private ObjectOutputStream          output;
+    private ObjectInputStream           input;
+    private int                         state = 0;
+    private Thread                      thread;
+    
+    
+    //**************************************************************************
+    // Constructor - Initialisation
+    //**************************************************************************
+    public Network(){
+        this.listObservers = new ArrayList();
+    }
     
     
     //**************************************************************************
@@ -51,8 +67,20 @@ public class Network {
             throw new LanError("Unable to connect to server! "+ex.getMessage());
         }
     }
-   
     
+    
+    /**
+     * Send a capsule to the server
+     * @param cpsl 
+     */
+    public void sendCapsule(Capsule cpsl){
+        try {
+            output.writeObject(cpsl);
+            output.flush();
+        } catch (IOException ex) {
+            // MESSAGE D'ERREUR
+        }
+    }
     
     /**
      * Execute the request received
@@ -62,7 +90,8 @@ public class Network {
         Request rqt = cpsl.getRequest();
         
         if(rqt == Request.LIST_OF_GAMES){
-            //RAFRAICHIR LA PAGE DE REQUETTE SI DANS LE BON ETAT sinon rien
+            ArrayList<ServerGame> l = (ArrayList<ServerGame>)cpsl.getObject();
+            this.notifyObservers(l);
         }
         else if(rqt == Request.JOIN_SUCCEED){
             // FONCTION QUI CHANGE DE PAGE ET D'ETAT -> ETAT 2
@@ -110,20 +139,6 @@ public class Network {
         }
     }
     
-
-    /**
-     * Send a capsule to the server
-     * @param cpsl 
-     */
-    public void sendCapsule(Capsule cpsl){
-        try {
-            output.writeObject(cpsl);
-            output.flush();
-        } catch (IOException ex) {
-            // MESSAGE D'ERREUR
-        }
-        
-    }
     //**************************************************************************
     // SETTERS / GETTERS
     //**************************************************************************
@@ -165,5 +180,35 @@ public class Network {
      */
     public void setOutput(ObjectOutputStream obj){
         this.output = obj;
+    }
+
+    
+    //**************************************************************************
+    // Observers
+    //**************************************************************************
+    @Override
+    public void addObserver(ObserverLan obs){
+        if(obs!=null){
+            this.listObservers.add(obs);
+        }
+    }
+
+    @Override
+    public void deleteObserver(ObserverLan o){
+        if(o!=null){
+            this.listObservers.remove(o);
+        }
+    }
+    
+    @Override
+    public void deleteAllObserver(){
+        this.listObservers = new ArrayList();
+    }
+    
+    @Override
+    public void notifyObservers(Object obj){
+        for(ObserverLan obs : this.listObservers){
+            obs.update(this, obj);
+        }
     }
 }
