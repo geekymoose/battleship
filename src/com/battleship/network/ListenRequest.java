@@ -11,22 +11,23 @@ package com.battleship.network;
  * @author  Jessica FAVIN
  */
 public class ListenRequest implements Runnable {
+    //**************************************************************************
+    // 
+    //**************************************************************************
+    private     Thread          t;
+    private     Network         nc;
+    private     boolean         flag = true;
 
+    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
-
-    ListenRequest ob1;
-    Thread t;
-    NetworkController nc;
-    boolean flag = true;
-
-    ListenRequest(NetworkController nc) {
+    public ListenRequest(Network nc) {
         t = new Thread(this, "ListenMessage");
         this.nc = nc;
         t.start();
     }
-
+    
     public void run() {
         do {
             try {

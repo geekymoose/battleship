@@ -6,9 +6,14 @@
 package com.battleship.asset;
 
 import com.battleship.exceptions.ForbiddenAction;
+import com.battleship.exceptions.LanError;
 import com.battleship.models.game.Player;
 import com.battleship.models.weapons.Missile;
 import com.battleship.models.weapons.Weapon;
+import com.battleship.network.Capsule;
+import com.battleship.network.Network;
+import com.battleship.network.Request;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -46,10 +51,10 @@ public class Session {
     private     static Session      singleton = null;
     private     String              name;
     private     int                 gameMode;
-    private     boolean             isConnected;
     private     ArrayList<Weapon>   listWeapon;
     private     Player              player; //used only during a game
     private     int                 money;
+    private     Network             network;
     
     
     
@@ -64,6 +69,7 @@ public class Session {
      */
     private Session(){
         this.initAccount();
+        this.network = null;
     }
     
     /**
@@ -78,7 +84,6 @@ public class Session {
      */
     private void initAccount(){
         this.name           = "Unknown";
-        this.isConnected    = false;
         this.money          = 0;
         this.listWeapon     = new ArrayList();
         this.money          = 0;
@@ -186,6 +191,36 @@ public class Session {
     
     
     //**************************************************************************
+    // Network functions
+    //**************************************************************************
+    /**
+     * Check if session is connected to network 
+     * @return true if connected, otherwise, return false
+     */
+    public static boolean isConnected(){
+        return Session.singleton.network != null;
+    }
+    
+    /**
+     * Try to disconnect current server
+     * @throws LanError thrown if unable to disconnect
+     */
+    public static void disconnect() throws LanError{
+        try{
+            Session.singleton.network.sendCapsule(new Capsule(Request.DISCONNECT, null));
+            Session.singleton.network.getInput().close();
+            Session.singleton.network.getOutput().close();
+            Session.singleton.network = null;
+        } catch(IOException ex) {
+            throw new LanError("Unable to disconnect");
+        }
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
     // Getters - Setters
     //**************************************************************************
     /**
@@ -219,6 +254,14 @@ public class Session {
         return Session.singleton.listWeapon;
     }
     
+    /**
+     * Return current network manager. Null if not connected
+     * @return Network 
+     */
+    public static Network getNetwork(){
+        return Session.singleton.network;
+    }
+    
     
     //**************************************************************************
     /**
@@ -235,5 +278,13 @@ public class Session {
      */
     public static void setPlayer(Player pPlayer){
         Session.singleton.player = pPlayer;
+    }
+    
+    /**
+     * Set network for this session
+     * @param pNetwork new network, null if no more network 
+     */
+    public static void setNetwork(Network pNetwork){
+        Session.singleton.network = pNetwork;
     }
 }

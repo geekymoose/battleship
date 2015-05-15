@@ -5,15 +5,17 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.Config;
+import com.battleship.asset.Session;
 import com.battleship.asset.ThemeManager;
 import com.battleship.constants.GameConstants;
-import com.battleship.controllers.GameConfigController;
 import com.battleship.exceptions.ExecError;
+import com.battleship.exceptions.LanError;
 import com.battleship.main.DebugTrack;
-import com.battleship.network.NetworkController;
+import com.battleship.network.Network;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.UiButton;
 import com.battleship.uibutton.ZozoDecorator;
+import static com.battleship.views.app.ApplicationFrame.LIST_GAMES;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.UiElement;
@@ -41,7 +43,6 @@ import javax.swing.JTextField;
  * @author  Jessica FAVIN
  */
 public class ConnectPanel extends PagePanel implements GameConstants, UiElement {
-    private GameConfigController    controller;
     private HeadBar                 p_hb;
     private JPanel                  p_container;
     private JPanel                  p_buttons;
@@ -119,18 +120,20 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     }
     
     private void defaultValues(){
-        tf_ipserver.setText("localhost");
+        //tf_ipserver.setText("localhost");
+        tf_ipserver.setText("192.168.1.55");
     }
     
     private void setBtnActions() {
         b_validate.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(connection()==true){
-                        DebugTrack.showExecMsg("Valid Config Game");
-                        goNextPage();
-                    } else {
-                        UiDialog.showError("Connection Error", "Unable to connect to server");
+                    try{
+                        connection();
+                        frame.rooting(LIST_GAMES, null);
+                        UiDialog.showWarning("Yeeaah!!", "Successfully connected");
+                    } catch(LanError ex) {
+                        UiDialog.showError("Connection Error", ex.getMessage());
                     }
                 }
             }
@@ -139,6 +142,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    System.out.println("DEBUG in ConnectPanel");
                     defaultValues();
                 }
             }
@@ -147,8 +151,14 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DebugTrack.showExecMsg("Return back");
-                    goPreviousPage();
+                    try{
+                        DebugTrack.showExecMsg("Return back");
+                        Session.disconnect();
+                        goPreviousPage();
+                    } catch(LanError ex) {
+                        UiDialog.showError("Connection Error", ex.getMessage());
+                    }
+                    
                 }
             }
         );
@@ -161,11 +171,11 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     //**************************************************************************
     /**
      * Connect to server
-     * @return true if successfully connected, otherwise, return false
+     * @throws LanError if unable to connect
      */
-    private boolean connection(){
-        NetworkController c = new NetworkController();
-        return c.tryConnect(this.tf_ipserver.getText());
+    private void connection() throws LanError{
+        Network c = new Network();
+        c.connectToIP(this.tf_ipserver.getText());
     }
     
     
@@ -188,7 +198,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     
     @Override
     protected void goPreviousPage(){
-        String msg      = "Are you sure you want to go back? Current configuration could be lost";
+        String msg      = "Are you sure you want to go back? You will be disconnected";
         String title    = "Warning";
         int choice = UiDialog.showYesNoWarning(title, msg);
         if(choice == JOptionPane.OK_OPTION){

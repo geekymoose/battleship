@@ -4,6 +4,8 @@
  */
 package com.battleship.network;
 
+import com.battleship.asset.Session;
+import com.battleship.exceptions.LanError;
 import com.battleship.main.DebugTrack;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,19 +18,12 @@ import java.net.Socket;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class NetworkController {
+public class Network {
     private Socket              clientSocket;
     private ObjectOutputStream  output;
     private ObjectInputStream   input;
-    private int state = 0;
-    
-    
-    //**************************************************************************
-    // CONSTRUCTOR
-    //**************************************************************************
-    public NetworkController() {
-
-    }
+    private int                 state = 0;
+    private Thread              thread;
     
     
     //**************************************************************************
@@ -36,19 +31,28 @@ public class NetworkController {
     //**************************************************************************
     /**
      * Try to establish a connection with the server
-     * @param ipServer
-     * @return 
+     * @param ipServer server IP
+     * @throws LanError thrown if unable to connect
      */
-    public boolean tryConnect(String ipServer) {
+    public void connectToIP(String ipServer) throws LanError {
+        if(Session.isConnected()){
+            DebugTrack.showErrMsg("You are already connected");
+            throw new LanError("You are already connected");
+        }
         try {
             this.clientSocket   = new Socket(ipServer, 5000);
-            Connection connect  = new Connection(clientSocket, this);
-            return true;
+            this.setOutput(new ObjectOutputStream(clientSocket.getOutputStream()));
+            this.getOutput().flush();
+            this.setInput(new ObjectInputStream(clientSocket.getInputStream()));
+            ListenRequest listen = new ListenRequest(this);
+            Session.setNetwork(this);
         } catch (Exception ex) {
-            DebugTrack.showErrMsg("Unable to connect, error msg : "+ex.getMessage());
+            DebugTrack.showErrMsg("Unable to connect to server! "+ex.getMessage());
+            throw new LanError("Unable to connect to server! "+ex.getMessage());
         }
-        return false;
     }
+   
+    
     
     /**
      * Execute the request received
@@ -99,6 +103,7 @@ public class NetworkController {
         }
         else if(rqt == Request.SERVER_CLOSURE){
             // FERMETURE DE OUTPUT ET INPUT ET REDIRECTION VERS MENU PRINCIPAL
+            Session.setNetwork(null);
         }
         else{
             // NE RIEN FAIRE 

@@ -42,6 +42,7 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     public  static final int     GAME           = 104;
     public  static final int     BAZAAR         = 105;
     public  static final int     NETWORK        = 106;
+    public  static final int    LIST_GAMES      = 107; 
     
     private final int           FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
     private final int           FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
@@ -121,6 +122,9 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
                     break;
                 case NETWORK:
                     this.p_mainContent = new ConnectPanel(this);
+                    break;
+                case LIST_GAMES:
+                    this.p_mainContent = new ListGamesPanel(this);
                     break;
                 default:
                     throw new ExecError(404); //Page not found
