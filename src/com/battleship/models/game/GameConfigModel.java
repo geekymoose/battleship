@@ -66,6 +66,8 @@ public class GameConfigModel extends Model implements GameConstants{
     
     private     int             firstPlayer; //Player which start to play
     
+    private     String          title;
+    
     
     
     
@@ -286,6 +288,14 @@ public class GameConfigModel extends Model implements GameConstants{
         }
     }
     
+    /**
+     * Return the game title
+     * @return String title of the game
+     */
+    public String getTitle(){
+        return this.title;
+    }
+    
     //**************************************************************************
     /**
      * Set id of the player which is going to play first. If not valid id, 
@@ -331,5 +341,18 @@ public class GameConfigModel extends Model implements GameConstants{
             this.gridType = pValue;
         }
         this.notifyObservers(null);
+    }
+    
+    /**
+     * Set new game title
+     * @param pValue title to set
+     * @throws ForbiddenAction thrown if to long or null
+     */
+    public void setTitle(String pValue) throws ForbiddenAction{
+        int maxLength = Config.getGameValues_int("game-title-max-length");
+        if(pValue.length() > maxLength || pValue.length() == 0){
+            throw new ForbiddenAction("Title is too long");
+        }
+        this.title = pValue;
     }
 }

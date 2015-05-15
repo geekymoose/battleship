@@ -17,6 +17,10 @@ import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.asset.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.asset.ThemeManager;
+import com.battleship.exceptions.ForbiddenAction;
+import com.battleship.network.Capsule;
+import com.battleship.network.Request;
+import com.battleship.network.ServerGame;
 import com.battleship.uibutton.UiButton;
 import com.battleship.views.tools.UiDialog;
 import com.battleship.views.tools.UiElement;
@@ -30,10 +34,13 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 
@@ -65,6 +72,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_bigCont;
     private     JPanel                  p_bigbigCont;
     private     HeadBar                 p_hb;
+    
+    private     JTextField              tf_title;
     
     private     JLabel                  l_grid1;
     private     JLabel                  l_grid2;
@@ -164,13 +173,19 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_container     .add(p_left,    BorderLayout.WEST);
         p_container     .add(p_center,  BorderLayout.CENTER);
         
+        //So ugly :p 
+        if(Session.isConnected()){
+            this.tf_title = new JTextField();
+            this.p_container.add(this.tf_title, BorderLayout.NORTH);
+        }
+        
         //Magouille pour sizer le borderlayout
         p_bigCont.add(p_container, gbc);
         //p_bigCont.setPreferredSize(new Dimension(490,370));
         p_bigbigCont.add(p_bigCont);
         
-        this.add(p_bigbigCont, BorderLayout.CENTER);
-        this.add(p_hb, BorderLayout.NORTH);
+        this.add(p_bigbigCont,  BorderLayout.CENTER);
+        this.add(p_hb,          BorderLayout.NORTH);
         this.setBtnActions();
     }
     
@@ -321,18 +336,36 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     //**************************************************************************
     @Override
     protected void goNextPage(){
+        System.out.println("DEBUG : ");
+        System.out.println(MODE_AI);
+        System.out.println(MODE_V2);
+        System.out.println(MODE_LAN);
         int mode = Session.getGameMode();
-        if(this.controller.isValidConfig()){
-            switch(mode){
-                case MODE_AI:
+        System.out.println("CURRENT MODE : "+mode);
+        System.out.println("IS VALID  : "+this.controller.isValidConfig());
+        switch(mode){
+            case MODE_AI:
+                if(this.controller.isValidConfig()){
                     frame.rooting(ApplicationFrame.PLACE_BOATS, true);
-                    break;
-                case MODE_V2:
+                }
+                break;
+            case MODE_V2:
+                if(this.controller.isValidConfig()){
                     frame.rooting(ApplicationFrame.PLACE_BOATS, true);
-                    break;
-                case MODE_LAN:
-                    break;
-            }
+                }
+                break;
+            case MODE_LAN:
+                try{
+                    this.controller.setTitle(this.tf_title.getText());
+                    String title = this.tf_title.getText();
+                    ServerGame g = new ServerGame(title, gridType);
+                    Session.getNetwork().sendCapsule(new Capsule(Request.CREATE_GAME, g));
+                    UiDialog.showConfirmDialog(title, "New game "+title+" created");
+                    frame.rooting(ApplicationFrame.LIST_GAMES, true);
+                } catch(ForbiddenAction ex) {
+                    UiDialog.showWarning("Bad title", ex.getMessage());
+                }
+                break;
         }
     }
     
@@ -342,18 +375,17 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         String title    = "Warning";
         int choice = UiDialog.showYesNoWarning(title, msg);
         if(choice == JOptionPane.OK_OPTION){
-            int mode = Session.getGameMode();
-            if(this.controller.isValidConfig()){
-                switch(mode){
-                    case MODE_AI:
-                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
-                        break;
-                    case MODE_V2:
-                        frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
-                        break;
-                    case MODE_LAN:
-                        break;
-                }
+        int mode = Session.getGameMode();
+            switch(mode){
+                case MODE_AI:
+                    frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
+                    break;
+                case MODE_V2:
+                    frame.rooting(ApplicationFrame.CHOOSE_GAME, null);
+                    break;
+                case MODE_LAN:
+                    frame.rooting(ApplicationFrame.LIST_GAMES, true);
+                    break;
             }
         }
     } //End previous

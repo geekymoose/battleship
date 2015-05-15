@@ -15,7 +15,6 @@ import com.battleship.network.Capsule;
 import com.battleship.network.Request;
 import com.battleship.network.ServerGame;
 import com.battleship.observers.ObservableLan;
-import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverLan;
 import com.battleship.uibutton.ImgButton;
 import com.battleship.uibutton.UiButton;
@@ -55,8 +54,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     private JPanel                  p_container;
     private JPanel                  p_buttons;
     private TablePanel              p_listPanel;
-    private UiButton                b_validate;
-    private UiButton                b_reset;
+    private UiButton                b_createGame;
     private UiButton                b_back;
     private ContainerPanel          p_centeredPane;
     private JPanel                  p_bigCont;
@@ -73,7 +71,6 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.setBtnActions();
-        Session.getNetwork().deleteAllObserver();
         Session.getNetwork().addObserver(this);
         this.loadUI();
     }
@@ -95,13 +92,11 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         
         p_centeredPane      .setPreferredSize(new Dimension(550,400));
 
-        b_validate = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
-        b_reset    = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
-        b_back     = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
+        b_createGame    = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
+        b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
         
         p_buttons           .add(b_back);
-        p_buttons           .add(b_reset);
-        p_buttons           .add(b_validate);
+        p_buttons           .add(b_createGame);
         
         p_bigCont           .setOpaque(false);
         p_container         .setOpaque(false);
@@ -120,17 +115,12 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     }
     
     private void setBtnActions() {
-        b_validate.addActionListener(new ActionListener() {
+        b_createGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                }
-            }
-        );
-        b_reset.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("DEBUG in ConnectPanel");
+                    Session.getNetwork().deleteObserver(ListGamesPanel.this);
+                    DebugTrack.showExecMsg("Create new game");
+                    frame.rooting(ApplicationFrame.CONFIG, true);
                 }
             }
         );
@@ -140,6 +130,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
                 public void actionPerformed(ActionEvent e) {
                     try{
                         DebugTrack.showExecMsg("Return back");
+                        Session.getNetwork().deleteObserver(ListGamesPanel.this);
                         Session.disconnect();
                         goPreviousPage();
                     } catch(LanError ex) {
