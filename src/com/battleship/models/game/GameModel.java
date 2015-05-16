@@ -149,7 +149,7 @@ public class GameModel extends Model implements GameConstants{
                 
             case GameConstants.MODE_LAN:
                 notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
-                this.breakLan.start();
+                this.switchLanModeTurn();
                 break;
         }
     }
@@ -210,7 +210,6 @@ public class GameModel extends Model implements GameConstants{
      * Change behavior for LAN Mode (Network)
      */
     private void switchLanModeTurn(){
-        int     oldPlayerTurn   = currentPlayerTurn;
         int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
         Player  foe             = listPlayers[foeIndex];
         if(Session.getPlayer().getFleet().isFleetDestroyed()){
@@ -225,7 +224,6 @@ public class GameModel extends Model implements GameConstants{
             this.counterTurn++;
             this.currentPlayerTurn  = foeIndex;
         }
-        this.breakLan.stop();
     }
     
     
