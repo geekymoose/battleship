@@ -23,6 +23,20 @@ import javax.swing.JOptionPane;
  */
 public abstract class UiDialog {
     //**************************************************************************
+    // Functions simple dialog
+    //**************************************************************************
+    /**
+     * Display a message jsut for information
+     * @param pTitle    title
+     * @param pMsg      message
+     */
+    public static void showInfoDialog(String pTitle, String pMsg){
+        JOptionPane opt = new JOptionPane();
+        opt.showMessageDialog(null, pMsg, pTitle, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    //**************************************************************************
     // Functions warngin with return param
     //**************************************************************************
     /**

@@ -79,7 +79,7 @@ public class GridController extends Controller{
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             pShooter.aimAt(p.x, p.y, this.model.getTabBoxMap());
         }
-        this.model.notifyObservers(null);
+        this.model.notifyObserversModel(null);
     }
     
     

@@ -28,17 +28,17 @@ public interface ObservableModel{
      * Add an observer of the model
      * @param o Observer
      */
-    public void addObserver(ObserverModel o);
+    public void addObserverModel(ObserverModel o);
     
     /**
      * Delete an observer
      * @param o Observer
      */
-    public void deleteObserver(ObserverModel o);
+    public void deleteObserverModel(ObserverModel o);
     
     /**
      * Notify any observers
      * @param obj element to update in the observer object
      */
-    public void notifyObservers(Object obj);
+    public void notifyObserversModel(Object obj);
 }

@@ -88,7 +88,7 @@ public abstract class SwingFactory implements GameConstants{
         GameConfigModel         m = new GameConfigModel();
         GameConfigController    c = new GameConfigController(m);
         GameConfigPanel         v = new GameConfigPanel(pFrame, c);
-        m.addObserver(v);
+        m.addObserverModel(v);
         c.setView(v);
         v.initPage();
         SwingFactory.model_gameConfig     = m;
@@ -115,7 +115,7 @@ public abstract class SwingFactory implements GameConstants{
         PlaceBoatsModel         m = new PlaceBoatsModel(SwingFactory.model_gameConfig);
         PlaceBoatsController    c = new PlaceBoatsController(m);
         PlaceBoatsPanel         v = new PlaceBoatsPanel(pFrame, c);
-        m.addObserver(v);
+        m.addObserverModel(v);
         c.setView(v);
         v.initPage();
         SwingFactory.model_placeBoatsModel     = m;
@@ -144,7 +144,7 @@ public abstract class SwingFactory implements GameConstants{
         GameModel           m           = new GameModel(config);
         GameController      c           = new GameController(m);
         GamePanel           v           = new GamePanel(pFrame, c);
-        m.addObserver(v);
+        m.addObserverModel(v);
         c.setView(v);
         v.initPage();
         SwingFactory.model_gameModel    = m;
@@ -182,7 +182,7 @@ public abstract class SwingFactory implements GameConstants{
                 v  = new GridHexaView(parent, c, width, height, type, pDim);
                 break;
         }
-        pModel.addObserver(v);
+        pModel.addObserverModel(v);
         c.setView(v);
         v.loadUI();
         return v;
@@ -217,9 +217,17 @@ public abstract class SwingFactory implements GameConstants{
                 v  = new GridHexaView(parent, c, width, height, type, pDim, color);
                 break;
         }
-        pModel.addObserver(v);
+        pModel.addObserverModel(v);
         c.setView(v);
         v.loadUI();
         return v;
+    }
+    
+    
+    //**************************************************************************
+    // Function for network
+    //**************************************************************************
+    public static void setGameConfig(GameConfigModel pGameConfig){
+        SwingFactory.model_gameConfig = pGameConfig;
     }
 }

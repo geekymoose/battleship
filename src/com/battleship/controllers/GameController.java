@@ -57,7 +57,7 @@ public class GameController extends Controller{
      */
     public void initPlayerObservers(){
         for (Player p:this.model.getConfig().getPlayers()){
-            p.addObserver((GamePanel)this.v);
+            p.addObserverModel((GamePanel)this.v);
         }
         this.model.getConfig().getPlayers();
     }

@@ -36,13 +36,14 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     //**************************************************************************
     // Variables and Constants
     //**************************************************************************
-    public  static final int     CHOOSE_GAME    = 101;
-    public  static final int     CONFIG         = 102;
-    public  static final int     PLACE_BOATS    = 103;
-    public  static final int     GAME           = 104;
-    public  static final int     BAZAAR         = 105;
-    public  static final int     NETWORK        = 106;
+    public  static final int    CHOOSE_GAME     = 101;
+    public  static final int    CONFIG          = 102;
+    public  static final int    PLACE_BOATS     = 103;
+    public  static final int    GAME            = 104;
+    public  static final int    BAZAAR          = 105;
+    public  static final int    NETWORK         = 106;
     public  static final int    LIST_GAMES      = 107; 
+    public  static final int    WAITING_ROOM    = 108; 
     
     private final int           FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
     private final int           FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
@@ -125,6 +126,9 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
                     break;
                 case LIST_GAMES:
                     this.p_mainContent = new ListGamesPanel(this);
+                    break;
+                case WAITING_ROOM:
+                    this.p_mainContent = new WaitingRoom(this);
                     break;
                 default:
                     throw new ExecError(404); //Page not found

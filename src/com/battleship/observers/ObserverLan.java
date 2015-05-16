@@ -21,5 +21,5 @@ public interface ObserverLan {
      * @param o     the observable object.
      * @param arg   an argument passed to the notifyObservers method.
      */
-    void update(ObservableLan o, Object arg);
+    void updateLan(ObservableLan o, Object arg);
 }

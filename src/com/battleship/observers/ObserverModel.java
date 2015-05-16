@@ -27,5 +27,5 @@ public interface ObserverModel {
      * @param o     the observable object.
      * @param arg   an argument passed to the notifyObservers method.
      */
-    void update(ObservableModel o, Object arg);
+    void updateModel(ObservableModel o, Object arg);
 }

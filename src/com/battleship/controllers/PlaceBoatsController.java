@@ -9,6 +9,7 @@ import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.PlaceBoatsModel;
 import com.battleship.models.game.Player;
+import java.awt.Point;
 
 
 
@@ -97,6 +98,18 @@ public class PlaceBoatsController extends Controller{
      */
     public void selectBoat(int pBoatIt){
         this.model.getCurrentPlayer().selectBoat(pBoatIt);
+    }
+    
+    /**
+     * Place one boat of lan player 
+     * @param pId               boat id
+     * @param pOrientation      orientation
+     * @param pX                x front position
+     * @param pY                y front position
+     */
+    public void placeLanFleetPlayer(int pId, int pOrientation, int pX, int pY){
+        this.model.getConfig().getPlayers()[1].selectBoat(pId);
+        this.model.getConfig().getPlayers()[1].placeBoatAt(new Point(pX, pY), pOrientation);
     }
     
     

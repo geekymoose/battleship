@@ -157,6 +157,7 @@ public abstract class Boat{
             return false;
         }
         this.resetPosition();
+        this.orientation = pOrientation;
         BoxMap box = pBox;
         this.tabCompartments[0].setBoxPosition(box); //Place first position
         for(int k=1; k<this.tabCompartments.length; k++){
@@ -189,6 +190,14 @@ public abstract class Boat{
      */
     public int getBoatId(){
         return this.idBoat;
+    }
+    
+    /**
+     * Return boat orientation
+     * @return int orientation
+     */
+    public int getOrientation(){
+        return this.orientation;
     }
     
     /**

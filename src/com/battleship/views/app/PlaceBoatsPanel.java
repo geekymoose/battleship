@@ -18,6 +18,11 @@ import com.battleship.asset.SwingFactory;
 import com.battleship.asset.ThemeManager;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
+import com.battleship.models.sprites.Boat;
+import com.battleship.network.Capsule;
+import com.battleship.network.Request;
+import com.battleship.observers.ObservableLan;
+import com.battleship.observers.ObserverLan;
 import com.battleship.uibutton.UiButton;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
@@ -45,7 +50,9 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameConstants{
+public class PlaceBoatsPanel extends PagePanel implements ObserverModel, 
+                                                          GameConstants,
+                                                          ObserverLan{
     private     final PlaceBoatsController      controller;
     
     private     ContainerPanel                  p_container;
@@ -88,6 +95,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         this.controller     = pController;
         this.dimBox         =  Config.getDimValues_dim("dim-placeboats-boxmap");
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
+        Session.getNetwork().addLanObserver(this);
         this.initComponents();
     }
     
@@ -207,8 +215,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
         fleetPlayer1.getGridCursor().setClickPlaceBoat();
         fleetPlayer2.getGridCursor().setClickPlaceBoat();
         
-        gridPlayer1.addObserver(this.p_dock);
-        gridPlayer2.addObserver(this.p_dock);
+        gridPlayer1.addObserverModel(this.p_dock);
+        gridPlayer2.addObserverModel(this.p_dock);
         
         this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
     }
@@ -221,7 +229,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
     
     
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
         this.repaint();
         //PlaceBoatsModel m   = (PlaceBoatsModel)o;
     }
@@ -298,6 +306,27 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 break;
                 
             case MODE_LAN:
+                //-1 invalid grid, 0 last player reached, 1 next player (AI)
+                switch(this.controller.switchPlayer()){
+                    case -1:
+                        DebugTrack.quickModeRoot(this.frame, ApplicationFrame.GAME);
+                        UiDialog.showWarning("beware!", "Some boats are missing on the grid!!\n"
+                                + "Do you want to figth with less boats than your enemy? "
+                                + "Woow! We've got a warrior here!");
+                        break;
+                    default:
+                        int[][] tab = new int[5][4];
+                        int     i   = 0; //Current boat to place
+                        for(Boat b : controller.getGameConfig().getPlayers()[0].getFleet().getListBoats()){
+                            tab[i][0] = b.getBoatId();
+                            tab[i][1] = b.getOrientation();
+                            tab[i][2] = b.getFrontPosition().getCoordinate().x;
+                            tab[i][3] = b.getFrontPosition().getCoordinate().y;
+                            i++;
+                        }
+                        Session.getNetwork().sendCapsule(new Capsule(Request.PLACE_BOAT, tab));
+                        break;
+                }
                 break;
         }
     }
@@ -320,6 +349,33 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel, GameCon
                 case MODE_LAN:
                     controller.resetFleetGrid();
                     break;
+            }
+        }
+    }
+
+
+    @Override
+    public void updateLan(ObservableLan o, Object arg){
+        if(arg instanceof int[][]){
+            int [][] tab = (int[][])arg;
+            for (int i=0; i<5; i++){
+                //Remain : 0 = id / 1 = orientation / 2 = x / 3 = y
+                for(int k=0; k<4; k++){
+                    int id              = tab[i][0];
+                    int orientation     = tab[i][1];
+                    int pos_x           = tab[i][2];
+                    int pos_y           = tab[i][3];
+                    this.controller.placeLanFleetPlayer(id, orientation, pos_x, pos_y);
+                }
+            }
+            UiDialog.showInfoDialog("Beware!!", "Your foe is ready for the awesome fight");
+        }
+        
+        if(arg instanceof Request){
+            Request request = (Request)arg;
+            if(request == Request.START){
+                Session.getNetwork().deleteLanObserver(this);
+                frame.rooting(ApplicationFrame.GAME, true);
             }
         }
     }

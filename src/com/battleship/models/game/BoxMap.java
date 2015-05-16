@@ -213,6 +213,6 @@ public abstract class BoxMap implements Target, GameConstants{
         if(pContent != null){
             this.content = pContent;
         }
-        this.grid.notifyObservers(null); //Notify box was modify
+        this.grid.notifyObserversModel(null); //Notify box was modify
     }
 }
