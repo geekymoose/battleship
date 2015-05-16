@@ -53,6 +53,7 @@ public abstract class Player extends Model implements GameConstants{
     private     int                     scoreCombo;
     private     int                     currentWeaponIndex;
     private     Boat                    currentSelectedBoat; //selectedBoat
+    private     boolean                 isBiginner;
     
     
     

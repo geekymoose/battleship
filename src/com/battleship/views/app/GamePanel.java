@@ -5,6 +5,7 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.*;
+import com.battleship.behaviors.Target;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -12,6 +13,7 @@ import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.GameConfigModel;
 import com.battleship.models.game.GameModel;
 import com.battleship.models.game.Player;
+import com.battleship.models.weapons.Weapon;
 import com.battleship.observers.*;
 import com.battleship.uibutton.*;
 import com.battleship.views.tools.PagePanel;
@@ -26,6 +28,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -49,7 +52,7 @@ import javax.swing.JPanel;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class GamePanel extends PagePanel implements ObserverModel{
+public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
     //**************************************************************************
     // Variables - Constants
     //**************************************************************************
@@ -96,6 +99,9 @@ public class GamePanel extends PagePanel implements ObserverModel{
         
         this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
+        if(Session.isConnected()){
+            Session.getNetwork().addLanObserver(this);
+        }
     }
     
     
@@ -164,9 +170,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         GridPanel radarPlayer1 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer1, dimBoxRadar);
         GridPanel radarPlayer2 = SwingFactory.loadGridPanel(this.p_radar, gridPlayer2, dimBoxRadar);
         
-        this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
-        this.p_radar.initGrids(radarPlayer1, radarPlayer2, conf.getSecondPlayerTurn(),
-                                                           conf.getFirstPlayerTurn());
+        this.p_fleet.initGrids(fleetPlayer1, fleetPlayer2, 0);
+        this.p_radar.initGrids(radarPlayer1, radarPlayer2, 1, 0);
         
         //TMP DEBUG
         fleetPlayer1.getGridCursor().setClickNoArm();
@@ -178,6 +183,14 @@ public class GamePanel extends PagePanel implements ObserverModel{
         //Change cursor owner, it means players 1 will attack grid 0 and reverso for player 0
         radarPlayer1.getGridCursor().setOwner(conf.getPlayers()[1]);
         radarPlayer2.getGridCursor().setOwner(conf.getPlayers()[0]);
+        
+        
+        if(Session.isConnected()){
+            if(conf.getFirstPlayerTurn() != 0){
+                this.p_radar.setAttackedGrid(0);
+            }
+        }
+        
         this.repaint();
     }
     
@@ -287,6 +300,25 @@ public class GamePanel extends PagePanel implements ObserverModel{
     
     @Override
     protected void goPreviousPage(){
+    }
+
+
+
+    @Override
+    public void updateLan(ObservableLan o, Object arg){
+        if(arg instanceof int[]){
+            //Remain : tab 0 = idWeapon / 1 = x / 2 = y
+            int tab[] = (int[])arg;
+            int idWeapon = tab[0];
+            Point p = new Point();
+            p.x = tab[1];
+            p.y = tab[2];
+            Weapon w = PooFactory.createWeaponFromId(idWeapon, 1);
+            GridPanel grid = this.p_fleet.getCurrentFleetPanel();
+            Target[][] target = grid.controller.getFleetGrid().getTabBoxMap();
+            w.fireAt(p.x, p.y, target, grid.controller.getFleetGrid());
+            this.controller.swithTurn();
+        }
     }
     
     

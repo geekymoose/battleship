@@ -95,7 +95,9 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         this.controller     = pController;
         this.dimBox         =  Config.getDimValues_dim("dim-placeboats-boxmap");
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
-        Session.getNetwork().addLanObserver(this);
+        if(Session.isConnected()){
+            Session.getNetwork().addLanObserver(this);
+        }
         this.initComponents();
     }
     
@@ -218,7 +220,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         gridPlayer1.addObserverModel(this.p_dock);
         gridPlayer2.addObserverModel(this.p_dock);
         
-        this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
+        //this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
+        this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, 0);
     }
     
     @Override

@@ -26,7 +26,7 @@ public class Network extends Model implements ObservableLan{
     //**************************************************************************
     // Variables - Constants
     //**************************************************************************
-    protected   ArrayList<ObserverLan> listObservers;
+    protected   ArrayList<ObserverLan>  listObservers;
     private Socket                      clientSocket;
     private ObjectOutputStream          output;
     private ObjectInputStream           input;
@@ -112,7 +112,8 @@ public class Network extends Model implements ObservableLan{
             //FONCTION QUI MET A JOUR LA POSITION DU CURSEUR ENEMI
         }
         else if(rqt == Request.SHOOT){
-            // FONCTION QUI TIRE SUR LA POSITION AVEC UN OBJET PRECISANT L'ARME ET LA POSITION OU UNE GRILLE DE BOOLEAN
+            int tab[] = (int[])cpsl.getObject();
+            this.notifyLanObservers(tab);
         }
         else if(rqt == Request.YOUR_TURN){
             //FONCTION QUI PERMET DE COMMENCER SON PROPRE TOUR
@@ -139,6 +140,10 @@ public class Network extends Model implements ObservableLan{
         else if(rqt == Request.PLACE_BOAT){
             int [][] tab = (int[][])cpsl.getObject();
             this.notifyLanObservers(tab);
+        }
+        else if(rqt == Request.BEGINNER){
+            Boolean isBiginner = (Boolean)cpsl.getObject();
+            this.notifyLanObservers(isBiginner);
         }
         else{
             // NE RIEN FAIRE 

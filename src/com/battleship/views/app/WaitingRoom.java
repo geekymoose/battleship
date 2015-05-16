@@ -61,6 +61,7 @@ public class WaitingRoom extends PagePanel implements GameConstants,
     private Image background;
     
     private ServerGame  game;
+    private boolean     isBeginner;
     
     
     //**************************************************************************
@@ -175,28 +176,40 @@ public class WaitingRoom extends PagePanel implements GameConstants,
         this.p_hb.reloadUI();
         this.repaint();
     }
-
+    
     
     //**************************************************************************
     // Network
     //**************************************************************************
     @Override
     public void updateLan(ObservableLan o, Object arg){
-        if(arg instanceof ServerGame){
+        if(arg instanceof Boolean){
+            this.isBeginner = (boolean)arg;
+            System.out.println("DEBUG : "+arg);
+            System.out.println("DEBUG : "+isBeginner);
+        }
+        
+        else if(arg instanceof ServerGame){
             this.game = (ServerGame)arg;
         }
-        if(arg instanceof Request){
+        
+        else if(arg instanceof Request){
             try {
                 //Game is ready to start!
                 Session.getNetwork().deleteLanObserver(this);
                 GameConfigModel m = new GameConfigModel();
                 m.setTitle(this.game.getTitle());
                 m.setGridType(this.game.getType());
+                
+                int posBeginner = (this.isBeginner) ? 0 : 1;
+                m.setFirstPlayerTurn(posBeginner);
+                
                 SwingFactory.setGameConfig(m);
                 frame.rooting(ApplicationFrame.PLACE_BOATS, true);
             } catch(ForbiddenAction ex) {
                 //Should never happend
             }
         }
+        
     }
 }

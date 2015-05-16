@@ -187,7 +187,7 @@ public class GameModel extends Model implements GameConstants{
     /**
      * Change behavior for V2 Mode (2 Players with same computer)
      */
-    public void switchV2ModeTurn(){
+    private void switchV2ModeTurn(){
         int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
         Player  foe             = listPlayers[foeIndex];
         if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
@@ -209,7 +209,7 @@ public class GameModel extends Model implements GameConstants{
     /**
      * Change behavior for LAN Mode (Network)
      */
-    public void switchLanModeTurn(){
+    private void switchLanModeTurn(){
         int     oldPlayerTurn   = currentPlayerTurn;
         int     foeIndex        = (currentPlayerTurn+1)%2;  //Works only for 2 players
         Player  foe             = listPlayers[foeIndex];
@@ -224,14 +224,6 @@ public class GameModel extends Model implements GameConstants{
         else{
             this.counterTurn++;
             this.currentPlayerTurn  = foeIndex;
-            this.notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
-            //AI player shoot on session player
-            if(foe instanceof PlayerLan){
-                DebugTrack.showExecMsg("AI Turn");
-                this.counterTurn++;
-                this.currentPlayerTurn  = oldPlayerTurn;
-                ((PlayerAI)foe).processAiShoot(Session.getPlayer().getFleet().getTabBoxMap());
-            }
         }
         this.breakLan.stop();
     }

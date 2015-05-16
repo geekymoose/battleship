@@ -30,5 +30,6 @@ public enum Request implements Serializable {
     YOUR_TURN,
     SERVER_CLOSURE,
     GET_GAME_SERVER, 
-    PLACE_BOAT;
+    PLACE_BOAT,
+    BEGINNER;
 }

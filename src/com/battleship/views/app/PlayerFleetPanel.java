@@ -104,9 +104,6 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
     }
     
     
-    
-    
-    
     //**************************************************************************
     // UI Functions
     //**************************************************************************
@@ -121,5 +118,12 @@ public class PlayerFleetPanel extends ContentPanel implements GameConstants {
             grid.reloadUI();
         }
         this.repaint();
+    }
+    
+    //**************************************************************************
+    // Getters - Setters 
+    //**************************************************************************
+    public GridPanel getCurrentFleetPanel(){
+        return this.currentGrid;
     }
 }

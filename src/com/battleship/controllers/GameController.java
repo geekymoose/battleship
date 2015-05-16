@@ -62,6 +62,10 @@ public class GameController extends Controller{
         this.model.getConfig().getPlayers();
     }
     
+    public void swithTurn(){
+        this.model.switchTurnBehaviors();
+    }
+    
     
     
     
