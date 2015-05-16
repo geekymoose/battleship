@@ -1,10 +1,7 @@
-/*
- * Class :      CheatCode
- * Creation:    Apr 4, 2015
- * Author :     Constantin MASSON
- * 
+/* 
+ * Creation : Apr 4, 2015
+ * Project Computer Science L2 Semester 4 - BattleShip
  */
-
 package com.battleship.asset;
 
 import com.battleship.constants.GameConstants;
