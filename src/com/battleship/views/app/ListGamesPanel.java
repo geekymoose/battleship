@@ -72,7 +72,9 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.setBtnActions();
-        Session.getNetwork().addLanObserver(this);
+        if(Session.isConnected()){
+            Session.getNetwork().addLanObserver(this);
+        }
         this.loadUI();
     }
     

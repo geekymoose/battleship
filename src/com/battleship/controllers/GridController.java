@@ -7,10 +7,14 @@
 
 package com.battleship.controllers;
 
+import com.battleship.asset.Session;
+import com.battleship.constants.GameConstants;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.FleetGridModel;
 import com.battleship.models.game.Player;
+import com.battleship.network.Capsule;
+import com.battleship.network.Request;
 import com.battleship.views.app.GridPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -63,8 +67,16 @@ public class GridController extends Controller{
         this.model.stopAiming();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             boolean shoot = pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
+            this.model.getGameModel().switchTurnBehaviors();
             if(shoot == true){
-                this.model.getGameModel().switchTurnBehaviors();
+                if(Session.getGameMode() == GameConstants.MODE_LAN){
+                    int idWeapon = pShooter.getCurrentWeapon().getWeaponId();
+                    int tab [] = new int[3];
+                    tab[0] = idWeapon;
+                    tab[1] = p.x;
+                    tab[2] = p.y;
+                    Session.getNetwork().sendCapsule(new Capsule(Request.SHOOT, tab));
+                }
             }
         }
     }
@@ -124,5 +136,13 @@ public class GridController extends Controller{
      */
     public Player getOwner(){
         return this.model.getOwner();
+    }
+    
+    /**
+     * Return FleetGridModel
+     * @return FleetGridModel
+     */
+    public FleetGridModel getFleetGrid(){
+        return this.model;
     }
 }
