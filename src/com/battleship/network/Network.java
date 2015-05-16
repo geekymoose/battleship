@@ -91,14 +91,13 @@ public class Network extends Model implements ObservableLan{
         
         if(rqt == Request.LIST_OF_GAMES){
             ArrayList<ServerGame> l = (ArrayList<ServerGame>)cpsl.getObject();
-            this.notifyObservers(l);
+            this.notifyLanObservers(l);
         }
         else if(rqt == Request.JOIN_SUCCEED){
-            // FONCTION QUI CHANGE DE PAGE ET D'ETAT -> ETAT 2
+            this.notifyLanObservers(Request.JOIN_SUCCEED);
         }
         else if(rqt == Request.IS_FULL){
-            //FONCTION QUI AFFICHE UN MESSAGE D'ERREUR 'desolé partie pleine'
-            // ETAT 1
+            this.notifyLanObservers(Request.IS_FULL);
         }
         else if(rqt == Request.NICKNAME){
             //FONCTION QUI ENREGISTRE LE PSEUDO SI DANS LE BON ETAT
@@ -107,8 +106,7 @@ public class Network extends Model implements ObservableLan{
             // FONCTION QUI ENREGISTRE LA FLOTTE ENEMIE
         }
         else if(rqt == Request.START){
-            // FONCTION QUI LANCE LA PARTIE LE JOUEUR QUI COMMENCE EST PRECISE DANS l'obj
-            // PAGE AVEC GRILLES ET TCHAT
+            this.notifyLanObservers(Request.START);
         }
         else if(rqt == Request.SELECTED_SQUARE){
             //FONCTION QUI MET A JOUR LA POSITION DU CURSEUR ENEMI
@@ -133,6 +131,14 @@ public class Network extends Model implements ObservableLan{
         else if(rqt == Request.SERVER_CLOSURE){
             // FERMETURE DE OUTPUT ET INPUT ET REDIRECTION VERS MENU PRINCIPAL
             Session.setNetwork(null);
+        } 
+        else if(rqt == Request.GET_GAME_SERVER){
+            ServerGame g = (ServerGame)cpsl.getObject();
+            this.notifyLanObservers(g);
+        } 
+        else if(rqt == Request.PLACE_BOAT){
+            int [][] tab = (int[][])cpsl.getObject();
+            this.notifyLanObservers(tab);
         }
         else{
             // NE RIEN FAIRE 
@@ -187,28 +193,28 @@ public class Network extends Model implements ObservableLan{
     // Observers
     //**************************************************************************
     @Override
-    public void addObserver(ObserverLan obs){
+    public void addLanObserver(ObserverLan obs){
         if(obs!=null){
             this.listObservers.add(obs);
         }
     }
 
     @Override
-    public void deleteObserver(ObserverLan o){
+    public void deleteLanObserver(ObserverLan o){
         if(o!=null){
             this.listObservers.remove(o);
         }
     }
     
     @Override
-    public void deleteAllObserver(){
+    public void deleteAllLanObserver(){
         this.listObservers = new ArrayList();
     }
     
     @Override
-    public void notifyObservers(Object obj){
+    public void notifyLanObservers(Object obj){
         for(ObserverLan obs : this.listObservers){
-            obs.update(this, obj);
+            obs.updateLan(this, obj);
         }
     }
 }

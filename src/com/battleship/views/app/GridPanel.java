@@ -119,7 +119,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
 
 
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
         FleetGridModel m = (FleetGridModel)o;
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {

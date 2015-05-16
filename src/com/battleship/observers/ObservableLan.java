@@ -19,22 +19,22 @@ public interface ObservableLan {
      * Add an observer of the model
      * @param o Observer
      */
-    public void addObserver(ObserverLan o);
+    public void addLanObserver(ObserverLan o);
     
     /**
      * Delete an observer
      * @param o Observer
      */
-    public void deleteObserver(ObserverLan o);
+    public void deleteLanObserver(ObserverLan o);
     
     /**
      * Delete all observer
      */
-    public void deleteAllObserver();
+    public void deleteAllLanObserver();
     
     /**
      * Notify any observers
      * @param obj element to update in the observer object
      */
-    public void notifyObservers(Object obj);
+    public void notifyLanObservers(Object obj);
 }

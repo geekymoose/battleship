@@ -138,17 +138,17 @@ public class GameModel extends Model implements GameConstants{
     public void switchTurnBehaviors(){
         switch(Session.getGameMode()){
             case GameConstants.MODE_AI:
-                notifyObservers(GameModel.SWITCH_BEHAVIORS);
+                notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
                 this.breakV1.start();
                 break;
                 
             case GameConstants.MODE_V2:
-                notifyObservers(GameModel.SWITCH_BEHAVIORS);
+                notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
                 this.breakV2.start();
                 break;
                 
             case GameConstants.MODE_LAN:
-                notifyObservers(GameModel.SWITCH_BEHAVIORS);
+                notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
                 this.breakLan.start();
                 break;
         }
@@ -163,16 +163,16 @@ public class GameModel extends Model implements GameConstants{
         Player  foe             = listPlayers[foeIndex];
         if(Session.getPlayer().getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_OVER);
+            notifyObserversModel(GameModel.GAME_OVER);
         } 
         else if(foe.getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_VICTORY);
+            notifyObserversModel(GameModel.GAME_VICTORY);
         }
         else{
             this.counterTurn++;
             this.currentPlayerTurn  = foeIndex;
-            this.notifyObservers(GameModel.SWITCH_BEHAVIORS);
+            this.notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
             //AI player shoot on session player
             if(foe instanceof PlayerAI){
                 DebugTrack.showExecMsg("AI Turn");
@@ -192,16 +192,16 @@ public class GameModel extends Model implements GameConstants{
         Player  foe             = listPlayers[foeIndex];
         if(listPlayers[currentPlayerTurn].getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_OVER);
+            notifyObserversModel(GameModel.GAME_OVER);
         } 
         else if(foe.getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_VICTORY);
+            notifyObserversModel(GameModel.GAME_VICTORY);
         } 
         else {
             counterTurn++;
             currentPlayerTurn  = foeIndex;
-            notifyObservers(GameModel.SWITCH_PAGE);
+            notifyObserversModel(GameModel.SWITCH_PAGE);
         }
         this.breakV2.stop();
     }
@@ -215,16 +215,16 @@ public class GameModel extends Model implements GameConstants{
         Player  foe             = listPlayers[foeIndex];
         if(Session.getPlayer().getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_OVER);
+            notifyObserversModel(GameModel.GAME_OVER);
         } 
         else if(foe.getFleet().isFleetDestroyed()){
             Session.getSession().earMoneyFromScore(Session.getPlayer().getScore());
-            notifyObservers(GameModel.GAME_VICTORY);
+            notifyObserversModel(GameModel.GAME_VICTORY);
         }
         else{
             this.counterTurn++;
             this.currentPlayerTurn  = foeIndex;
-            this.notifyObservers(GameModel.SWITCH_BEHAVIORS);
+            this.notifyObserversModel(GameModel.SWITCH_BEHAVIORS);
             //AI player shoot on session player
             if(foe instanceof PlayerLan){
                 DebugTrack.showExecMsg("AI Turn");

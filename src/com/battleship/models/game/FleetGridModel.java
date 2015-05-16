@@ -105,7 +105,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
         }
         this.listBoats      = new ArrayList();
         this.listExplosions = new ArrayList();
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     
@@ -172,18 +172,18 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
 
     @Override
     public void startUiEvent(EventApp pEvent){
-        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
+        this.notifyObserversModel(pEvent);//pEvent is not used, null could be sent
     }
 
     @Override
     public void updateUiEvent(EventApp pEvent){
-        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
+        this.notifyObserversModel(pEvent);//pEvent is not used, null could be sent
     }
 
     @Override
     public void stopUiEvent(EventApp pEvent){
         this.listExplosions.remove((ExplosionEvent)pEvent);
-        this.notifyObservers(pEvent);//pEvent is not used, null could be sent
+        this.notifyObserversModel(pEvent);//pEvent is not used, null could be sent
     }
     
     
@@ -205,7 +205,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
                 box.hover();
             }
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -220,7 +220,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
                 box.hover();
             }
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /*
@@ -233,7 +233,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
                 this.tabBoxMap[y][x].stopAim();
             }
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -245,7 +245,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
                 this.tabBoxMap[y][x].stopHover();
             }
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -257,7 +257,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
                 this.tabBoxMap[y][x].stopAim();
             }
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     
@@ -291,7 +291,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
         if(currentOrientation>=listOrientations.size()){
             currentOrientation = 0;
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
 
     /**
@@ -302,7 +302,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
         if(currentOrientation<0){
             currentOrientation = (listOrientations.size()-1);
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     

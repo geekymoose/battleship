@@ -134,7 +134,7 @@ public class DockPanel extends ContentPanel implements ObserverModel{
     }
 
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
         this.repaint();
     }
     

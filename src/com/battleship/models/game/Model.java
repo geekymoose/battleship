@@ -54,23 +54,23 @@ public abstract class Model implements ObservableModel{
     // Observers
     //**************************************************************************
     @Override
-    public void addObserver(ObserverModel obs){
+    public void addObserverModel(ObserverModel obs){
         if(obs!=null){
             this.listObservers.add(obs);
         }
     }
 
     @Override
-    public void deleteObserver(ObserverModel o){
+    public void deleteObserverModel(ObserverModel o){
         if(o!=null){
             this.listObservers.remove(o);
         }
     }
     
     @Override
-    public void notifyObservers(Object obj){
+    public void notifyObserversModel(Object obj){
         for(ObserverModel obs : this.listObservers){
-            obs.update(this, obj);
+            obs.updateModel(this, obj);
         }
     }
 }

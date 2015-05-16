@@ -68,10 +68,11 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     //**************************************************************************
     public ListGamesPanel(WindowFrame pFrame) throws ExecError {
         super(pFrame);
+        DebugTrack.showExecMsg("In list games");
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
         this.setBtnActions();
-        Session.getNetwork().addObserver(this);
+        Session.getNetwork().addLanObserver(this);
         this.loadUI();
     }
     
@@ -118,7 +119,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         b_createGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Session.getNetwork().deleteObserver(ListGamesPanel.this);
+                    Session.getNetwork().deleteLanObserver(ListGamesPanel.this);
                     DebugTrack.showExecMsg("Create new game");
                     frame.rooting(ApplicationFrame.CONFIG, true);
                 }
@@ -130,17 +131,15 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
                 public void actionPerformed(ActionEvent e) {
                     try{
                         DebugTrack.showExecMsg("Return back");
-                        Session.getNetwork().deleteObserver(ListGamesPanel.this);
+                        Session.getNetwork().deleteLanObserver(ListGamesPanel.this);
                         Session.disconnect();
                         goPreviousPage();
                     } catch(LanError ex) {
                         UiDialog.showError("Connection Error", ex.getMessage());
                     }
-                    
                 }
             }
         );
-        
     }//End setBtnActions
     
     
@@ -179,7 +178,9 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     @Override
     public void reloadUI() {
         this.background = ThemeManager.getTheme().getImg(417000);
-        this.p_hb.reloadUI();
+        this.p_hb           .reloadUI();
+        this.b_back         .reloadUI();
+        this.b_createGame   .reloadUI();
         this.repaint();
     }
 
@@ -188,9 +189,21 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     // Network
     //**************************************************************************
     @Override
-    public void update(ObservableLan o, Object arg){
+    public void updateLan(ObservableLan o, Object arg){
         if(arg instanceof ArrayList){
             this.p_listPanel.updateListGame((ArrayList<ServerGame>)arg);
+        }
+        
+        if(arg instanceof Request){
+            Request request = (Request)arg;
+            if(request == Request.IS_FULL){
+                UiDialog.showError("Game is full", "This game is already full");
+            }
+            else if(request == Request.JOIN_SUCCEED){
+                Session.getNetwork().deleteLanObserver(ListGamesPanel.this);
+                frame.rooting(ApplicationFrame.WAITING_ROOM, null);
+                UiDialog.showInfoDialog("Yeah!!", "You have successfully join the game");
+            }
         }
     }
     
@@ -305,13 +318,12 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
             p_nbPlayer          .setPreferredSize(new Dimension(60,32));
             b_join              .setPreferredSize(new Dimension(60,32));
             p_grid              .setPreferredSize(new Dimension(70, 32));
-            //this.setPreferredSize(new Dimension(400, 40));
             
             b_join.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // SEND TO SERVER REQUEST JOIN
-                        // ID GAME
+                        Capsule p = new Capsule(Request.JOIN_GAME, Integer.valueOf(l_id.getText()));
+                        Session.getNetwork().sendCapsule(p);
                     }
                 }
             );
@@ -327,6 +339,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
 
         @Override
         public void loadUI(){
+            this.reloadUI();
         }
         
         @Override

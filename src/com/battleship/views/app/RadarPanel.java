@@ -158,6 +158,6 @@ public class RadarPanel extends ContentPanel implements ObserverModel, GameConst
     }
 
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
     }
 }

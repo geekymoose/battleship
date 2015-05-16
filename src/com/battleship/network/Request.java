@@ -29,4 +29,6 @@ public enum Request implements Serializable {
     SELECTED_SQUARE,
     YOUR_TURN,
     SERVER_CLOSURE,
+    GET_GAME_SERVER, 
+    PLACE_BOAT;
 }

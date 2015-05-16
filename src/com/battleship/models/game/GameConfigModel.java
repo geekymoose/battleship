@@ -9,6 +9,7 @@ import com.battleship.main.DebugTrack;
 import com.battleship.asset.Config;
 import com.battleship.asset.Session;
 import com.battleship.exceptions.ForbiddenAction;
+import com.battleship.network.ServerGame;
 
 
 
@@ -120,7 +121,8 @@ public class GameConfigModel extends Model implements GameConstants{
                 this.currentNbPlayers   = 2;
                 break;
             case MODE_LAN:
-                this.listPlayers[0] = Session.getPlayer();
+                this.listPlayers[0]     = Session.getPlayer();
+                this.listPlayers[1]     = new PlayerLan();
                 this.currentNbPlayers   = 1;
                 break;
         }
@@ -134,7 +136,7 @@ public class GameConfigModel extends Model implements GameConstants{
         this.gridHeight     = this.gridDefaultHeight;
         this.gridType       = this.gridDefaultType;
         this.firstPlayer    = Config.getGameValues_int("default-first-player");
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -153,6 +155,7 @@ public class GameConfigModel extends Model implements GameConstants{
     // Functions
     //**************************************************************************
     /**
+     * @deprecated Not used 
      * Add this player in the game. If game is already full, this function throws 
      * an exception (And player is not added). <br/>
      * If player successfully added, the fleetGrid for this player is
@@ -317,7 +320,7 @@ public class GameConfigModel extends Model implements GameConstants{
         if(pValue>=this.gridMinWidth && pValue<=this.gridMaxWidth){
             this.gridWidth = pValue;
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
 
     /**
@@ -329,7 +332,7 @@ public class GameConfigModel extends Model implements GameConstants{
         if(pValue>=this.gridMinHeight && pValue<=this.gridMaxHeight){
             this.gridHeight = pValue;
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
 
     /**
@@ -340,7 +343,7 @@ public class GameConfigModel extends Model implements GameConstants{
         if(pValue == GRID_TYPE_SQUARE || pValue == GRID_TYPE_HEXAGON){
             this.gridType = pValue;
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**

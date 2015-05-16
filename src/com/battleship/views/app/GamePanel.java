@@ -172,8 +172,8 @@ public class GamePanel extends PagePanel implements ObserverModel{
         fleetPlayer1.getGridCursor().setClickNoArm();
         fleetPlayer2.getGridCursor().setClickNoArm();
         
-        conf.getPlayers()[0].addObserver(this.p_radar);
-        conf.getPlayers()[1].addObserver(this.p_radar);
+        conf.getPlayers()[0].addObserverModel(this.p_radar);
+        conf.getPlayers()[1].addObserverModel(this.p_radar);
         
         //Change cursor owner, it means players 1 will attack grid 0 and reverso for player 0
         radarPlayer1.getGridCursor().setOwner(conf.getPlayers()[1]);
@@ -243,7 +243,7 @@ public class GamePanel extends PagePanel implements ObserverModel{
 
     
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
         if(o instanceof Player){
             this.repaint();
         } else if (o instanceof GameModel && arg instanceof Integer){

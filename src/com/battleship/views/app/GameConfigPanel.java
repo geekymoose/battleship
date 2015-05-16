@@ -34,8 +34,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -289,7 +287,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     // Functions for update - Ui reloading
     //**************************************************************************
     @Override
-    public void update(ObservableModel o, Object arg){
+    public void updateModel(ObservableModel o, Object arg){
         this.gridType   = ((GameConfigModel)o).getGridType();
         
         //Button reset state
@@ -336,13 +334,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     //**************************************************************************
     @Override
     protected void goNextPage(){
-        System.out.println("DEBUG : ");
-        System.out.println(MODE_AI);
-        System.out.println(MODE_V2);
-        System.out.println(MODE_LAN);
         int mode = Session.getGameMode();
-        System.out.println("CURRENT MODE : "+mode);
-        System.out.println("IS VALID  : "+this.controller.isValidConfig());
         switch(mode){
             case MODE_AI:
                 if(this.controller.isValidConfig()){
@@ -361,7 +353,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                     ServerGame g = new ServerGame(title, gridType);
                     Session.getNetwork().sendCapsule(new Capsule(Request.CREATE_GAME, g));
                     UiDialog.showConfirmDialog(title, "New game "+title+" created");
-                    frame.rooting(ApplicationFrame.LIST_GAMES, true);
+                    frame.rooting(ApplicationFrame.WAITING_ROOM, true);
                 } catch(ForbiddenAction ex) {
                     UiDialog.showWarning("Bad title", ex.getMessage());
                 }

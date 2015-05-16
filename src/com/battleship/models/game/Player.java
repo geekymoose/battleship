@@ -121,7 +121,7 @@ public abstract class Player extends Model implements GameConstants{
             this.currentWeaponIndex = 0;
         }
         this.fleetGrid.stopAiming();
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -133,7 +133,7 @@ public abstract class Player extends Model implements GameConstants{
             this.currentWeaponIndex = (this.listWeapons.size()-1);
         }
         this.fleetGrid.stopAiming();
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -148,7 +148,7 @@ public abstract class Player extends Model implements GameConstants{
         }
         this.currentWeaponIndex = pValue;
         this.fleetGrid.stopAiming();
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -166,7 +166,7 @@ public abstract class Player extends Model implements GameConstants{
             index++;
         }
         this.fleetGrid.stopAiming();
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
@@ -185,7 +185,7 @@ public abstract class Player extends Model implements GameConstants{
             this.listWeapons.add(pWeapon);
             pWeapon.setOwner(this);
         }
-        this.notifyObservers(null);
+        this.notifyObserversModel(null);
     }
     
     /**
