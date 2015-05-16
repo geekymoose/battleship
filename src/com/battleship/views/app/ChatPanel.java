@@ -9,8 +9,10 @@ import com.battleship.asset.CheatCode;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,7 +22,6 @@ import javax.swing.JTextField;
 
 
 /**
- * <h1></h1>
  * 
  * 
  * @since   Feb 11. 2015
@@ -65,7 +66,7 @@ public class ChatPanel extends ContentPanel {
      * Set the size of the chat
      */
     private void setSizes(){
-        tf_sentence.setPreferredSize(new Dimension(200, 25));
+        tf_sentence.setPreferredSize(new Dimension(180, 25));
     }
     
     /**
@@ -80,6 +81,10 @@ public class ChatPanel extends ContentPanel {
         tf_sentence = new JTextField();
         ta_chat = new JTextArea();
         setupChat();
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.ta_chat        .setMargin(new Insets(10, 10, 10, 10));
+        this.tf_sentence    .setMargin(new Insets(0,10,0,10));
+        this.setOpaque(false);
     }
 
     /**
