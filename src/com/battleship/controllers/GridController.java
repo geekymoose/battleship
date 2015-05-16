@@ -67,8 +67,8 @@ public class GridController extends Controller{
         this.model.stopAiming();
         if((this.model.getBoxMapAt(p.x, p.y)) != null){
             boolean shoot = pShooter.shootAt(p.x, p.y, this.model.getTabBoxMap());
-            this.model.getGameModel().switchTurnBehaviors();
             if(shoot == true){
+                this.model.getGameModel().switchTurnBehaviors();
                 if(Session.getGameMode() == GameConstants.MODE_LAN){
                     int idWeapon = pShooter.getCurrentWeapon().getWeaponId();
                     int tab [] = new int[3];
