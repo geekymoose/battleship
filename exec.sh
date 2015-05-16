@@ -32,6 +32,7 @@ declare param_o #javadoc
 declare param_j #jar
 declare param_x #execute
 declare param_u #create UML
+declare param_s #also start server
 declare param_d #clean repository from tmp files
 
 
@@ -68,6 +69,10 @@ function execute(){
         echo -e "\n *** Execute project"
         execute_project
     fi
+
+    if [[ ! -z $param_s ]];then
+        execute_server
+    fi
 }
 
 
@@ -76,13 +81,14 @@ function execute(){
 # @param @ every parameter (Must be given!!)
 # @return number of the last option: OPTIND (could be used to get arguments)
 function processOptions(){
-    while getopts "hjoxud" optname; do
+    while getopts "hjoxuds" optname; do
         case "$optname" in
-            "d") param_d=1 ;clean_repository;;
+            "d") clean_repository ;;
             "h") displayHelpAndExit ;;
             "j") param_j=1 ;;
             "o") param_o=1 ;;
             "x") param_x=1 ;;
+            "s") param_s=1 ;;
             "u") echo " WARNING : -u is not used anymore!";displayErrorAndExit;;
             "?") displayErrorAndExit 101 $OPTARG ;;
             ":") displayErrorAndExit 102 $OPTARG ;;
@@ -128,7 +134,13 @@ function create_build_class(){
 
 # Execute
 function execute_project(){
-    java -cp $DOSS_BUILD com.battleship.main.Main
+    java -cp $DOSS_BUILD com.battleship.main.Main &
+}
+
+function execute_server(){
+    cd server
+    #echo "server"
+    ./launchServer.sh &
 }
 
 #create manifest file
@@ -136,13 +148,14 @@ function create_manifest(){
     echo "Manifest-Version: 1.0" >  "manifest"
     echo "Main-Class: com.battleship.main.Main" >>  "manifest"
     echo "Class-Path: $DOSS_BUILD"  >>  "manifest"
-    #echo "Class-Path: build/ "  >>  "manifest"DOSS_BUILD
+    echo -e "\n\n\n" >>  "manifest"
 }
 
 # Create jar file 
 function create_jar(){
     create_manifest
     #jar -cfm battleship.jar "manifest" $DOSS_BUILD"com/*"
+    #jar -cfm battleship.jar "manifest" jjgenerated/build/com/*
     jar -cfm battleship.jar "manifest" jjgenerated/build/com/*
 }
 
@@ -173,6 +186,7 @@ function displayHelpAndExit {
     echo -e "\t-u       Generate UML"
     echo -e "\t-j       Generate Javadoc"
     echo -e "\t-o       Generate jar file"
+    echo -e "\t-s       launch server window"
     
     #AUTHOR
     echo -e "\nAUTHOR"
@@ -212,7 +226,7 @@ function clean_repository(){
     rm -r $DOSS_GENERATED ; check_error
     rm battleship.jar   ; check_error
     rm manifest         ; check_error
-    return $EXIT_SUCCESS
+    exit $EXIT_FAILURE
 }
 
 

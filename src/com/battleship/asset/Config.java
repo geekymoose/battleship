@@ -77,7 +77,7 @@ public class Config {
      * these path.
      */
     private Config(){
-        String constantsPath        = "src/com/battleship/constants/";
+        String constantsPath        = "config/";
         this.dimConfigPath          = constantsPath+"dimConfig.xml";
         this.themeConfigPath        = constantsPath+"themeConfig.xml";
         this.gameConfigPath         = constantsPath+"gameConfig.xml";

@@ -120,8 +120,8 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     }
     
     private void defaultValues(){
-        //tf_ipserver.setText("localhost");
-        tf_ipserver.setText("192.168.1.55");
+        tf_ipserver.setText("localhost");
+        //tf_ipserver.setText("192.168.1.55");
     }
     
     private void setBtnActions() {
