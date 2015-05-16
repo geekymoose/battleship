@@ -127,7 +127,8 @@ public class Network extends Model implements ObservableLan{
             // 4 - PROBLEME etc...
         }
         else if(rqt == Request.MSG_CHAT){
-            // REDIRIGER LE MESSAGE VERS LE TCHAT
+            String msg = (String)cpsl.getObject();
+            this.notifyLanObservers(msg);
         }
         else if(rqt == Request.SERVER_CLOSURE){
             // FERMETURE DE OUTPUT ET INPUT ET REDIRECTION VERS MENU PRINCIPAL

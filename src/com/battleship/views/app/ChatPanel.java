@@ -6,6 +6,11 @@
 package com.battleship.views.app;
 
 import com.battleship.asset.CheatCode;
+import com.battleship.asset.Session;
+import com.battleship.network.Capsule;
+import com.battleship.network.Request;
+import com.battleship.observers.ObservableLan;
+import com.battleship.observers.ObserverLan;
 import com.battleship.views.tools.ContentPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -29,7 +34,7 @@ import javax.swing.JTextField;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public class ChatPanel extends ContentPanel {
+public class ChatPanel extends ContentPanel implements ObserverLan{
     private     JPanel          p_sentence;
     private     JPanel          p_north;
     private     JTextField      tf_sentence;
@@ -53,6 +58,9 @@ public class ChatPanel extends ContentPanel {
         this.setSizes();
         this.addEachComponents();
         this.setActions();
+        if(Session.isConnected()){
+            Session.getNetwork().addLanObserver(this);
+        }
     }
     
     
@@ -110,8 +118,13 @@ public class ChatPanel extends ContentPanel {
     }
 
     public void printChatMessage(String string) {
-        ta_chat.append(string);
-        ta_chat.setCaretPosition(ta_chat.getText().length());
+        if(string != null){
+            string = string.trim();
+            if(!string.isEmpty() && !string.equals("\n")){
+                ta_chat.append(string+"\n");
+                ta_chat.setCaretPosition(ta_chat.getText().length());
+            }
+        }
     }
 
     //Peut être à changer un peu pour eviter d'appuyer sur enter par erreur
@@ -124,10 +137,10 @@ public class ChatPanel extends ContentPanel {
                         String sentence = tf_sentence.getText();
                         CheatCode.processStrCode(sentence);
                         
-                        ta_chat.append(sentence+"\n");
-                        ta_chat.setCaretPosition(ta_chat.getText().length());
-                        
-                        //sendToServer(sentence); // Envoyer le message au server pour l'envoyer à l'autre user
+                        if(Session.isConnected()){
+                            Session.getNetwork().sendCapsule(new Capsule(Request.MSG_CHAT, sentence));
+                        }
+                        printChatMessage(sentence);
                         tf_sentence.setText("");
                     }
                 }
@@ -156,5 +169,13 @@ public class ChatPanel extends ContentPanel {
     @Override
     public void reloadUI(){
     
+    }
+
+    @Override
+    public void updateLan(ObservableLan o, Object arg){
+        if(arg instanceof String){
+            String msg = (String)arg;
+            this.printChatMessage(msg);
+        }
     }
 }
