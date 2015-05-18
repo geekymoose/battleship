@@ -2,7 +2,6 @@
  * Creation : 30 April 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-
 package com.battleship.asset;
 
 import java.awt.Dimension;
@@ -10,11 +9,15 @@ import java.awt.Point;
 
 
 
-
-
 /**
  * <h1>GridCalculator</h1>
  * <p>public abstract class GridCalculator</p>
+ * 
+ * <p>
+ * GridCalculator is a class with function used for grid calculation 
+ * management. For example, it write function to get cell under cursor etc. 
+ * It is also useful for Image placement in grid 
+ * </p>
  *
  * @since   Apr 2, 2015
  * @author  Constantin MASSON
@@ -23,119 +26,86 @@ import java.awt.Point;
  */
 public abstract class GridCalculator {
     //**************************************************************************
-    // Constants - Variables
+    // Grid Image placement functions
     //**************************************************************************
-    public static final int     BORDERS_FROM_TOP_AND_LEFT = 10;
-    private static int          t, s, r, h; //Constants for dimension hexa
-    private static Dimension    dimBox;
-    
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Constructor - Initialization
-    //**************************************************************************
-    protected GridCalculator(){
-        
+    /**
+     * Return Upper Left Corner of an Hexagon BoxMapView, in function of its position 
+     * in a grid
+     * @param pPosition     position in grid coordinates where to place image
+     * @param dim           box dimension
+     * @return Point upper left corner of this box
+     */
+    public static Point hexaBoxUpperLeftCorner(Point pPosition, Dimension dim){
+        Point   p   = new Point();
+        int     dx  = 1; 
+        int     dy  = -2;
+        if(pPosition.x%2 != 0){
+            dy += dim.height/2;
+        }
+        p.x = dx + (pPosition.x * (dim.width-8));
+        p.y = dy + (pPosition.y * dim.height);
+        return p;
     }
     
     /**
-     * Initialize dimension for square
-     * @param pDim 
+     * Return Upper Left Corner for a Square BoxMapView, in function of its position 
+     * in a grid
+     * @param pPosition     position in grid coordinates where to place image
+     * @param dim           Box dimension
+     * @return Point upper left corner of this box
      */
-    private static void initSquareValues(Dimension pDim){
-        dimBox = pDim;
+    public static Point squareBoxpUpperLeftCorner(Point pPosition, Dimension dim){
+        Point   p   = new Point();
+        int     dx  = 1;
+        int     dy  = 1;
+        p.x = dx + (pPosition.x * dim.width);
+        p.y = dy + (pPosition.y * dim.height);
+        return p;
     }
     
     
+    //**************************************************************************
+    // Grid positions functions
+    //**************************************************************************
     /**
-     * Set all the sizes
-     * Set size for elements
-     * @param height
+     * Convert absolute pixel position to coordinate position for square. 
+     * Dimension is the size for one box, in order to process the position using 
+     * position coordinates
+     * (pxToSquareCoor -> pixelToSquareCoordinate)
+     *
+     * @param pX    x absolute position in pixel
+     * @param pY    y absolute position in pixel 
+     * @param pDim  BoxMap Dimension
+     * @return Point position in coordinate mode
      */
-    private static void initHexaValues(Dimension pDim) {
-        int height = pDim.height;
+    public static Point pxToSquareCoor(int pX, int pY, Dimension pDim){
+        int x = pX/pDim.width;
+        int y = pY/pDim.height;
+        return new Point(x, y);
+    }
+    
+    /**
+     * Convert absolute pixel position to coordinate position. (for Hexagon grid)
+     * (pxToHexaCoor -> pixelToHexagonCoordinate)
+     *
+     * @param mx    x absolute position in pixel
+     * @param my    y absolute position in pixel 
+     * @param pDim  BoxMap Dimension
+     * @return Point position
+     */
+    public static Point pxToHexaCoor(int mx, int my, Dimension pDim) {
+        //This function was inspired from http://www.quarkphysics.ca/scripsi/hexgrid/
+        Point p = new Point(-1, -1);
         /*
          * h = basic dimension: height (distance between two adj centresr aka size)
          * r = radius of inscribed circle
          * s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
          * t = (h/2) tan30 = (h/2) 1/sqrt(3) = h / (2 sqrt(3)) = r / sqrt(3)
          */
-        h  = height;
-        r  = h / 2;
-        s  = (int) (h / 1.73205);
-        t  = (int) (r / 1.73205);
-    }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Functions
-    //**************************************************************************
-    /**
-     * Convert absolute pixel position to coordinate position for square
-     * (pxToSquareCoor to pixelToSquareCoordinate)
-     *
-     * @param pX    x value
-     * @param pY    y value 
-     * @param pDim  BoxMap Dimension
-     * @return Point position
-     */
-    public static Point pxToSquareCoor(int pX, int pY, Dimension pDim){
-        initSquareValues(pDim);
-        return pxToSquareCoor(pX, pY);
-    }
-    
-    
-    /**
-     * Convert absolute pixel position to coordinate position for square
-     * (pxToSquareCoor -> pixelToSquareCoordinate)
-     *
-     * @param pX x value
-     * @param pY y value 
-     * @return Point position
-     */
-    private static Point pxToSquareCoor(int pX, int pY){
-        int x = pX/dimBox.width;
-        int y = pY/dimBox.height;
-        return new Point(x, y);
-    }
-    
-    
-    /**
-     * Convert absolute pixel position to coordinate position. (for Hexagon grid)
-     * (pxToHexaCoor to pixelToHexagonCoordinate)
-     *
-     * @param mx        x value
-     * @param my        y value 
-     * @param pDim      Box Dimension
-     * @return Point position
-     */
-    public static Point pxToHexaCoor(int mx, int my, Dimension pDim) {
-        initHexaValues(pDim);
-        return pxToHexaCoor(mx, my);
-    }
-    
-    
-    
-    /**
-     * Convert absolute pixel position to coordinate position. (for Hexagon grid)
-     * (pxToHexaCoor -> pixelToHexagonCoordinate)
-     *
-     * @param mx x value
-     * @param my  y value 
-     * @return Point position
-     */
-    private static Point pxToHexaCoor(int mx, int my) {
-        Point p = new Point(-1, -1);
-
-        //correction for BORDERS and XYVertex
-        mx -= BORDERS_FROM_TOP_AND_LEFT;
-        my -= BORDERS_FROM_TOP_AND_LEFT;
+        int h  = pDim.height;
+        int r  = h / 2;
+        int s  = (int) (h / 1.73205);
+        int t  = (int) (r / 1.73205);
         /*
          * This gives a quick value for x. 
          * It works only on odd cols and doesn't handle the triangle sections. 
@@ -160,7 +130,6 @@ public abstract class GridCalculator {
         if (my - (x % 2) * r < 0) {
             return p; // prevent clicking in the open halfhexes at the top of the screen
         }
-		//System.out.println("dx=" + dx + " dy=" + dy + "  > " + dx*r/t + " <");
 
         //even columns
         if (x % 2 == 0) {
@@ -193,6 +162,4 @@ public abstract class GridCalculator {
         p.y = y;
         return p;
     }
-    
-    
 }

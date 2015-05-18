@@ -16,16 +16,12 @@ import com.battleship.models.weapons.Weapon;
 /**
  * <h1>PooFactory</h1>
  * <p>public class PooFactory</p>
+ * <p>PooFactory create instance of object used by application</p>
  *
  * @since   May 14, 2015
  * @author  Constantin MASSON
  */
 public class PooFactory {
-    //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-
     //**************************************************************************
     // Functions
     //**************************************************************************

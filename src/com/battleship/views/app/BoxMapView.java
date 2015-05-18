@@ -15,8 +15,6 @@ import java.awt.Point;
 
 
 
-
-
 /**
  * <h1>BoxMapView</h1>
  * <p>
@@ -69,13 +67,6 @@ public abstract class BoxMapView implements UiElement{
     protected   Image       imgHoverHiddenValid;
     protected   Image       imgHoverHiddenNotValid;
     
-    
-    
-    
-    
-    
-    
-    
 
     //**************************************************************************
     // Constructor - Initialization
@@ -118,9 +109,6 @@ public abstract class BoxMapView implements UiElement{
         this.sprite     = pSprite;
         this.loadUI();
     }
-    
-    
-    
     
 
     //**************************************************************************
@@ -168,9 +156,6 @@ public abstract class BoxMapView implements UiElement{
     protected abstract void drawHover(Graphics2D g2);
     
     
-    
-    
-    
     //**************************************************************************
     // UI Functions
     //**************************************************************************
@@ -178,10 +163,6 @@ public abstract class BoxMapView implements UiElement{
     public void loadUI(){
         this.reloadUI();
     }
-    
-    
-    
-    
     
     
     //**************************************************************************

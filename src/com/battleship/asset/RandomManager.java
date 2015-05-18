@@ -4,26 +4,15 @@
  * Author :     Constantin MASSON
  * 
  */
-
 package com.battleship.asset;
 
 
 
-
-
-
 /**
- * <h1>RandomManager</h1>
- * <p>
- * public class RandomManager
- * </p>
- * 
- * <p>
- * This class manage all random tools
- * </p>
+ * <p>This class manage all random tools</p>
  *
- * 
- * @author Constantin MASSON
+ * @since   Apr 2, 2015
+ * @author  Constantin MASSON
  */
 public abstract class RandomManager {
     
@@ -31,7 +20,7 @@ public abstract class RandomManager {
      * Get random number between pMin and pMax included
      * @param pMin min value (included)
      * @param pMax max value (included)
-     * @return int random number
+     * @return random number between min and max (included) with int precision
      */
     public static int getRandomBetween(int pMin, int pMax){
         return (int)(Math.random() * (pMax+1-pMin))+ pMin;
