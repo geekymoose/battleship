@@ -19,11 +19,10 @@ package com.battleship.dynamic;
 
 import com.battleship.asset.ThemeManager;
 import com.battleship.views.tools.UiElement;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
-
-
 
 
 
@@ -52,7 +51,6 @@ public class ExplosionEvent extends DynamicEvent implements UiElement{
         this.loadUI();
     }
     
-    
 
     //**************************************************************************
     // Functions
@@ -70,7 +68,6 @@ public class ExplosionEvent extends DynamicEvent implements UiElement{
     }
     
     
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************
@@ -88,5 +85,16 @@ public class ExplosionEvent extends DynamicEvent implements UiElement{
      */
     public Image getCurrentImg(){
         return (Image)super.getCurrentState();
+    }
+    
+    /**
+     * Return dimension of the current image event
+     * @return Dimension of current image event
+     */
+    public Dimension getImgDim(){
+        Dimension dim = new Dimension();
+        dim.width   = ((Image)super.getListStates().get(this.currentStatePos)).getWidth(null);
+        dim.height  = ((Image)super.getListStates().get(this.currentStatePos)).getHeight(null);
+        return dim;
     }
 }

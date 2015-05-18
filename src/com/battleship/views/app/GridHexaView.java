@@ -4,6 +4,7 @@
  */
 package com.battleship.views.app;
 
+import com.battleship.asset.GridCalculator;
 import com.battleship.controllers.GridController;
 import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.exceptions.ExecError;
@@ -11,6 +12,7 @@ import com.battleship.models.sprites.Water;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import javax.swing.JPanel;
 
 
@@ -86,10 +88,8 @@ public class GridHexaView extends GridPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ExplosionEvent e : this.listExplosions){
-            int x   = (e.getPosition().x * (tabBox[0][0].getDimension().width-8))+19;
-            int y   = (e.getPosition().y * tabBox[0][0].getDimension().height)+19;
-            int dy  = (e.getPosition().x%2==0)? 0:25;
-            g.drawImage(e.getCurrentImg(), x, y+dy, this);
+            Point p = GridCalculator.placeImgHexa(e.getPosition(), e.getImgDim(), tabBox[0][0].getDimension());
+            g.drawImage(e.getCurrentImg(), p.x, p.y, this);
         }
     }
 }

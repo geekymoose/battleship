@@ -35,7 +35,7 @@ public abstract class GridCalculator {
      * @param dim           box dimension
      * @return Point upper left corner of this box
      */
-    public static Point hexaBoxUpperLeftCorner(Point pPosition, Dimension dim){
+    private static Point hexaBoxUpperLeftCorner(Point pPosition, Dimension dim){
         Point   p   = new Point();
         int     dx  = 1; 
         int     dy  = -2;
@@ -47,19 +47,32 @@ public abstract class GridCalculator {
         return p;
     }
     
+    public static Point placeImgHexa(Point pPosition, Dimension pImgDim, Dimension pBoxDim){
+        Point   p   = new Point();
+        int     dx  = 1 + pBoxDim.width/2;
+        int     dy  = -2 + pBoxDim.height/2;
+        if(pPosition.x%2 != 0){
+            dy += pBoxDim.height/2;
+        }
+        p.x = dx + (pPosition.x * (pBoxDim.width-8))- pImgDim.width/2;
+        p.y = dy + (pPosition.y * pBoxDim.height)- pImgDim.height/2;
+        return p;
+    }
+    
     /**
      * Return Upper Left Corner for a Square BoxMapView, in function of its position 
      * in a grid
-     * @param pPosition     position in grid coordinates where to place image
-     * @param dim           Box dimension
+     * @param pPosition position in grid coordinates where to place image
+     * @param pImgDim   dimension of the image to place in the grid
+     * @param pBoxDim   dimension of a box on the grid
      * @return Point upper left corner of this box
      */
-    public static Point squareBoxpUpperLeftCorner(Point pPosition, Dimension dim){
+    public static Point placeImgSquare(Point pPosition, Dimension pImgDim, Dimension pBoxDim){
         Point   p   = new Point();
-        int     dx  = 1;
-        int     dy  = 1;
-        p.x = dx + (pPosition.x * dim.width);
-        p.y = dy + (pPosition.y * dim.height);
+        int     dx  = 1 + pBoxDim.width/2;
+        int     dy  = 1 + pBoxDim.height/2;
+        p.x = dx + (pPosition.x * pBoxDim.width)    - pImgDim.width/2;
+        p.y = dy + (pPosition.y * pBoxDim.height)   - pImgDim.height/2;
         return p;
     }
     

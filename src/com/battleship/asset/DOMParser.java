@@ -2,7 +2,6 @@
  * Creation : 28 March 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-
 package com.battleship.asset;
 
 import com.battleship.exceptions.ExecError;
@@ -30,7 +29,7 @@ import org.xml.sax.SAXException;
  * @since   Mar 28, 2015
  * @author  Constantin MASSON
  * 
- * @see Config
+ * @see com.battleship.asset.Config
  */
 public class DOMParser {
     //**************************************************************************

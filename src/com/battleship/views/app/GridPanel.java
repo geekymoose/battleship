@@ -63,8 +63,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     protected       ArrayList<ExplosionEvent> listExplosions;
     
     
-    
-    
     //**************************************************************************
     // CONSTRUCTOR
     //**************************************************************************
@@ -81,7 +79,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     public GridPanel(JPanel pPar, GridController pC, int pW, int pH, int pT, Dimension pDim) 
     throws ExecError{
         super(pPar);
-        //this.setPreferredSize(Config.getDimValues_dim("dim-fleetgrid"));
         this.controller         = pC;
         Dimension dim           = new Dimension();
         dim.width               = pDim.width    * (pW);
@@ -96,9 +93,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         this.addMouseMotionListener(this);
         this.addMouseWheelListener(this);
     }
-    
-    
-    
     
     
     //**************************************************************************
@@ -130,11 +124,7 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
         }
         this.listExplosions = m.getListExplosions();
         this.repaint();
-        this.parentPage.repaint();
     }
-    
-    
-    
     
     
     //**************************************************************************
@@ -195,9 +185,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
     public int getTypeGrid(){
         return this.gridType;
     }
-    
-    
-    
     
     
     //**************************************************************************
