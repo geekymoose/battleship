@@ -2,10 +2,9 @@
  * Creation:    Apr 1, 2015
  * Project Computer Science L2 Semester 4 - BattleShip
  */
-
 package com.battleship.views.app;
 
-import com.battleship.asset.ImgCalculator;
+import com.battleship.asset.GridCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import java.awt.BasicStroke;
@@ -15,7 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-
 
 
 
@@ -41,50 +39,40 @@ public class BoxMapViewSquare extends BoxMapView{
     private Rectangle rect;
     
     
-    
-    
-    
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new BoxMap view for square mode
-     * @param coordinateX   coordinate in the grid
-     * @param coordinateY   coordinate in the grid
-     * @param pDim          BoxDefault dimension
-     * @param pSprite       Default sprite
+     * Create a new BoxMap view for square mode with default border color
+     * @param posX      coordinate in the grid
+     * @param posY      coordinate in the grid
+     * @param pDim      boxDefault dimension
+     * @param pSprite   default sprite
      */
-    public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite){
-        super(coordinateX, coordinateY, pDim, pSprite);
+    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite){
+        super(posX, posY, pDim, pSprite);
         this.rect = this.createRectangle();
     }
     
     /**
-     * 
-     * @param coordinateX   coordinate in the grid
-     * @param coordinateY   coordinate in the grid
-     * @param pDim          BoxDefault dimension
-     * @param pSprite       Default sprite
-     * @param c             Color of the borders
+     * Create a new BoxMap view for square mode with specific border color
+     * @param posX      coordinate in the grid
+     * @param posY      coordinate in the grid
+     * @param pDim      boxDefault dimension
+     * @param pSprite   default sprite
+     * @param c         color of the borders
      */
-    public BoxMapViewSquare(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite, Color c){
-        super(coordinateX, coordinateY, pDim, pSprite, c);
+    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
+        super(posX, posY, pDim, pSprite, c);
         this.rect = this.createRectangle();
     }
     
-    /*
-     * Create a rectangle
-     */
     private Rectangle createRectangle(){
         Point p     = new Point();
         p.x         = this.dimension.width * this.coordinate.x;
         p.y         = this.dimension.height * this.coordinate.y;
         return new Rectangle(p, this.dimension);
     }
-    
-    
-    
     
     
     //**************************************************************************
@@ -94,7 +82,7 @@ public class BoxMapViewSquare extends BoxMapView{
     protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
         Image   i   = null;
-        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgBoatAlive;
@@ -118,7 +106,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawHidden(Graphics2D g2){
         Image   i   = null;
-        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgHiddenWaterAlive;
@@ -142,7 +130,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawTargeted(Graphics2D g2){
         Image   i   = this.imgTargeted;
-        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
@@ -152,14 +140,11 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawHover(Graphics2D g2){
         Image   i   = this.imgHoverBoatAlive;
-        Point   p   = ImgCalculator.squareBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
-    
-    
-    
     
     
     //**************************************************************************

@@ -4,7 +4,7 @@
  */
 package com.battleship.views.app;
 
-import com.battleship.asset.ImgCalculator;
+import com.battleship.asset.GridCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
 import java.awt.BasicStroke;
@@ -14,7 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
-
 
 
 
@@ -31,86 +30,56 @@ import java.awt.Polygon;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  * 
- * @see BoxMapView
+ * @see com.battleship.views.BoxMapView
  */
 public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     final int   BORDERS_FROM_TOP_AND_LEFT = 10;
-    private     int         t, s, r, h; //Constants for dimension hexa
     private     Polygon     polygon;
-    
-    
-    
     
     
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a BoxMapHexagon
-     * @param coordinateX   coordinate in the grid
-     * @param coordinateY   coordinate in the grid
-     * @param pDim          BoxDefault dimension
-     * @param pSprite       Default sprite
+     * Create a BoxMapHexagon with default border color
+     * @param posX      coordinate in the grid
+     * @param posY      coordinate in the grid
+     * @param pDim      boxDefault dimension
+     * @param pSprite   default sprite inside
      */
-    public BoxMapViewHexagon(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite){
-        super(coordinateX, coordinateY, pDim, pSprite);
-        this.initValues(this.dimension.width);
-        this.polygon = this.createHexagon(coordinateX, coordinateY);
+    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite){
+        super(posX, posY, pDim, pSprite);
+        this.polygon = this.createHexagon(posX, posY, this.dimension);
     }
     
     /**
-     * Create a BoxMapHexagon
-     * @param coordinateX   coordinate in the grid
-     * @param coordinateY   coordinate in the grid
-     * @param pDim          BoxDefault dimension
-     * @param pSprite       Default sprite
-     * @param c             Color of the borders
+     * Create a BoxMapHexagon with specific border color
+     * @param posX      coordinate in the grid
+     * @param posY      coordinate in the grid
+     * @param pDim      boxDefault dimension
+     * @param pSprite   default sprite
+     * @param c         color of the borders
      */
-    public BoxMapViewHexagon(int coordinateX, int coordinateY, Dimension pDim, Sprite pSprite, Color c){
-        super(coordinateX, coordinateY, pDim, pSprite, c);
-        this.initValues(this.dimension.width);
-        this.polygon = this.createHexagon(coordinateX, coordinateY);
+    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
+        super(posX, posY, pDim, pSprite, c);
+        this.polygon = this.createHexagon(posX, posY, this.dimension);
     }
-    
-    
-    /*
-     * Set all the sizes
-     * Set size for elements
-     * @param height
-     */
-    private void initValues(int height) {
-        /*
-         * h = basic dimension: height (distance between two adj centresr aka size)
-         * r = radius of inscribed circle
-         * s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
-         * t = (h/2) tan30 = (h/2) 1/sqrt(3) = h / (2 sqrt(3)) = r / sqrt(3)
-         */
-        this.h  = height;
-        this.r  = h / 2;
-        this.s  = (int) (h / 1.73205);
-        this.t  = (int) (r / 1.73205);
-    }
-    
     
     /*
      * Create new Hexagon. Created from BoxMap coordinate. Actual Box center 
      * is calculated and polygon is created for this box
-     *
-     * @param coordinateX x coordinate in the grid
-     * @param coordinateY y coordinate in the grid
-     * @return a Polygon with all the coordinates of the hexagon
      */
-    private Polygon createHexagon(int coordinateX, int coordinateY) {
-        int x0 = coordinateX * (s + t);
-        int y0 = coordinateY * h + (coordinateX % 2) * h / 2;
+    private Polygon createHexagon(int coordinateX, int coordinateY, Dimension pDim) {
+        int h  = pDim.height;
+        int r  = h / 2;
+        int s  = (int) (h / 1.73205);
+        int t  = (int) (r / 1.73205);
         
-        int x = x0 + BORDERS_FROM_TOP_AND_LEFT;
-        int y = y0 + BORDERS_FROM_TOP_AND_LEFT;
+        int x = coordinateX * (s + t);
+        int y = coordinateY * h + (coordinateX % 2) * h / 2;
         if (s == 0 || h == 0) {
-            System.out.println("ERROR: size of hex has not been set");
             return new Polygon();
         }
 
@@ -122,9 +91,6 @@ public class BoxMapViewHexagon extends BoxMapView{
     }
     
     
-    
-    
-    
     //**************************************************************************
     // Draw fucntions
     //**************************************************************************
@@ -132,7 +98,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
         Image   i   = null;
-        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.hexaBoxUpperLeftCorner(this.coordinate, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgBoatAlive;
@@ -156,7 +122,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawHidden(Graphics2D g2){
         Image   i   = null;
-        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.hexaBoxUpperLeftCorner(this.coordinate, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgHiddenWaterAlive;
@@ -179,7 +145,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawTargeted(Graphics2D g2){
         Image   i   = this.imgTargeted;
-        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.hexaBoxUpperLeftCorner(this.coordinate, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
@@ -188,13 +154,11 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawHover(Graphics2D g2){
         Image   i   = this.imgHoverBoatAlive;
-        Point   p   = ImgCalculator.hexaBoxMapUpperLeftCorner(this, dimension);
+        Point   p   = GridCalculator.hexaBoxUpperLeftCorner(this.coordinate, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.polygon);
     }
-    
-    
     
     
     //**************************************************************************
