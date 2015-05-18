@@ -4,7 +4,6 @@
  */
 package com.battleship.asset;
 
-import com.battleship.constants.GameConstants;
 import com.battleship.models.game.GameModel;
 import com.battleship.models.game.Player;
 import com.battleship.models.weapons.*;
@@ -12,42 +11,23 @@ import com.battleship.views.app.RadarPanel;
 
 
 
-
-
 /**
  * <h1>CheatCode</h1>
- * <p>
- * public abstract class CheatCode
- * implements GameConstants
- * </p>
+ * <p>public abstract class CheatCode</p>
+ * <p>Cheat code</p>
  *
- * @author  Constantin MASSON
  * @since   Apr 4, 2015
+ * @author  Constantin MASSON
  */
-public abstract class CheatCode implements GameConstants{
+public abstract class CheatCode{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
     private     static boolean         cheatAuthorized     = true;
-    
     private     static GameModel       game;
     private     static RadarPanel      radar;
     
     
-    
-    
-    
-    
-
-    //**************************************************************************
-    // Constructor - Initialization
-    //**************************************************************************
-    
-    
-    
-    
-    
-
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -78,10 +58,6 @@ public abstract class CheatCode implements GameConstants{
     }
     
     
-    
-    
-    
-
     //**************************************************************************
     // Getters - Setters
     //**************************************************************************

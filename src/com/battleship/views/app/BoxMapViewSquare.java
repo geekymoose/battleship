@@ -82,7 +82,7 @@ public class BoxMapViewSquare extends BoxMapView{
     protected void drawDefault(Graphics2D g2){
         g2.setStroke(new BasicStroke(this.borderSize));
         Image   i   = null;
-        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
+        Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgBoatAlive;
@@ -106,7 +106,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawHidden(Graphics2D g2){
         Image   i   = null;
-        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
+        Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgHiddenWaterAlive;
@@ -130,7 +130,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawTargeted(Graphics2D g2){
         Image   i   = this.imgTargeted;
-        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
+        Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
@@ -140,7 +140,7 @@ public class BoxMapViewSquare extends BoxMapView{
     @Override
     protected void drawHover(Graphics2D g2){
         Image   i   = this.imgHoverBoatAlive;
-        Point   p   = GridCalculator.squareBoxpUpperLeftCorner(this.coordinate, dimension);
+        Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
         g2.setColor(this.borderColor);
         g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);

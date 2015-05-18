@@ -5,6 +5,7 @@
 
 package com.battleship.views.app;
 
+import com.battleship.asset.GridCalculator;
 import com.battleship.controllers.GridController;
 import com.battleship.dynamic.ExplosionEvent;
 import com.battleship.exceptions.ExecError;
@@ -12,9 +13,8 @@ import com.battleship.models.sprites.Water;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import javax.swing.JPanel;
-
-
 
 
 
@@ -32,15 +32,11 @@ public class GridSquareView extends GridPanel{
     private Dimension dimBox;
     
     
-    
-    
-    
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
-     * Create a new square grid in view
+     * Create a new square grid in view with default border color
      * @param p     parent PagePanel where grid is placed
      * @param c     grid controller
      * @param w     grid width
@@ -61,24 +57,24 @@ public class GridSquareView extends GridPanel{
     }
     
     /**
-     * Create a new square grid in view
-     * @param pParent       parent PagePanel where grid is placed
-     * @param pController   grid controller
-     * @param pW            grid width
-     * @param pH            grid height
-     * @param pDim          dimension of one BoxMap
-     * @param pType         grid type
-     * @param c             Color of the borders
+     * Create a new square grid in view with specific border color
+     * @param p     parent PagePanel where grid is placed
+     * @param c     grid controller
+     * @param w     grid width
+     * @param h     grid height
+     * @param d     dimension of one BoxMap
+     * @param t     grid type
+     * @param b     border color
      * @throws ExecError thrown if error during creation
      */
-    public GridSquareView(JPanel pParent, GridController pController, 
-                        int pW, int pH, int pType, Dimension pDim, Color c) throws ExecError{
-        super(pParent, pController,pW, pH, pType, pDim);
-        this.dimBox = pDim;
+    public GridSquareView(JPanel p, GridController c, int w, int h, int t, Dimension d, Color b) 
+    throws ExecError{
+        super(p, c,w, h, t, d);
+        this.dimBox = d;
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewSquare(x, y, pDim, new Water(), c);
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water(), b);
             }
         }
     }
@@ -87,9 +83,8 @@ public class GridSquareView extends GridPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ExplosionEvent e : this.listExplosions){
-            int x = (e.getPosition().x * tabBox[0][0].getDimension().width)+5;
-            int y = (e.getPosition().y * tabBox[0][0].getDimension().height)+8;
-            g.drawImage(e.getCurrentImg(), x, y, this);
+            Point p = GridCalculator.placeImgSquare(e.getPosition(), e.getImgDim(), tabBox[0][0].getDimension());
+            g.drawImage(e.getCurrentImg(), p.x, p.y, this);
         }
     }
 }
