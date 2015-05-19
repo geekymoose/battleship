@@ -34,6 +34,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -85,6 +86,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         p_bigCont           = new JPanel();
         p_listPanel         = new TablePanel(); 
         p_centeredPane      = new ContainerPanel();
+        p_centeredPane.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         
         this                .setLayout(new BorderLayout());

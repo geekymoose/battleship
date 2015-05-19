@@ -34,6 +34,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,7 +65,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     private     JPanel                  p_buttons;
     private     JPanel                  p_center;
-    private     JPanel                  p_container;
+    private     ContainerPanel          p_container;
     private     JPanel                  p_left;
     private     JPanel                  p_right;
     private     JPanel                  p_bigCont;
@@ -126,6 +127,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_bigCont       = new JPanel();
         p_bigbigCont    = new JPanel();
         p_hb            = new HeadBar(this);
+        p_container.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
         cl              = new CardLayout();
         gbc             = new GridBagConstraints();
