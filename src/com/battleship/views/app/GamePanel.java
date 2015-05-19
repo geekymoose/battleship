@@ -96,7 +96,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         this.controller     = pController;
         this.dimBoxFleet    = Config.getDimValues_dim("dim-playerfleet-boxmap");
         this.dimBoxRadar    = Config.getDimValues_dim("dim-radar-boxmap");
-        
         this.initComponents();
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         if(Session.isConnected()){
@@ -104,10 +103,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         }
     }
     
-    
-    /*
-     * Initialize all components
-     */
     private void initComponents() throws ExecError{
         this.p_headbar  = new HeadBar(this);
         p_centerPane    = new ContainerPanel();
@@ -246,14 +241,12 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         this.repaint();
     }
     
-    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(this.img_background,0,0, this.getWidth(), this.getHeight(), this);
     }
 
-    
     @Override
     public void updateModel(ObservableModel o, Object arg){
         if(o instanceof Player){
@@ -264,9 +257,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             this.repaint();
         }
     }
-    
-    
-    
     
     
     //**************************************************************************
@@ -301,8 +291,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
     protected void goPreviousPage(){
     }
 
-
-
     @Override
     public void updateLan(ObservableLan o, Object arg){
         if(arg instanceof int[]){
@@ -319,9 +307,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             this.controller.swithTurn();
         }
     }
-    
-    
-    
     
     
     //**************************************************************************
@@ -343,7 +328,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         // Constants - Variables
         //**********************************************************************
         private     JPanel      wrapper_center;
-        
         private     JLabel      l_switchTitle;
         private     JLabel      l_nextPlayerName;
         private     JLabel      l_nbTurn;

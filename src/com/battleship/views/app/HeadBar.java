@@ -40,7 +40,6 @@ public class HeadBar extends ContentPanel{
     private JLabel              l_title;
     private JLabel              l_music;
     private ImageIcon           title;
-    private UiButton            b_music;
     private JPanel              p_logo;
     private JPanel              p_theme;
     private JComboBox           themes;
@@ -71,14 +70,10 @@ public class HeadBar extends ContentPanel{
         this.l_title    = new JLabel();
         this.l_music    = new JLabel("Music");
         this.themes     = new JComboBox();
-        this.b_music    = new ZozoDecorator(new ImgButton(425100, 425100, 425200)).getUiButton();
-        
-        this.b_music    .setPreferredSize(new Dimension(30,30));
         this            .setLayout(new BorderLayout());
         
         this            .add(l_title, BorderLayout.WEST);
         this.p_theme    .add(themes);
-        this.p_theme    .add(b_music);
         this            .add(p_theme, BorderLayout.EAST);
     }
     
@@ -103,7 +98,6 @@ public class HeadBar extends ContentPanel{
     @Override
     public void reloadUI(){
         this.title = ThemeManager.getTheme().getImgIcon(426100);
-        this.b_music.reloadUI();
         this.l_title.setIcon(title);
         this.repaint();
     }

@@ -37,6 +37,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -116,6 +117,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         
         p_container         = new ContainerPanel();
         p_bigContainer      = new JPanel();
+        p_container.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
         this.gridPanel      = new PlayerFleetPanel(this); 
         this.p_dock         = new DockPanel(this, this.controller);

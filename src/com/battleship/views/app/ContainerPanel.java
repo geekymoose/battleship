@@ -9,7 +9,6 @@ import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.BorderFactory;
 
 
 
@@ -32,12 +31,10 @@ public class ContainerPanel extends ContentPanel{
     //**************************************************************************
     public ContainerPanel(){
         this.setOpaque(false);
-        this.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
     }
     public ContainerPanel(PagePanel pParent){
         super(pParent);
         this.setOpaque(false);
-        this.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
     }
     
     //**************************************************************************

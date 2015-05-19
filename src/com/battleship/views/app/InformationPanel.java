@@ -44,23 +44,27 @@ public class InformationPanel extends ContentPanel implements Observer {
     private Player              player;
     private JTextArea           ta_info;
     private JScrollPane         sp_scroll;
-    
-    //Display score
-    private JPanel              p_score;
-    private JLabel              l_scoreTitle;
-    private JLabel              l_scoreValue;
+    private JPanel              wrapper_general;
     
     //Display weapons
     private JPanel              p_weaponContener;
     
-    //Display Player name
-    private JPanel              p_playerName;
-    private JLabel              l_playerName;
-
-    //Another Data
+    //Wrapper
     private JPanel              p_west;
     private JPanel              p_center;
     private JPanel              p_east;
+    private ContainerPanel      wrapper_data;
+    
+    //Data
+    private JPanel              p_playerName;
+    private JPanel              p_score;
+    private JLabel              l_playerLabel;
+    private JLabel              l_playerName;
+    private JLabel              l_scoreTitle;
+    private JLabel              l_scoreValue;
+    private JLabel              l_turnLabel;
+    private JLabel              l_turnValue;
+
     
     
     
@@ -86,34 +90,38 @@ public class InformationPanel extends ContentPanel implements Observer {
      * Place every panel in he information panel
      */
     private void initComponents() {
-        this.setLayout(new BorderLayout());
+        //General contener
+        this.p_west             = new JPanel();
+        this.p_east             = new JPanel();
+        this.p_center           = new JPanel();
+        this.wrapper_data       = new ContainerPanel();
+        this.wrapper_general    = new JPanel();
         
-        //Set score panel
+        this.p_weaponContener   = new JPanel();
         this.p_score            = new JPanel();
+        this.p_playerName       = new JPanel();
+        
         this.l_scoreTitle       = new JLabel("Score : ");
         this.l_scoreValue       = new JLabel();
+        this.l_playerLabel      = new JLabel("Player : ");
+        this.l_playerName       = new JLabel();
+        this.l_turnLabel        = new JLabel("Turn : ");
+        this.l_turnValue        = new JLabel();
+        
+        this                    .setLayout(new BorderLayout());
         this.p_score            .setLayout(new FlowLayout());
+        this.p_playerName       .setLayout(new FlowLayout());
+        this.p_weaponContener   .setLayout(new FlowLayout());
+        
+        
+        this.p_playerName       .add(this.l_playerName);
         this.p_score            .add(this.l_scoreTitle);
         this.p_score            .add(this.l_scoreValue);
         
-        //Set palyer panel
-        this.p_playerName       = new JPanel();
-        this.l_playerName       = new JLabel();
-        this.p_playerName       .setLayout(new FlowLayout());
-        this.p_playerName       .add(this.l_playerName);
-        
-        //Weapon panel
-        this.p_weaponContener   = new JPanel();
-        this.p_weaponContener   .setLayout(new FlowLayout());
         this.p_weaponContener   .add(new NukeIcon());
         this.p_weaponContener   .add(new TorpedoIcon(){});
         this.p_weaponContener   .add(new BombIcon());
         this.p_weaponContener   .add(new MissileIcon());
-    
-        //General contener
-        this.p_west              = new JPanel();
-        this.p_east              = new JPanel();
-        this.p_center            = new JPanel();
         
         //Add data panel in general panel
         this.p_west             .add(this.p_playerName);
@@ -134,6 +142,8 @@ public class InformationPanel extends ContentPanel implements Observer {
         this.p_east             .setOpaque(false);
         this.p_center           .setOpaque(false);
         this                    .setOpaque(false);
+        this.wrapper_data       .setOpaque(false);
+        this.wrapper_general    .setOpaque(false);
         
         this.updateData();
     }
