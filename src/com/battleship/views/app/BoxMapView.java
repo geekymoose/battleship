@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.asset.Config;
 import com.battleship.behaviors.Sprite;
 import com.battleship.dynamic.BoxMapEvent;
+import com.battleship.dynamic.EventApp;
 import com.battleship.dynamic.UiEventApp;
 import com.battleship.views.tools.UiElement;
 import java.awt.Color;
@@ -38,6 +39,7 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
     protected   Color       borderColor;
     protected   Dimension   dimension;
     protected   Point       coordinate;
+    protected   GridPanel   grid;
     
     protected   boolean     isHidden;
     protected   boolean     isHover;
@@ -48,13 +50,11 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
     //Visible images
     protected   Image       imgBoatAlive;
     protected   Image       imgBoatDead;
-    protected   Image       imgWaterAlive;
     protected   Image       imgWaterDead;
     
     
     //Hidden image
     protected   Image       imgHiddenBoatDead;
-    protected   Image       imgHiddenWaterAlive;
     protected   Image       imgHiddenWaterDead;
     
     //Targeted image
@@ -79,42 +79,53 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
     //**************************************************************************
     /**
      * Create a new BoxMapView at position given (Grid coordinates)
-     * @param x x coordinate
-     * @param y y coordinate
-     * @param pDimension BoxMap default dimension
-     * @param pSprite Default sprite
+     * @param x             x coordinate
+     * @param y             y coordinate
+     * @param pDimension    BoxMap default dimension
+     * @param pSprite       Default sprite
+     * @param pParent       grid where box is placed
      */
-    protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite){
+    protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite, GridPanel pParent){
         this.coordinate     = new Point(x, y);
         this.dimension      = pDimension;
         this.isHidden       = false;
         this.isHover        = false;
         this.isTargeted     = false;
+        this.grid           = pParent;
         this.borderSize     = Config.getDimValues_int("boxmap-border-size");
         this.borderColor    = Color.BLACK;
         this.sprite         = pSprite;
+        this.initializeEvents();
         this.loadUI();
     }
     
     /**
      * Create a new BoxMapView at position given (Grid coordinates)
-     * @param x x coordinate
-     * @param y y coordinate
-     * @param pDimension BoxMap default dimension
-     * @param pSprite Default sprite
-     * @param c Color for the borders 
+     * @param x             x coordinate
+     * @param y             y coordinate
+     * @param pDimension    BoxMap default dimension
+     * @param pSprite       Default sprite
+     * @param c             Color for the borders 
+     * @param pParent       grid where box is placed
      */
-    protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite, Color c){
+    protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite, Color c, GridPanel pParent){
         this.coordinate = new Point(x, y);
         this.dimension  = pDimension;
         this.isHidden   = false;
         this.isHover    = false;
         this.isTargeted = false;
+        this.grid           = pParent;
         this.borderSize = Config.getDimValues_int("boxmap-border-size");
         this.borderColor= c;
         this.sprite     = pSprite;
+        this.initializeEvents();
         this.loadUI();
     }
+    
+    /**
+     * Initialize all event 
+     */
+    protected abstract void initializeEvents();
     
 
     //**************************************************************************
@@ -176,6 +187,19 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
     public void loadUI(){
         this.reloadUI();
     }
+
+    @Override
+    public void startUiEvent(EventApp pEvent){
+    }
+
+    @Override
+    public void updateUiEvent(EventApp pEvent){
+        this.grid.repaint();
+    }
+
+    @Override
+    public void stopUiEvent(EventApp pEvent){
+    }
     
     
     //**************************************************************************
@@ -206,6 +230,14 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
      */
     public void setHidden(boolean pValue){
         this.isHidden = pValue;
+        this.animWaterAlive.stopTimer();
+        this.animHiddenWaterAlive.stopTimer();
+        if(this.isHidden==true){
+            this.animHiddenWaterAlive.startTimer();
+        }
+        else{
+            this.animWaterAlive.startTimer();
+        }
     }
     
     /**

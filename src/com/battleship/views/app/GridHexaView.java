@@ -54,7 +54,7 @@ public class GridHexaView extends GridPanel{
         this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water());
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water(), this);
             }
         }
     }
@@ -80,7 +80,7 @@ public class GridHexaView extends GridPanel{
         this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water(), co);
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water(), co, this);
             }
         }
     }
