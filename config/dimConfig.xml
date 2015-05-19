@@ -26,7 +26,7 @@
         
         <dimension>
             <frame>
-                <val id="default-dim-appframe"  width="1350" height="700"/>
+                <val id="default-dim-appframe"  width="1275" height="650"/>
             </frame>
             
             <panel>
