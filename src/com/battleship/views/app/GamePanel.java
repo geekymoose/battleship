@@ -35,6 +35,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -101,6 +102,11 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         if(Session.isConnected()){
             Session.getNetwork().addLanObserver(this);
         }
+                DebugTrack.showDebugMsg("Game Over");
+                this.p_bigCont.removeAll();
+                this.p_endGamePanel.setOutcome(GameModel.GAME_OVER);
+                this.p_bigCont.add(this.p_endGamePanel);
+                this.p_bigCont.revalidate();
     }
     
     private void initComponents() throws ExecError{
@@ -469,6 +475,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         private JPanel      wrapper_bottom;
         
         private JLabel      l_titleReward;
+        private JLabel      l_mainImg;
         private UiButton    b_goBazaar;
         private UiButton    b_return;
         private int         gameOutcome;
@@ -490,6 +497,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             this.wrapper_general= new JPanel();
             this.wrapper_bottom = new JPanel();
             this.wrapper_center = new JPanel();
+            this.l_mainImg      = new JLabel(new ImageIcon());
             
             GridBagConstraints  gc = new GridBagConstraints();
             this                .setLayout(new GridBagLayout());
@@ -506,7 +514,9 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             this.l_titleReward  .setForeground(Color.WHITE);
             this.l_titleReward  .setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
             
+            
             //Add elements in wrapper
+            this.wrapper_center .add(this.l_mainImg);
             this.wrapper_center .add(this.l_titleReward);
             this.wrapper_center .add(this.b_goBazaar);
             this.wrapper_bottom .add(this.b_return);
@@ -561,10 +571,12 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             //Display voctory or game over
             switch(this.gameOutcome){
                 case GameModel.GAME_VICTORY:
-                    this.l_titleReward.setText("Victory");
+                    this.l_mainImg = new JLabel(ThemeManager.getTheme().getImgIcon(722030));
+                    this.revalidate();
                     break;
                 case GameModel.GAME_OVER:
-                    this.l_titleReward.setText("Game over");
+                    this.l_mainImg = new JLabel(ThemeManager.getTheme().getImgIcon(712030));
+                    this.revalidate();
                     break;
             }
         }
