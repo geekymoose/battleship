@@ -58,7 +58,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
     // Variables - Constants
     //**************************************************************************
     private     final GameController    controller;
-    private     JPanel                  p_centerPane;
+    private     ContainerPanel          p_centerPane;
     private     JPanel                  p_bigCont;
     
     private     Dimension               dimBoxFleet;
@@ -102,11 +102,6 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         if(Session.isConnected()){
             Session.getNetwork().addLanObserver(this);
         }
-                DebugTrack.showDebugMsg("Game Over");
-                this.p_bigCont.removeAll();
-                this.p_endGamePanel.setOutcome(GameModel.GAME_OVER);
-                this.p_bigCont.add(this.p_endGamePanel);
-                this.p_bigCont.revalidate();
     }
     
     private void initComponents() throws ExecError{

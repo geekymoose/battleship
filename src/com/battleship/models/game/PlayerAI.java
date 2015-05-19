@@ -92,11 +92,10 @@ public class PlayerAI extends Player{
                         Point target = this.getSurrounding(lastHit);
                         posX = (int)target.getX();
                         posY = (int)target.getY();
-                        System.out.println("coordinates : "+posY+","+posX);
+                        //System.out.println("coordinates : "+posY+","+posX);
                     }                    
                 }
                 if(lastHit==null){
-                    System.out.println("lastHit is null : RANDOM");
                     do{
                         posX = RandomManager.getRandomBetween(0, (pWhere[0].length-1));
                         posY = RandomManager.getRandomBetween(0, (pWhere.length-1));
@@ -108,7 +107,6 @@ public class PlayerAI extends Player{
                 if(russianRoulette==5){
                     this.listWeapons.add(new Torpedo(this, 1));
                     this.switchWeaponWith(404);
-                    System.out.println("IA : weapon changed");
                 }
                 if(lastHit!=null) {
                     if(getSurrounding(lastHit)==null){
@@ -118,7 +116,7 @@ public class PlayerAI extends Player{
                         Point target = this.getSurrounding(lastHit);
                         posX = (int)target.getX();
                         posY = (int)target.getY();
-                        System.out.println("coordinates : "+posY+","+posX);
+                        //System.out.println("coordinates : "+posY+","+posX);
                     }                    
                 }
                 if(lastHit==null){
