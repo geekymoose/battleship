@@ -6,6 +6,8 @@ package com.battleship.views.app;
 
 import com.battleship.asset.Config;
 import com.battleship.behaviors.Sprite;
+import com.battleship.dynamic.BoxMapEvent;
+import com.battleship.dynamic.UiEventApp;
 import com.battleship.views.tools.UiElement;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,7 +30,7 @@ import java.awt.Point;
  * @author  Anthony CHAFFOT
  * @author  Jessica FAVIN
  */
-public abstract class BoxMapView implements UiElement{
+public abstract class BoxMapView implements UiElement, UiEventApp{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
@@ -67,6 +69,10 @@ public abstract class BoxMapView implements UiElement{
     protected   Image       imgHoverHiddenValid;
     protected   Image       imgHoverHiddenNotValid;
     
+    //Animation water
+    protected   BoxMapEvent animWaterAlive;
+    protected   BoxMapEvent animHiddenWaterAlive;
+    
 
     //**************************************************************************
     // Constructor - Initialization
@@ -79,14 +85,14 @@ public abstract class BoxMapView implements UiElement{
      * @param pSprite Default sprite
      */
     protected BoxMapView(int x, int y, Dimension pDimension, Sprite pSprite){
-        this.coordinate = new Point(x, y);
-        this.dimension  = pDimension;
-        this.isHidden   = false;
-        this.isHover    = false;
-        this.isTargeted = false;
-        this.borderSize = Config.getDimValues_int("boxmap-border-size");
-        this.borderColor= Color.BLACK;
-        this.sprite     = pSprite;
+        this.coordinate     = new Point(x, y);
+        this.dimension      = pDimension;
+        this.isHidden       = false;
+        this.isHover        = false;
+        this.isTargeted     = false;
+        this.borderSize     = Config.getDimValues_int("boxmap-border-size");
+        this.borderColor    = Color.BLACK;
+        this.sprite         = pSprite;
         this.loadUI();
     }
     

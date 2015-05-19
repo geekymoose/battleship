@@ -145,7 +145,7 @@ public abstract class BoxMap implements Target, GameConstants{
         if(this.content.hit()==true){
             int img     = this.content.getExplosion();
             int delay   = Config.getGameValues_int("timer-boat-explosion");
-            this.grid.addExplosion(delay, 0, EventApp.STATIC_EVENT, coordinate);
+            this.grid.addExplosion(delay, 0, EventApp.STATIC_EVENT, coordinate, img);
             return true;
         } else{
             return false;

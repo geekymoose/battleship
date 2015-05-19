@@ -162,10 +162,11 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
      * @param pDelay        frequency of refresh
      * @param pIdImg        first image id
      * @param pEventType    event type
-     * @param pPosition     where to place event (Coordinate in grid)
+     * @param pPos          where to place event (Coordinate in grid)
+     * @param pImg          id of image to place
      */
-    public void addExplosion(int pDelay, int pIdImg, int pEventType, Point pPosition){
-        ExplosionEvent explosion = new ExplosionEvent(pDelay, pIdImg, pEventType, this, pPosition);
+    public void addExplosion(int pDelay, int pIdImg, int pEventType, Point pPos, int pImg){
+        ExplosionEvent explosion = new ExplosionEvent(pDelay, pIdImg, pEventType, this, pPos, pImg);
         this.listExplosions.add(explosion);
         explosion.startTimer();
     }
@@ -179,7 +180,7 @@ public abstract class FleetGridModel extends Model implements UiEventApp, GameCo
     public void updateUiEvent(EventApp pEvent){
         this.notifyObserversModel(pEvent);//pEvent is not used, null could be sent
     }
-
+    
     @Override
     public void stopUiEvent(EventApp pEvent){
         this.listExplosions.remove((ExplosionEvent)pEvent);

@@ -59,7 +59,6 @@ public class GameModel extends Model implements GameConstants{
     //Break timer
     private     Timer               breakV1;
     private     Timer               breakV2;
-    private     Timer               breakLan;
     
     
     
@@ -110,12 +109,6 @@ public class GameModel extends Model implements GameConstants{
             @Override
             public void actionPerformed(ActionEvent e){
                 switchV2ModeTurn();
-            }
-        });
-        this.breakLan = new Timer(GameConstants.DELAY_BREAK_LAN, new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                switchLanModeTurn();
             }
         });
     }

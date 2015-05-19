@@ -7,6 +7,8 @@ package com.battleship.views.app;
 import com.battleship.asset.GridCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
+import com.battleship.dynamic.BoxMapEvent;
+import com.battleship.dynamic.EventApp;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 
 
@@ -151,12 +154,12 @@ public class BoxMapViewSquare extends BoxMapView{
         //Visible images
         this.imgBoatAlive           = ThemeManager.getTheme().getImg(301700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(301800);
-        this.imgWaterAlive          = ThemeManager.getTheme().getImg(301600);
+        this.imgWaterAlive          = ThemeManager.getTheme().getImg(30160001);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(301900);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(301800);
-        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(301400);
+        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(30140001);
         this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(301500);
 
         //Targeted image
@@ -170,5 +173,17 @@ public class BoxMapViewSquare extends BoxMapView{
         
         this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(301200);
         this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(301200);
+    }
+
+    @Override
+    public void startUiEvent(EventApp pEvent){
+    }
+
+    @Override
+    public void updateUiEvent(EventApp pEvent){
+   }
+
+    @Override
+    public void stopUiEvent(EventApp pEvent){
     }
 }
