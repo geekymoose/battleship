@@ -206,13 +206,15 @@ public class Session {
      * @throws LanError thrown if unable to disconnect
      */
     public static void disconnect() throws LanError{
-        try{
-            Session.singleton.network.sendCapsule(new Capsule(Request.DISCONNECT, null));
-            Session.singleton.network.getInput().close();
-            Session.singleton.network.getOutput().close();
-            Session.singleton.network = null;
-        } catch(IOException ex) {
-            throw new LanError("Unable to disconnect");
+        if(Session.isConnected()){
+            try{
+                Session.singleton.network.sendCapsule(new Capsule(Request.DISCONNECT, null));
+                Session.singleton.network.getInput().close();
+                Session.singleton.network.getOutput().close();
+                Session.singleton.network = null;
+            } catch(IOException ex) {
+                throw new LanError("Unable to disconnect");
+            }
         }
     }
     

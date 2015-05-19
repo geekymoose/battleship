@@ -72,8 +72,6 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_bigbigCont;
     private     HeadBar                 p_hb;
     
-    private     JTextField              tf_title;
-    
     private     JLabel                  l_grid1;
     private     JLabel                  l_grid2;
     
@@ -90,6 +88,11 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     
     //Data
     private     int                     gridType;
+    
+    //Special content
+    private     JPanel                  p_gameTitle;
+    private     JLabel                  l_gameLabel;
+    private     JTextField              tf_gameTitle;
     
     
     
@@ -113,6 +116,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         this.controller = pController;
         this.setPreferredSize(Config.getDimValues_dim("default-dim-appframe"));
         this.initComponents();
+        this.setBtnActions();
+        this.setSpecialContent();
     }
     
     /*
@@ -173,20 +178,32 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         p_container     .add(p_left,    BorderLayout.WEST);
         p_container     .add(p_center,  BorderLayout.CENTER);
         
-        //So ugly :p 
-        if(Session.isConnected()){
-            this.tf_title = new JTextField();
-            this.p_container.add(this.tf_title, BorderLayout.NORTH);
-        }
-        
-        //Magouille pour sizer le borderlayout
-        p_bigCont.add(p_container, gbc);
-        //p_bigCont.setPreferredSize(new Dimension(490,370));
-        p_bigbigCont.add(p_bigCont);
+        p_bigCont       .add(p_container, gbc);
+        p_bigbigCont    .add(p_bigCont);
         
         this.add(p_bigbigCont,  BorderLayout.CENTER);
         this.add(p_hb,          BorderLayout.NORTH);
-        this.setBtnActions();
+    }
+    
+    /*
+     * Add special content. Special content can change in function 
+     * of current type game. For example, AI mode need to set AI difficulti 
+     */
+    private void setSpecialContent(){
+        
+        //So ugly :p 
+        if(Session.isConnected()){
+            this.tf_gameTitle   = new JTextField();
+            this.l_gameLabel    = new JLabel("Title of the game");
+            this.p_gameTitle    = new JPanel();
+            
+            this.p_gameTitle    .setOpaque(false);
+            this.p_gameTitle    .setLayout(new FlowLayout());
+            this.p_gameTitle    .setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+            this.p_gameTitle    .add(this.l_gameLabel);
+            this.p_gameTitle    .add(this.tf_gameTitle);
+            this.p_container    .add(this.p_gameTitle, BorderLayout.NORTH);
+        }
     }
     
     @Override
@@ -350,8 +367,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                 break;
             case MODE_LAN:
                 try{
-                    this.controller.setTitle(this.tf_title.getText());
-                    String title = this.tf_title.getText();
+                    this.controller.setTitle(this.tf_gameTitle.getText());
+                    String title = this.tf_gameTitle.getText();
                     ServerGame g = new ServerGame(title, gridType);
                     Session.getNetwork().sendCapsule(new Capsule(Request.CREATE_GAME, g));
                     UiDialog.showConfirmDialog(title, "New game "+title+" created");

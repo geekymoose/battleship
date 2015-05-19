@@ -295,7 +295,7 @@ public class Controller {
      */
     public void createGame(Capsule cpsl, Player p) {
         ServerGame game = (ServerGame) cpsl.getObject();
-        m.addNewGame(new ServerGame(game.getTitle(), game.getType()));
+        m.addNewGame(game);
         p.setCurrentGame(game.getId());
         game.addPlayer();
         printMsg("******* NEW Game " +game.getId()+" created *******\n");
