@@ -27,8 +27,6 @@ import javax.swing.JPanel;
 
 
 
-
-
 /**
  * <h1>GridPanel</h1>
  * <p>

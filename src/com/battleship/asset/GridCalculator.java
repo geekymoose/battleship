@@ -31,48 +31,55 @@ public abstract class GridCalculator {
     /**
      * Return Upper Left Corner of an Hexagon BoxMapView, in function of its position 
      * in a grid
-     * @param pPosition     position in grid coordinates where to place image
-     * @param dim           box dimension
+     * @param pPos      position in grid coordinates where to place image
+     * @param pImgDim   dimension of the image to place in the grid
+     * @param pBoxDim   dimension of a box on the grid
      * @return Point upper left corner of this box
      */
-    private static Point hexaBoxUpperLeftCorner(Point pPosition, Dimension dim){
-        Point   p   = new Point();
-        int     dx  = 1; 
-        int     dy  = -2;
-        if(pPosition.x%2 != 0){
-            dy += dim.height/2;
-        }
-        p.x = dx + (pPosition.x * (dim.width-8));
-        p.y = dy + (pPosition.y * dim.height);
-        return p;
-    }
-    
-    public static Point placeImgHexa(Point pPosition, Dimension pImgDim, Dimension pBoxDim){
+    public static Point placeImgHexa(Point pPos, Dimension pImgDim, Dimension pBoxDim){
         Point   p   = new Point();
         int     dx  = 1 + pBoxDim.width/2;
         int     dy  = -2 + pBoxDim.height/2;
-        if(pPosition.x%2 != 0){
+        if(pPos.x%2 != 0){
             dy += pBoxDim.height/2;
         }
-        p.x = dx + (pPosition.x * (pBoxDim.width-8))- pImgDim.width/2;
-        p.y = dy + (pPosition.y * pBoxDim.height)- pImgDim.height/2;
+        p.x = dx + (pPos.x * (pBoxDim.width-8))- pImgDim.width/2;
+        p.y = dy + (pPos.y * pBoxDim.height)- pImgDim.height/2;
         return p;
     }
     
     /**
      * Return Upper Left Corner for a Square BoxMapView, in function of its position 
-     * in a grid
-     * @param pPosition position in grid coordinates where to place image
+     * in a grid. It will place image given at position pPos.
+     * @param pPos      position in grid coordinates where to place image
      * @param pImgDim   dimension of the image to place in the grid
      * @param pBoxDim   dimension of a box on the grid
      * @return Point upper left corner of this box
      */
-    public static Point placeImgSquare(Point pPosition, Dimension pImgDim, Dimension pBoxDim){
+    public static Point placeImgSquare(Point pPos, Dimension pImgDim, Dimension pBoxDim){
+        Point p = GridCalculator.coordToPxCenterSquare(pPos, pBoxDim);
+        p.x -= pImgDim.width/2;
+        p.y -= pImgDim.height/2;
+        return p;
+    }
+    
+    
+    //**************************************************************************
+    // Get absolute center position from coordinates
+    //**************************************************************************
+    /**
+     * Convert square coordinate position (From a grid) to absolute pixel. 
+     * For example, if square at coordinate x = 1 / y = 3 is given, the pixel 
+     * position of the square(1,3) will be returned. Center position is returned. 
+     * 
+     * @param pPos      coordinate position of the square
+     * @param pBoxDim   box dimension
+     * @return center absolute position
+     */
+    public static Point coordToPxCenterSquare(Point pPos, Dimension pBoxDim){
         Point   p   = new Point();
-        int     dx  = 1 + pBoxDim.width/2;
-        int     dy  = 1 + pBoxDim.height/2;
-        p.x = dx + (pPosition.x * pBoxDim.width)    - pImgDim.width/2;
-        p.y = dy + (pPosition.y * pBoxDim.height)   - pImgDim.height/2;
+        p.x         = 1 + pBoxDim.width/2   + (pPos.x * pBoxDim.width);
+        p.y         = 1 + pBoxDim.height/2  + (pPos.y * pBoxDim.height);
         return p;
     }
     
@@ -108,7 +115,7 @@ public abstract class GridCalculator {
      */
     public static Point pxToHexaCoor(int mx, int my, Dimension pDim) {
         //This function was inspired from http://www.quarkphysics.ca/scripsi/hexgrid/
-        Point p = new Point(-1, -1);
+        
         /*
          * h = basic dimension: height (distance between two adj centresr aka size)
          * r = radius of inscribed circle
@@ -119,6 +126,7 @@ public abstract class GridCalculator {
         int r  = h / 2;
         int s  = (int) (h / 1.73205);
         int t  = (int) (r / 1.73205);
+        
         /*
          * This gives a quick value for x. 
          * It works only on odd cols and doesn't handle the triangle sections. 
@@ -141,7 +149,7 @@ public abstract class GridCalculator {
         int dy = my - y * h;
 
         if (my - (x % 2) * r < 0) {
-            return p; // prevent clicking in the open halfhexes at the top of the screen
+            return new Point(-1, -1);
         }
 
         //even columns
@@ -171,8 +179,6 @@ public abstract class GridCalculator {
                 }
             }
         }
-        p.x = x;
-        p.y = y;
-        return p;
+        return new Point(x,y);
     }
 }

@@ -129,6 +129,7 @@ public abstract class BoxMapView implements UiElement{
         } else if (this.isHover){
             this.drawHover(g2);
         }
+        this.drawBorder(g2);
     }
     
     /**
@@ -154,6 +155,12 @@ public abstract class BoxMapView implements UiElement{
      * @param g2 Graphics 2D used
      */
     protected abstract void drawHover(Graphics2D g2);
+    
+    /**
+     * Draw box border
+     * @param g2 Graphics 2D used
+     */
+    protected abstract void drawBorder(Graphics2D g2);
     
     
     //**************************************************************************

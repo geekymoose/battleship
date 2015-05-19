@@ -36,7 +36,7 @@ public class BoxMapViewSquare extends BoxMapView{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private Rectangle rect;
+    private Rectangle border;
     
     
     //**************************************************************************
@@ -51,7 +51,7 @@ public class BoxMapViewSquare extends BoxMapView{
      */
     public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite){
         super(posX, posY, pDim, pSprite);
-        this.rect = this.createRectangle();
+        this.border = this.createBorder();
     }
     
     /**
@@ -64,12 +64,12 @@ public class BoxMapViewSquare extends BoxMapView{
      */
     public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
         super(posX, posY, pDim, pSprite, c);
-        this.rect = this.createRectangle();
+        this.border = this.createBorder();
     }
     
-    private Rectangle createRectangle(){
+    private Rectangle createBorder(){
         Point p     = new Point();
-        p.x         = this.dimension.width * this.coordinate.x;
+        p.x         = this.dimension.width  * this.coordinate.x;
         p.y         = this.dimension.height * this.coordinate.y;
         return new Rectangle(p, this.dimension);
     }
@@ -98,10 +98,7 @@ public class BoxMapViewSquare extends BoxMapView{
                 break;
         }
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
-    
     
     @Override
     protected void drawHidden(Graphics2D g2){
@@ -122,18 +119,13 @@ public class BoxMapViewSquare extends BoxMapView{
                 break;
         }
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
 
-    
     @Override
     protected void drawTargeted(Graphics2D g2){
         Image   i   = this.imgTargeted;
         Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
     }
 
     
@@ -142,8 +134,12 @@ public class BoxMapViewSquare extends BoxMapView{
         Image   i   = this.imgHoverBoatAlive;
         Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+    }
+    
+    @Override
+    protected void drawBorder(Graphics2D g2){
         g2.setColor(this.borderColor);
-        g2.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        g2.drawRect(this.border.x, this.border.y, this.border.width, this.border.height);
     }
     
     

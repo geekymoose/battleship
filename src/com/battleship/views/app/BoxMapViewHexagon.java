@@ -36,7 +36,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     Polygon     polygon;
+    private     Polygon     border;
     
     
     //**************************************************************************
@@ -51,7 +51,7 @@ public class BoxMapViewHexagon extends BoxMapView{
      */
     public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite){
         super(posX, posY, pDim, pSprite);
-        this.polygon = this.createHexagon(posX, posY, this.dimension);
+        this.border = this.createBorder();
     }
     
     /**
@@ -64,21 +64,21 @@ public class BoxMapViewHexagon extends BoxMapView{
      */
     public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
         super(posX, posY, pDim, pSprite, c);
-        this.polygon = this.createHexagon(posX, posY, this.dimension);
+        this.border = this.createBorder();
     }
     
     /*
      * Create new Hexagon. Created from BoxMap coordinate. Actual Box center 
      * is calculated and polygon is created for this box
      */
-    private Polygon createHexagon(int coordinateX, int coordinateY, Dimension pDim) {
-        int h  = pDim.height;
+    private Polygon createBorder() {
+        int h  = this.dimension.height;
         int r  = h / 2;
         int s  = (int) (h / 1.73205);
         int t  = (int) (r / 1.73205);
         
-        int x = coordinateX * (s + t);
-        int y = coordinateY * h + (coordinateX % 2) * h / 2;
+        int x = this.coordinate.x * (s + t);
+        int y = this.coordinate.y * h + (this.coordinate.x % 2) * h / 2;
         if (s == 0 || h == 0) {
             return new Polygon();
         }
@@ -114,10 +114,7 @@ public class BoxMapViewHexagon extends BoxMapView{
                 break;
         }
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawPolygon(this.polygon);
     }
-    
     
     @Override
     protected void drawHidden(Graphics2D g2){
@@ -138,8 +135,6 @@ public class BoxMapViewHexagon extends BoxMapView{
                 break;
         }
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawPolygon(this.polygon);
     }
 
     @Override
@@ -147,8 +142,6 @@ public class BoxMapViewHexagon extends BoxMapView{
         Image   i   = this.imgTargeted;
         Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
-        g2.setColor(this.borderColor);
-        g2.drawPolygon(this.polygon);
     }
     
     @Override
@@ -156,8 +149,12 @@ public class BoxMapViewHexagon extends BoxMapView{
         Image   i   = this.imgHoverBoatAlive;
         Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
+    }
+    
+    @Override
+    protected void drawBorder(Graphics2D g2){
         g2.setColor(this.borderColor);
-        g2.drawPolygon(this.polygon);
+        g2.drawPolygon(this.border);
     }
     
     
