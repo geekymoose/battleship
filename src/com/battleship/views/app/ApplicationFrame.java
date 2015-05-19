@@ -15,9 +15,6 @@ import javax.swing.JPanel;
 
 
 
-
-
-
 /**
  * <h1>ApplicationFrame</h1>
  * <p>
@@ -48,17 +45,11 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     private final int           FRAME_SIZE_W    = Config.getDimValues_int("frame-size-width");
     private final int           FRAME_SIZE_H    = Config.getDimValues_int("frame-size-height");
     
-    
-    //Variables 
-    /**
+    /*
      * This is the content displayed at the moment by the application. Application 
      * is only a Frame container for a page to display. mainContent is this page.
-     * @var mainContent
      */
     private     PagePanel   p_mainContent;
-    
-    
-    
     
     
     //**************************************************************************
@@ -72,8 +63,7 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
         this.setTitle(Config.getGameValues_str("frame-title"));
         this.setSize(FRAME_SIZE_W, FRAME_SIZE_H);
         this.setAlwaysOnTop(false);
-        //this.setResizable(false);
-        this.setResizable(true); //DEBUG
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
     }
@@ -89,15 +79,11 @@ public class ApplicationFrame extends JFrame implements WindowFrame {
     }
     
     
-    
-    
-    
     //**************************************************************************
     // Functions
     //**************************************************************************
     @Override
     public void rooting(int path, Object param){
-        //Note this rooting mode, with XML file, was experimental
         this.getContentPane().removeAll();
         boolean reset = false;
         if (param instanceof Boolean && (Boolean)param == true){

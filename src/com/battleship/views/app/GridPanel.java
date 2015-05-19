@@ -13,6 +13,7 @@ import com.battleship.models.game.FleetGridModel;
 import com.battleship.observers.ObservableModel;
 import com.battleship.observers.ObserverModel;
 import com.battleship.views.tools.ContentPanel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,6 +24,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 
@@ -71,22 +73,17 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
      * @param pW    grid width
      * @param pH    grid height
      * @param pT    grid type
-     * @param pDim  dimension of one BoxMap
      * @throws ExecError thrown if unable to create grid
      */
-    public GridPanel(JPanel pPar, GridController pC, int pW, int pH, int pT, Dimension pDim) 
+    public GridPanel(JPanel pPar, GridController pC, int pW, int pH, int pT) 
     throws ExecError{
         super(pPar);
         this.controller         = pC;
-        Dimension dim           = new Dimension();
-        dim.width               = pDim.width    * (pW);
-        dim.height              = pDim.height   * (pH+1);
         this.gridWidth          = pW;
         this.gridHeight         = pH;
         this.gridType           = pT;
         this.listExplosions     = new ArrayList();
         this.cursor             = new GridCursor(this, controller, controller.getOwner());
-        this.setPreferredSize(dim);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.addMouseWheelListener(this);
@@ -108,7 +105,6 @@ public abstract class GridPanel extends ContentPanel implements MouseListener,
             }
         }
     }
-
 
     @Override
     public void updateModel(ObservableModel o, Object arg){

@@ -37,14 +37,9 @@ public abstract class GridCalculator {
      * @return Point upper left corner of this box
      */
     public static Point placeImgHexa(Point pPos, Dimension pImgDim, Dimension pBoxDim){
-        Point   p   = new Point();
-        int     dx  = 1 + pBoxDim.width/2;
-        int     dy  = -2 + pBoxDim.height/2;
-        if(pPos.x%2 != 0){
-            dy += pBoxDim.height/2;
-        }
-        p.x = dx + (pPos.x * (pBoxDim.width-8))- pImgDim.width/2;
-        p.y = dy + (pPos.y * pBoxDim.height)- pImgDim.height/2;
+        Point   p   = GridCalculator.coordToPxCenterHexa(pPos, pBoxDim);
+        p.x -= pImgDim.width/2;
+        p.y -= pImgDim.height/2;
         return p;
     }
     
@@ -63,6 +58,31 @@ public abstract class GridCalculator {
         return p;
     }
     
+    /**
+     * Place an image to display hexa grid
+     * @param pPos      position in grid coordinates where to place image
+     * @param pImgDim   dimension of the image to place in the grid
+     * @param pBoxDim   dimension of a box on the grid
+     * @return Point upper left corner of this box
+     */
+    public static Point placeGridImgHexa(Point pPos, Dimension pImgDim, Dimension pBoxDim){
+        /*
+         * 
+         * This function should be same as placeImgHexa, but there is a development error. 
+         * Hexa image are no well managed, and the image as empty border. These border 
+         * has to be deleted by the 1 and -2
+         */
+        Point   p   = new Point();
+        int     dx  = 1 + pBoxDim.width/2;
+        int     dy  = -2 + pBoxDim.height/2;
+        if(pPos.x%2 != 0){
+            dy += pBoxDim.height/2;
+        }
+        p.x = dx + (pPos.x * (pBoxDim.width-8))- pImgDim.width/2;
+        p.y = dy + (pPos.y * pBoxDim.height)- pImgDim.height/2;
+        return p;
+    }
+    
     
     //**************************************************************************
     // Get absolute center position from coordinates
@@ -72,14 +92,35 @@ public abstract class GridCalculator {
      * For example, if square at coordinate x = 1 / y = 3 is given, the pixel 
      * position of the square(1,3) will be returned. Center position is returned. 
      * 
-     * @param pPos      coordinate position of the square
+     * @param pPos      coordinate position on square grid
      * @param pBoxDim   box dimension
      * @return center absolute position
      */
     public static Point coordToPxCenterSquare(Point pPos, Dimension pBoxDim){
         Point   p   = new Point();
+        //Cuz img is 48 px, box dim is 50
         p.x         = 1 + pBoxDim.width/2   + (pPos.x * pBoxDim.width);
         p.y         = 1 + pBoxDim.height/2  + (pPos.y * pBoxDim.height);
+        return p;
+    }
+    
+    /**
+     * Convert hexa coordinate position (From a grid) to absolute pixel. 
+     * Center position is returned. 
+     * 
+     * @param pPos      coordinate position on hexa grid
+     * @param pBoxDim   box dimension
+     * @return center absolute position
+     */
+    public static Point coordToPxCenterHexa(Point pPos, Dimension pBoxDim){
+        Point   p   = new Point();
+        int     dx  = 3+pBoxDim.width/2;
+        int     dy  = pBoxDim.height/2;
+        if(pPos.x%2 != 0){
+            dy += pBoxDim.height/2;
+        }
+        p.x = dx + (pPos.x * (pBoxDim.width-8));
+        p.y = dy + (pPos.y * pBoxDim.height);
         return p;
     }
     

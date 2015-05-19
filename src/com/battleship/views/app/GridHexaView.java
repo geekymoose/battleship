@@ -32,13 +32,6 @@ import javax.swing.JPanel;
  */
 public class GridHexaView extends GridPanel{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    
-    
-    
-
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
@@ -52,7 +45,11 @@ public class GridHexaView extends GridPanel{
      * @throws ExecError thrown if error during creation
      */
     public GridHexaView(JPanel p, GridController c, int w, int h, int t, Dimension d) throws ExecError{
-        super(p, c,w, h, t, d);
+        super(p, c,w, h, t);
+        Dimension dim           = new Dimension();
+        dim.width               = (d.width    * w) + 1;
+        dim.height              = (d.height   * w) + d.height/2 + 2;
+        this.setPreferredSize(dim);
         //Create all box
         this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
@@ -64,22 +61,26 @@ public class GridHexaView extends GridPanel{
     
     /**
      * Create a new Hexagon grid in view with the choice of the color
-     * @param pParent       parent PagePanel where grid is placed
-     * @param pController   grid controller
-     * @param pW            grid width
-     * @param pH            grid height
-     * @param pType         grid type
-     * @param pDim          grid dimension
-     * @param c Color for the borders of the grid
+     * @param p     parent PagePanel where grid is placed
+     * @param c     grid controller
+     * @param w     grid width
+     * @param h     grid height
+     * @param d     dimension of one BoxMap
+     * @param t     grid type
+     * @param co    Color for the borders of the grid
      * @throws ExecError thrown if error during creation
      */
-    public GridHexaView(JPanel pParent, GridController pController, 
-                        int pW, int pH, int pType, Dimension pDim, Color c) throws ExecError{
-        super(pParent, pController,pW, pH, pType, pDim);
+    public GridHexaView(JPanel p, GridController c, int w, int h, int t, Dimension d, Color co) 
+    throws ExecError{
+        super(p, c,w, h, t);
+        Dimension dim           = new Dimension();
+        dim.width               = (d.width    * w) - d.width;
+        dim.height              = (d.height   * w) + d.height/2 + 2;
+        this.setPreferredSize(dim);
         this.tabBox = new BoxMapViewHexagon[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, pDim, new Water(), c);
+                this.tabBox[y][x] = new BoxMapViewHexagon(x, y, d, new Water(), co);
             }
         }
     }
@@ -88,7 +89,7 @@ public class GridHexaView extends GridPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ExplosionEvent e : this.listExplosions){
-            Point p = GridCalculator.placeImgHexa(e.getPosition(), e.getImgDim(), tabBox[0][0].getDimension());
+            Point p = GridCalculator.placeImgHexa(e.getPosition(), e.getImgDim(), this.getBoxDimension());
             g.drawImage(e.getCurrentImg(), p.x, p.y, this);
         }
     }
