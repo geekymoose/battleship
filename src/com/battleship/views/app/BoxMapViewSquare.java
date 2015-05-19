@@ -16,7 +16,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 
 
@@ -51,9 +50,10 @@ public class BoxMapViewSquare extends BoxMapView{
      * @param posY      coordinate in the grid
      * @param pDim      boxDefault dimension
      * @param pSprite   default sprite
+     * @param pParent   grid where box is placed
      */
-    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite){
-        super(posX, posY, pDim, pSprite);
+    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite, GridPanel pParent){
+        super(posX, posY, pDim, pSprite, pParent);
         this.border = this.createBorder();
     }
     
@@ -64,10 +64,18 @@ public class BoxMapViewSquare extends BoxMapView{
      * @param pDim      boxDefault dimension
      * @param pSprite   default sprite
      * @param c         color of the borders
+     * @param pParent   grid where box is placed
      */
-    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
-        super(posX, posY, pDim, pSprite, c);
+    public BoxMapViewSquare(int posX, int posY, Dimension pDim, Sprite pSprite, Color c, GridPanel pParent){
+        super(posX, posY, pDim, pSprite, c, pParent);
         this.border = this.createBorder();
+    }
+    
+    @Override
+    protected void initializeEvents(){
+        this.animWaterAlive         = new BoxMapEvent(200, 0, EventApp.LOOP_EVENT, this, this.coordinate, 30160001);
+        this.animHiddenWaterAlive   = new BoxMapEvent(200, 0, EventApp.LOOP_EVENT, this, this.coordinate, 30140001);
+        this.animWaterAlive.startTimer();
     }
     
     private Rectangle createBorder(){
@@ -90,7 +98,7 @@ public class BoxMapViewSquare extends BoxMapView{
                 i = this.imgBoatAlive;
                 break;
             case Sprite.ALIVE_WATER:
-                i = this.imgWaterAlive;
+                i = this.animWaterAlive.getCurrentImg();
                 break;
             case Sprite.DEAD_BOAT:
                 i = this.imgBoatDead;
@@ -108,10 +116,10 @@ public class BoxMapViewSquare extends BoxMapView{
         Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
-                i = this.imgHiddenWaterAlive;
+                i = this.animHiddenWaterAlive.getCurrentImg();
                 break;
             case Sprite.ALIVE_WATER:
-                i = this.imgHiddenWaterAlive;
+                i = this.animHiddenWaterAlive.getCurrentImg();
                 break;
             case Sprite.DEAD_BOAT:
                 i = this.imgHiddenBoatDead;
@@ -154,12 +162,10 @@ public class BoxMapViewSquare extends BoxMapView{
         //Visible images
         this.imgBoatAlive           = ThemeManager.getTheme().getImg(301700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(301800);
-        this.imgWaterAlive          = ThemeManager.getTheme().getImg(30160001);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(301900);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(301800);
-        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(30140001);
         this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(301500);
 
         //Targeted image
@@ -173,17 +179,8 @@ public class BoxMapViewSquare extends BoxMapView{
         
         this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(301200);
         this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(301200);
-    }
-
-    @Override
-    public void startUiEvent(EventApp pEvent){
-    }
-
-    @Override
-    public void updateUiEvent(EventApp pEvent){
-   }
-
-    @Override
-    public void stopUiEvent(EventApp pEvent){
+        
+        this.animWaterAlive         .reloadUI();
+        this.animHiddenWaterAlive   .reloadUI();
     }
 }

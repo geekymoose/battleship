@@ -188,5 +188,6 @@ public abstract class EventApp <E> extends TimerManager{
      */
     public void setListStates(ArrayList<E> pList){
         this.listStates = (pList != null)? pList : new ArrayList();
+        this.currentStatePos = this.firstStatesPos;
     }
 }

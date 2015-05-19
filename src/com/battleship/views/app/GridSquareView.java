@@ -48,7 +48,7 @@ public class GridSquareView extends GridPanel{
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water());
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water(), this);
             }
         }
     }
@@ -74,7 +74,7 @@ public class GridSquareView extends GridPanel{
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
-                this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water(), b);
+                this.tabBox[y][x] = new BoxMapViewSquare(x, y, d, new Water(), b, this);
             }
         }
     }

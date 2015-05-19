@@ -174,9 +174,9 @@
                 <hexa>
                     <img type="static" ext="png">201200</img>
                     <img type="static" ext="png">201300</img>
-                    <img type="static" ext="png">201400</img>
+                    <img type="dynamic" ext="png">20140001</img>
                     <img type="static" ext="png">201500</img>
-                    <img type="static" ext="png">201600</img>
+                    <img type="dynamic" ext="png">20160001</img>
                     <img type="static" ext="png">201700</img>
                     <img type="static" ext="png">201800</img>
                     <img type="static" ext="png">201900</img>

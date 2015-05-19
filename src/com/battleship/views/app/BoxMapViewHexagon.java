@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.asset.GridCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
+import com.battleship.dynamic.BoxMapEvent;
 import com.battleship.dynamic.EventApp;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -49,9 +50,10 @@ public class BoxMapViewHexagon extends BoxMapView{
      * @param posY      coordinate in the grid
      * @param pDim      boxDefault dimension
      * @param pSprite   default sprite inside
+     * @param pParent   grid where box is placed
      */
-    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite){
-        super(posX, posY, pDim, pSprite);
+    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite, GridPanel pParent){
+        super(posX, posY, pDim, pSprite, pParent);
         this.border = this.createBorder();
     }
     
@@ -62,10 +64,18 @@ public class BoxMapViewHexagon extends BoxMapView{
      * @param pDim      boxDefault dimension
      * @param pSprite   default sprite
      * @param c         color of the borders
+     * @param pParent   grid where box is placed
      */
-    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite, Color c){
-        super(posX, posY, pDim, pSprite, c);
+    public BoxMapViewHexagon(int posX, int posY, Dimension pDim, Sprite pSprite, Color c, GridPanel pParent){
+        super(posX, posY, pDim, pSprite, c, pParent);
         this.border = this.createBorder();
+    }
+    
+    @Override
+    protected void initializeEvents(){
+        this.animWaterAlive         = new BoxMapEvent(200, 0, EventApp.LOOP_EVENT, this, this.coordinate, 20160001);
+        this.animHiddenWaterAlive   = new BoxMapEvent(200, 0, EventApp.LOOP_EVENT, this, this.coordinate, 20140001);
+        this.animWaterAlive.startTimer();
     }
     
     /*
@@ -104,7 +114,7 @@ public class BoxMapViewHexagon extends BoxMapView{
                 i = this.imgBoatAlive;
                 break;
             case Sprite.ALIVE_WATER:
-                i = this.imgWaterAlive;
+                i = this.animWaterAlive.getCurrentImg();
                 break;
             case Sprite.DEAD_BOAT:
                 i = this.imgBoatDead;
@@ -122,10 +132,10 @@ public class BoxMapViewHexagon extends BoxMapView{
         Point   p   = GridCalculator.placeGridImgHexa(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
-                i = this.imgHiddenWaterAlive;
+                i = this.animHiddenWaterAlive.getCurrentImg();
                 break;
             case Sprite.ALIVE_WATER:
-                i = this.imgHiddenWaterAlive;
+                i = this.animHiddenWaterAlive.getCurrentImg();
                 break;
             case Sprite.DEAD_BOAT:
                 i = this.imgHiddenBoatDead;
@@ -167,12 +177,10 @@ public class BoxMapViewHexagon extends BoxMapView{
         //Visible images
         this.imgBoatAlive           = ThemeManager.getTheme().getImg(201700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(201800);
-        this.imgWaterAlive          = ThemeManager.getTheme().getImg(20160001);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(201900);
 
         //Hidden image
         this.imgHiddenBoatDead      = ThemeManager.getTheme().getImg(201800);
-        this.imgHiddenWaterAlive    = ThemeManager.getTheme().getImg(201400);
         this.imgHiddenWaterDead     = ThemeManager.getTheme().getImg(201500);
 
         //Targeted image
@@ -181,22 +189,13 @@ public class BoxMapViewHexagon extends BoxMapView{
         //Hover image
         this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(201200);
         this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(201200);
-        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(20120001);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(201200);
         this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(201200);
         
         this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(201200);
         this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(201200);
-    }
-
-    @Override
-    public void startUiEvent(EventApp pEvent){
-    }
-
-    @Override
-    public void updateUiEvent(EventApp pEvent){
-   }
-
-    @Override
-    public void stopUiEvent(EventApp pEvent){
+        
+        this.animWaterAlive         .reloadUI();
+        this.animHiddenWaterAlive   .reloadUI();
     }
 }
