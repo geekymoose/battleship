@@ -54,6 +54,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
     private JPanel                  p_bigCont;
     private JTextField              tf_ipserver;
     private JLabel                  l_ipserver;
+    private JLabel                  l_mainImg;
 
     //Images
     private Image background;
@@ -76,6 +77,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
         p_hb                = new HeadBar(this);
         tf_ipserver         = new JTextField("127.0.0.1");
         l_ipserver          = new JLabel("IP Server : ");
+        l_mainImg           = new JLabel(ThemeManager.getTheme().getImgIcon(702030));
         p_container         = new JPanel();
         p_bigCont           = new JPanel();
         p_connect           = new JPanel(); 
@@ -89,7 +91,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
         p_centeredPane      .setLayout(new BorderLayout());
         
         tf_ipserver         .setPreferredSize(new Dimension(100,20));
-        p_centeredPane      .setPreferredSize(new Dimension(400,400));
+        p_centeredPane      .setPreferredSize(new Dimension(600,400));
 
         b_validate = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
         b_reset    = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
@@ -110,6 +112,7 @@ public class ConnectPanel extends PagePanel implements GameConstants, UiElement 
         p_connect           .add(l_ipserver);
         p_connect           .add(tf_ipserver);
         
+        p_centeredPane       .add(l_mainImg, BorderLayout.NORTH);
         p_centeredPane      .add(p_connect,BorderLayout.CENTER);
         p_centeredPane      .add(p_buttons, BorderLayout.SOUTH);
         p_bigCont           .add(p_centeredPane);

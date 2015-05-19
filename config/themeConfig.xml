@@ -102,6 +102,10 @@
                 <img type="static" ext="png">413100</img>
                 <img type="static" ext="png">413200</img>
                 <img type="static" ext="png">413300</img>
+				
+				<img type="static" ext="png">854210</img>
+                <img type="static" ext="png">854220</img>
+                <img type="static" ext="png">854230</img>
                 
                 <!--  Image DockPanel  --> 
                 <img type="static" ext="png">418100</img>
@@ -131,6 +135,13 @@
             <title>
                 <img type="static" ext="png">426100</img>
             </title>
+
+			<menu>
+                <img type="static" ext="png">702030</img>
+				<img type="static" ext="png">712030</img>
+				<img type="static" ext="png">722030</img>
+				<img type="static" ext="png">732030</img>
+            </menu>
             
             <grid>
                 <img type="static" ext="png">414100</img>

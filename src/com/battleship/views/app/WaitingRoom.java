@@ -32,6 +32,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -53,6 +54,8 @@ public class WaitingRoom extends PagePanel implements GameConstants,
     private JPanel                  p_buttons;
     private ContainerPanel          p_centeredPane;
     private JPanel                  p_bigCont;
+    private JLabel                  l_mainImg;
+    private JLabel                  l_message;
     
     private UiButton                b_back;
     private UiButton                b_start;
@@ -84,6 +87,8 @@ public class WaitingRoom extends PagePanel implements GameConstants,
         p_container         = new JPanel();
         p_bigCont           = new JPanel();
         p_centeredPane      = new ContainerPanel();
+        l_mainImg           = new JLabel(ThemeManager.getTheme().getImgIcon(732030));
+        l_message           = new JLabel("Your is not ready yet");
 
         
         this                .setLayout(new BorderLayout());
@@ -104,6 +109,8 @@ public class WaitingRoom extends PagePanel implements GameConstants,
         p_centeredPane      .setOpaque(false);
         p_buttons           .setOpaque(false);
         
+        p_centeredPane      .add(l_mainImg, BorderLayout.NORTH);
+        p_centeredPane      .add(l_message, BorderLayout.CENTER);
         
         p_centeredPane      .add(p_buttons, BorderLayout.SOUTH);
         p_bigCont           .add(p_centeredPane);
