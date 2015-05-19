@@ -96,9 +96,8 @@ public class BoxMapViewHexagon extends BoxMapView{
     //**************************************************************************
     @Override
     protected void drawDefault(Graphics2D g2){
-        g2.setStroke(new BasicStroke(this.borderSize));
         Image   i   = null;
-        Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
+        Point   p   = GridCalculator.placeGridImgHexa(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgBoatAlive;
@@ -119,7 +118,7 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawHidden(Graphics2D g2){
         Image   i   = null;
-        Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
+        Point   p   = GridCalculator.placeGridImgHexa(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
             case Sprite.ALIVE_BOAT:
                 i = this.imgHiddenWaterAlive;
@@ -140,19 +139,20 @@ public class BoxMapViewHexagon extends BoxMapView{
     @Override
     protected void drawTargeted(Graphics2D g2){
         Image   i   = this.imgTargeted;
-        Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
+        Point   p   = GridCalculator.placeGridImgHexa(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
     }
     
     @Override
     protected void drawHover(Graphics2D g2){
         Image   i   = this.imgHoverBoatAlive;
-        Point   p   = GridCalculator.placeImgHexa(this.coordinate, dimension, dimension);
+        Point   p   = GridCalculator.placeGridImgHexa(this.coordinate, dimension, dimension);
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
     }
     
     @Override
     protected void drawBorder(Graphics2D g2){
+        g2.setStroke(new BasicStroke(this.borderSize));
         g2.setColor(this.borderColor);
         g2.drawPolygon(this.border);
     }

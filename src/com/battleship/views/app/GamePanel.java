@@ -184,13 +184,12 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         radarPlayer1.getGridCursor().setOwner(conf.getPlayers()[1]);
         radarPlayer2.getGridCursor().setOwner(conf.getPlayers()[0]);
         
-        
+        //If connected and is not the first player for this game
         if(Session.isConnected()){
             if(conf.getFirstPlayerTurn() != 0){
                 this.p_radar.setAttackedGrid(0);
             }
         }
-        
         this.repaint();
     }
     

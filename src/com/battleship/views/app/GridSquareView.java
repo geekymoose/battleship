@@ -27,12 +27,6 @@ import javax.swing.JPanel;
  */
 public class GridSquareView extends GridPanel{
     //**************************************************************************
-    // Constants - Variables
-    //**************************************************************************
-    private Dimension dimBox;
-    
-    
-    //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
     /**
@@ -46,8 +40,11 @@ public class GridSquareView extends GridPanel{
      * @throws ExecError thrown if error during creation
      */
     public GridSquareView(JPanel p, GridController c, int w, int h, int t, Dimension d) throws ExecError{
-        super(p, c,w, h, t, d);
-        this.dimBox = d;
+        super(p, c,w, h, t);
+        Dimension dim           = new Dimension();
+        dim.width               = (d.width    * w) +2;
+        dim.height              = (d.height   * w) +2;
+        this.setPreferredSize(dim);
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
@@ -69,8 +66,11 @@ public class GridSquareView extends GridPanel{
      */
     public GridSquareView(JPanel p, GridController c, int w, int h, int t, Dimension d, Color b) 
     throws ExecError{
-        super(p, c,w, h, t, d);
-        this.dimBox = d;
+        super(p, c,w, h, t);
+        Dimension dim           = new Dimension();
+        dim.width               = (d.width    * w) +2;
+        dim.height              = (d.height   * w) +2;
+        this.setPreferredSize(dim);
         this.tabBox = new BoxMapViewSquare[this.gridHeight][this.gridWidth];
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridWidth; x++) {
@@ -83,7 +83,7 @@ public class GridSquareView extends GridPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ExplosionEvent e : this.listExplosions){
-            Point p = GridCalculator.placeImgSquare(e.getPosition(), e.getImgDim(), tabBox[0][0].getDimension());
+            Point p = GridCalculator.placeImgSquare(e.getPosition(), e.getImgDim(), this.getBoxDimension());
             g.drawImage(e.getCurrentImg(), p.x, p.y, this);
         }
     }

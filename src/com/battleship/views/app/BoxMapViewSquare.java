@@ -80,7 +80,6 @@ public class BoxMapViewSquare extends BoxMapView{
     //**************************************************************************
     @Override
     protected void drawDefault(Graphics2D g2){
-        g2.setStroke(new BasicStroke(this.borderSize));
         Image   i   = null;
         Point   p   = GridCalculator.placeImgSquare(this.coordinate, dimension, dimension);
         switch(this.sprite.getState()){
@@ -138,6 +137,7 @@ public class BoxMapViewSquare extends BoxMapView{
     
     @Override
     protected void drawBorder(Graphics2D g2){
+        g2.setStroke(new BasicStroke(this.borderSize));
         g2.setColor(this.borderColor);
         g2.drawRect(this.border.x, this.border.y, this.border.width, this.border.height);
     }
