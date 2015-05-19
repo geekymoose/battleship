@@ -164,9 +164,9 @@
                 <square>
                     <img type="static" ext="png">301200</img>
                     <img type="static" ext="png">301300</img>
-                    <img type="static" ext="png">301400</img>
+                    <img type="dynamic" ext="png">30140001</img>
                     <img type="static" ext="png">301500</img>
-                    <img type="static" ext="png">301600</img>
+                    <img type="dynamic" ext="png">30160001</img>
                     <img type="static" ext="png">301700</img>
                     <img type="static" ext="png">301800</img>
                     <img type="static" ext="png">301900</img>
@@ -186,6 +186,7 @@
             
             <explosion>
                 <img type="dynamic" ext="png">105001</img>
+                <img type="dynamic" ext="png">115001</img>
             </explosion>
         </ui>
     </image>

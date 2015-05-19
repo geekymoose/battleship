@@ -1,17 +1,7 @@
 /*
- * Class :      ExplosionEvent
- * Creation:    May 5, 2015
+ * Class :      BoxMapEvent
+ * Creation:    May 19, 2015
  * Author :     Constantin MASSON
- * 
- * 
- * IMPORTANT NOTE
- * Event with image work directly with image name. For example, from constructor, 
- * pFirst is the name of the first image to display. CurrentImg the current image 
- * to display.
- * In order to display event, actionPerformed increment the currentImg value by 
- * one. It is important to understand that currentImg is also the name of this img!!! 
- * It is working only if img have a numeric! (Some update will maybe add name 
- * with ABC characters, but later)
  * 
  */
 
@@ -26,14 +16,22 @@ import java.util.ArrayList;
 
 
 
+
+
 /**
- * <h1>ExplosionEvent</h1>
- * <p>public class ExplosionEvent</p>
+ * <h1>BoxMapEvent</h1>
+ * <p>
+ * public class BoxMapEvent<br/>
+ * extends DynamicEvent<br/>
+ * implements UiElement
+ * </p>
+ * 
+ * <p>BoxMapEvent is a event displayed in a BoxMap, for example a moving water
  *
- * @since   May 5, 2015
+ * @since   May 19, 2015
  * @author  Constantin MASSON
  */
-public class ExplosionEvent extends DynamicEvent implements UiElement{
+public class BoxMapEvent extends DynamicEvent implements UiElement{
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
@@ -54,7 +52,7 @@ public class ExplosionEvent extends DynamicEvent implements UiElement{
      * @param pImg          name of image to display
      * 
      */
-    public ExplosionEvent(int pDelay, int pFirst, int pEventType, UiEventApp pCont, Point pPos, int pImg){
+    public BoxMapEvent(int pDelay, int pFirst, int pEventType, UiEventApp pCont, Point pPos, int pImg){
         super(pDelay, pFirst, pEventType, pCont, pPos);
         this.img = pImg;
         this.loadUI();

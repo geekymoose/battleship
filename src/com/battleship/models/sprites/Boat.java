@@ -268,7 +268,7 @@ public abstract class Boat{
         protected Compartment(BoxMap pPosition){
             this.isDestroyed    = false;
             this.boxPosition    = pPosition;
-            this.idImgExplosion = 105001;
+            this.idImgExplosion = 115001;
         }
 
 

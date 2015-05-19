@@ -7,6 +7,7 @@ package com.battleship.views.app;
 import com.battleship.asset.GridCalculator;
 import com.battleship.asset.ThemeManager;
 import com.battleship.behaviors.Sprite;
+import com.battleship.dynamic.EventApp;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -166,7 +167,7 @@ public class BoxMapViewHexagon extends BoxMapView{
         //Visible images
         this.imgBoatAlive           = ThemeManager.getTheme().getImg(201700);
         this.imgBoatDead            = ThemeManager.getTheme().getImg(201800);
-        this.imgWaterAlive          = ThemeManager.getTheme().getImg(201600);
+        this.imgWaterAlive          = ThemeManager.getTheme().getImg(20160001);
         this.imgWaterDead           = ThemeManager.getTheme().getImg(201900);
 
         //Hidden image
@@ -180,10 +181,22 @@ public class BoxMapViewHexagon extends BoxMapView{
         //Hover image
         this.imgHoverBoatAlive      = ThemeManager.getTheme().getImg(201200);
         this.imgHoverBoatDead       = ThemeManager.getTheme().getImg(201200);
-        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(201200);
+        this.imgHoverWaterAlive     = ThemeManager.getTheme().getImg(20120001);
         this.imgHoverWaterDead      = ThemeManager.getTheme().getImg(201200);
         
         this.imgHoverHiddenValid    = ThemeManager.getTheme().getImg(201200);
         this.imgHoverHiddenNotValid = ThemeManager.getTheme().getImg(201200);
+    }
+
+    @Override
+    public void startUiEvent(EventApp pEvent){
+    }
+
+    @Override
+    public void updateUiEvent(EventApp pEvent){
+   }
+
+    @Override
+    public void stopUiEvent(EventApp pEvent){
     }
 }
