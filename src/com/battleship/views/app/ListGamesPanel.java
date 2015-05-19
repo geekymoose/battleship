@@ -95,9 +95,9 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
         p_bigCont           .setLayout(new GridBagLayout());
         p_centeredPane      .setLayout(new BorderLayout());
         
-        p_centeredPane      .setPreferredSize(new Dimension(550,400));
+        p_centeredPane      .setPreferredSize(new Dimension(600,500));
 
-        b_createGame    = new ZozoDecorator(new ImgButton(406100, 406200, 406300)).getUiButton();
+        b_createGame    = new ZozoDecorator(new ImgButton(854210, 854220, 854230)).getUiButton();
         b_back          = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
         
         p_buttons           .add(b_back);
