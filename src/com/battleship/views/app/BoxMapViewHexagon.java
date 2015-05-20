@@ -141,7 +141,7 @@ public class BoxMapViewHexagon extends BoxMapView{
                 i = this.imgHiddenBoatDead;
                 break;
             case Sprite.DEAD_WATER:
-                i = this.imgHiddenWaterDead;
+                i = this.animWaterAlive.getCurrentImg();
                 break;
         }
         g2.drawImage(i, p.x, p.y, i.getWidth(null), i.getHeight(null), null);
