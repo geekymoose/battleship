@@ -157,6 +157,9 @@ public class Session {
      * @throws ForbiddenAction throw if unable to buy
      */
     public void buyAmmoWeapon(Weapon pWeapon, int pAmmo) throws ForbiddenAction{
+        if(pWeapon.getPriceAmmo() == Weapon.INFINITE_AMO){
+            throw new ForbiddenAction("Ammo is infinit, you don't have to buy it");
+        }
         if((pWeapon.getPriceAmmo()*pAmmo) > this.money){
             throw new ForbiddenAction("You don't have enough money!!!");
         }else{

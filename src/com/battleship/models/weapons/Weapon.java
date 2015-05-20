@@ -94,7 +94,9 @@ public abstract class Weapon{
         if(this.ammo == 0){
             return false;
         }
-        this.ammo--;
+        if(this.ammo != Weapon.INFINITE_AMO){
+            this.ammo--;
+        }
         if(grid instanceof FleetGridSquare){
             return shot.fireSquareGrid(pX, pY, pTarget);
         }
