@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -121,7 +122,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
         
         this                    .setLayout(new BorderLayout());
         this.wrapper_general    .setLayout(new GridBagLayout());
-        this.wrapper_data       .setLayout(new BorderLayout());
+        this.wrapper_data       .setLayout(new BoxLayout(this.wrapper_data, BoxLayout.Y_AXIS));
         this.wrapper_page       .setLayout(new BorderLayout());
         this.wrapper_weapons    .setLayout(new BorderLayout());
         
@@ -133,6 +134,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
         this.p_ownedWeaponPan   .setOpaque(false);
         this.p_shopWeaponPan    .setOpaque(false);
         
+        this.wrapper_data       .setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         this.wrapper_page       .setBorder(BorderFactory.createEmptyBorder(20,50,20,50));
         this.p_ownedWeaponPan   .setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2), "Owned Weapons"));
@@ -307,6 +309,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
             this.l_weaponImg    = new JLabel(this.img_default);
             this.l_weaponImg    .setPreferredSize(new Dimension(100,50));
             this.l_weaponData   .setPreferredSize(new Dimension(400, 50)); 
+            this.l_weaponData   .setForeground(Color.LIGHT_GRAY);
             
             switch(pType){
                 case WeaponPanel.OWNED:
@@ -318,7 +321,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
                     } catch(ForbiddenAction ex) {
                     }
                     this.l_weaponData.setText(this.name+" - current ammo : "+ammo+" - Ammo price : "+priceAmmo);
-                    this.b_tradeButton = new ZozoDecorator(new ImgButton(410700, 410800, 410900)).getUiButton();
+                    this.b_tradeButton = new ZozoDecorator(new ImgButton(410700, 410900, 410800)).getUiButton();
                     this.b_tradeButton.addActionListener(new ActionListener(){
                             @Override
                             public void actionPerformed(ActionEvent e){
@@ -343,7 +346,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
                     break;
                 case WeaponPanel.SHOP:
                     this.l_weaponData.setText(this.name+" - Weapon price : "+priceWeapon);
-                    this.b_tradeButton = new ZozoDecorator(new ImgButton(411000, 411100, 411200)).getUiButton();
+                    this.b_tradeButton = new ZozoDecorator(new ImgButton(411000, 411200, 411100)).getUiButton();
                     this.b_tradeButton.addActionListener(new ActionListener(){
                             @Override
                             public void actionPerformed(ActionEvent e){
