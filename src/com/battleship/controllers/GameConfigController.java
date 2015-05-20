@@ -8,6 +8,9 @@ import com.battleship.exceptions.ExecError;
 import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.main.DebugTrack;
 import com.battleship.models.game.GameConfigModel;
+import com.battleship.models.game.Player;
+import com.battleship.models.game.PlayerAI;
+import com.battleship.models.game.PlayerAI.Difficulty;
 
 
 
@@ -107,5 +110,9 @@ public class GameConfigController extends Controller{
      */
     public void setTitle(String pValue) throws ForbiddenAction{
         this.model.setTitle(pValue);
+    }
+    
+    public void setAIDifficulty(Difficulty pValue){
+        ((PlayerAI)this.model.getPlayers()[1]).setDifficulty(pValue);
     }
 }

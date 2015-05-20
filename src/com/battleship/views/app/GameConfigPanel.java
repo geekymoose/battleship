@@ -18,6 +18,8 @@ import com.battleship.asset.Config;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.asset.ThemeManager;
 import com.battleship.exceptions.ForbiddenAction;
+import com.battleship.models.game.PlayerAI;
+import com.battleship.models.game.PlayerAI.Difficulty;
 import com.battleship.network.Capsule;
 import com.battleship.network.Request;
 import com.battleship.network.ServerGame;
@@ -27,6 +29,7 @@ import com.battleship.views.tools.UiElement;
 import com.battleship.views.tools.WindowFrame;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -36,6 +39,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -93,6 +97,10 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_gameTitle;
     private     JLabel                  l_gameLabel;
     private     JTextField              tf_gameTitle;
+    
+    private     JPanel                  p_AILevel;
+    private     JLabel                  l_AILevel;
+    private     JComboBox               cb_AILevel;
     
     
     
@@ -191,7 +199,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
      */
     private void setSpecialContent(){
         
-        //So ugly :p 
+        //LAN MODE
         if(Session.isConnected()){
             this.tf_gameTitle   = new JTextField();
             this.l_gameLabel    = new JLabel("Title of the game");
@@ -203,6 +211,27 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             this.p_gameTitle    .add(this.l_gameLabel);
             this.p_gameTitle    .add(this.tf_gameTitle);
             this.p_container    .add(this.p_gameTitle, BorderLayout.NORTH);
+        }
+        
+        //AI MODE
+        if(Session.getGameMode() == GameConstants.MODE_AI){
+            this.p_AILevel      = new JPanel();
+            this.l_AILevel      = new JLabel("AI Difficulty : ");
+            //this.cb_AILevel     = new JComboBox(tab);
+            this.cb_AILevel     = new JComboBox(PlayerAI.Difficulty.values());
+            this.p_AILevel      .setOpaque(false);
+            this.p_AILevel      .setLayout(new FlowLayout());
+            this.l_AILevel      .setForeground(Color.LIGHT_GRAY);
+            this.p_AILevel      .add(this.l_AILevel);
+            this.p_AILevel      .add(this.cb_AILevel);
+            this.p_container    .add(this.p_AILevel, BorderLayout.NORTH);
+            this.cb_AILevel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Difficulty selected = (Difficulty)cb_AILevel.getSelectedItem();
+                    controller.setAIDifficulty(selected);
+                }
+            });
         }
     }
     
@@ -308,6 +337,11 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     @Override
     public void updateModel(ObservableModel o, Object arg){
         this.gridType   = ((GameConfigModel)o).getGridType();
+        
+        if(Session.getGameMode() == GameConstants.MODE_AI){
+            PlayerAI p = (PlayerAI)((GameConfigModel)o).getPlayers()[1];
+            this.cb_AILevel.setSelectedItem(p.getCurrentDifficulty());
+        }
         
         //Button reset state
         if(((GameConfigModel)o).isDefaultConfig()){

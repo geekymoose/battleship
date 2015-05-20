@@ -6,6 +6,7 @@ package com.battleship.models.game;
 
 import com.battleship.asset.RandomManager;
 import com.battleship.behaviors.Target;
+import com.battleship.main.DebugTrack;
 import com.battleship.models.weapons.Torpedo;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -31,19 +32,15 @@ public class PlayerAI extends Player{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    public static final int     EASY = 1;
-    public static final int     HARD = 2;
-    public static final int     EXPERT = 3;
-    private             int     difficulty;
-    private             int[][] grid;
-    public static final int     VOID = 0;
-    public static final int     PLOUF = 1;
-    public static final int     BOAT = 2;
-    private             Point   lastHit;
-    private             int     orientation;
+    private             Difficulty      difficulty;
+    private             int[][]         grid;
+    public static final int             VOID = 0;
+    public static final int             PLOUF = 1;
+    public static final int             BOAT = 2;
+    private             int             orientation;
+    private             Point           lastHit;
     
     
-
     //**************************************************************************
     // Constructor - Initialization
     //**************************************************************************
@@ -52,7 +49,7 @@ public class PlayerAI extends Player{
      */
     public PlayerAI(){
         super();
-        difficulty = HARD;
+        difficulty = Difficulty.HARD;
         //height et width pas implémentés dès le début => erreur null pointer
         //grid = new int [this.fleetGrid.gridHeight][this.fleetGrid.gridWidth];
         grid = new int [10][10];
@@ -64,7 +61,6 @@ public class PlayerAI extends Player{
     
     
     
-
     //**************************************************************************
     // Functions
     //**************************************************************************
@@ -229,4 +225,38 @@ public class PlayerAI extends Player{
         return new Point(pY, pX);
     }
     
+    
+    /*
+     * Enum with difficulty 
+     */
+    public enum Difficulty{
+        EASY("easy"),
+        HARD("hard"),
+        EXPERT("expert");
+        
+        private String description;
+        Difficulty(String pDescription){
+            this.description = pDescription;
+        }
+        
+        public String getDescription(){
+            return this.description;
+        }
+    }
+    
+    
+    
+    
+
+    //**************************************************************************
+    // Getter - Setters for AI Player
+    //**************************************************************************
+    public Difficulty getCurrentDifficulty(){
+        return this.difficulty;
+    }
+    
+    public void setDifficulty(Difficulty pValue){
+        this.difficulty = pValue;
+        DebugTrack.showDebugMsg("AI PLayer : diff set to "+pValue.getDescription());
+    }
 }
