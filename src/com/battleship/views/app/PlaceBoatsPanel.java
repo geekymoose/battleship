@@ -31,13 +31,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -59,6 +66,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
     private     ContainerPanel                  p_container;
     private     DockPanel                       p_dock;
     private     JPanel                          p_bigContainer;
+    private     SwitchPanel                     switchPanel;
     
     private     HeadBar                         p_hb;
     private     JPanel                          p_buttonPanel;
@@ -67,8 +75,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
     private     UiButton                        b_placeRandom;
     private     UiButton                        b_back;
     
+    //Data
     private     Dimension                       dimBox;
-    
     private     PlayerFleetPanel                gridPanel;
     
     //Image 
@@ -100,6 +108,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
             Session.getNetwork().addLanObserver(this);
         }
         this.initComponents();
+        this.setBtnActions();
     }
     
     /*
@@ -113,7 +122,8 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         this.b_reset        = new ZozoDecorator(new ImgButton(405100, 405200, 405300)).getUiButton();
         this.b_placeRandom  = new ZozoDecorator(new ImgButton(410400, 410500, 410600)).getUiButton();
         this.b_back         = new ZozoDecorator(new ImgButton(404100, 404200, 404300)).getUiButton();
-        p_hb                = new HeadBar(this);
+        this.p_hb           = new HeadBar(this);
+        this.switchPanel    = new SwitchPanel();
         
         p_container         = new ContainerPanel();
         p_bigContainer      = new JPanel();
@@ -121,8 +131,6 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         
         this.gridPanel      = new PlayerFleetPanel(this); 
         this.p_dock         = new DockPanel(this, this.controller);
-        GridBagConstraints gbc;
-        gbc                 = new GridBagConstraints();
         p_bigContainer      .setLayout(new GridBagLayout());
         this.p_buttonPanel  .setLayout(new FlowLayout());
         this.p_buttonPanel  .add(b_back);
@@ -141,11 +149,12 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         p_container         .add(gridPanel, BorderLayout.CENTER);
         p_container         .add(p_dock, BorderLayout.EAST);
         p_container         .add(p_buttonPanel, BorderLayout.SOUTH);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
         p_bigContainer      .add(p_container, gbc);
         
         this                .add(p_hb, BorderLayout.NORTH);
         this                .add(p_bigContainer, BorderLayout.CENTER);
-        this                .setBtnActions();
     }
     
     /*
@@ -224,6 +233,10 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         
         //this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, conf.getFirstPlayerTurn());
         this.gridPanel.initGrids(fleetPlayer1, fleetPlayer2, 0);
+        
+        if(Session.getGameMode() == GameConstants.MODE_V2){
+            this.switchPanel.display();
+        }
     }
     
     @Override
@@ -260,6 +273,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
         this.b_reset        .reloadUI();
         this.b_placeRandom  .reloadUI();
         this.b_back         .reloadUI();
+        this.switchPanel    .reloadUI();
         this.repaint();
     }
     
@@ -304,8 +318,7 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
                         break;
                     case 1:
                         this.gridPanel.displayGridPlayer(1); //1 for player 1
-                        UiDialog.showWarning("Next Player", 
-                                             "Beware! Next player has to place his boats!!");
+                        this.switchPanel.display();
                         break;
                 }
                 break;
@@ -382,6 +395,152 @@ public class PlaceBoatsPanel extends PagePanel implements ObserverModel,
                 Session.getNetwork().deleteLanObserver(this);
                 frame.rooting(ApplicationFrame.GAME, true);
             }
+        }
+    }
+    
+    
+    
+    
+    
+    //**************************************************************************
+    // Inner class for break between 2 placement (In V2 mode)
+    //**************************************************************************
+    /**
+     * <h1>SwitchPanel</h1>
+     * <p>
+     * public class SwitchPanel<br/>
+     * extends JPanel
+     * </p>
+     * 
+     * <p>Panel display between 2 placement in V2 mode.</p>
+     */
+    private class SwitchPanel extends ContainerPanel implements KeyListener, MouseListener{
+        //**********************************************************************
+        // Constants - Variables
+        //**********************************************************************
+        private     JPanel      wrapper_center;
+        private     JLabel      l_playerTurn;
+        private     JLabel      l_switchMessage;
+        
+        
+        
+        //**********************************************************************
+        // Constructors - Initialization
+        //**********************************************************************
+        public SwitchPanel(){
+            this.initComponents();
+            this.setFocusable(true);
+            this.addKeyListener(this);
+            this.addMouseListener(this);
+        }
+        
+        private void initComponents(){
+            this.wrapper_center     = new JPanel();
+            this.l_playerTurn       = new JLabel();
+            this.l_switchMessage    = new JLabel();
+            
+            this.l_playerTurn       .setForeground(Color.WHITE);
+            this.l_switchMessage    .setForeground(Color.WHITE);
+            this                    .setLayout(new GridBagLayout());
+            this.wrapper_center     .setLayout(new BoxLayout(this.wrapper_center, BoxLayout.Y_AXIS));
+            this.wrapper_center     .setOpaque(false);
+            
+            //Add in center wrapper
+            this.wrapper_center     .add(this.l_playerTurn);
+            this.wrapper_center     .add(this.l_switchMessage);
+            
+            GridBagConstraints gbc  = new GridBagConstraints();
+            this.add(this.wrapper_center, gbc);
+        }
+        
+        
+        //**********************************************************************
+        // Functions
+        //**********************************************************************
+        /**
+         * Start displaying this Panel. Remove grid (Radar and fleet) from 
+         * current game and display page without information about players state
+         */
+        public void display(){
+            String  name = PlaceBoatsPanel.this.controller.getCurrentPlayer().getName();
+            Font    font = new Font("Arial", Font.BOLD, 25);
+            
+            this.l_playerTurn       .setText("It's "+name+" turn!!");
+            this.l_switchMessage    .setText("Tape space to continue...");
+            this.l_playerTurn       .setFont(font);
+            this.l_switchMessage    .setFont(font);
+            
+            PlaceBoatsPanel.this.remove(p_bigContainer);
+            PlaceBoatsPanel.this.add(this, BorderLayout.CENTER);
+            PlaceBoatsPanel.this.revalidate();
+            PlaceBoatsPanel.this.repaint();
+            this.requestFocusInWindow();
+        }
+        
+        /**
+         * Stop displaying this panel. Restore current game state with player 
+         * turn data
+         */
+        public void stopSwitchPanel(){
+            PlaceBoatsPanel.this.remove(this);
+            PlaceBoatsPanel.this.add(p_bigContainer,BorderLayout.CENTER);
+            PlaceBoatsPanel.this.revalidate();
+            PlaceBoatsPanel.this.repaint();
+        }
+        
+        @Override
+        public void loadUI(){
+            this.reloadUI();
+        }
+        
+        @Override
+        public void reloadUI(){
+        }
+        
+        
+        //**********************************************************************
+        // KeyListener
+        //**********************************************************************
+        @Override
+        public void keyTyped(KeyEvent e){
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e){
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e){
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_SPACE) {
+                this.stopSwitchPanel();
+            }
+        }
+
+
+        @Override
+        public void mouseClicked(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e){
+        
         }
     }
 }
