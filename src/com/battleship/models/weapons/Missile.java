@@ -38,7 +38,7 @@ public class Missile extends Weapon{
     //**************************************************************************
     public Missile(Player pOwner, int pAmmo){
         super(Weapon.MISSILE, new ShotTypeMissile(), pOwner, pAmmo);
-        this.name           = "Bomb";
+        this.name           = "Missile";
         this.priceWeapon    = Config.getGameValues_int("price-missile");
         this.priceAmmo      = Config.getGameValues_int("price-ammo-missile");
     }

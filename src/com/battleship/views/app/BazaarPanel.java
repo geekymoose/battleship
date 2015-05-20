@@ -188,6 +188,7 @@ public class BazaarPanel extends PagePanel implements GameConstants{
         this.listOwnedWeapons   = new ArrayList();
         for(Weapon w : Session.getListWeapons()){
             this.listOwnedWeapons.add(new WeaponPanel(w, WeaponPanel.OWNED));
+            System.out.println("DEBUG in bazaar : "+w.getWeaponId());
         }
         this.p_ownedWeaponPan   .removeAll();
         this.p_ownedWeaponPan   .setLayout(new GridLayout(this.listOwnedWeapons.size(), 1));
@@ -327,6 +328,9 @@ public class BazaarPanel extends PagePanel implements GameConstants{
                             public void actionPerformed(ActionEvent e){
                                 try{
                                     switch(idWeapon){
+                                        case Weapon.MISSILE:
+                                            Session.getSession().buyAmmoWeapon(new Missile(null, Weapon.INFINITE_AMO), 1);
+                                            break;
                                         case Weapon.BOMB:
                                             Session.getSession().buyAmmoWeapon(new Bomb(null, 1), 1);
                                             break;
@@ -352,6 +356,8 @@ public class BazaarPanel extends PagePanel implements GameConstants{
                             public void actionPerformed(ActionEvent e){
                                 try{
                                     switch(idWeapon){
+                                        case Weapon.MISSILE:
+                                            break;
                                         case Weapon.BOMB:
                                             Session.getSession().buyWeapon(new Bomb(null, 1));
                                             break;
