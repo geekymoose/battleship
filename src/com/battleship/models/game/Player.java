@@ -45,7 +45,7 @@ public abstract class Player extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    public      static final int        MIN_NAME_LENGTH         = 5;
+    public      static final int        MIN_NAME_LENGTH         = 4;
     public      static final int        MAX_NAME_LENGTH         = 25;
     protected   String                  name;
     protected   FleetGridModel          fleetGrid;
