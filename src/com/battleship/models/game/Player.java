@@ -8,6 +8,7 @@ import com.battleship.asset.PooFactory;
 import com.battleship.asset.RandomManager;
 import com.battleship.behaviors.Target;
 import com.battleship.constants.GameConstants;
+import com.battleship.exceptions.ForbiddenAction;
 import com.battleship.models.sprites.*;
 import com.battleship.models.weapons.*;
 import java.awt.Point;
@@ -37,14 +38,16 @@ import java.util.ArrayList;
  * @author  Jessica FAVIN
  * @author  Anthony CHAFFOT
  * 
- * @see PlayerAI
- * @see PlayerHuman
+ * @see com.battleship.models.game.PlayerAI
+ * @see com.battleship.models.game.PlayerHuman
  */
 public abstract class Player extends Model implements GameConstants{
     //**************************************************************************
     // Constants - Variables
     //**************************************************************************
-    private     String                  name;
+    public      static final int        MIN_NAME_LENGTH         = 5;
+    public      static final int        MAX_NAME_LENGTH         = 25;
+    protected   String                  name;
     protected   FleetGridModel          fleetGrid;
     private     GameModel               game; //Game where player is playing
     protected   ArrayList<Weapon>       listWeapons;
@@ -77,7 +80,7 @@ public abstract class Player extends Model implements GameConstants{
      * List weapon is fill with the default weapon and fleetGrid is not set
      */
     public Player() {
-        this.name                   = "MisterSwadow";
+        this.name                   = "NoName";
         this.score                  = 0;
         this.scoreCombo             = 1;
         this.listWeapons            = new ArrayList();
@@ -313,6 +316,25 @@ public abstract class Player extends Model implements GameConstants{
     
     
     
+    //**************************************************************************
+    // Getters - Setters
+    //**************************************************************************
+    /**
+     * Check if name given in parameter is valid
+     * @param pName name to check
+     * @return true if valid, otherwise, return false
+     */
+    public boolean isValidName(String pName){
+        if(pName == null){
+            return false;
+        }
+        return pName.length()>= MIN_NAME_LENGTH && pName.length() <= MAX_NAME_LENGTH;
+    }
+    
+    
+    
+    
+    
 
     //**************************************************************************
     // Getters - Setters
@@ -361,13 +383,12 @@ public abstract class Player extends Model implements GameConstants{
     /**
      * Set player name
      * @param pValue new player name, if is not a String or empty, throw exception
+     * @throws ForbiddenAction if not valid name
      */
-    public void setName(String pValue) {
-        /*
-         * ATTENTION
-         * To finish!!
-         * Add exception and check if valid name (Not empty, valid lenght...)
-         */
+    public void setName(String pValue) throws ForbiddenAction {
+        if(this.isValidName(pValue) == false){
+            throw new ForbiddenAction("Name '"+pValue+"' is not a valid name!");
+        }
         this.name = pValue;
     }
     
@@ -390,12 +411,4 @@ public abstract class Player extends Model implements GameConstants{
     public void setGameModel(GameModel pGame){
         this.game = pGame;
     }
-    
-    
-    
-    
-    
-    //**************************************************************************
-    // Network function
-    //**************************************************************************
 }

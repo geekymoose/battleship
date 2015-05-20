@@ -112,7 +112,20 @@ public class GameConfigController extends Controller{
         this.model.setTitle(pValue);
     }
     
+    /*
+     * Set AI difficulty mode
+     */
     public void setAIDifficulty(Difficulty pValue){
         ((PlayerAI)this.model.getPlayers()[1]).setDifficulty(pValue);
+    }
+    
+    /**
+     * Set name for a specific player
+     * @param pPlayer   player position in player tab
+     * @param pName     name to set
+     * @throws ForbiddenAction 
+     */
+    public void setPlayersName(int pPlayer, String pName) throws ForbiddenAction{
+        this.model.getPlayers()[pPlayer].setName(pName);
     }
 }
