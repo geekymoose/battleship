@@ -234,6 +234,7 @@ public abstract class BoxMapView implements UiElement, UiEventApp{
         this.animHiddenWaterAlive.stopTimer();
         if(this.isHidden==true){
             this.animHiddenWaterAlive.startTimer();
+            this.animWaterAlive.startTimer();
         }
         else{
             this.animWaterAlive.startTimer();
