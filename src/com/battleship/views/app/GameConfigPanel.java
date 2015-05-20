@@ -34,6 +34,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -101,6 +102,13 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
     private     JPanel                  p_AILevel;
     private     JLabel                  l_AILevel;
     private     JComboBox               cb_AILevel;
+    
+    private     JPanel                  p_namePlayers;
+    private     JLabel                  l_namePlayer1;
+    private     JLabel                  l_namePlayer2;
+    private     JTextField              tf_namePlayer1;
+    private     JTextField              tf_namePlayer2;
+    
     
     
     
@@ -214,7 +222,7 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
         }
         
         //AI MODE
-        if(Session.getGameMode() == GameConstants.MODE_AI){
+        else if(Session.getGameMode() == GameConstants.MODE_AI){
             this.p_AILevel      = new JPanel();
             this.l_AILevel      = new JLabel("AI Difficulty : ");
             //this.cb_AILevel     = new JComboBox(tab);
@@ -232,6 +240,24 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                     controller.setAIDifficulty(selected);
                 }
             });
+        }
+        
+        else if(Session.getGameMode() == GameConstants.MODE_V2){
+            this.p_namePlayers      = new JPanel();
+            this.l_namePlayer1      = new JLabel("Name player 1");
+            this.l_namePlayer2      = new JLabel("Name player 2");
+            this.tf_namePlayer1     = new JTextField();
+            this.tf_namePlayer2     = new JTextField();
+            
+            this.p_namePlayers      .setOpaque(false);
+            this.p_namePlayers      .setLayout(new GridLayout(2,2));
+            this.l_namePlayer1      .setForeground(Color.LIGHT_GRAY);
+            this.l_namePlayer2      .setForeground(Color.LIGHT_GRAY);
+            this.p_namePlayers      .add(this.l_namePlayer1);
+            this.p_namePlayers      .add(this.l_namePlayer2);
+            this.p_namePlayers      .add(this.tf_namePlayer1);
+            this.p_namePlayers      .add(this.tf_namePlayer2);
+            this.p_container        .add(this.p_namePlayers, BorderLayout.NORTH);
         }
     }
     
@@ -395,9 +421,13 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
                 }
                 break;
             case MODE_V2:
-                if(this.controller.isValidConfig()){
-                    frame.rooting(ApplicationFrame.PLACE_BOATS, true);
-                }
+                    try{
+                        controller.setPlayersName(0, tf_namePlayer1.getText());
+                        controller.setPlayersName(1, tf_namePlayer2.getText());
+                        frame.rooting(ApplicationFrame.PLACE_BOATS, true);
+                    } catch(ForbiddenAction ex) {
+                        UiDialog.showWarning("Not valid name", ex.getMessage());
+                    }
                 break;
             case MODE_LAN:
                 try{

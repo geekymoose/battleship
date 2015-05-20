@@ -52,9 +52,10 @@ public class PlayerAI extends Player{
         difficulty = Difficulty.HARD;
         //height et width pas implémentés dès le début => erreur null pointer
         //grid = new int [this.fleetGrid.gridHeight][this.fleetGrid.gridWidth];
-        grid = new int [10][10];
-        lastHit = null;
+        grid        = new int [10][10];
+        lastHit     = null;
         orientation = 0;
+        this.name   = "AiPlayer";
     }
     
     
