@@ -329,9 +329,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         // Constants - Variables
         //**********************************************************************
         private     JPanel      wrapper_center;
-        private     JLabel      l_switchTitle;
-        private     JLabel      l_nextPlayerName;
-        private     JLabel      l_nbTurn;
+        private     JLabel      l_playerTurn;
         private     JLabel      l_switchMessage;
         
         
@@ -347,27 +345,20 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
         
         private void initComponents(){
             this.wrapper_center     = new JPanel();
-            this.l_switchTitle      = new JLabel();
-            this.l_nextPlayerName   = new JLabel();
-            this.l_nbTurn           = new JLabel();
+            this.l_playerTurn       = new JLabel();
             this.l_switchMessage    = new JLabel();
             
-            this.l_switchTitle      .setForeground(Color.WHITE);
-            this.l_nextPlayerName   .setForeground(Color.WHITE);
-            this.l_nbTurn           .setForeground(Color.WHITE);
+            this.l_playerTurn       .setForeground(Color.WHITE);
             this.l_switchMessage    .setForeground(Color.WHITE);
-            
-            GridBagConstraints gbc  = new GridBagConstraints();
-            this.setLayout(new GridBagLayout());
+            this                    .setLayout(new GridBagLayout());
             this.wrapper_center     .setLayout(new BoxLayout(this.wrapper_center, BoxLayout.Y_AXIS));
             this.wrapper_center     .setOpaque(false);
             
             //Add in center wrapper
-            this.wrapper_center     .add(this.l_switchTitle);
-            this.wrapper_center     .add(this.l_nextPlayerName);
-            this.wrapper_center     .add(this.l_nbTurn);
+            this.wrapper_center     .add(this.l_playerTurn);
             this.wrapper_center     .add(this.l_switchMessage);
             
+            GridBagConstraints gbc  = new GridBagConstraints();
             this.add(this.wrapper_center, gbc);
         }
         
@@ -381,17 +372,11 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
          */
         public void display(){
             String  name = GamePanel.this.controller.getGameModel().getPlayerTurn().getName();
-            String  turn = String.valueOf(GamePanel.this.controller.getGameModel().getNbTurn());
             Font    font = new Font("Arial", Font.BOLD, 25);
             
-            this.l_switchTitle      .setText("Call the next player!!!");
-            this.l_nextPlayerName   .setText("Player turn : "+name);
-            this.l_nbTurn           .setText("current turn : "+turn);
+            this.l_playerTurn       .setText("It's "+name+" turn!!");
             this.l_switchMessage    .setText("Tape space to continue...");
-            
-            this.l_switchTitle      .setFont(font);
-            this.l_nextPlayerName   .setFont(font);
-            this.l_nbTurn           .setFont(font);
+            this.l_playerTurn       .setFont(font);
             this.l_switchMessage    .setFont(font);
             
             GamePanel.this.remove(p_bigCont);
