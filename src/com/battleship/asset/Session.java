@@ -145,6 +145,7 @@ public class Session {
         if(pWeapon.getPriceWeapon() > this.money){
             throw new ForbiddenAction("You don't have enough money!!!");
         }else{
+            this.money -= pWeapon.getPriceWeapon();
             this.addWeapon(pWeapon);
         }
     }
@@ -159,6 +160,7 @@ public class Session {
         if((pWeapon.getPriceAmmo()*pAmmo) > this.money){
             throw new ForbiddenAction("You don't have enough money!!!");
         }else{
+            this.money -= pWeapon.getPriceAmmo();
             this.addAmmoWeapon(pWeapon, pAmmo);
         }
     }
