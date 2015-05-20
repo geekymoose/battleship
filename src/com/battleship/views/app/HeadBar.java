@@ -7,14 +7,10 @@ package com.battleship.views.app;
 import com.battleship.asset.ThemeManager;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
-import com.battleship.uibutton.ImgButton;
-import com.battleship.uibutton.UiButton;
-import com.battleship.uibutton.ZozoDecorator;
 import com.battleship.views.tools.ContentPanel;
 import com.battleship.views.tools.PagePanel;
 import com.battleship.views.tools.UiDialog;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -60,7 +56,6 @@ public class HeadBar extends ContentPanel{
         super(pParent);
         this.initComponents();
         this.initThemeComboBox();
-        
         this.loadUI();
     }
     

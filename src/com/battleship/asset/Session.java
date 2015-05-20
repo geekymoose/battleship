@@ -83,11 +83,9 @@ public class Session {
      * Initialize session status with default values
      */
     private void initAccount(){
-        this.name           = "Unknown";
+        this.name           = "Session";
         this.money          = 0;
         this.listWeapon     = new ArrayList();
-        this.money          = 0;
-        this.name           = "Unknown";
         this.player         = null;
         this.listWeapon     .add(new Missile(this.player, Weapon.INFINITE_AMO));
     }
@@ -130,9 +128,10 @@ public class Session {
             for(Weapon w : this.listWeapon){
                 if(pWeapon.getClass() == w.getClass()){
                     w.addAmmo(pAmmo);
+                    return;
                 }
             }
-            throw new ForbiddenAction("You must by a "+pWeapon.getName()+" before !");
+            throw new ForbiddenAction("You must buy a "+pWeapon.getName()+" before !");
         }
     }
     
@@ -257,11 +256,43 @@ public class Session {
     }
     
     /**
+     * Return a specific weapon owned by player using weapon id. If player 
+     * doesn't own this weapon , throws error
+     * @param pWeaponId id of the weapon to get
+     * @return weapon owned by session
+     * @throws ForbiddenAction thrown if session doesn't have this weapon
+     */
+    public static Weapon getWeapon(int pWeaponId) throws ForbiddenAction{
+        for(Weapon w : Session.singleton.listWeapon){
+            if(w.getWeaponId() == pWeaponId){
+                return w;
+            }
+        }
+        throw new ForbiddenAction("You don't have this weapon");
+    }
+    
+    /**
      * Return current network manager. Null if not connected
      * @return Network 
      */
     public static Network getNetwork(){
         return Session.singleton.network;
+    }
+    
+    /**
+     * Return current session money
+     * @return int money
+     */
+    public static int getMoney(){
+        return Session.singleton.money;
+    }
+    
+    /**
+     * Return session name
+     * @return String session name
+     */
+    public static String getName(){
+        return Session.singleton.name;
     }
     
     
