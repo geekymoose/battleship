@@ -196,6 +196,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
     public void updateLan(ObservableLan o, Object arg){
         if(arg instanceof ArrayList){
             this.p_listPanel.updateListGame((ArrayList<ServerGame>)arg);
+            this.repaint();
         }
         
         if(arg instanceof Request){
@@ -288,7 +289,7 @@ public class ListGamesPanel extends PagePanel implements GameConstants,
             
             b_join              = new JButton("Join");
 
-            l_grid = (grid == 1) ? new JLabel("hexa") : new JLabel("square");
+            l_grid = (grid == 2) ? new JLabel(ThemeManager.getTheme().getImgIcon(504230)) : new JLabel(ThemeManager.getTheme().getImgIcon(504231));
             
 
             this.p_id           .setLayout(new GridBagLayout());
