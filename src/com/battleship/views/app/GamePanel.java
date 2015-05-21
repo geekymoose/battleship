@@ -6,6 +6,7 @@ package com.battleship.views.app;
 
 import com.battleship.asset.*;
 import com.battleship.behaviors.Target;
+import com.battleship.constants.GameConstants;
 import com.battleship.controllers.GameController;
 import com.battleship.exceptions.ExecError;
 import com.battleship.main.DebugTrack;
@@ -33,6 +34,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -186,6 +189,10 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
                 this.p_radar.setAttackedGrid(0);
             }
         }
+        
+        if(Session.getGameMode() == GameConstants.MODE_V2){
+            this.p_switchPanel.display();
+        }
         this.repaint();
     }
     
@@ -324,7 +331,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
      * the players fleet during switching
      * </p>
      */
-    private class SwitchPanel extends ContainerPanel implements KeyListener{
+    private class SwitchPanel extends ContainerPanel implements KeyListener, MouseListener{
         //**********************************************************************
         // Constants - Variables
         //**********************************************************************
@@ -341,6 +348,7 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             this.initComponents();
             this.setFocusable(true);
             this.addKeyListener(this);
+            this.addMouseListener(this);
         }
         
         private void initComponents(){
@@ -428,6 +436,31 @@ public class GamePanel extends PagePanel implements ObserverModel, ObserverLan{
             if (key == KeyEvent.VK_SPACE) {
                 this.stopSwitchPanel();
             }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e){
+            this.requestFocusInWindow();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e){
+            this.requestFocusInWindow(false);
         }
     }
     
