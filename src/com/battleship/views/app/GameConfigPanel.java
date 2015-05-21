@@ -246,8 +246,8 @@ public class GameConfigPanel extends PagePanel implements ObserverModel,
             this.p_namePlayers      = new JPanel();
             this.l_namePlayer1      = new JLabel("Name player 1");
             this.l_namePlayer2      = new JLabel("Name player 2");
-            this.tf_namePlayer1     = new JTextField();
-            this.tf_namePlayer2     = new JTextField();
+            this.tf_namePlayer1     = new JTextField("Player 1");
+            this.tf_namePlayer2     = new JTextField("Player 2");
             
             this.p_namePlayers      .setOpaque(false);
             this.p_namePlayers      .setLayout(new GridLayout(2,2));
