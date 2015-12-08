@@ -184,8 +184,8 @@ function displayHelpAndExit {
     echo -e "\t-h       Display help"
     echo -e "\t-x       Execute"
     echo -e "\t-u       Generate UML"
-    echo -e "\t-j       Generate Javadoc"
-    echo -e "\t-o       Generate jar file"
+    echo -e "\t-j       Generate jar file"
+    echo -e "\t-o       Generate javadoc"
     echo -e "\t-s       launch server window"
     
     #AUTHOR
