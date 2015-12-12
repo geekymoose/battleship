@@ -34,8 +34,8 @@ Allow executable rights with `chmod 755 exec.sh`
 * Display help with `./exec.sh -h`
 
 #### On Windows
-Unfortunately, there is some issues with the jar for windows. We will add a windows support as soon as possible. You could still compile the code from
-any IDE (By creating a project)
+Simple execute the jar file `battleship.jar` from the project directory. If you want to move the file, don't forget to move the folder data as well
+(As it's required for program execution, or you will get a nice error warning)
 
 ####WARNING
 Don't forget to check the technical description (Java version for example)
@@ -110,6 +110,11 @@ In order to now all the images you must create, take a look at the `data/theme/d
 ## Screenshots
 A full list of screenshots for various themes can be found in the [screenshots
 folder](https://github.com/GeekyMoose/battleship/tree/master/documents/screenshots).
+
+
+<!-- *********************************************************************** -->
+## JavaDoc
+JavaDoc for this project is available in the folder [documents/javadoc](https://github.com/GeekyMoose/battleship/tree/master/documents/JavaDoc)
 
 
 <!-- *********************************************************************** -->
