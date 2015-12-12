@@ -139,24 +139,25 @@ function execute_project(){
 
 function execute_server(){
     cd server
-    #echo "server"
     ./launchServer.sh &
+	cd ..
 }
 
 #create manifest file
 function create_manifest(){
     echo "Manifest-Version: 1.0" >  "manifest"
     echo "Main-Class: com.battleship.main.Main" >>  "manifest"
-    echo "Class-Path: $DOSS_BUILD"  >>  "manifest"
+    #echo "Class-Path: $DOSS_BUILD"  >>  "manifest"
     echo -e "\n\n\n" >>  "manifest"
 }
 
 # Create jar file 
 function create_jar(){
+    cd $DOSS_BUILD
     create_manifest
-    #jar -cfm battleship.jar "manifest" $DOSS_BUILD"com/*"
-    #jar -cfm battleship.jar "manifest" jjgenerated/build/com/*
-    jar -cfm battleship.jar "manifest" jjgenerated/build/com/*
+    jar -cfm battleship.jar "manifest" com/*
+	cd ../..
+	cp $DOSS_BUILD/battleship.jar .
 }
 
 
