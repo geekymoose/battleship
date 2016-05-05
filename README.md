@@ -1,49 +1,49 @@
 # Battleship
-
+Download the executable: [Battleship.zip](https://github.com/GeekyMoose/battleship/releases/download/v1.0/battleship.zip)
 
 ![img](https://github.com/GeekyMoose/battleship/blob/master/documents/screenshots/theme_default/1-defaultWelcome.png)
 
 
 <!-- *********************************************************************** -->
 ## Description
-Frebruary - May 2015
+February - May 2015
 
-Battleship is a university project realized during the second year of Bachelor of Computer Science. 
-The goal was to realize a battleship game using Java.
+Battleship is a university project realized during the second year of Bachelor of Computer Science. The goal was to realize a battleship game using Java.
 
-The teacher in charge was [Michele Pagani](http://www.pps.univ-paris-diderot.fr/~pagani/) (michele.pagani@pps.univ-paris-diderot.fr)
-<br/>
+The teacher in charge was [Michele Pagani](http://www.pps.univ-paris-diderot.fr/~pagani/) (michele.pagani@pps.univ-paris-diderot.fr)<br/>
 We got the best grade for this project.
 
 
 <!-- *********************************************************************** -->
-## Installation
-Clone this project on your computer using 
-`git clone https://github.com/GeekyMoose/battleship.git`
+## Installation / Execution
 
+### Download
+**Executable zip file:** Download the zip file. (See above for link).<br/>
+**Source code:** clone the project using `git clone https://github.com/GeekyMoose/battleship.git`
 
-<!-- *********************************************************************** -->
-## Execute
-#### On linux and MAC
+### Execute from release zip file
+Unzip the file and execute the jar file. Note that all the elements inside this zip file are required in order to run.
+
+### Execute from source code
+#### On Linux and MAC
 To run the project, use the script `exec.sh`<br/>
 Allow executable rights with `chmod 755 exec.sh`
 
-* Execute project with `./exec.sh -x`
-* Generate javadoc with `./exec.sh -o`
-* Generate jar file with `./exec.sh -j`
 * Display help with `./exec.sh -h`
+* Execute project with `./exec.sh -x`
+* Generate JavaDoc with `./exec.sh -o`
+* Generate jar file with `./exec.sh -j`
 
 #### On Windows
-Simple execute the jar file `battleship.jar` from the project directory. If you want to move the file, don't forget to move the folder data as well
-(As it's required for program execution, or you will get a nice error warning)
+There is no easy way to compile from windows. However, you can download the zip executable and run the .jar file.
 
-####WARNING
+####Warning
 Don't forget to check the technical description (Java version for example)
 
 
 <!-- *********************************************************************** -->
 ## Technical description
-- Java version: java SE 8 (Warning, we didn't develope compatibility for older version)
+- Java version: Java SE 8 (Warning, we didn't develop compatibility for older version)
 - Language: Java / Swing
 - IDE used: NetBeans 8
 - Network: TCP Protocol (The server itself is written in Java)
@@ -53,12 +53,12 @@ Don't forget to check the technical description (Java version for example)
 ## Explosion animation
 ![img](https://github.com/GeekyMoose/battleship/blob/master/documents/screenshots/gif/explosion_demo.gif)
 
-Explosions are managed by a 'handcraft java library'. (Can be find in `com.battleship.dynamic` package).
+Explosions are managed by a 'handcraft Java library'. (Can be find in `com.battleship.dynamic` package).
 
 #### How does it work
 The explosions manager can be compared to an automata with a specific number a states. 
 
-* Each state is an image. (Even if `EvenApp` can theorically manage any type)
+* Each state is an image. (Even if `EvenApp` can in theory manage any type)
 * When `EvenApp` start, a timer set a push delay which call next state.
 * `DynamicEvent` extends `EvenApp` and add a position (x:y) behavior
 * `ExplosionEvent` extends `DynamicEvent` and create the specific explosion behavior
@@ -75,10 +75,10 @@ All the images used are loaded from `data/theme` folder. An 'handcraft' library 
 
 Image name is formated using an unique number. (Dev note: a format accepting string name could be better, but an another name parsing would be required). 
 <br/>
-Name format: xxxxaa (xxxx is an unique number, aa represente the animation position)
+Name format: xxxxaa (xxxx is an unique number, aa represents the animation position)
 
 * xxxx is an unique number (Used as a name)
-* aa represente the animation position. (up to 98, 99 is forbidden).
+* aa represents the animation position. (up to 98, 99 is forbidden).
 
 The animation number is used in case of 'dynamic image' loading. This process will load the first image (00) and then, will try to load image while image aa+1 exists (Note, 99 is forbidden, since a bug could occure as the next image will be loaded as well in the current animation loading)
 
@@ -90,8 +90,7 @@ You can create your own theme and import it in the game.
 ![img](https://github.com/GeekyMoose/battleship/blob/master/documents/screenshots/gif/theme_default.gif)
 ![img](https://github.com/GeekyMoose/battleship/blob/master/documents/screenshots/gif/theme_paint.gif)
 
-All themes are located in the folder `data/theme`. 
-<br/>
+All themes are located in the folder `data/theme`. <br/>
 In order to now all the images you must create, take a look at the `data/theme/default` folder.
 
 #### Theme crafting steps
@@ -114,18 +113,17 @@ folder](https://github.com/GeekyMoose/battleship/tree/master/documents/screensho
 
 <!-- *********************************************************************** -->
 ## JavaDoc
-JavaDoc for this project is available in the folder [documents/javadoc](https://github.com/GeekyMoose/battleship/tree/master/documents/JavaDoc)
+You can generate the JavaDoc using `exec.sh -o`
 
 
 <!-- *********************************************************************** -->
 ## Why the paint theme? 
-While we were coding this project, we had a joke about the graphic design of the project, imagining what could happened if a child was drawing the project. And so, you know what hapened! The most difficult part was to stay serious in the university library during this awful task.
+While we were coding this project, we had a joke about the graphic design of the project, imagining what could happened if a child was drawing the project. And so, you know what happened! The most difficult part was to stay serious in the university library during this awful task.
 
 
+<!-- *********************************************************************** -->
 ## Authors
 * Constantin MASSON ([GeekyMoose](https://github.com/GeekyMoose))
 * Anthony CHAFFOT ([NightWold](https://github.com/NightWolfRobot))
 * Jessica FAVIN ([JessicaFavin](https://github.com/JessicaFavin))
-
-
 
