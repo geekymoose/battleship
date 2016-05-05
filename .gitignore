@@ -1,4 +1,6 @@
 *.class
+*manifest.mf
+*battleshipServer.jar
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
